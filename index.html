@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Japan City Guide: Tokyo Sakura 2026</title>
-    <!-- Tailwind CSS & Lucide Icons -->
+    
+    <!-- 🌸 이모지 파비콘 설정 -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌸</text></svg>">
+    
+    <!-- 라이브러리 및 폰트 로드 -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,12 +36,11 @@
     
     <style>
         body { font-family: 'Plus Jakarta Sans', 'Noto Sans JP', sans-serif; -webkit-font-smoothing: antialiased; }
-        .app-gradient { background: linear-gradient(180deg, #e0f2fe 0%, #ffffff 40%, #fff1f2 100%); background-attachment: fixed; }
+        .app-gradient { background: linear-gradient(180deg, #e0f2fe 0%, #ffffff 50%, #fff1f2 100%); background-attachment: fixed; }
         .dark .app-gradient { background: linear-gradient(180deg, #1a1111 0%, #120a0a 100%); }
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         
-        /* Snap Scroll for Mobile */
         @media (max-width: 768px) {
             .snap-x-mandatory {
                 scroll-snap-type: x mandatory;
@@ -52,7 +55,7 @@
         .slide-up { animation: slideUp 0.4s ease-out; }
         @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         
-        /* Sakura Petal Animation Logic */
+        /* 벚꽃 흩날림 애니메이션 */
         .petal { 
             position: absolute; background-color: #ffdae9; border-radius: 150% 0 150% 0; 
             opacity: 0.6; pointer-events: none; z-index: 5; animation: fall linear infinite;
@@ -67,7 +70,6 @@
 
         #detailOverlay { transition: opacity 0.3s ease, transform 0.3s ease; }
 
-        /* Timeline Bar Styles */
         .timeline-bar { height: 6px; background: #f1f1f1; border-radius: 10px; position: relative; }
         .timeline-progress { height: 100%; background: #ea2a33; border-radius: 10px; position: absolute; left: 0; top: 0; }
         .timeline-dot {
@@ -81,14 +83,14 @@
     
     <div id="app" class="relative mx-auto flex h-screen w-full flex-col overflow-hidden bg-white/30 dark:bg-background-dark/30 backdrop-blur-[2px] app-gradient shadow-2xl">
         
-        <!-- Animation Container -->
+        <!-- 꽃잎 애니메이션 레이어 -->
         <div id="petalContainer" class="absolute inset-0 pointer-events-none overflow-hidden z-0"></div>
 
-        <!-- Main Content Area -->
+        <!-- 메인 스크롤 콘텐츠 -->
         <div id="mainContent" class="flex-1 overflow-y-auto hide-scrollbar pb-32 relative z-10">
             <div class="max-w-6xl mx-auto w-full px-6 md:px-12 text-left">
                 
-                <!-- Header -->
+                <!-- 상단 헤더 섹션 -->
                 <div class="pt-12 md:pt-20 pb-10 flex justify-between items-end text-left">
                     <div>
                         <p class="text-[10px] md:text-xs font-black text-primary uppercase tracking-[0.2em] mb-1">Spring 2026 Edition</p>
@@ -99,7 +101,7 @@
                     </button>
                 </div>
 
-                <!-- Forecast Strategy Card -->
+                <!-- 개화 예측 전략 카드 -->
                 <div class="mb-12">
                     <div class="bg-[#ea2a33] rounded-[2.5rem] md:rounded-[3.5rem] p-8 md:p-14 text-white shadow-2xl shadow-primary/20 relative overflow-hidden slide-up">
                         <div class="absolute right-[-10px] top-[10px] opacity-20 pointer-events-none">
@@ -107,7 +109,8 @@
                         </div>
                         <div class="relative z-10 max-w-2xl text-left">
                             <p class="text-[11px] md:text-xs font-black opacity-90 uppercase tracking-widest mb-4">2026 BLOOM FORECAST</p>
-                            <h3 id="forecastStatus" class="text-[28px] md:text-[42px] font-bold leading-tight mb-8 md:mb-12 min-h-[80px] md:min-h-[120px] text-left">
+                            <h3 id="forecastStatus" class="text-[32px] md:text-[48px] font-bold leading-tight mb-8 md:mb-12 text-left">
+                                <!-- JS에서 오늘 날짜(2/10) 기준으로 문구 자동 업데이트 -->
                                 Loading...
                             </h3>
                             <div class="flex items-center gap-6 md:gap-10 text-center">
@@ -125,7 +128,7 @@
                     </div>
                 </div>
 
-                <!-- Best Spots Section -->
+                <!-- Best Spots 섹션 -->
                 <div class="mb-16">
                     <div class="flex justify-between items-center mb-8">
                         <h3 class="text-2xl md:text-3xl font-black text-left">Best Spots</h3>
@@ -133,117 +136,113 @@
                             <i class="fa-solid fa-star"></i>
                             <span>Editor's Choice</span>
                         </div>
-                        <div class="flex md:hidden items-center gap-1.5">
-                             <span class="text-[9px] font-bold text-gray-400">옆으로 밀어보기</span>
-                             <i class="fa-solid fa-arrow-right-long text-[10px] text-gray-300"></i>
-                        </div>
                     </div>
-                    <div id="bestSpotsContainer" class="flex md:grid md:grid-cols-2 lg:grid-cols-4 overflow-x-auto md:overflow-visible hide-scrollbar gap-5 md:gap-8 snap-x-mandatory text-left"></div>
+                    <div id="bestSpotsContainer" class="flex md:grid md:grid-cols-2 lg:grid-cols-4 overflow-x-auto md:overflow-visible hide-scrollbar gap-5 md:gap-8 snap-x-mandatory text-left">
+                        <!-- JS 렌더링 영역 -->
+                    </div>
                 </div>
 
-                <!-- Famous Tokyo Spots Section -->
+                <!-- Famous Spots 섹션 -->
                 <div class="mb-16">
                     <h3 class="text-2xl md:text-3xl font-black mb-8 text-left">Famous Tokyo Spots</h3>
                     <div id="famousSpotsContainer" class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8"></div>
                 </div>
 
-                <!-- Tokyo Suburbs Section -->
+                <!-- Suburbs 섹션 -->
                 <div class="mb-20">
-                    <h3 class="text-2xl md:text-3xl font-black mb-8 text-left">Tokyo Suburbs</h3>
+                    <h3 class="text-2xl md:text-3xl font-black mb-8 text-left text-left">Tokyo Suburbs</h3>
                     <div id="suburbSpotsContainer" class="flex md:grid md:grid-cols-3 overflow-x-auto md:overflow-visible hide-scrollbar gap-5 md:gap-8"></div>
                 </div>
                 
                 <div class="py-20 text-center opacity-30">
                     <p class="text-[10px] md:text-xs font-black tracking-widest uppercase">Japan City Guide Project 2026</p>
-                    <p class="mt-2 text-[9px] font-bold">Optimized for GitHub Pages</p>
+                    <p class="mt-2 text-[9px] font-bold">Optimized for GitHub Pages & Hybrid Web</p>
                 </div>
             </div>
         </div>
 
-        <!-- Sticky Navigation Tab Bar -->
+        <!-- 하단 고정 탭 바 -->
         <div class="fixed bottom-0 left-0 right-0 z-50">
             <div class="max-w-[600px] mx-auto bg-white/95 dark:bg-background-dark/95 backdrop-blur-xl border-t md:border border-gray-100 dark:border-white/5 md:rounded-t-[2.5rem] px-10 pt-4 pb-8 md:pb-6 flex justify-between items-center shadow-2xl">
                 <button class="flex flex-col items-center gap-1 text-primary group active:scale-90 transition-transform"><i class="fa-solid fa-house text-xl md:text-2xl"></i><span class="text-[10px] font-bold">홈</span></button>
-                <button class="flex flex-col items-center gap-1 text-gray-400 active:scale-90 transition-transform"><i class="fa-solid fa-map-location-dot text-xl md:text-2xl"></i><span class="text-[10px] font-bold">탐색</span></button>
-                <button class="flex flex-col items-center gap-1 text-gray-400 active:scale-90 transition-transform"><i class="fa-solid fa-calendar-check text-xl md:text-2xl"></i><span class="text-[10px] font-bold">내 일정</span></button>
-                <button class="flex flex-col items-center gap-1 text-gray-400 active:scale-90 transition-transform"><i class="fa-solid fa-ellipsis text-xl md:text-2xl"></i><span class="text-[10px] font-bold">더보기</span></button>
+                <button class="flex flex-col items-center gap-1 text-gray-400 group active:scale-90 transition-transform"><i class="fa-solid fa-map-location-dot text-xl md:text-2xl"></i><span class="text-[10px] font-bold">탐색</span></button>
+                <button class="flex flex-col items-center gap-1 text-gray-400 group active:scale-90 transition-transform"><i class="fa-solid fa-calendar-check text-xl md:text-2xl"></i><span class="text-[10px] font-bold">내 일정</span></button>
+                <button class="flex flex-col items-center gap-1 text-gray-400 group active:scale-90 transition-transform"><i class="fa-solid fa-ellipsis text-xl md:text-2xl"></i><span class="text-[10px] font-bold">더보기</span></button>
             </div>
         </div>
 
-        <!-- Detail Overlay -->
-        <div id="detailOverlay" class="fixed inset-0 z-[100] translate-x-full md:translate-x-0 md:opacity-0 md:pointer-events-none bg-white/10 dark:bg-black/60 md:backdrop-blur-md transition-all duration-500 overflow-y-auto hide-scrollbar hidden md:flex items-center justify-center p-0 md:p-4 cursor-pointer"></div>
+        <!-- 상세 보기 오버레이 -->
+        <div id="detailOverlay" class="fixed inset-0 z-[100] translate-x-full md:translate-x-0 md:opacity-0 md:pointer-events-none bg-white dark:bg-background-dark md:bg-black/60 md:backdrop-blur-sm transition-all duration-500 overflow-y-auto hide-scrollbar hidden md:flex items-center justify-center p-0 md:p-4 cursor-pointer">
+            <!-- 상세 콘텐츠 로드 -->
+        </div>
     </div>
 
     <script>
         // --- [마스터 데이터 섹션] ---
-        // GitHub Pages 배포 시 사진 경로는 img: 'images/파일명.jpg' 형식으로 적어주세요.
+        // 'img' 항목은 배포 환경의 images/ 폴더 사진 경로로 수정해 주세요.
         const data = {
             best: [
                 { 
                     id: 'nakameguro', name: '나카메구로', sub: '벚꽃 터널과 핑크 제등', 
-                    img: 'https://images.unsplash.com/photo-1542931415-163ae57213ee?q=80&w=1200', 
-                    vibe: 'ROMANTIC', crowd: '매우 높음',
+                    img: 'images/nakameguro.jpg', vibe: 'ROMANTIC', crowd: '매우 높음',
                     timeline: { start: 'Mar 20', peak: 'Mar 27', end: 'Apr 03', progress: 85 },
                     history: '800그루의 벚꽃이 메구로 강을 따라 분홍빛 터널을 만듭니다. 밤이 되면 켜지는 핑크색 제등이 강물에 비쳐 도쿄 최고의 야경을 선사합니다.',
                     tips: ['핑크 스파클링 와인을 마시며 산책하세요.', '오후 6시부터 시작되는 라이트업이 핵심입니다.'],
                     attractions: [
-                        { name: 'Starbucks Reserve', img: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=400' },
-                        { name: 'Onibus Coffee', img: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=400' }
+                        { name: 'Starbucks Reserve', img: 'images/att_starbucks.jpg' },
+                        { name: 'Onibus Coffee', img: 'images/att_onibus.jpg' }
                     ],
                     station: 'NAKAMEGURO, TOKYO'
                 },
                 { 
                     id: 'ueno', name: '우에노 공원', sub: '도쿄 최고 전통의 축제', 
-                    img: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=1200', 
-                    vibe: 'TRADITIONAL', crowd: '매우 높음',
+                    img: 'images/ueno.jpg', vibe: 'TRADITIONAL', crowd: '매우 높음',
                     timeline: { start: 'Mar 18', peak: 'Mar 25', end: 'Apr 01', progress: 95 },
                     history: '도쿄에서 가장 사랑받는 공원 중 하나로, 1,000그루가 넘는 벚꽃 아래에서 즐기는 하나미 문화의 정점을 경험할 수 있습니다.',
                     tips: ['아침 일찍 자리를 잡는 것이 좋습니다.', '공원 내 박물관 투어를 병행해보세요.'],
                     attractions: [
-                        { name: 'National Museum', img: 'https://images.unsplash.com/photo-1518998053574-53f0209f512d?q=80&w=400' },
-                        { name: 'Ueno Zoo', img: 'https://images.unsplash.com/photo-1534567153574-2b12153a87f0?q=80&w=400' }
+                        { name: 'National Museum', img: 'images/att_museum.jpg' },
+                        { name: 'Ueno Zoo', img: 'images/att_zoo.jpg' }
                     ],
                     station: 'UENO, TOKYO'
                 },
                 { 
                     id: 'hanzomon', name: '한조몬', sub: '해자 위로 흐르는 벚꽃', 
-                    img: 'https://images.unsplash.com/photo-1524413840807-0c3cb6fa8087?q=80&w=1200', 
-                    vibe: 'ELEGANT', crowd: '높음',
+                    img: 'images/hanzomon.jpg', vibe: 'ELEGANT', crowd: '높음',
                     timeline: { start: 'Mar 20', peak: 'Mar 27', end: 'Apr 03', progress: 70 },
                     history: '황궁 해자를 따라 보트를 타며 감상하는 벚꽃은 도쿄에서 가장 우아하고 고즈넉한 봄 풍경을 선사합니다.',
                     tips: ['보트 대기 줄이 길 수 있으니 오픈 전 방문을 권장합니다.', '야경 라이트업이 매우 아름답습니다.'],
                     attractions: [
-                        { name: 'Imperial Palace', img: 'https://images.unsplash.com/photo-1542352135-24e5b3b0dfb2?q=80&w=400' }
+                        { name: 'Imperial Palace', img: 'images/att_palace.jpg' }
                     ],
                     station: 'KUDANSHITA, TOKYO'
                 },
                 { 
                     id: 'roppongi', name: '롯폰기 미드타운', sub: '도심 속 화려한 라이트업', 
-                    img: 'https://images.unsplash.com/photo-1536098565842-c4b11dc50826?q=80&w=1200', 
-                    vibe: 'MODERN', crowd: '보통',
+                    img: 'images/roppongi.jpg', vibe: 'MODERN', crowd: '보통',
                     timeline: { start: 'Mar 22', peak: 'Mar 29', end: 'Apr 05', progress: 60 },
                     history: '세련된 고층 빌딩 숲 사이로 펼쳐지는 벚꽃 길은 도심 속에서 느끼는 가장 현대적이고 화려한 봄입니다.',
                     tips: ['쇼핑몰 내 창가 좌석 카페를 이용해보세요.', '라이트업 이후의 바 풍경도 근사합니다.'],
                     attractions: [
-                        { name: 'Mori Museum', img: 'https://images.unsplash.com/photo-1505761671935-60b3a7427bad?q=80&w=400' }
+                        { name: 'Mori Museum', img: 'images/att_mori.jpg' }
                     ],
                     station: 'ROPPONGI, TOKYO'
                 }
             ],
             famous: [
-                { id: 'shinjuku', name: '신주쿠 교엔', sub: '광활한 피크닉 성지', icon: 'fa-leaf', img: 'https://images.unsplash.com/photo-1534567153574-2b12153a87f0?q=80&w=800' },
-                { id: 'sumida', name: '스미다 공원', sub: '스카이트리 명품 뷰', icon: 'fa-bridge', img: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=800' },
-                { id: 'inokashira', name: '이노카시라', sub: '연못과 오리 보트', icon: 'fa-water', img: 'https://images.unsplash.com/photo-1524413840807-0c3cb6fa8087?q=80&w=800' },
-                { id: 'rikugien', name: '육의원', sub: '쏟아지는 수양벚꽃', icon: 'fa-mountain-sun', img: 'https://images.unsplash.com/photo-1490806678562-23730e281431?q=80&w=800' }
+                { id: 'shinjuku', name: '신주쿠 교엔', sub: '광활한 피크닉 성지', icon: 'fa-leaf', img: 'images/shinjuku.jpg' },
+                { id: 'sumida', name: '스미다 공원', sub: '스카이트리 명품 뷰', icon: 'fa-bridge', img: 'images/sumida.jpg' },
+                { id: 'inokashira', name: '이노카시라', sub: '연못과 오리 보트', icon: 'fa-water', img: 'images/inokashira.jpg' },
+                { id: 'rikugien', name: '육의원', sub: '쏟아지는 수양벚꽃', icon: 'fa-mountain-sun', img: 'images/rikugien.jpg' }
             ],
             suburbs: [
-                { id: 'kawaguchi', name: '가와구치코', sub: '후지산과 벚꽃 절경', img: 'https://images.unsplash.com/photo-1490806678562-23730e281431?q=80&w=800', transport: '버스 2시간' },
-                { id: 'kamakura', name: '가마쿠라', sub: '바다와 사찰의 조화', img: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=800', transport: '기차 1시간' },
-                { id: 'kawagoe', name: '가와고에', sub: '작은 에도 운하 체험', img: 'https://images.unsplash.com/photo-1542931415-163ae57213ee?q=80&w=800', transport: '기차 30분' }
+                { id: 'kawaguchi', name: '가와구치코', sub: '후지산과 벚꽃 절경', img: 'images/sub_kawaguchi.jpg', transport: '버스 2시간' },
+                { id: 'kamakura', name: '가마쿠라', sub: '바다와 사찰의 조화', img: 'images/sub_kamakura.jpg', transport: '기차 1시간' },
+                { id: 'kawagoe', name: '가와고에', sub: '작은 에도 운하 체험', img: 'images/sub_kawagoe.jpg', transport: '기차 30분' }
             ]
         };
 
-        // --- APP LOGIC ---
+        // --- 앱 구동 로직 ---
         function initApp() {
             updateForecastStatus();
             renderBestSpots();
@@ -253,10 +252,11 @@
             setupEvents();
         }
 
+        // 오늘 날짜 기준 상태 메시지 업데이트
         function updateForecastStatus() {
             const now = new Date();
             const forecastStatus = document.getElementById('forecastStatus');
-            const startDay = new Date(2026, 2, 20); 
+            const startDay = new Date(2026, 2, 20); // 3월 20일
             if (now < startDay) {
                 forecastStatus.innerHTML = `아직 도쿄의 벚꽃은 <br/><span class="underline underline-offset-8 decoration-4 decoration-white/40 font-black">개화 전 !</span>`;
             } else {
@@ -267,12 +267,12 @@
         function renderBestSpots() {
             const container = document.getElementById('bestSpotsContainer');
             container.innerHTML = data.best.map(spot => `
-                <div onclick="openDetail('${spot.id}')" class="min-w-[280px] md:min-w-0 w-full h-[450px] md:h-[520px] bg-white dark:bg-white/5 rounded-[3rem] overflow-hidden shadow-2xl relative group active:scale-95 transition-all snap-center cursor-pointer text-left">
+                <div onclick="openDetail('${spot.id}')" class="min-w-[280px] md:min-w-0 w-full h-[480px] md:h-[540px] bg-sakura-pink/20 dark:bg-white/5 rounded-[3rem] overflow-hidden shadow-2xl relative group active:scale-95 transition-all snap-center cursor-pointer text-left">
                     <img src="${spot.img}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="${spot.name}" onerror="this.src='https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=800'">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/20 to-transparent"></div>
-                    <div class="absolute bottom-12 left-10 right-10">
+                    <div class="absolute bottom-12 left-10 right-10 text-left">
                         <span class="inline-block px-4 py-1.5 rounded-full bg-primary text-[10px] font-black text-white uppercase mb-5 shadow-lg shadow-primary/20">${spot.vibe}</span>
-                        <h4 class="text-white text-3xl font-black mb-3 text-left leading-tight tracking-tighter">${spot.name}</h4>
+                        <h4 class="text-white text-3xl font-black mb-3 text-left tracking-tighter">${spot.name}</h4>
                         <p class="text-white/70 text-[11px] font-medium leading-relaxed text-left">${spot.sub}</p>
                     </div>
                 </div>
@@ -294,7 +294,7 @@
             const container = document.getElementById('suburbSpotsContainer');
             container.innerHTML = data.suburbs.map(spot => `
                 <div onclick="openDetail('${spot.id}')" class="min-w-[240px] md:min-w-0 w-full bg-white dark:bg-white/5 rounded-[2.8rem] overflow-hidden border border-white/50 active:scale-95 transition-all shadow-sm hover:shadow-xl transition-all text-left">
-                    <div class="h-36 md:h-48 overflow-hidden"><img src="${spot.img}" class="w-full h-full object-cover" alt="${spot.name}" onerror="this.src='https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=800'"></div>
+                    <div class="h-36 md:h-48 overflow-hidden bg-sakura-pink/10"><img src="${spot.img}" class="w-full h-full object-cover" alt="${spot.name}" onerror="this.src='https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=800'"></div>
                     <div class="p-6 md:p-8 text-left">
                         <h4 class="font-black text-lg md:text-xl mb-1.5 text-left">${spot.name}</h4>
                         <p class="text-[10px] md:text-xs text-gray-400 font-bold mb-4 text-left">${spot.sub}</p>
@@ -304,28 +304,34 @@
             `).join('');
         }
 
+        // 상세 페이지 팝업 (image_757e66.jpg UI 재현)
         function openDetail(id) {
             const spot = data.best.find(s => s.id === id) || data.suburbs.find(s => s.id === id) || data.famous.find(s => s.id === id);
             if (!spot) return;
+            
             const overlay = document.getElementById('detailOverlay');
             const isMobile = window.innerWidth < 768;
+
             const history = spot.history || "도쿄의 아름다운 벚꽃 명소입니다. 2026년 봄, 분홍빛으로 물든 도심의 낭만을 만끽해보세요.";
             const crowd = spot.crowd || "보통";
             const tips = spot.tips || ["편안한 신발을 신으세요.", "보조 배터리를 챙기세요."];
             const timeline = spot.timeline || { start: 'Mar 20', peak: 'Mar 27', end: 'Apr 03', progress: 50 };
             const attractions = spot.attractions || [];
-            const station = spot.station || "TOKYO, JAPAN";
 
             overlay.innerHTML = `
                 <div class="w-full h-full md:h-[90vh] md:max-w-xl md:rounded-[3.5rem] bg-white dark:bg-background-dark overflow-hidden md:shadow-2xl relative flex flex-col slide-up shadow-inner text-left cursor-default" onclick="event.stopPropagation()">
+                    
+                    <!-- 헤더 -->
                     <div class="shrink-0 h-16 px-6 flex justify-between items-center bg-white dark:bg-background-dark sticky top-0 z-[120] border-b border-gray-50 dark:border-white/5 shadow-sm text-left">
                         <button onclick="closeDetail()" class="text-[#181111] dark:text-white p-2 active:scale-75 transition-transform"><i class="fa-solid fa-chevron-left text-xl"></i></button>
                         <h2 class="text-[#181111] dark:text-white font-black text-lg text-left">${spot.name}</h2>
                         <button class="text-[#ea2a33] p-2 active:scale-75 transition-transform"><i class="fa-solid fa-arrow-up-from-bracket text-xl"></i></button>
                     </div>
-                    <div class="flex-1 overflow-y-auto hide-scrollbar pb-32">
-                        <div class="px-6 pt-4 text-center text-left">
-                            <div class="relative w-full aspect-[4/3] rounded-[2.5rem] overflow-hidden shadow-2xl bg-gray-100 inline-block text-left">
+
+                    <div class="flex-1 overflow-y-auto hide-scrollbar pb-40">
+                        <!-- 이미지 라운드 카드 -->
+                        <div class="px-6 pt-4 text-center">
+                            <div class="relative w-full aspect-[4/3] rounded-[2.5rem] overflow-hidden shadow-2xl bg-gray-100 inline-block">
                                 <img src="${spot.img}" class="w-full h-full object-cover" alt="${spot.name}" onerror="this.src='https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=800'">
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                                 <div class="absolute bottom-6 left-6">
@@ -333,24 +339,69 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="px-8 pt-8 text-left">
                             <div class="text-center mb-10 text-left">
-                                <h2 class="text-3xl font-black mb-3 text-left tracking-tighter">${spot.name}</h2>
-                                <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-primary/5 rounded-full border border-primary/10 text-left"><i class="fa-solid fa-user-group text-primary text-[10px]"></i><p class="text-primary text-[10px] font-black uppercase tracking-tight text-left">혼잡도 : ${crowd}</p></div>
+                                <h2 class="text-4xl font-black mb-3 text-left tracking-tighter">${spot.name}</h2>
+                                <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-primary/5 rounded-full border border-primary/10 text-left">
+                                    <i class="fa-solid fa-user-group text-primary text-[10px]"></i>
+                                    <p class="text-primary text-[10px] font-black uppercase tracking-tight text-left">혼잡도 : ${crowd}</p>
+                                </div>
                             </div>
+
+                            <!-- 벚꽃 타임라인 -->
                             <div class="mb-10 px-1 bg-white/50 dark:bg-white/5 rounded-3xl p-6 border border-gray-50 dark:border-white/5 shadow-sm text-left">
                                 <h3 class="flex items-center gap-2 text-sm font-black mb-10 text-left"><i class="fa-solid fa-calendar-check text-primary"></i> 벚꽃 타임라인</h3>
-                                <div class="timeline-bar mb-10 text-left"><div class="timeline-progress" style="width: ${timeline.progress}%"></div><div class="timeline-dot" style="left: ${timeline.progress}%"></div><div class="absolute -bottom-10 left-0 text-center text-left"><p class="text-[8px] font-bold text-gray-400 uppercase text-left">개화</p><p class="text-[9px] font-black text-left">${timeline.start}</p></div><div class="absolute -bottom-10 left-1/2 -translate-x-1/2 text-center text-left"><p class="text-[8px] font-bold text-primary uppercase text-left">만개</p><p class="text-[9px] font-black text-primary text-left">${timeline.peak}</p></div><div class="absolute -bottom-10 right-0 text-center text-left"><p class="text-[8px] font-bold text-gray-400 uppercase text-left">낙화</p><p class="text-[9px] font-black text-left">${timeline.end}</p></div></div>
+                                <div class="timeline-bar mb-10 text-left">
+                                    <div class="timeline-progress" style="width: ${timeline.progress}%"></div>
+                                    <div class="timeline-dot" style="left: ${timeline.progress}%"></div>
+                                    <div class="absolute -bottom-10 left-0 text-center text-left"><p class="text-[8px] font-bold text-gray-400 uppercase text-left">개화</p><p class="text-[9px] font-black text-left">${timeline.start}</p></div>
+                                    <div class="absolute -bottom-10 left-1/2 -translate-x-1/2 text-center text-left"><p class="text-[8px] font-bold text-primary uppercase text-left">만개</p><p class="text-[9px] font-black text-primary text-left">${timeline.peak}</p></div>
+                                    <div class="absolute -bottom-10 right-0 text-center text-left"><p class="text-[8px] font-bold text-gray-400 uppercase text-left">낙화</p><p class="text-[9px] font-black text-left">${timeline.end}</p></div>
+                                </div>
                             </div>
+
                             <div class="mb-10 text-left"><h3 class="flex items-center gap-2 text-sm font-black mb-4 border-l-4 border-primary pl-3 text-left">정보</h3><p class="text-gray-500 dark:text-gray-400 text-base leading-relaxed font-medium text-left">${history}</p></div>
-                            <div class="bg-[#fff9f9] dark:bg-primary/5 p-8 rounded-[2.5rem] mb-10 border border-red-50 dark:border-primary/10 text-left text-left"><h3 class="flex items-center gap-2 text-primary font-black mb-5 text-left"><i class="fa-solid fa-wand-magic-sparkles text-left"></i> 꿀팁</h3><ul class="space-y-4 text-left">${tips.map(tip => `<li class="flex gap-4 text-[13px] font-bold text-gray-700 dark:text-gray-300 text-left text-left text-left"><span class="text-primary mt-1 shrink-0 text-left">•</span> <span class="text-left text-left text-left leading-relaxed">${tip}</span></li>`).join('')}</ul></div>
-                            ${attractions.length > 0 ? `<div class="mb-10 text-left text-left text-left"><div class="flex justify-between items-center mb-6 text-left text-left"><h3 class="text-sm font-black text-left text-left">주변 볼거리</h3><button class="text-[10px] font-black text-primary uppercase tracking-widest text-left">VIEW ALL</button></div><div class="flex overflow-x-auto hide-scrollbar gap-5 pb-4 text-left">${attractions.map(att => `<div class="min-w-[160px] flex flex-col gap-3 group active:scale-95 transition-all text-center text-left"><div class="h-40 w-full rounded-[2.5rem] bg-cover bg-center shadow-xl border border-white/50 bg-gray-100 text-left" style="background-image: url('${att.img}')"></div><p class="text-[11px] font-black text-center text-left mt-1 text-gray-600">${att.name}</p></div>`).join('')}</div></div>` : ''}
-                            <div class="mb-10 text-left"><h3 class="text-sm font-black mb-6 text-left text-left">위치</h3><div class="relative w-full h-52 rounded-[2.5rem] overflow-hidden shadow-inner border border-gray-100 text-left"><div class="absolute inset-0 bg-gray-200 flex items-center justify-center pointer-events-none text-left text-left"><i class="fa-solid fa-location-dot text-primary text-5xl drop-shadow-2xl text-left text-left"></i></div><div class="absolute bottom-5 left-5 right-5 bg-white/95 dark:bg-background-dark/95 p-4 rounded-2xl flex items-center justify-between shadow-2xl border border-white/50 text-left"><p class="text-[10px] font-black uppercase tracking-tight truncate mr-4 text-left">${station}</p><i class="fa-solid fa-up-right-from-square text-primary text-sm cursor-pointer active:scale-75 transition-all text-left"></i></div></div></div>
+
+                            <!-- 꿀팁 카드 -->
+                            <div class="bg-[#fff9f9] dark:bg-primary/5 p-8 rounded-[2.5rem] mb-10 border border-red-50 dark:border-primary/10 text-left text-left">
+                                <h3 class="flex items-center gap-2 text-primary font-black mb-5 text-left"><i class="fa-solid fa-wand-magic-sparkles text-left"></i> 꿀팁</h3>
+                                <ul class="space-y-4">
+                                    ${tips.map(tip => `<li class="flex gap-4 text-[13px] font-bold text-gray-700 dark:text-gray-300 text-left text-left text-left"><span class="text-primary mt-1 shrink-0 text-left">•</span> <span class="text-left text-left text-left leading-relaxed">${tip}</span></li>`).join('')}
+                                </ul>
+                            </div>
+
+                            <!-- 주변 볼거리 -->
+                            ${attractions.length > 0 ? `
+                                <div class="mb-10 text-left">
+                                    <div class="flex justify-between items-center mb-6 text-left text-left"><h3 class="text-sm font-black text-left text-left">주변 볼거리</h3><button class="text-[10px] font-black text-primary uppercase tracking-widest text-left">VIEW ALL</button></div>
+                                    <div class="flex overflow-x-auto hide-scrollbar gap-5 pb-4 text-left">
+                                        ${attractions.map(att => `<div class="min-w-[160px] flex flex-col gap-3 group active:scale-95 transition-all text-center text-left"><div class="h-40 w-full rounded-[2.5rem] bg-cover bg-center shadow-xl border border-white/50 bg-gray-100 text-left" style="background-image: url('${att.img}')"></div><p class="text-[11px] font-black text-center text-left mt-1 text-gray-600">${att.name}</p></div>`).join('')}
+                                    </div>
+                                </div>
+                            ` : ''}
+
+                            <div class="mb-10 text-left">
+                                <h3 class="text-sm font-black mb-6 text-left text-left">위치</h3>
+                                <div class="relative w-full h-52 rounded-[2.5rem] overflow-hidden shadow-inner border border-gray-100 text-left">
+                                    <div class="absolute inset-0 bg-gray-100 flex items-center justify-center text-left"><i class="fa-solid fa-location-dot text-primary text-5xl drop-shadow-2xl text-left text-left"></i></div>
+                                    <div class="absolute bottom-5 left-5 right-5 bg-white/95 dark:bg-background-dark/95 p-4 rounded-2xl flex items-center justify-between shadow-2xl border border-white/50 text-left">
+                                        <p class="text-[10px] font-black uppercase tracking-tight truncate mr-4 text-left">${spot.station || 'TOKYO, JAPAN'}</p>
+                                        <i class="fa-solid fa-up-right-from-square text-primary text-sm cursor-pointer active:scale-75 transition-all text-left"></i>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="shrink-0 bg-white/95 dark:bg-background-dark/95 backdrop-blur-xl border-t border-gray-100 dark:border-white/5 px-6 py-5 pb-8 flex items-center gap-3 z-[130] shadow-[0_-5px_20px_rgba(0,0,0,0.05)] text-left"><button class="flex-[1] h-14 rounded-2xl bg-primary/5 dark:bg-primary/10 text-primary font-black text-sm flex items-center justify-center gap-2 active:scale-95 transition-all border border-primary/10 text-left"><i class="fa-solid fa-map"></i><span class="text-left">길찾기</span></button><button class="flex-[1.5] h-14 rounded-2xl bg-primary text-white font-black text-sm flex items-center justify-center gap-2 shadow-xl shadow-primary/30 active:scale-95 transition-all text-left"><i class="fa-solid fa-plus"></i><span class="text-left">내 일정에 추가</span></button></div>
+
+                    <!-- 하단 액션 바 -->
+                    <div class="shrink-0 bg-white/95 dark:bg-background-dark/95 backdrop-blur-xl border-t border-gray-100 dark:border-white/5 px-6 py-5 pb-8 flex items-center gap-3 z-[130] shadow-[0_-5px_20px_rgba(0,0,0,0.05)] text-left">
+                        <button class="flex-[1] h-14 rounded-2xl bg-primary/5 dark:bg-primary/10 text-primary font-black text-sm flex items-center justify-center gap-2 active:scale-95 transition-all border border-primary/10 text-left"><i class="fa-solid fa-map"></i><span class="text-left">길찾기</span></button>
+                        <button class="flex-[1.5] h-14 rounded-2xl bg-primary text-white font-black text-sm flex items-center justify-center gap-2 shadow-xl shadow-primary/30 active:scale-95 transition-all text-left"><i class="fa-solid fa-plus-circle"></i><span class="text-left">내 일정에 추가</span></button>
+                    </div>
                 </div>
             `;
+            
             overlay.classList.remove('hidden');
             if (!isMobile) {
                 overlay.style.pointerEvents = 'auto';
