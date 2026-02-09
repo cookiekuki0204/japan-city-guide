@@ -4,10 +4,32 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
     <title>Tokyo Sakura Guide 2026</title>
+    
+    <!-- 🌸 파비콘 설정: 벚꽃 이모지 -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌸</text></svg>">
+    
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <!-- Noto Sans JP & Plus Jakarta Sans fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    
+    <!-- 아이콘 깨짐 방지를 위한 Material Symbols Outlined 강제 로드 -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL,GRAD,opsz@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+    
+    <!-- Firebase SDK (ESM) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, query, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // 환경 변수 기반 설정 (GitHub 배포 시 보안 유지)
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : { apiKey: "" };
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'tokyo-sakura-2026';
+
+        window.fb = { db, auth, appId, collection, addDoc, query, onSnapshot, serverTimestamp, signInAnonymously, signInWithCustomToken, onAuthStateChanged };
+    </script>
+
     <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -23,97 +45,58 @@
                     fontFamily: {
                         "display": ["Plus Jakarta Sans", "Noto Sans JP", "sans-serif"]
                     },
-                    borderRadius: {
-                        "DEFAULT": "1rem",
-                        "lg": "2rem",
-                        "xl": "3rem",
-                        "full": "9999px"
-                    },
+                    borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" },
                 },
             },
         }
     </script>
     <style>
-        body { 
-            font-family: 'Plus Jakarta Sans', 'Noto Sans JP', sans-serif; 
-            -webkit-font-smoothing: antialiased;
-        }
-        .sakura-gradient {
-            background: linear-gradient(180deg, #e0f2fe 0%, #ffffff 40%, #fff1f2 100%);
-            background-attachment: fixed;
-        }
+        body { font-family: 'Plus Jakarta Sans', 'Noto Sans JP', sans-serif; -webkit-font-smoothing: antialiased; }
+        .sakura-gradient { background: linear-gradient(180deg, #e0f2fe 0%, #ffffff 40%, #fff1f2 100%); background-attachment: fixed; }
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        .transition-view { transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+        .transition-view { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
         
-        /* Sakura Petal Animation */
-        .petal {
-            position: absolute;
-            background-color: #ffdae9;
-            border-radius: 150% 0 150% 0;
-            opacity: 0.7;
-            pointer-events: none;
-            z-index: 1;
-            animation: fall linear infinite;
+        /* 아이콘 폰트 강제 정의 */
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined' !important;
+            font-weight: normal; font-style: normal; font-size: 24px; line-height: 1;
+            letter-spacing: normal; text-transform: none; display: inline-block;
+            white-space: nowrap; word-wrap: normal; direction: ltr; -webkit-font-smoothing: antialiased;
         }
+
+        /* 벚꽃 낙화 애니메이션 */
+        .petal { position: absolute; background-color: #ffdae9; border-radius: 150% 0 150% 0; opacity: 0.7; pointer-events: none; z-index: 1; animation: fall linear infinite; }
         @keyframes fall {
             0% { transform: translate(0, -10px) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.8; }
-            90% { opacity: 0.8; }
             100% { transform: translate(100px, 100vh) rotate(360deg); opacity: 0; }
         }
 
-        .ads-slot {
-            background: rgba(234, 42, 51, 0.03);
-            border: 1px dashed rgba(234, 42, 51, 0.15);
-            display: flex; align-items: center; justify-content: center;
-            color: #ea2a33; font-size: 11px; font-weight: 700;
-            margin: 24px 0; min-height: 120px; border-radius: 1.5rem;
-            text-transform: uppercase; letter-spacing: 1px;
-        }
+        .itinerary-step::before { content: ''; position: absolute; left: 7px; top: 24px; bottom: -8px; width: 2px; background: #ea2a3320; }
+        .itinerary-step:last-child::before { display: none; }
+        
+        .animate-fade-in { animation: fadeIn 0.4s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Timeline Styles */
-        .timeline-track {
-            height: 6px;
-            background: #eee;
-            border-radius: 3px;
-            position: relative;
-        }
-        .timeline-progress {
-            height: 100%;
-            background: #ea2a33;
-            border-radius: 3px;
-            position: absolute;
-            left: 0;
-            top: 0;
-        }
-        .timeline-marker {
-            position: absolute;
-            top: -4px;
-            width: 14px;
-            height: 14px;
-            background: #fff;
-            border: 3px solid #ea2a33;
-            border-radius: 50%;
-            transform: translateX(-50%);
-        }
+        /* AI Loading 애니메이션 */
+        .ai-loading-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .5; transform: scale(1.05); } }
     </style>
 </head>
 <body class="bg-background-light dark:bg-background-dark text-[#181111] dark:text-white transition-colors duration-300 antialiased overflow-x-hidden">
     
-    <!-- Background Animation Container -->
     <div id="petalContainer" class="fixed inset-0 pointer-events-none overflow-hidden z-0"></div>
 
-    <div id="app" class="relative mx-auto flex h-auto min-h-screen w-full max-w-[480px] flex-col overflow-x-hidden shadow-2xl bg-white/30 dark:bg-background-dark/30 backdrop-blur-[2px] sakura-gradient">
+    <div id="app" class="relative mx-auto flex h-auto min-h-screen w-full max-w-[480px] flex-col overflow-x-hidden shadow-2xl bg-white dark:bg-background-dark/30 backdrop-blur-[2px] sakura-gradient">
         
         <!-- View: Home -->
         <div id="homeView" class="transition-view flex flex-col w-full relative z-10">
             <div class="h-12 w-full"></div>
             
             <div class="px-6 flex justify-between items-center">
-                <div class="flex items-center gap-2">
-                    <span class="material-symbols-outlined text-primary text-2xl font-bold">location_city</span>
-                    <span class="text-[10px] font-black text-gray-400 uppercase tracking-widest">Tokyo 2026</span>
+                <div class="flex items-center gap-2 text-left">
+                    <span class="material-symbols-outlined text-primary text-2xl font-bold font-display">location_city</span>
+                    <span class="text-[10px] font-black text-gray-400 uppercase tracking-widest font-display">Tokyo 2026</span>
                 </div>
                 <button id="langBtnHome" class="px-4 py-2 rounded-full bg-white/80 dark:bg-black/40 backdrop-blur-md border border-white text-[10px] font-bold text-primary shadow-sm active:scale-95 transition-all">
                     JP / 日本語
@@ -121,482 +104,348 @@
             </div>
 
             <!-- Hero Section -->
-            <div class="relative h-[32vh] w-full flex flex-col items-center justify-center px-6">
+            <div class="relative h-[32vh] w-full flex flex-col items-center justify-center px-6 text-center">
                 <div class="absolute top-5 opacity-5 pointer-events-none">
-                    <span class="material-symbols-outlined text-[200px] text-primary">castle</span>
+                    <span class="material-symbols-outlined text-[200px] text-primary font-bold">castle</span>
                 </div>
                 <div class="relative z-10 text-center">
-                    <span class="inline-block px-4 py-1 rounded-full bg-white/40 dark:bg-black/20 backdrop-blur-sm text-[10px] font-black tracking-[0.2em] text-primary mb-4 uppercase border border-primary/10">Spring 2026 Edition</span>
-                    <h1 id="homeHeroTitle" class="text-[#181111] dark:text-white tracking-tighter text-[38px] font-extrabold leading-[1.1]">
-                        올봄에는 꼭 가야 해
-                    </h1>
-                    <div class="mt-3 flex items-center justify-center gap-3">
+                    <span id="labelSpringYear" class="inline-block px-4 py-1 rounded-full bg-white/40 dark:bg-black/20 backdrop-blur-sm text-[10px] font-black tracking-[0.2em] text-primary mb-4 uppercase border border-primary/10 font-display">Spring 2026 Edition</span>
+                    <h1 id="homeHeroTitle" class="text-[#181111] dark:text-white tracking-tighter text-[38px] font-extrabold leading-[1.1]">올봄에는 꼭 가야 해</h1>
+                    <div class="mt-3 flex items-center justify-center gap-3 text-center">
                         <span class="h-[1px] w-8 bg-primary/40"></span>
-                        <h2 id="homeHeroSub" class="text-primary tracking-widest text-[22px] font-bold leading-tight">
-                            도쿄 벚꽃 명소
-                        </h2>
+                        <h2 id="homeHeroSub" class="text-primary tracking-widest text-[22px] font-bold leading-tight">도쿄 벚꽃 명소</h2>
                         <span class="h-[1px] w-8 bg-primary/40"></span>
                     </div>
                 </div>
             </div>
 
-            <!-- Global Bloom Forecast Bar -->
+            <!-- Dynamic Bloom Forecast (2/9 기준 반영) -->
             <div class="px-6 mb-4">
-                <div class="bg-white/60 dark:bg-black/20 backdrop-blur-md rounded-2xl p-4 border border-white/40 flex items-center justify-between">
-                    <div class="flex items-center gap-3">
+                <div class="bg-white/60 dark:bg-black/20 backdrop-blur-md rounded-2xl p-4 border border-white/40 flex items-center justify-between shadow-sm">
+                    <div class="flex items-center gap-3 text-left font-display">
                         <div class="size-10 rounded-full bg-primary/10 flex items-center justify-center">
-                            <span class="material-symbols-outlined text-primary text-xl font-bold">insights</span>
+                            <span class="material-symbols-outlined text-primary text-xl font-display font-display font-display font-display font-display">insights</span>
                         </div>
                         <div>
-                            <p id="labelForecastTitle" class="text-[10px] font-black text-gray-400 uppercase tracking-tighter">2026 Bloom Forecast</p>
-                            <p id="labelForecastStatus" class="text-sm font-bold">도쿄는 지금 <span class="text-primary font-black">만개(Peak)</span> 직전!</p>
+                            <p id="labelForecastTitle" class="text-[10px] font-black text-gray-400 uppercase tracking-tighter font-display font-display">2026 Bloom Forecast</p>
+                            <p id="labelForecastStatus" class="text-sm font-bold font-display font-display"></p>
                         </div>
-                    </div>
-                    <div class="text-right">
-                        <p class="text-[10px] font-bold text-primary">Mar 22 - Mar 29</p>
-                        <p class="text-[9px] text-gray-400">Best Viewing</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Quick Icon Menu -->
+            <!-- Quick Icon Menu (4대 명소 고정) -->
             <div class="px-6 py-4">
                 <div class="grid grid-cols-4 gap-4 text-center">
-                    <div class="flex flex-col items-center gap-2 cursor-pointer group" onclick="scrollToElement('locationList')">
-                        <div class="flex size-14 items-center justify-center rounded-full bg-white/80 dark:bg-white/10 shadow-lg shadow-primary/5 border border-sakura-pink/30 group-active:scale-90 transition-transform">
-                            <span class="material-symbols-outlined text-primary text-2xl">waves</span>
+                    <div class="flex flex-col items-center gap-2 cursor-pointer group" onclick="scrollToElement('locationListBest')">
+                        <div class="flex size-14 items-center justify-center rounded-full bg-white/80 dark:bg-white/10 shadow-lg border border-sakura-pink/30 group-active:scale-90 transition-transform">
+                            <span class="material-symbols-outlined text-primary text-2xl font-display font-display font-display font-display font-display font-display">waves</span>
                         </div>
-                        <span class="text-[10px] font-extrabold text-gray-600 dark:text-gray-300">나카메구로</span>
+                        <span class="text-[10px] font-extrabold text-gray-600 dark:text-gray-300 font-display">나카메구로</span>
                     </div>
-                    <div class="flex flex-col items-center gap-2 cursor-pointer group" onclick="scrollToElement('locationList')">
-                        <div class="flex size-14 items-center justify-center rounded-full bg-white/80 dark:bg-white/10 shadow-lg shadow-primary/5 border border-sakura-pink/30 group-active:scale-90 transition-transform">
-                            <span class="material-symbols-outlined text-primary text-2xl">park</span>
+                    <div class="flex flex-col items-center gap-2 cursor-pointer group" onclick="scrollToElement('locationListBest')">
+                        <div class="flex size-14 items-center justify-center rounded-full bg-white/80 dark:bg-white/10 shadow-lg border border-sakura-pink/30 group-active:scale-90 transition-transform font-display font-display font-display font-display font-display font-display">
+                            <span class="material-symbols-outlined text-primary text-2xl font-display font-display">park</span>
                         </div>
-                        <span class="text-[10px] font-extrabold text-gray-600 dark:text-gray-300">우에노</span>
+                        <span class="text-[10px] font-extrabold text-gray-600 dark:text-gray-300 font-display">우에노</span>
                     </div>
-                    <div class="flex flex-col items-center gap-2 cursor-pointer group" onclick="scrollToElement('locationList')">
-                        <div class="flex size-14 items-center justify-center rounded-full bg-white/80 dark:bg-white/10 shadow-lg shadow-primary/5 border border-sakura-pink/30 group-active:scale-90 transition-transform">
-                            <span class="material-symbols-outlined text-primary text-2xl">kayaking</span>
+                    <div class="flex flex-col items-center gap-2 cursor-pointer group" onclick="scrollToElement('locationListBest')">
+                        <div class="flex size-14 items-center justify-center rounded-full bg-white/80 dark:bg-white/10 shadow-lg border border-sakura-pink/30 group-active:scale-90 transition-transform font-display font-display font-display font-display font-display font-display font-display font-display">
+                            <span class="material-symbols-outlined text-primary text-2xl font-display font-display">kayaking</span>
                         </div>
-                        <span class="text-[10px] font-extrabold text-gray-600 dark:text-gray-300">한조몬</span>
+                        <span class="text-[10px] font-extrabold text-gray-600 dark:text-gray-300 font-display">한조몬</span>
                     </div>
-                    <div class="flex flex-col items-center gap-2 cursor-pointer group" onclick="scrollToElement('locationList')">
-                        <div class="flex size-14 items-center justify-center rounded-full bg-white/80 dark:bg-white/10 shadow-lg shadow-primary/5 border border-sakura-pink/30 group-active:scale-90 transition-transform">
-                            <span class="material-symbols-outlined text-primary text-2xl">nightlight</span>
+                    <div class="flex flex-col items-center gap-2 cursor-pointer group" onclick="scrollToElement('locationListBest')">
+                        <div class="flex size-14 items-center justify-center rounded-full bg-white/80 dark:bg-white/10 shadow-lg border border-sakura-pink/30 group-active:scale-90 transition-transform font-display font-display font-display font-display font-display font-display font-display font-display">
+                            <span class="material-symbols-outlined text-primary text-2xl font-display font-display">nightlight</span>
                         </div>
-                        <span class="text-[10px] font-extrabold text-gray-600 dark:text-gray-300">롯폰기</span>
+                        <span class="text-[10px] font-extrabold text-gray-600 dark:text-gray-300 font-display">롯폰기</span>
                     </div>
                 </div>
             </div>
 
-            <!-- List Section -->
+            <!-- Best Spots Section (Fixed 4) -->
+            <div class="px-6 py-6 pb-4 font-display font-display font-display font-display font-display">
+                <h3 id="labelBestSpots" class="text-xl font-extrabold mb-6 font-display font-display font-display font-display font-display font-display">Best Spots</h3>
+                <div id="locationListBest" class="flex flex-col gap-4 font-display font-display font-display font-display font-display font-display font-display font-display"></div>
+            </div>
+
+            <!-- More Spots Section (Explore More) -->
             <div class="px-6 py-6 pb-20">
-                <div class="flex items-center justify-between mb-6">
-                    <h3 id="labelBestSpots" class="text-xl font-extrabold">Best Spots</h3>
-                    <div class="flex gap-2">
-                        <span class="size-2 rounded-full bg-primary"></span>
-                        <span class="size-2 rounded-full bg-primary/30"></span>
-                        <span class="size-2 rounded-full bg-primary/10"></span>
-                    </div>
+                <div class="flex items-center gap-2 mb-6">
+                    <span class="material-symbols-outlined text-primary text-xl font-bold font-display font-display font-display font-display font-display font-display font-display font-display font-display">new_releases</span>
+                    <h3 id="labelMoreSpots" class="text-xl font-extrabold font-display font-display font-display font-display font-display font-display font-display font-display font-display font-display">Explore More</h3>
                 </div>
-                
-                <div id="locationList" class="flex flex-col gap-4">
-                    <!-- Dynamic List -->
-                </div>
+                <div id="locationListMore" class="flex flex-col gap-4"></div>
 
-                <!-- Ad Slot (SEO/Ads Ready) -->
-                <div class="ads-slot">AD: Spring Travel Essentials</div>
-
-                <!-- 1-Day Golden Course Section -->
-                <div class="mt-10 mb-20 bg-white/60 dark:bg-white/5 backdrop-blur-md rounded-[2.5rem] p-8 border border-white shadow-xl">
-                    <div class="flex items-center justify-between mb-8">
-                        <div>
-                            <h3 id="labelCourseTitle" class="text-xl font-black tracking-tight">도쿄 벚꽃 1일 황금 루트</h3>
-                            <p id="labelCourseSub" class="text-[10px] font-bold text-gray-400 uppercase mt-1">Perfect Day Trip Itinerary</p>
+                <!-- 1-Day Golden Course -->
+                <div class="mt-16 mb-20 bg-white/60 dark:bg-white/5 backdrop-blur-md rounded-[2.5rem] p-8 border border-white shadow-xl font-display font-display font-display font-display font-display">
+                    <div class="flex items-center justify-between mb-8 text-left font-display font-display font-display font-display font-display font-display font-display font-display font-display">
+                        <div class="text-left font-display font-display font-display font-display font-display font-display font-display font-display font-display font-display font-display font-display">
+                            <h3 id="labelCourseTitle" class="text-xl font-black tracking-tight font-display font-display font-display font-display font-display font-display font-display">도쿄 벚꽃 1일 황금 루트</h3>
+                            <p id="labelCourseSub" class="text-[10px] font-bold text-gray-400 uppercase mt-1 tracking-widest font-display font-display font-display font-display">Perfect Day Trip Itinerary</p>
                         </div>
-                        <span class="material-symbols-outlined text-primary text-4xl font-bold">auto_awesome</span>
+                        <span class="material-symbols-outlined text-primary text-4xl font-bold font-display font-display font-display font-display font-display font-display font-display font-display font-display">auto_awesome</span>
                     </div>
-
-                    <div class="space-y-12 relative ml-4">
-                        <div class="absolute left-[-21px] top-2 bottom-2 w-0.5 bg-gradient-to-b from-primary via-primary/40 to-primary/10"></div>
-
-                        <!-- Step 1 -->
-                        <div class="relative">
-                            <div class="absolute -left-[32px] top-1 size-6 rounded-full bg-white border-4 border-primary shadow-sm z-10 flex items-center justify-center">
-                                <span class="size-1.5 rounded-full bg-primary"></span>
-                            </div>
-                            <div>
-                                <p class="text-[10px] font-black text-primary uppercase mb-1">09:00 AM - 한조몬/구단시타</p>
-                                <h4 id="courseStep1Title" class="text-base font-bold">치도리가후치 보트 산책</h4>
-                                <p id="courseStep1Desc" class="text-xs text-gray-500 mt-2 leading-relaxed font-medium">가장 붐비기 전, 해자 위로 흐르는 우아한 벚꽃을 보트 위에서 감상하세요.</p>
-                            </div>
-                        </div>
-
-                        <!-- Transit -->
-                        <div class="relative py-2 px-4 bg-gray-50 dark:bg-white/5 rounded-xl border border-gray-100 flex items-center gap-3">
-                            <span class="material-symbols-outlined text-xs text-blue-500 font-bold">subway</span>
-                            <p id="transit1" class="text-[10px] font-bold text-gray-400 tracking-tight">한조몬선 → 우에노역 (약 20분)</p>
-                        </div>
-
-                        <!-- Step 2 -->
-                        <div class="relative">
-                            <div class="absolute -left-[32px] top-1 size-6 rounded-full bg-white border-4 border-primary/40 shadow-sm z-10 flex items-center justify-center">
-                                <span class="size-1.5 rounded-full bg-primary/40"></span>
-                            </div>
-                            <div>
-                                <p class="text-[10px] font-black text-primary uppercase mb-1">01:00 PM - 우에노</p>
-                                <h4 id="courseStep2Title" class="text-base font-bold">우에노 공원 & 박물관</h4>
-                                <p id="courseStep2Desc" class="text-xs text-gray-500 mt-2 leading-relaxed font-medium">벚꽃 아래에서 즐기는 피크닉과 국립 박물관의 예술 전시를 함께 즐겨보세요.</p>
-                            </div>
-                        </div>
-
-                        <!-- Transit -->
-                        <div class="relative py-2 px-4 bg-gray-50 dark:bg-white/5 rounded-xl border border-gray-100 flex items-center gap-3">
-                            <span class="material-symbols-outlined text-xs text-orange-400 font-bold">subway</span>
-                            <p id="transit2" class="text-[10px] font-bold text-gray-400 tracking-tight">히비야선 → 나카메구로역 (약 35분)</p>
-                        </div>
-
-                        <!-- Step 3 -->
-                        <div class="relative">
-                            <div class="absolute -left-[32px] top-1 size-6 rounded-full bg-white border-4 border-primary/20 shadow-sm z-10 flex items-center justify-center">
-                                <span class="size-1.5 rounded-full bg-primary/20"></span>
-                            </div>
-                            <div>
-                                <p class="text-[10px] font-black text-primary uppercase mb-1">06:30 PM - 나카메구로</p>
-                                <h4 id="courseStep3Title" class="text-base font-bold">메구로강 야간 라이트업</h4>
-                                <p id="courseStep3Desc" class="text-xs text-gray-500 mt-2 leading-relaxed font-medium">분홍색 제등이 켜진 강변을 따라 샴페인을 즐기며 여행의 대미를 장식하세요.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Footer / SEO Content -->
-                <div class="text-[11px] text-gray-400 leading-relaxed space-y-4 px-2">
-                    <p id="footerDesc">본 가이드는 2026년 도쿄 벚꽃 개화 예상 시기를 바탕으로 제작되었습니다. 나카메구로, 우에노 공원, 치도리가후치 등 도쿄 주요 벚꽃 명소의 실시간 혼잡도와 라이트업 시간표를 확인하고 완벽한 봄 여행을 계획하세요.</p>
-                    <p class="text-center font-bold tracking-tight">© 2026 Tokyo Sakura Guide. All rights reserved.</p>
+                    <div id="homeCourseList" class="space-y-12 relative ml-4 text-left font-display font-display font-display font-display font-display font-display font-display font-display font-display font-display"></div>
                 </div>
             </div>
 
-            <!-- Floating Footer Action -->
-            <div class="fixed bottom-8 left-1/2 -translate-x-1/2 w-[85%] max-w-[380px] z-40">
-                <button class="w-full bg-primary text-white font-black py-4 rounded-full shadow-2xl shadow-primary/40 flex items-center justify-center gap-3 transition-transform active:scale-95 border-t border-white/20">
-                    <span class="material-symbols-outlined text-[20px] font-bold">explore</span>
+            <div class="fixed bottom-8 left-1/2 -translate-x-1/2 w-[85%] max-w-[380px] z-40 text-center">
+                <button class="w-full bg-primary text-white font-black py-4 rounded-full shadow-2xl shadow-primary/40 flex items-center justify-center gap-3 active:scale-95 transition-all border-t border-white/20 font-display font-display font-display font-display font-display">
+                    <span class="material-symbols-outlined text-[20px] font-bold font-display font-display font-display font-display font-display">explore</span>
                     <span id="labelSpread">가이드북 펼치기</span>
                 </button>
             </div>
         </div>
 
-        <!-- View: Detail Overlay -->
+        <!-- View: Detail Overlay (오리지널 시안 스타일) -->
         <div id="detailView" class="transition-view fixed inset-0 z-50 translate-x-full bg-white dark:bg-background-dark overflow-y-auto hidden max-w-[480px] mx-auto shadow-2xl">
             <!-- Header -->
             <div class="sticky top-0 z-[60] flex items-center bg-white/90 dark:bg-background-dark/90 backdrop-blur-xl p-4 pb-2 justify-between border-b border-gray-50">
-                <div onclick="closeDetail()" class="text-primary cursor-pointer active:scale-75 transition-transform p-2">
-                    <span class="material-symbols-outlined text-[28px] font-black">arrow_back</span>
-                </div>
-                <h2 id="detailHeaderTitle" class="text-[#181111] dark:text-white text-lg font-extrabold leading-tight flex-1 text-center tracking-tight">Location</h2>
-                <div class="flex w-12 items-center justify-end">
-                    <button class="flex items-center justify-center rounded-full h-10 w-10 bg-primary/5 text-primary border border-primary/10 active:scale-90 transition-transform">
-                        <span class="material-symbols-outlined text-[20px] font-bold">share</span>
-                    </button>
-                </div>
+                <div onclick="closeDetail()" class="text-primary cursor-pointer p-2 active:scale-75 transition-transform"><span class="material-symbols-outlined text-[28px] font-black">arrow_back</span></div>
+                <h2 id="detailHeaderTitle" class="text-[#181111] dark:text-white text-lg font-bold flex-1 text-center font-display">Location</h2>
+                <div class="flex w-12 items-center justify-end"><button class="flex items-center justify-center rounded-full h-10 w-10 bg-primary/5 text-primary border border-primary/10 active:scale-90 transition-transform"><span class="material-symbols-outlined text-[20px] font-bold">share</span></button></div>
             </div>
-
-            <div id="detailContent" class="pb-40">
-                <!-- Dynamic Content (Timeline, History, Tips, Attractions, Map) -->
-            </div>
-
-            <!-- Bottom Floating Bar for Detail -->
-            <div class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] bg-white/95 dark:bg-background-dark/95 backdrop-blur-xl border-t border-gray-100 p-5 pb-10 flex gap-3 z-[60]">
-                <button class="flex-[1] flex items-center justify-center gap-2 h-14 rounded-full bg-primary/5 text-primary font-black text-sm border border-primary/10 active:scale-95 transition-all">
-                    <span class="material-symbols-outlined text-sm font-bold">directions</span>
-                    <span id="btnDirections">Directions</span>
-                </button>
-                <button class="flex-[1.5] flex items-center justify-center gap-2 h-14 rounded-full bg-primary text-white font-black text-sm shadow-xl shadow-primary/30 active:scale-95 transition-all">
-                    <span class="material-symbols-outlined text-sm font-bold">auto_stories</span>
-                    <span id="btnMyTrip">Add to My Trip</span>
+            <div id="detailContent" class="pb-40"></div>
+            <div class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] bg-white/95 dark:bg-background-dark/95 backdrop-blur-xl border-t border-gray-100 p-5 pb-10 flex gap-3 z-[60] text-center font-display">
+                <button class="flex-[1] h-14 rounded-full bg-primary/5 text-primary font-black text-sm border border-primary/10 active:scale-95 transition-all">Directions</button>
+                <button id="addTripBtn" class="flex-[1.5] h-14 rounded-full bg-primary text-white font-black text-sm shadow-xl shadow-primary/30 active:scale-95 transition-all">
+                    AI 코스 생성 ✨
                 </button>
             </div>
         </div>
+
+        <!-- Itinerary Modal -->
+        <div id="itineraryModal" class="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-center justify-center p-6 hidden">
+            <div class="bg-white dark:bg-background-dark w-full max-w-sm rounded-[2.5rem] overflow-hidden shadow-2xl flex flex-col max-h-[82vh]">
+                <div class="p-8 pb-4">
+                    <div class="flex justify-between items-start mb-6 text-left">
+                        <div><h3 class="text-2xl font-black tracking-tight" id="modalCourseTitle">나만의 1일 코스</h3><p class="text-[10px] font-bold text-primary uppercase mt-1 tracking-widest font-display font-display font-display font-display font-display font-display">Tokyo Sakura Guide</p></div>
+                        <button onclick="closeItinerary()" class="text-gray-300 hover:text-primary transition-colors"><span class="material-symbols-outlined font-bold">close</span></button>
+                    </div>
+                    <div id="itinerarySteps" class="space-y-4 overflow-y-auto hide-scrollbar max-h-[48vh] pr-2 text-left font-display"></div>
+                </div>
+                <div class="p-6 pt-0 mt-auto text-center"><button onclick="closeItinerary()" class="w-full bg-primary text-white font-bold py-4 rounded-2xl shadow-lg active:scale-95 transition-all font-display font-display font-display font-display font-display">확인</button></div>
+            </div>
+        </div>
+
+        <!-- AI Loading Overlay -->
+        <div id="aiLoading" class="fixed inset-0 z-[200] bg-white/90 dark:bg-background-dark/90 backdrop-blur-md flex flex-col items-center justify-center hidden">
+            <div class="relative flex items-center justify-center mb-6 font-display font-display font-display font-display font-display font-display">
+                <span class="material-symbols-outlined text-[80px] text-primary ai-loading-pulse font-display font-display font-display font-display font-display">auto_awesome</span>
+                <div class="absolute inset-0 border-4 border-primary/20 rounded-full animate-ping font-display font-display font-display"></div>
+            </div>
+            <p class="text-xl font-black text-primary animate-pulse font-display">Gemini가 코스를 설계 중입니다... ✨</p>
+        </div>
     </div>
 
-    <script>
-        // --- DATA (Ready for expansion) ---
-        const locations = [
-            {
-                id: 'nakameguro',
-                icon: 'waves',
-                img: 'https://images.unsplash.com/photo-1542931415-163ae57213ee?q=80&w=2070&auto=format&fit=crop',
-                name: { kr: '나카메구로', jp: '中目黒' },
-                sub: { kr: '메구로강의 벚꽃 터널', jp: '目黒川の桜のトンネル' },
-                station: 'Nakameguro, Tokyo',
-                bloom_timeline: { start: 'Mar 20', peak: 'Mar 27', end: 'Apr 03', progress: 85 },
-                stats: { crowd: { kr: '매우 높음', jp: '非常に高い' }, bloom: 'Full Bloom' },
-                history: {
-                    kr: '800그루의 벚꽃이 메구로 강을 따라 분홍빛 터널을 만듭니다. 밤이 되면 켜지는 핑크색 제등이 강물에 비쳐 도쿄 최고의 야경을 선사합니다.',
-                    jp: '目黒川沿いに広がる約800本の桜並木. 夜になると点灯するピンクの提灯が川面に映り, 幻想的な雰囲気を醸し出す東京屈指の名所です.'
-                },
-                tips: [
-                    { kr: '핑크 스파클링 와인을 마시며 산책하세요.', jp: 'ピンクのスパークリングワインを片手に.' },
-                    { kr: '오후 6시부터 시작되는 라이트업이 핵심입니다.', jp: '午後6時からのライトアップが最大の見どころ입니다.' }
-                ],
-                attractions: [
-                    { name: 'Starbucks Reserve', img: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=500&auto=format&fit=crop' },
-                    { name: 'Onibus Coffee', img: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=500&auto=format&fit=crop' }
-                ]
-            },
-            {
-                id: 'ueno',
-                icon: 'park',
-                img: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=2070&auto=format&fit=crop',
-                name: { kr: '우에노 공원', jp: '上野恩賜公園' },
-                sub: { kr: '도쿄에서 가장 사랑받는 공원', jp: '東京で最も愛される公園' },
-                station: 'Ueno, Taito, Tokyo',
-                bloom_timeline: { start: 'Mar 18', peak: 'Mar 25', end: 'Apr 01', progress: 95 },
-                stats: { crowd: { kr: '높음', jp: '高い' }, bloom: 'Peak Season' },
-                history: {
-                    kr: '1,000그루가 넘는 벚꽃이 피어나는 도쿄에서 가장 오래된 공원 중 하나입니다. 일본의 전형적인 축제(하나미) 분위기를 느끼기에 최고입니다.',
-                    jp: '1,000本を超える桜が咲き乱れる東京で最も歴史ある公園. 賑やかなお花見文化を体験できる最高の場所です.'
-                },
-                tips: [
-                    { kr: '오전 일찍 방문하여 자리를 확보하세요.', jp: '午前中の早い時間に到着しましょう. ' },
-                    { kr: '박물관과 미술관 투어를 병행하면 좋습니다.', jp: '美術館巡りとセットで楽しむのがおすすめ. ' }
-                ],
-                attractions: [
-                    { name: 'National Museum', img: 'https://images.unsplash.com/photo-1518998053574-53f0209f512d?q=80&w=500&auto=format&fit=crop' },
-                    { name: 'Ueno Zoo', img: 'https://images.unsplash.com/photo-1534567153574-2b12153a87f0?q=80&w=500&auto=format&fit=crop' }
-                ]
-            },
-            {
-                id: 'chidori',
-                icon: 'kayaking',
-                img: 'https://images.unsplash.com/photo-1524413840807-0c3cb6fa8087?q=80&w=2070&auto=format&fit=crop',
-                name: { kr: '치도리가후치', jp: '千鳥ヶ淵' },
-                sub: { kr: '해자 위로 흐르는 벚꽃', jp: 'お堀에 흐르는 桜' },
-                station: 'Kudanshita, Chiyoda, Tokyo',
-                bloom_timeline: { start: 'Mar 22', peak: 'Mar 29', end: 'Apr 05', progress: 40 },
-                stats: { crowd: { kr: '보통', jp: '普通' }, bloom: 'Opening' },
-                history: {
-                    kr: '황궁 해자를 따라 보트를 타며 감상하는 벚꽃은 도쿄에서 가장 우아한 풍경입니다. 화려함보다는 고요하고 품격 있는 봄을 만날 수 있습니다.',
-                    jp: '皇居のお堀をボートで進みながら眺める桜. 東京で最も優雅で気品あふれる春の風景です.'
-                },
-                tips: [
-                    { kr: '보트 대기는 오픈 전부터 시작하세요.', jp: 'ボートはオープン前から並ぶのが吉. ' },
-                    { kr: '야간 조명 아래 해자는 더욱 신비롭습니다.', jp: '夜のライトアップはさらに神秘的입니다. ' }
-                ],
-                attractions: [
-                    { name: 'Imperial Palace', img: 'https://images.unsplash.com/photo-1542352135-24e5b3b0dfb2?q=80&w=500&auto=format&fit=crop' }
-                ]
-            }
-        ];
-
-        // --- UI TEXT ENGINE ---
-        let currentLang = 'kr';
-        const uiText = {
-            kr: { homeTitle: "올봄에는 꼭 가야 해", homeSub: "도쿄 벚꽃 명소", spread: "가이드북 펼치기", directions: "길 찾기", myTrip: "내 일정에 추가", labelHistory: "정보", labelTips: "꿀팁", labelAtt: "주변 볼거리", labelLoc: "위치", labelCrowd: "혼잡도", labelBestSpots: "Best Spots", forecastTitle: "2026 개화 예측", forecastStatus: "도쿄는 지금 <span class='text-primary font-black'>만개(Peak)</span> 직전!", timelineTitle: "벚꽃 타임라인", timelineStart: "개화", timelinePeak: "만개", timelineEnd: "낙화", courseTitle: "도쿄 벚꽃 1일 황금 루트", courseSub: "Perfect Day Trip Itinerary", step1Title: "치도리가후치 보트 산책", step1Desc: "가장 붐비기 전, 해자 위로 흐르는 우아한 벚꽃을 보트 위에서 감상하세요.", transit1: "한조몬선 → 우에노역 (약 20분)", step2Title: "우에노 공원 & 박물관", step2Desc: "벚꽃 아래에서 즐기는 피크닉과 국립 박물관의 예술 전시를 함께 즐겨보세요.", transit2: "히비야선 → 나카메구로역 (약 35분)", step3Title: "메구로강 야간 라이트업", step3Desc: "분홍색 제등이 켜진 강변을 따라 샴페인을 즐기며 여행의 대미를 장식하세요." },
-            jp: { homeTitle: "今年絶対行くべき", homeSub: "東京の桜名所", spread: "ガイドブックを開く", directions: "ルート案内", myTrip: "旅程に追加", labelHistory: "歴史と情報", labelTips: "お花見의 팁", labelAtt: "周辺のスポット", labelLoc: "位置", labelCrowd: "混雑状況", labelBestSpots: "人気スポット", forecastTitle: "2026 開花予想", forecastStatus: "東京は現在 <span class='text-primary font-black'>満開(Peak)</span> 直前!", timelineTitle: "桜タイムライン", timelineStart: "開花", timelinePeak: "満開", timelineEnd: "落花", courseTitle: "東京桜1일 골든루트", courseSub: "Perfect Day Trip Itinerary", step1Title: "千鳥ヶ淵ボート散策", step1Desc: "混雑する前に, お堀に流れる優雅な桜をボートの上から堪能しましょう.", transit1: "半蔵門線 → 上野駅 (約20分)", step2Title: "上野公園 ＆ 博物館", step2Desc: "桜の下でのピクニックと国立博物館の芸術展示を一緒に楽しんでください.", transit2: "日比谷線 → 中目黒駅 (約35分)", step3Title: "目黒川夜間ライトアップ", step3Desc: "ピンクの提灯が灯る川沿いでシャンパンを楽しみ, 旅を締めくくりましょう." }
-        };
-
-        function init() {
-            renderHomeList();
-            setupEvents();
-            updateUIStrings();
-            createPetals();
+    <script type="module">
+        // --- Gemini API Logic ---
+        const apiKey = ""; // Runtime-injected
+        async function callGemini(prompt, systemInstruction) {
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            const payload = {
+                contents: [{ parts: [{ text: prompt }] }],
+                systemInstruction: { parts: [{ text: systemInstruction }] }
+            };
+            const fetchWithRetry = async (delay = 1000, retries = 5) => {
+                try {
+                    const response = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                    if (!response.ok) throw new Error('API failed');
+                    return await response.json();
+                } catch (err) {
+                    if (retries === 0) throw err;
+                    await new Promise(r => setTimeout(r, delay));
+                    return fetchWithRetry(delay * 2, retries - 1);
+                }
+            };
+            const result = await fetchWithRetry();
+            return result.candidates?.[0]?.content?.parts?.[0]?.text || "오류가 발생했습니다.";
         }
 
+        const locations = [
+            { id: 'nakameguro', isBest: true, icon: 'waves', img: 'https://images.unsplash.com/photo-1542931415-163ae57213ee?q=80&w=2070&auto=format&fit=crop', name: { kr: '나카메구로', jp: '中目黒' }, sub: { kr: '메구로강의 벚꽃 터널', jp: '目黒川の桜のトンネル' }, station: 'Nakameguro, Tokyo', stats: { crowd: { kr: '매우 높음', jp: '非常に高い' } }, history: { kr: '800그루의 벚꽃이 메구로 강을 따라 분홍빛 터널을 만듭니다. 밤이 되면 켜지는 핑크색 제등이 도쿄 최고의 야경을 선사합니다.', jp: '800本の桜が目黒川に沿ってピンクのトンネルを作ります. 提灯の明かり가 도쿄의 상징입니다.' }, tips: [ { kr: '핑크 스파클링 와인을 마시며 산책하세요.', jp: '핑크의 스파클링 와인를 즐겨보세요.' }, { kr: '오후 6시 라이트업이 핵심입니다.', jp: '라이트업을 놓치지 마세요.' } ], attractions: [ { name: 'Starbucks Reserve', img: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=500&auto=format&fit=crop' }, { name: 'Onibus Coffee', img: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=500&auto=format&fit=crop' } ] },
+            { id: 'ueno', isBest: true, icon: 'park', img: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=2070&auto=format&fit=crop', name: { kr: '우에노 공원', jp: '上野恩賜公園' }, sub: { kr: '도쿄에서 가장 사랑받는 공원', jp: '東京で最も愛される公園' }, station: 'Ueno, Taito, Tokyo', stats: { crowd: { kr: '높음', jp: '高い' } }, history: { kr: '우에노 공원은 1,000그루 이상의 사쿠라 나무가 있는 도쿄에서 가장 역사적인 명소입니다. 일본 최초의 공영 공원 중 하나입니다.', jp: '上野公園は1,000本以上の桜がある日本で最も歴史的な場所입니다.' }, tips: [ { kr: '오전 일찍 방문하여 명당을 확보하세요.', jp: '자리 확보를 위해 일찍 방문합시다.' }, { kr: '파란 돗자리와 겉옷을 챙기세요.', jp: '레저 시트와 방한복을 잊지 마세요.' } ], attractions: [ { name: 'National Museum', img: 'https://images.unsplash.com/photo-1518998053574-53f0209f512d?q=80&w=500&auto=format&fit=crop' }, { name: 'Ueno Zoo', img: 'https://images.unsplash.com/photo-1534567153574-2b12153a87f0?q=80&w=500&auto=format&fit=crop' } ] },
+            { id: 'chidori', isBest: true, icon: 'kayaking', img: 'https://images.unsplash.com/photo-1524413840807-0c3cb6fa8087?q=80&w=2070&auto=format&fit=crop', name: { kr: '한조몬/치도리가후치', jp: '千鳥ヶ淵' }, sub: { kr: '해자 위로 흐르는 벚꽃', jp: 'お堀에 흐르는 桜' }, station: 'Kudanshita, Chiyoda, Tokyo', stats: { crowd: { kr: '보통', jp: '普通' } }, history: { kr: '황궁 해자를 따라 보트를 타며 감상하는 벚꽃은 도쿄에서 가장 우아한 풍경입니다. 고요하고 품격 있는 봄을 만날 수 있습니다.', jp: '皇居のお堀를 보트로 나아가며 감상하는 벚꽃입니다.' }, tips: [ { kr: '보트 대기는 오픈 전부터 시작하세요.', jp: '보트는 오픈 전부터 줄 서는 것을 추천.' } ], attractions: [ { name: 'Imperial Palace', img: 'https://images.unsplash.com/photo-1542352135-24e5b3b0dfb2?q=80&w=500&auto=format&fit=crop' } ] },
+            { id: 'roppongi', isBest: true, icon: 'nightlight', img: 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=2070&auto=format&fit=crop', name: { kr: '롯폰기 힐즈', jp: '六本木ヒルズ' }, sub: { kr: '밤의 세련된 벚꽃 산책', jp: '都会적인 夜桜' }, station: 'Roppongi Station, Tokyo', stats: { crowd: { kr: '보통', jp: '普通' } }, history: { kr: '모리 정원과 사쿠라자카를 잇는 롯폰기의 벚꽃길은 현대적인 도시의 봄을 보여줍니다.', jp: '毛利庭園과 さくら坂을 잇는 고급 명소입니다.' }, tips: [ { kr: '연못에 비친 벚꽃을 놓치지 마세요.', jp: '毛利庭園의 풍경이 일품입니다.' } ], attractions: [ { name: 'Mori Art Museum', img: 'https://images.unsplash.com/photo-1518998053574-53f0209f512d?q=80&w=500&auto=format&fit=crop' } ] },
+            { id: 'shinjuku', isBest: false, icon: 'park', img: 'https://images.unsplash.com/photo-1491884661903-66d4791c1214?q=80&w=2070&auto=format&fit=crop', name: { kr: '신주쿠 교엔', jp: '新宿御苑' }, sub: { kr: '거대한 도심 힐링 가든', jp: '都会のオアシス' }, station: 'Shinjuku-gyoemmae, Tokyo', stats: { crowd: { kr: '보통', jp: '普通' } }, history: { kr: '다양한 종의 벚꽃이 있어 오랜 기간 꽃구경이 가능합니다.', jp: '多様な桜가 핀 도내 최대 규모의 정원입니다.' }, tips: [ { kr: '입장 시 주류 반입은 금지입니다.', jp: '술 반입이 금지되어 조용합니다.' } ], attractions: [ { name: 'NTT Docomo Tower', img: 'https://images.unsplash.com/photo-1503899036084-c55cdd92da26?q=80&w=500&auto=format&fit=crop' } ] },
+            { id: 'sumida', isBest: false, icon: 'skis', img: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=2070&auto=format&fit=crop', name: { kr: '스미다 공원', jp: '隅田公園' }, sub: { kr: '스카이트리 벚꽃 뷰', jp: 'スカ이트リーと桜' }, station: 'Asakusa Station, Tokyo', stats: { crowd: { kr: '높음', jp: '高い' } }, history: { kr: '스미다 강변을 따라 펼쳐진 벚꽃길로, 도쿄 스카이트리를 배경으로 사진을 남기기 좋습니다.', jp: '스카이트리 배경이 일품인 강변길입니다.' }, tips: [ { kr: '수상 버스 체험을 추천합니다.', jp: '수상 버스에서 감상하세요.' } ], attractions: [ { name: 'Tokyo Skytree', img: 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?q=80&w=500&auto=format&fit=crop' } ] },
+            { id: 'kawazu', isBest: false, icon: 'event', img: 'https://images.unsplash.com/photo-1526368010889-da096d3277a1?q=80&w=2070&auto=format&fit=crop', name: { kr: '가와즈 (근교)', jp: '河津' }, sub: { kr: '2월의 조기 개화 벚꽃', jp: '早咲きの河津桜' }, station: 'Kawazu Station, Shizuoka', stats: { crowd: { kr: '매우 높음', jp: '非常に高い' } }, history: { kr: '2월 초부터 피는 진한 분홍색의 가와즈자쿠라 축제로 유명하며 도쿄에서 가장 먼저 봄을 만날 수 있습니다.', jp: '2月初旬부터 즐기는 河津桜まつ리입니다.' }, tips: [ { kr: '2월인 지금이 방문 적기입니다!', jp: '今가 最高のシーズン입니다!' } ], attractions: [ { name: 'Kawazu Falls', img: 'https://images.unsplash.com/photo-1542483664-9f798835848c?q=80&w=500&auto=format&fit=crop' } ] }
+        ];
+
+        let currentLang = 'kr';
+        let currentUser = null;
+        let currentLocId = null;
+
+        const uiStrings = {
+            kr: { homeTitle: "올봄에는 꼭 가야 해", homeSub: "도쿄 벚꽃 명소", directions: "길 찾기", myTrip: "내 일정에 추가", labelHistory: "History", labelTips: "Hanami Tips", labelAtt: "Nearby Attractions", labelLoc: "Location", labelCrowd: "Crowd Level", forecastTitle: "2026 개화 예측", step1: "치도리가후치 보트 산책", step2: "우에노 공원 & 박물관", step3: "나카메구로 야간 라이트업", commentTitle: "현장 Talk", commentSubmit: "등록", commentPlaceholder: "현재 분위기를 공유하세요...", spread: "가이드북 펼치기", moreSpots: "Explore More" },
+            jp: { homeTitle: "今年絶対行くべき", homeSub: "東京の桜名所", directions: "ルート案内", myTrip: "일정에 추가", labelHistory: "歴史", labelTips: "お花見의 팁", labelAtt: "周辺のスポット", labelLoc: "位置", labelCrowd: "混雑状況", forecastTitle: "2026 開花予想", step1: "千鳥ヶ淵ボート散策", step2: "上野公園 ＆ 博物館", step3: "中目黒夜間ライトアップ", commentTitle: "現지의 목소리", commentSubmit: "送信", commentPlaceholder: "현재의 분위기를 공유...", spread: "ガイド북 열기", moreSpots: "もっと見る" }
+        };
+
+        // --- Core Logic ---
         function createPetals() {
             const container = document.getElementById('petalContainer');
-            for(let i=0; i<15; i++) {
+            if (!container) return;
+            container.innerHTML = '';
+            for(let i=0; i<18; i++) {
                 const petal = document.createElement('div');
                 petal.className = 'petal';
                 petal.style.left = Math.random() * 100 + 'vw';
-                petal.style.width = Math.random() * 10 + 5 + 'px';
+                petal.style.width = Math.random() * 8 + 6 + 'px';
                 petal.style.height = petal.style.width;
-                petal.style.animationDuration = Math.random() * 3 + 4 + 's';
+                petal.style.animationDuration = Math.random() * 4 + 6 + 's';
                 petal.style.animationDelay = Math.random() * 5 + 's';
                 container.appendChild(petal);
             }
         }
 
-        function renderHomeList() {
-            const list = document.getElementById('locationList');
-            list.innerHTML = '';
-            locations.forEach(loc => {
-                const item = document.createElement('div');
-                item.className = "group flex items-center justify-between p-5 bg-white/70 dark:bg-white/5 backdrop-blur-md border border-white/40 dark:border-white/10 rounded-2xl shadow-sm hover:shadow-lg hover:bg-white active:scale-95 transition-all cursor-pointer";
-                item.onclick = () => openDetail(loc.id);
-                item.innerHTML = `
-                    <div class="flex items-center gap-4">
-                        <div class="size-11 rounded-full bg-primary/10 flex items-center justify-center border border-primary/10">
-                            <span class="material-symbols-outlined text-primary text-xl font-bold">${loc.icon}</span>
-                        </div>
-                        <div>
-                            <p class="text-[13px] font-black text-[#181111] dark:text-white">${loc.name[currentLang]}</p>
-                            <p class="text-[10px] text-gray-400 font-bold tracking-tight">${loc.stats.bloom}</p>
-                        </div>
-                    </div>
-                    <span class="material-symbols-outlined text-gray-300 group-hover:text-primary transition-all">chevron_right</span>
-                `;
-                list.appendChild(item);
+        function updateForecastByDate() {
+            const today = new Date();
+            const month = today.getMonth() + 1;
+            const day = today.getDate();
+            const forecastEl = document.getElementById('labelForecastStatus');
+            let statusKR = (month < 2 || (month === 2 && day < 15)) ? "아직은 일러요~ <span class='text-primary font-black'>겨울잠</span> 자는 중 💤" : (month === 3 && day >= 15) ? "곧 <span class='text-primary font-black'>개화</span>합니다! ✨" : "도쿄는 지금 <span class='text-primary font-black'>만개</span> 직전! 🌸";
+            let statusJP = (month < 2 || (month === 2 && day < 15)) ? "まだ早いです. <span class='text-primary font-black'>冬眠</span> 中입니다 💤" : "間もなく <span class='text-primary font-black'>開花</span> します! ✨";
+            if (forecastEl) forecastEl.innerHTML = currentLang === 'kr' ? statusKR : statusJP;
+        }
+
+        async function initAuth() {
+            const { auth, signInAnonymously, onAuthStateChanged, signInWithCustomToken } = window.fb;
+            return new Promise((resolve) => {
+                const unsubscribe = onAuthStateChanged(auth, async (user) => {
+                    if (user) { currentUser = user; unsubscribe(); resolve(user); }
+                    else { if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) await signInWithCustomToken(auth, __initial_auth_token); else await signInAnonymously(auth); }
+                });
             });
         }
 
-        function openDetail(id) {
+        function renderHomeList() {
+            const listBest = document.getElementById('locationListBest');
+            const listMore = document.getElementById('locationListMore');
+            if (!listBest || !listMore) return;
+            listBest.innerHTML = ''; listMore.innerHTML = '';
+            locations.forEach(loc => {
+                const card = document.createElement('div');
+                card.className = "flex items-center justify-between p-5 bg-white/70 dark:bg-white/5 backdrop-blur-md border border-white/40 rounded-2xl shadow-sm active:scale-95 transition-all cursor-pointer text-left font-display";
+                card.onclick = () => openDetail(loc.id);
+                card.innerHTML = `<div class="flex items-center gap-4"><div class="size-11 rounded-full bg-primary/10 flex items-center justify-center shadow-sm"><span class="material-symbols-outlined text-primary text-xl font-bold font-display font-display font-display font-display font-display font-display font-display">${loc.icon}</span></div><div><p class="text-[14px] font-black text-[#181111] dark:text-white font-display font-display font-display font-display font-display">${loc.name[currentLang]}</p><p class="text-[10px] text-gray-500 font-bold mt-0.5 font-display font-display font-display">${loc.sub[currentLang]}</p></div></div><span class="material-symbols-outlined text-gray-300 font-display font-display font-display">chevron_right</span>`;
+                if(loc.isBest) listBest.appendChild(card); else listMore.appendChild(card);
+            });
+        }
+
+        function renderHomeCourse() {
+            const list = document.getElementById('homeCourseList');
+            if (!list) return;
+            const lang = uiStrings[currentLang];
+            list.innerHTML = `<div class="absolute left-[-21px] top-2 bottom-2 w-0.5 bg-gradient-to-b from-primary via-primary/40 to-primary/10 font-display"></div>
+                <div class="relative text-left fade-in font-display"><div class="absolute -left-[32px] top-1 size-6 rounded-full bg-white border-4 border-primary z-10 flex items-center justify-center shadow-sm font-display font-display font-display font-display font-display"><span class="size-1.5 rounded-full bg-primary font-display font-display font-display font-display"></span></div><div><p class="text-[10px] font-black text-primary uppercase mb-1 font-display">09:00 AM</p><h4 class="text-base font-bold font-display">${lang.step1}</h4></div></div>
+                <div class="relative text-left fade-in font-display font-display font-display font-display font-display font-display font-display font-display font-display font-display"><div class="absolute -left-[32px] top-1 size-6 rounded-full bg-white border-4 border-primary/40 z-10 flex items-center justify-center shadow-sm font-display font-display font-display font-display font-display font-display"><span class="size-1.5 rounded-full bg-primary/40 font-display"></span></div><div><p class="text-[10px] font-black text-primary uppercase mb-1 font-display">01:00 PM</p><h4 class="text-base font-bold font-display">${lang.step2}</h4></div></div>
+                <div class="relative text-left fade-in font-display font-display font-display font-display font-display font-display font-display font-display font-display font-display font-display font-display"><div class="absolute -left-[32px] top-1 size-6 rounded-full bg-white border-4 border-primary/20 z-10 flex items-center justify-center shadow-sm font-display font-display"><span class="size-1.5 rounded-full bg-primary/20 font-display"></span></div><div><p class="text-[10px] font-black text-primary uppercase mb-1 font-display font-display font-display">06:30 PM</p><h4 class="text-base font-bold font-display font-display">${lang.step3}</h4></div></div>`;
+        }
+
+        async function openDetail(id) {
+            currentLocId = id;
             const loc = locations.find(l => l.id === id);
             const view = document.getElementById('detailView');
-            const lang = uiText[currentLang];
-            
+            const lang = uiStrings[currentLang];
             document.getElementById('detailHeaderTitle').innerText = loc.name[currentLang];
-            
             document.getElementById('detailContent').innerHTML = `
-                <div class="px-5 py-4">
-                    <div class="w-full bg-center bg-no-repeat bg-cover flex flex-col justify-end overflow-hidden rounded-3xl min-h-[300px] relative shadow-2xl" style="background-image: url('${loc.img}');">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-                        <div class="relative p-6">
-                            <span class="bg-primary text-white text-[10px] font-black uppercase tracking-[0.2em] px-3 py-1.5 rounded-full border border-white/30">Recommended Spot</span>
+                <div class="px-4 py-2 text-center animate-fade-in"><div class="mx-auto w-full max-w-[440px] bg-center bg-cover flex flex-col justify-end overflow-hidden rounded-xl min-h-[280px] relative shadow-lg font-display" style="background-image: url('${loc.img}');"><div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent font-display font-display"></div><div class="relative p-6 text-left"><span class="bg-primary text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full font-display font-display font-display">Recommended Spot</span></div></div></div>
+                <div class="px-6 pt-6 pb-2 text-left animate-fade-in font-display"><h1 class="text-[#181111] dark:text-white tracking-tight text-[30px] font-extrabold font-display font-display font-display">${loc.name[currentLang]}</h1><div class="flex gap-3 mt-4 flex-wrap"><div class="flex h-9 items-center gap-x-2 rounded-full bg-primary/10 px-4 border border-primary/5 font-display font-display font-display font-display"><span class="material-symbols-outlined text-primary text-[18px] font-display font-display font-display">group</span><p class="text-primary text-xs font-semibold font-display font-display font-display font-display font-display font-display">${lang.labelCrowd}: ${loc.stats.crowd[currentLang]}</p></div><div class="flex h-9 items-center gap-x-2 rounded-full bg-green-100 dark:bg-green-900/30 px-4 font-display font-display font-display"><span class="material-symbols-outlined text-green-600 text-[18px] font-display">eco</span><p class="text-green-600 dark:text-green-400 text-xs font-semibold font-display font-display font-display">Bloom Season</p></div></div></div>
+                
+                <!-- AI Feature: Gemini Powered Hidden Gem ✨ -->
+                <div class="px-6 py-4 font-display font-display font-display">
+                    <button id="aiTipBtn" class="w-full bg-white border-2 border-primary/20 p-4 rounded-2xl flex items-center justify-between group active:scale-95 transition-all shadow-sm font-display font-display">
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-primary font-bold font-display font-display font-display font-display font-display">auto_awesome</span>
+                            <p class="text-sm font-black text-primary font-display font-display">AI 현지인 꿀팁 ✨</p>
                         </div>
+                        <span class="material-symbols-outlined text-gray-300 group-hover:text-primary font-display font-display">expand_more</span>
+                    </button>
+                    <div id="aiTipContainer" class="mt-3 bg-primary/5 rounded-2xl p-5 hidden text-left text-sm font-bold text-gray-700 leading-relaxed border border-primary/10 animate-fade-in font-display font-display">
+                        불러오는 중...
                     </div>
                 </div>
 
-                <div class="px-6 pt-4 pb-2 text-center">
-                    <h1 class="text-[#181111] dark:text-white tracking-tighter text-[34px] font-black leading-tight">${loc.name[currentLang]}</h1>
-                    <div class="flex gap-2 mt-4 justify-center flex-wrap">
-                        <div class="flex h-8 items-center gap-x-2 rounded-full bg-primary/5 px-4 border border-primary/10">
-                            <span class="material-symbols-outlined text-primary text-[14px] font-bold">group</span>
-                            <p class="text-primary text-[9px] font-black uppercase tracking-tight">${lang.labelCrowd}: ${loc.stats.crowd[currentLang]}</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="px-6 py-4">
-                    <div class="bg-white/60 dark:bg-white/5 backdrop-blur-md rounded-3xl p-6 border border-white shadow-sm">
-                        <h3 class="text-sm font-black mb-4 flex items-center gap-2">
-                            <span class="material-symbols-outlined text-primary text-lg font-bold">calendar_month</span> ${lang.timelineTitle}
-                        </h3>
-                        <div class="timeline-track mb-8">
-                            <div class="timeline-progress" style="width: ${loc.bloom_timeline.progress}%"></div>
-                            <div class="timeline-marker" style="left: ${loc.bloom_timeline.progress}%"></div>
-                            <div class="absolute -bottom-7 left-0 text-center transform">
-                                <p class="text-[9px] font-bold text-gray-400">${lang.timelineStart}</p>
-                                <p class="text-[8px] font-black">${loc.bloom_timeline.start}</p>
-                            </div>
-                            <div class="absolute -bottom-7 left-1/2 text-center transform -translateX-1/2">
-                                <p class="text-[9px] font-bold text-primary">${lang.timelinePeak}</p>
-                                <p class="text-[8px] font-black text-primary">${loc.bloom_timeline.peak}</p>
-                            </div>
-                            <div class="absolute -bottom-7 right-0 text-center transform">
-                                <p class="text-[9px] font-bold text-gray-400">${lang.timelineEnd}</p>
-                                <p class="text-[8px] font-black">${loc.bloom_timeline.end}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="px-8 py-6">
-                    <h3 class="text-[#181111] dark:text-white text-xl font-black mb-4 flex items-center gap-2">
-                        <span class="w-1.5 h-6 bg-primary rounded-full"></span> ${lang.labelHistory}
-                    </h3>
-                    <p class="text-gray-500 dark:text-white/60 text-base leading-relaxed font-medium">
-                        ${loc.history[currentLang]}
-                    </p>
-                </div>
-
-                <div class="px-6 py-4">
-                    <div class="bg-primary/5 dark:bg-primary/10 rounded-3xl p-7 border border-primary/10">
-                        <div class="flex items-center gap-2 mb-4">
-                            <span class="material-symbols-outlined text-primary font-black">tips_and_updates</span>
-                            <h3 class="text-primary text-lg font-black tracking-tight">${lang.labelTips}</h3>
-                        </div>
-                        <ul class="space-y-4">
-                            ${loc.tips.map(tip => `
-                                <li class="flex gap-4 text-sm font-bold text-[#181114]/80 dark:text-white/80 leading-relaxed">
-                                    <span class="size-2 rounded-full bg-primary mt-2 shrink-0"></span> 
-                                    ${tip[currentLang]}
-                                </li>
-                            `).join('')}
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="py-6">
-                    <div class="px-8 flex justify-between items-center mb-6">
-                        <h3 class="text-[#181111] dark:text-white text-xl font-black">${lang.labelAtt}</h3>
-                        <button class="text-primary text-xs font-black uppercase tracking-widest">View All</button>
-                    </div>
-                    <div class="flex overflow-x-auto hide-scrollbar gap-5 px-8 pb-4">
-                        ${loc.attractions.map(att => `
-                            <div class="min-w-[180px] w-[180px] flex flex-col gap-3">
-                                <div class="h-44 w-full rounded-3xl bg-center bg-cover shadow-xl border border-white/20" style="background-image: url('${att.img}');"></div>
-                                <p class="text-[#181111] dark:text-white text-xs font-black leading-tight px-1">${att.name}</p>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-
-                <div class="px-8 py-6">
-                    <h3 class="text-[#181111] dark:text-white text-xl font-black mb-5">${lang.labelLoc}</h3>
-                    <div class="w-full h-52 rounded-3xl bg-slate-100 dark:bg-slate-800 overflow-hidden relative border border-gray-100 shadow-inner">
-                        <img class="w-full h-full object-cover opacity-50 grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMNi7p1v3Ppixb5wSKHQs-EnrlHOcYO_qGet9cMpHIgJxwxFSfxtkQf3Bv3PtDUJceznR_3SOg4qLcf-M6ACSizKdaLjd8bVQOXl4_EBmwCQVLh9Um3FKXd66Cl7DgU0MchoNIOObIYUiCcs0qMoxEknVyi__0glpDDYME1ryulfzbD6kWrWO4UBemh9IAgt0NL1AeEWGUQQRnMQwy1tFTLUk243RC5DWpk0YTc5nQlw8m0F4_yZMf8-Tz7n0ePtagu2W90GikWt0"/>
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <span class="material-symbols-outlined text-primary text-[54px] drop-shadow-2xl font-black" style="font-variation-settings: 'FILL' 1">location_on</span>
-                        </div>
-                        <div class="absolute bottom-5 left-5 right-5 bg-white/95 dark:bg-background-dark/95 p-4 rounded-2xl flex items-center justify-between shadow-2xl">
-                            <p class="text-[10px] font-black dark:text-white uppercase tracking-tight">${loc.station}</p>
-                            <span class="material-symbols-outlined text-primary text-[20px] font-bold">open_in_new</span>
-                        </div>
-                    </div>
-                </div>
+                <div class="px-6 py-4 text-left animate-fade-in font-display font-display font-display"><h3 class="text-[#181111] dark:text-white text-xl font-bold mb-2 font-display font-display font-display font-display">${lang.labelHistory}</h3><p class="text-[#181111]/70 dark:text-white/70 text-base leading-relaxed font-display font-display font-display font-display font-display font-display">${loc.history[currentLang]}</p></div>
+                <!-- Hanami Tips -->
+                <div class="px-6 py-6 animate-fade-in text-center font-display font-display font-display font-display font-display font-display font-display"><div class="mx-auto bg-primary/5 dark:bg-primary/10 rounded-2xl p-6 border border-primary/20 max-w-[420px] shadow-sm font-display font-display font-display font-display"><div class="flex items-center justify-center gap-2 mb-4 font-display font-display font-display font-display font-display font-display font-display font-display font-display font-display font-display"><span class="material-symbols-outlined text-primary font-bold font-display font-display font-display">tips_and_updates</span><h3 class="text-primary text-lg font-extrabold uppercase font-display font-display font-display font-display font-display font-display">${lang.labelTips}</h3></div><ul class="space-y-4 text-left inline-block font-display font-display font-display font-display font-display font-display font-display">${loc.tips.map(tip => `<li class="flex gap-4 text-sm text-[#181114]/80 dark:text-white/80 font-bold leading-relaxed font-display font-display font-display font-display font-display"><span class="text-primary shrink-0 mt-0.5 font-display font-display font-display font-display font-display font-display font-display font-display">•</span><span>${tip[currentLang]}</span></li>`).join('')}</ul></div></div>
+                <!-- Attractions -->
+                <div class="py-4 animate-fade-in font-display font-display font-display font-display font-display font-display font-display font-display font-display"><div class="px-6 flex justify-between items-center mb-4 font-display font-display font-display font-display font-display font-display font-display font-display"><h3 class="text-[#181111] dark:text-white text-xl font-bold font-display font-display font-display font-display font-display font-display font-display font-display">${lang.labelAtt}</h3><button class="text-primary text-sm font-extrabold font-display font-display font-display font-display">View All</button></div><div class="flex overflow-x-auto hide-scrollbar gap-4 px-6 pb-4 font-display font-display font-display font-display font-display">${loc.attractions.map(att => `<div class="min-w-[160px] w-[160px] flex flex-col gap-2 font-display font-display font-display font-display font-display font-display font-display font-display font-display font-display font-display font-display" style="background-image: url('${att.img}');"><div class="h-40 w-full rounded-xl bg-center bg-cover shadow-sm border border-black/5 font-display font-display font-display font-display font-display font-display font-display font-display font-display font-display font-display font-display font-display font-display font-display font-display font-display" style="background-image: url('${att.img}');"></div><p class="text-[#181111] dark:text-white text-[13px] font-bold leading-tight text-left font-display font-display font-display font-display font-display font-display font-display font-display font-display">${att.name}</p></div>`).join('')}</div></div>
+                <!-- Talk Section -->
+                <div class="px-6 py-10 mt-6 border-t border-gray-100 bg-gray-50/30 text-left animate-fade-in font-display font-display font-display font-display font-display font-display font-display font-display font-display"><h3 class="text-xl font-black mb-6 flex items-center gap-2 font-display font-display font-display font-display font-display font-display font-display font-display font-display font-display font-display font-display font-display"><span class="material-symbols-outlined text-primary font-display font-display font-display font-display font-display font-display font-display font-display font-display font-display font-display font-display">forum</span> ${lang.commentTitle}</h3><div id="commentList" class="space-y-4 mb-6 max-h-[300px] overflow-y-auto hide-scrollbar pr-2 font-display font-display font-display font-display font-display font-display font-display font-display font-display font-display"></div><div class="flex gap-2 p-2 bg-white rounded-2xl border border-gray-200 shadow-xl font-display font-display font-display font-display font-display font-display font-display font-display font-display font-display font-display font-display font-display font-display"><input type="text" id="commentInput" placeholder="${lang.commentPlaceholder}" class="flex-1 bg-transparent border-none focus:ring-0 text-sm px-3 font-medium font-display font-display font-display font-display font-display font-display font-display"><button id="sendBtn" class="bg-primary text-white text-xs font-bold px-5 py-2.5 rounded-xl font-display font-display font-display font-display font-display font-display font-display font-display font-display">전송</button></div></div>
             `;
-
-            view.classList.remove('hidden');
-            setTimeout(() => view.classList.remove('translate-x-full'), 10);
-            window.scrollTo(0,0);
+            document.getElementById('sendBtn').onclick = () => window.submitComment();
+            document.getElementById('aiTipBtn').onclick = () => getAiTip(loc);
+            view.classList.remove('hidden'); setTimeout(() => view.classList.remove('translate-x-full'), 10);
+            if (currentUser) await fetchComments(id); else { const user = await initAuth(); if (user) await fetchComments(id); }
         }
 
-        function closeDetail() {
-            const view = document.getElementById('detailView');
-            view.classList.add('translate-x-full');
-            setTimeout(() => view.classList.add('hidden'), 500);
+        async function getAiTip(loc) {
+            const container = document.getElementById('aiTipContainer');
+            container.classList.toggle('hidden');
+            if (container.classList.contains('hidden')) return;
+            const systemPrompt = `당신은 도쿄의 전문 여행 가이드입니다. 제공된 벚꽃 장소에 대해 현지인만 아는 매우 구체적이고 유니크한 꿀팁 1가지를 알려주세요.`;
+            const userPrompt = `${loc.name.kr} (${loc.sub.kr})에 대한 특별한 팁을 100자 이내로 알려줘.`;
+            try { const response = await callGemini(userPrompt, systemPrompt); container.innerText = response; }
+            catch (err) { container.innerText = "팁을 불러오지 못했습니다."; }
         }
 
-        function toggleLang() {
+        window.handleAiItinerary = async () => {
+            const loc = locations.find(l => l.id === currentLocId);
+            if (!loc) return;
+            document.getElementById('aiLoading').classList.remove('hidden');
+            const systemPrompt = `당신은 도쿄 벚꽃 여행 전문가입니다. 사용자가 선택한 장소를 중심으로 시간대별 최적의 1일 여행 코스를 리스트 형식으로 생성하세요.`;
+            const userPrompt = `${loc.name.kr}을(를) 포함한 완벽한 1일 벚꽃 여행 일정을 한국어로 작성해줘.`;
+            try { const response = await callGemini(userPrompt, systemPrompt); displayAiItinerary(response); }
+            catch (err) { alert("오류 발생"); }
+            finally { document.getElementById('aiLoading').classList.add('hidden'); }
+        };
+
+        function displayAiItinerary(text) {
+            const stepsEl = document.getElementById('itinerarySteps'); stepsEl.innerHTML = '';
+            const div = document.createElement('div');
+            div.className = "bg-primary/5 p-5 rounded-2xl border border-primary/10 font-bold text-sm leading-loose whitespace-pre-line";
+            div.innerHTML = text; stepsEl.appendChild(div);
+            document.getElementById('itineraryModal').classList.remove('hidden');
+        }
+
+        async function fetchComments(id) {
+            const { db, appId, query, onSnapshot, collection } = window.fb;
+            const q = query(collection(db, 'artifacts', appId, 'public', 'data', `comments_${id}`));
+            onSnapshot(q, (snapshot) => {
+                const list = document.getElementById('commentList'); if (!list) return; list.innerHTML = '';
+                const sorted = snapshot.docs.map(d => d.data()).sort((a,b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
+                if (sorted.length === 0) { list.innerHTML = `<p class="text-center text-xs text-gray-400 py-4 italic font-display">첫 소식을 남겨보세요!</p>`; return; }
+                sorted.forEach(data => { const el = document.createElement('div'); el.className = "p-4 bg-white rounded-2xl shadow-sm border border-white animate-fade-in text-left font-display font-display"; el.innerHTML = `<p class="text-[10px] text-gray-400 font-bold mb-1 font-display font-display font-display font-display">User_${data.userId?.substring(0,4)} • ${data.createdAt ? new Date(data.createdAt.toDate()).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : '방금'}</p><p class="text-[13px] font-bold text-gray-700 font-display font-display font-display font-display font-display">${data.text}</p>`; list.appendChild(el); });
+            });
+        }
+
+        window.submitComment = async () => {
+            const input = document.getElementById('commentInput'); if(!input.value.trim()) return; if (!currentUser) await initAuth();
+            const { db, appId, addDoc, collection, serverTimestamp } = window.fb;
+            try { await addDoc(collection(db, 'artifacts', appId, 'public', 'data', `comments_${currentLocId}`), { text: input.value, userId: currentUser.uid, createdAt: serverTimestamp() }); input.value = ''; } catch (err) { console.error(err); }
+        };
+
+        function toggleLanguage() {
             currentLang = currentLang === 'kr' ? 'jp' : 'kr';
             document.getElementById('langBtnHome').innerText = currentLang === 'kr' ? 'JP / 日本語' : 'KR / 한국어';
-            updateUIStrings();
-            renderHomeList();
+            document.getElementById('homeHeroTitle').innerText = uiStrings[currentLang].homeTitle;
+            document.getElementById('homeHeroSub').innerText = uiStrings[currentLang].homeSub;
+            document.getElementById('labelSpread').innerText = uiStrings[currentLang].spread;
+            document.getElementById('labelMoreSpots').innerText = uiStrings[currentLang].moreSpots;
+            renderHomeList(); renderHomeCourse(); updateForecastByDate(); if(currentLocId) openDetail(currentLocId);
         }
 
-        function updateUIStrings() {
-            const lang = uiText[currentLang];
-            document.getElementById('homeHeroTitle').innerText = lang.homeTitle;
-            document.getElementById('homeHeroSub').innerText = lang.homeSub;
-            document.getElementById('labelSpread').innerText = lang.spread;
-            document.getElementById('btnDirections').innerText = lang.directions;
-            document.getElementById('btnMyTrip').innerText = lang.myTrip;
-            document.getElementById('labelBestSpots').innerText = lang.labelBestSpots;
-            document.getElementById('labelForecastTitle').innerText = lang.forecastTitle;
-            document.getElementById('labelForecastStatus').innerHTML = lang.forecastStatus;
-            
-            document.getElementById('labelCourseTitle').innerText = lang.courseTitle;
-            document.getElementById('labelCourseSub').innerText = lang.courseSub;
-            document.getElementById('courseStep1Title').innerText = lang.step1Title;
-            document.getElementById('courseStep1Desc').innerText = lang.step1Desc;
-            document.getElementById('transit1').innerText = lang.transit1;
-            document.getElementById('courseStep2Title').innerText = lang.step2Title;
-            document.getElementById('courseStep2Desc').innerText = lang.step2Desc;
-            document.getElementById('transit2').innerText = lang.transit2;
-            document.getElementById('courseStep3Title').innerText = lang.step3Title;
-            document.getElementById('courseStep3Desc').innerText = lang.step3Desc;
-        }
+        window.onload = async () => {
+            createPetals(); renderHomeList(); renderHomeCourse(); updateForecastByDate(); await initAuth();
+            document.getElementById('langBtnHome').onclick = toggleLanguage;
+            window.closeDetail = () => { document.getElementById('detailView').classList.add('translate-x-full'); setTimeout(() => document.getElementById('detailView').classList.add('hidden'), 500); };
+            window.closeItinerary = () => document.getElementById('itineraryModal').classList.add('hidden');
+        };
 
-        function scrollToElement(id) {
-            document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-
-        function setupEvents() {
-            document.getElementById('langBtnHome').onclick = toggleLang;
-        }
-
-        window.onload = init;
+        window.scrollToElement = (id) => { const el = document.getElementById(id); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
     </script>
 </body>
 </html>
