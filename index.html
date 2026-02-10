@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Japan City Guide: Tokyo Sakura 2026</title>
+    <title>Japan City Guide: Tokyo Sakura 2026 Master</title>
     
     <!-- 🌸 Sakura Emoji Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌸</text></svg>">
@@ -80,6 +80,11 @@
         .rank-3 { background: #CD7F32; color: #ffffff; }
         .rank-other { background: #f1f5f9; color: #64748b; }
         .dark .rank-other { background: rgba(255,255,255,0.1); color: #fff; }
+
+        .line-badge {
+            font-size: 8px; font-weight: 900; padding: 2px 5px; border-radius: 4px; color: white;
+            text-transform: uppercase; margin-right: 4px;
+        }
     </style>
 </head>
 <body class="bg-background-light dark:bg-background-dark text-[#181111] dark:text-white transition-colors duration-300 min-h-screen overflow-x-hidden text-left">
@@ -89,8 +94,8 @@
         <div id="petalContainer" class="absolute inset-0 pointer-events-none overflow-hidden z-0"></div>
 
         <!-- Main Scrollable Content -->
-        <div id="mainContent" class="flex-1 overflow-y-auto hide-scrollbar pb-32 relative z-10">
-            <div class="max-w-6xl mx-auto w-full px-6 md:px-12 text-left">
+        <div id="mainContent" class="flex-1 overflow-y-auto hide-scrollbar pb-32 relative z-10 text-left">
+            <div class="max-w-6xl mx-auto w-full px-6 md:px-12">
                 
                 <!-- Header -->
                 <div class="pt-12 md:pt-20 pb-10 flex justify-between items-end">
@@ -106,7 +111,7 @@
                 <!-- Forecast Card -->
                 <div class="mb-12">
                     <div class="bg-[#ea2a33] rounded-[2.5rem] md:rounded-[3.5rem] p-8 md:p-14 text-white shadow-2xl shadow-primary/20 relative overflow-hidden slide-up text-left">
-                        <div class="absolute right-[-10px] top-[10px] opacity-20 pointer-events-none">
+                        <div class="absolute right-[-10px] top-[10px] opacity-20 pointer-events-none text-left">
                             <i class="fa-solid fa-sun text-[150px] md:text-[200px]"></i>
                         </div>
                         <div class="relative z-10 max-w-2xl text-left">
@@ -130,49 +135,49 @@
                 </div>
 
                 <!-- Best Spots Section -->
-                <div class="mb-16">
+                <div class="mb-16 text-left">
                     <div class="flex justify-between items-center mb-8">
                         <h3 class="text-2xl md:text-3xl font-black text-left">Best Spots 2026</h3>
                         <div class="hidden md:flex items-center gap-2 text-primary font-bold">
                             <i class="fa-solid fa-star"></i>
-                            <span class="text-sm font-bold">Editor's Choice</span>
+                            <span class="text-sm font-bold text-left">Editor's Choice</span>
                         </div>
                     </div>
-                    <div id="bestSpotsContainer" class="flex md:grid md:grid-cols-2 lg:grid-cols-4 overflow-x-auto md:overflow-visible hide-scrollbar gap-5 md:gap-8 snap-x-mandatory text-left">
+                    <div id="bestSpotsContainer" class="flex md:grid md:grid-cols-2 lg:grid-cols-4 overflow-x-auto md:overflow-visible hide-scrollbar gap-5 md:gap-8 snap-x-mandatory">
                     </div>
                 </div>
 
                 <!-- Famous Spots Section -->
-                <div class="mb-16">
+                <div class="mb-16 text-left">
                     <h3 class="text-2xl md:text-3xl font-black mb-8 text-left">Famous Tokyo Spots</h3>
-                    <div id="famousSpotsContainer" class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 text-left"></div>
+                    <div id="famousSpotsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 text-left"></div>
                 </div>
 
                 <!-- Suburbs Section -->
-                <div class="mb-20">
+                <div class="mb-20 text-left">
                     <h3 class="text-2xl md:text-3xl font-black mb-8 text-left">Tokyo Suburbs</h3>
                     <div id="suburbSpotsContainer" class="flex md:grid md:grid-cols-3 overflow-x-auto md:overflow-visible hide-scrollbar gap-5 md:gap-8 text-left"></div>
                 </div>
                 
                 <div class="py-20 text-center opacity-30">
                     <p class="text-[10px] md:text-xs font-black tracking-widest uppercase">Japan City Guide Project 2026</p>
-                    <p class="mt-2 text-[9px] font-bold">All Rankings Verified via Google Maps & Tabelog</p>
+                    <p class="mt-2 text-[9px] font-bold">Standardized Units & Regional Metro Mapping</p>
                 </div>
             </div>
         </div>
 
         <!-- Tab Bar -->
-        <div class="fixed bottom-0 left-0 right-0 z-50">
+        <div class="fixed bottom-0 left-0 right-0 z-50 text-left">
             <div class="max-w-[600px] mx-auto bg-white/95 dark:bg-background-dark/95 backdrop-blur-xl border-t md:border border-gray-100 dark:border-white/5 md:rounded-t-[2.5rem] px-10 pt-4 pb-8 md:pb-6 flex justify-between items-center shadow-2xl">
-                <button class="flex flex-col items-center gap-1 text-primary active:scale-90 transition-transform text-left"><i class="fa-solid fa-house text-xl md:text-2xl"></i><span class="text-[10px] font-bold">홈</span></button>
-                <button class="flex flex-col items-center gap-1 text-gray-400 active:scale-90 transition-transform text-left"><i class="fa-solid fa-map-location-dot text-xl md:text-2xl"></i><span class="text-[10px] font-bold text-left">탐색</span></button>
-                <button class="flex flex-col items-center gap-1 text-gray-400 active:scale-90 transition-transform text-left"><i class="fa-solid fa-calendar-check text-xl md:text-2xl"></i><span class="text-[10px] font-bold text-left">내 일정</span></button>
-                <button class="flex flex-col items-center gap-1 text-gray-400 active:scale-90 transition-transform text-left"><i class="fa-solid fa-ellipsis text-xl md:text-2xl"></i><span class="text-[10px] font-bold text-left">더보기</span></button>
+                <button class="flex flex-col items-center gap-1 text-primary active:scale-90 transition-transform"><i class="fa-solid fa-house text-xl md:text-2xl"></i><span class="text-[10px] font-bold">홈</span></button>
+                <button class="flex flex-col items-center gap-1 text-gray-400 active:scale-90 transition-transform"><i class="fa-solid fa-map-location-dot text-xl md:text-2xl"></i><span class="text-[10px] font-bold text-left">탐색</span></button>
+                <button class="flex flex-col items-center gap-1 text-gray-400 active:scale-90 transition-transform"><i class="fa-solid fa-calendar-check text-xl md:text-2xl"></i><span class="text-[10px] font-bold text-left text-left">내 일정</span></button>
+                <button class="flex flex-col items-center gap-1 text-gray-400 active:scale-90 transition-transform"><i class="fa-solid fa-ellipsis text-xl md:text-2xl"></i><span class="text-[10px] font-bold text-left text-left text-left">더보기</span></button>
             </div>
         </div>
 
         <!-- Detail Overlay -->
-        <div id="detailOverlay" class="fixed inset-0 z-[100] translate-x-full md:translate-x-0 md:opacity-0 md:pointer-events-none bg-white dark:bg-background-dark md:bg-black/60 md:backdrop-blur-md transition-all duration-500 overflow-y-auto hide-scrollbar hidden md:flex items-center justify-center p-0 md:p-4 cursor-pointer text-left">
+        <div id="detailOverlay" class="fixed inset-0 z-[100] translate-x-full md:translate-x-0 md:opacity-0 md:pointer-events-none bg-white dark:bg-background-dark md:bg-black/60 md:backdrop-blur-md transition-all duration-500 overflow-y-auto hide-scrollbar hidden md:flex items-center justify-center p-0 md:p-4 cursor-pointer text-left text-left text-left">
         </div>
     </div>
 
@@ -184,152 +189,228 @@
                     id: 'nakameguro', region: '나카메구로', spotName: '메구로 강', sub: '벚꽃 터널과 핑크 제등', 
                     img: 'images/nakameguro.jpg', vibe: 'ROMANTIC', crowd: '매우 높음',
                     timeline: { start: 'Mar 20', peak: 'Mar 27', end: 'Apr 03', progress: 85 },
-                    history: '메구로 강을 따라 흐르는 800그루의 왕벚나무가 만드는 분홍빛 터널은 도쿄에서 가장 감각적인 봄 풍경입니다. 밤이 되면 켜지는 수천 개의 핑크 제등과 강물에 비친 꽃잎은 전 세계 여행자들의 로망입니다.',
-                    tips: ['라이트업은 일몰 후 오후 8시까지.', '호라이바시 다리가 공식 포토 스팟.', '스타벅스 리저브는 입장 번호표 필수.'],
+                    history: '메구로 강을 따라 흐르는 800그루의 왕벚나무가 만드는 분홍빛 터널은 도쿄 최고의 낭만입니다. 밤이 되면 켜지는 핑크 제등과 강물에 비친 꽃잎은 전 세계 여행자들의 로망입니다.',
+                    tips: ['라이트업은 일몰 후 오후 8시까지.', '호라이바시 다리가 공식 포토 스팟.', '벚꽃 샴페인을 들고 산책해 보세요.'],
                     attractions: {
-                        museums: [
-                            { name: '사토 사쿠라 미술관', img: 'images/att_sato.jpg', desc: '벚꽃 그림만을 전문적으로 전시하는 현대 일본화 미술관.' },
-                            { name: '기생충 박물관', img: 'images/att_parasite.jpg', desc: '세계 유일의 기생충 전문 박물관으로 독특한 전시를 자랑함.' }
-                        ],
-                        historical: [
-                            { name: '유텐지 사찰', img: 'images/att_yutenji.jpg', desc: '에도 시대의 정취를 간직한 고즈넉하고 평온한 지역 사찰.' },
-                            { name: '히카와 신사', img: 'images/att_hikawa.jpg', desc: '지역의 액운을 막아주는 나카메구로의 유서 깊은 수호 신사.' }
-                        ],
-                        unique: [
-                            { name: '트래블러스 팩토리', img: 'images/att_travelers.jpg', desc: '여행의 설렘을 테마로 한 빈티지 문구 브랜드의 본점.' },
-                            { name: '스타더스트 다리', img: 'images/att_star.jpg', desc: '야경이 가장 예쁜 촬영 포인트로 알려진 강변의 명당.' }
-                        ]
+                        museums: [{ name: '사토 사쿠라 미술관', img: 'images/att_sato.jpg', desc: '벚꽃 그림 전문 일본화 미술관.' }],
+                        historical: [{ name: '유텐지 사찰', img: 'images/att_yutenji.jpg', desc: '에도 시대의 정취를 간직한 조용한 사찰.' }],
+                        unique: [{ name: '트래블러스 팩토리', img: 'images/att_travelers.jpg', desc: '여행의 설렘을 테마로 한 빈티지 문구 본점.' }]
                     },
                     cafes: [
-                        { name: 'Starbucks Reserve Roastery', rank: 1, score: '4.2', desc: '세계 최대 규모이자 벚꽃 테라스를 가진 커피 성지' },
-                        { name: 'I\'m Donut? Nakameguro', rank: 2, score: '3.9', desc: '생도넛 열풍을 일으킨 도쿄 최고의 핫플' },
-                        { name: 'Onibus Coffee', rank: 3, score: '3.7', desc: '철길 옆 고택에서 즐기는 감성 스페셜티 커피' },
-                        { name: 'Cafe Facon', rank: 4, score: '3.7', desc: '넬 드립 방식으로 정성껏 내린 장인 정신의 커피' },
-                        { name: 'Sidewalk Stand', rank: 5, score: '3.6', desc: '에스프레소와 크래프트 맥주를 즐기는 스탠드바' }
+                        { name: 'Starbucks Reserve Tokyo', rank: 1, score: '4.2', desc: '세계 최대 규모이자 벚꽃 테라스를 가진 곳' },
+                        { name: 'Onibus Coffee', rank: 2, score: '3.7', desc: '철길 옆 감성 고택 스페셜티 커피' },
+                        { name: 'I\'m Donut? Nakameguro', rank: 3, score: '3.9', desc: '도쿄 대표 생도넛 맛집' },
+                        { name: 'Cafe Facon', rank: 4, score: '3.7', desc: '넬 드립 방식의 장인 정신 카페' },
+                        { name: 'Sidewalk Stand', rank: 5, score: '3.6', desc: '강변 산책용 에스프레소 스탠드' }
                     ],
                     restaurants: [
-                        { name: 'Seirinkan', rank: 1, score: '4.1', desc: '도쿄 3대 화덕 피자로 손꼽히는 나폴리 정통 맛집' },
-                        { name: 'Kushiwakamaru', rank: 2, score: '4.0', desc: '가성비와 분위기를 모두 잡은 예약 필수 야키토리' },
-                        { name: 'Nakameguro Mitsu', rank: 3, score: '3.8', desc: '제철 식재료로 차려낸 모던하고 정갈한 일본 가정식' },
-                        { name: 'Beef Kitchen', rank: 4, score: '3.7', desc: '합리적인 가격에 최상급 와규를 즐기는 야키니쿠' },
-                        { name: 'Totoshio', rank: 5, score: '3.7', desc: '매일 아침 수산시장에서 공수하는 신선한 해산물 맛집' }
+                        { name: 'Seirinkan', rank: 1, score: '4.1', desc: '도쿄 3대 화덕 피자의 정점' },
+                        { name: 'Kushiwakamaru', rank: 2, score: '4.0', desc: '가성비 최고의 야키토리 성지' },
+                        { name: 'Nakameguro Mitsu', rank: 3, score: '3.8', desc: '모던하고 정갈한 일본 가정식' },
+                        { name: 'Beef Kitchen', rank: 4, score: '3.7', desc: '합리적인 가격의 와규 야키니쿠' },
+                        { name: 'Totoshio', rank: 5, score: '3.7', desc: '신선한 해산물 전문 이자카야' }
                     ],
-                    station: 'NAKAMEGURO (Hibiya & Toyoko Line)'
+                    station: 'Nakameguro Station',
+                    lines: [{ name: 'H', color: '#B10619' }, { name: 'TY', color: '#DA0442' }]
                 },
                 { 
                     id: 'ueno', region: '우에노', spotName: '우에노 은사 공원', sub: '도쿄 최고 전통의 하나미 성지', 
                     img: 'images/ueno.jpg', vibe: 'TRADITIONAL', crowd: '매우 높음',
                     timeline: { start: 'Mar 18', peak: 'Mar 25', end: 'Apr 01', progress: 95 },
-                    history: '에도 시대부터 이어진 유서 깊은 벚꽃 명소입니다. 공원 내 박물관, 미술관, 동물원이 밀집해 있어 하루 종일 도쿄의 문화와 자연을 만끽하기에 완벽한 장소입니다.',
-                    tips: ['오전 8시 전 방문 시 여유로운 사진 가능.', '공원 중앙 스타벅스 광장이 휴식 명당.', '돗자리를 이용한 정통 하나미의 성지.'],
+                    history: '에도 시대부터 이어진 도쿄 최대의 벚꽃 공원입니다. 박물관과 동물원이 밀집해 있어 문화와 자연을 동시에 즐기기에 완벽합니다.',
+                    tips: ['오전 8시 전 방문 권장.', '공원 중앙 스타벅스 광장이 휴식 명당.'],
                     attractions: {
-                        museums: [
-                            { name: '도쿄 국립 박물관', img: 'images/att_ueno_tnm.jpg', desc: '일본의 역사와 예술을 집대성한 가장 오래된 국립 박물관.' },
-                            { name: '국립서양미술관', img: 'images/att_ueno_nmwa.jpg', desc: '르 코르뷔지에가 설계한 세계 문화 유산 미술관.' }
-                        ],
-                        historical: [
-                            { name: '우에노 토쇼구', img: 'images/att_ueno_toshogu.jpg', desc: '도쿠가와 이에야스를 모시는 화려한 황금빛의 신사.' },
-                            { name: '키요미즈 칸논도', img: 'images/att_ueno_kannon.jpg', desc: '원형 소나무와 벚꽃의 조화가 아름다운 역사적 사찰.' }
-                        ],
-                        unique: [
-                            { name: '아메요코 시장', img: 'images/att_ueno_ameyoko.jpg', desc: '활기 넘치는 도심 속 재래시장으로 길거리 음식이 일품.' },
-                            { name: '시노바즈 연못', img: 'images/att_ueno_pond.jpg', desc: '거대한 연꽃 호수 주변을 따라 벚꽃이 늘어진 산책로.' }
-                        ]
+                        museums: [{ name: '도쿄 국립 박물관', img: 'images/att_ueno_tnm.jpg', desc: '일본의 역사와 예술을 집대성한 곳.' }],
+                        historical: [{ name: '우에노 토쇼구', img: 'images/att_ueno_toshogu.jpg', desc: '황금빛 장식의 화려한 신사.' }],
+                        unique: [{ name: '아메요코 시장', img: 'images/att_ueno_ameyoko.jpg', desc: '활기 넘치는 도심 재래시장.' }]
                     },
                     cafes: [
-                        { name: 'Starbucks Ueno Park', rank: 1, score: '3.9', desc: '공원의 자연과 어우러진 도쿄 랜드마크 스타벅스' },
-                        { name: 'Kayaba Coffee', rank: 2, score: '3.8', desc: '1938년부터 이어진 클래식한 감성의 고택 카페' },
-                        { name: 'Park Side Cafe', rank: 3, score: '3.6', desc: '숲을 바라보며 브런치를 즐기는 통유리 카페' },
-                        { name: 'Mihashi Ueno', rank: 4, score: '3.8', desc: '일본 전통 디저트 안미츠로 명성이 높은 노포' },
-                        { name: 'Cafe Hibiki', rank: 5, score: '3.5', desc: '음악당 내 위치한 조용하고 품격 있는 쉼터' }
+                        { name: 'Starbucks Ueno Park', rank: 1, score: '3.9', desc: '자연과 어우러진 랜드마크 매장' },
+                        { name: 'Kayaba Coffee', rank: 2, score: '3.8', desc: '클래식한 감성의 고택 카페' },
+                        { name: 'Park Side Cafe', rank: 3, score: '3.6', desc: '숲을 바라보는 통유리 카페' },
+                        { name: 'Mihashi Ueno', rank: 4, score: '3.8', desc: '일본 전통 디저트 안미츠 노포' },
+                        { name: 'Cafe Hibiki', rank: 5, score: '3.5', desc: '음악당 내 조용한 쉼터' }
                     ],
                     restaurants: [
-                        { name: 'Inshoutei', rank: 1, score: '4.2', desc: '140년 역사를 자랑하는 공원 내 고택 가이세키 전문점' },
-                        { name: 'Izuei Honten', rank: 2, score: '4.1', desc: '에도 시대부터 이어져 온 전설적인 장어 덮밥 노포' },
-                        { name: 'Yamabe', rank: 3, score: '3.9', desc: '줄 서서 먹는 최강 가성비의 두툼한 돈카츠 맛집' },
-                        { name: 'Seiyoken', rank: 4, score: '3.7', desc: '일본 최초의 정통 서양식 요리를 선보인 역사적 식당' },
-                        { name: 'Negishi Ueno', rank: 5, score: '3.6', desc: '담백하고 쫄깃한 우설 구이로 유명한 현지 인기 스팟' }
+                        { name: 'Inshoutei', rank: 1, score: '4.2', desc: '140년 전통의 고택 가이세키' },
+                        { name: 'Izuei Honten', rank: 2, score: '4.1', desc: '에도 시대 전설의 장어 덮밥' },
+                        { name: 'Yamabe Okachimachi', rank: 3, score: '3.9', desc: '가성비 최강의 두툼한 돈카츠' },
+                        { name: 'Ueno Seiyoken', rank: 4, score: '3.7', desc: '최초의 정통 서양식 레스토랑' },
+                        { name: 'Negishi Ueno', rank: 5, score: '3.6', desc: '쫄깃한 우설 구이 로컬 맛집' }
                     ],
-                    station: 'UENO (JR & Metro)'
+                    station: 'Ueno Station',
+                    lines: [{ name: 'JR', color: '#00B21B' }, { name: 'G', color: '#FF9500' }, { name: 'H', color: '#B10619' }]
                 },
                 { 
                     id: 'hanzomon', region: '한조몬', spotName: '치도리가후치', sub: '해자 위로 흐르는 벚꽃', 
                     img: 'images/hanzomon.jpg', vibe: 'ELEGANT', crowd: '높음',
                     timeline: { start: 'Mar 20', peak: 'Mar 27', end: 'Apr 03', progress: 70 },
-                    history: '황궁 해자를 따라 조성된 치도리가후치 산책로는 도쿄에서 가장 우아하고 격조 높은 벚꽃길입니다. 물 위로 흐드러지게 핀 벚꽃 가지 사이로 타는 보트가 상징적입니다.',
-                    tips: ['보트는 오전 9시 이전 방문 강력 권장.', '라이트업 야경이 매우 기품 있고 정적입니다.', '황궁 주변을 따라 걷는 산책 코스 추천.'],
+                    history: '황궁 해자를 따라 조성된 우아한 벚꽃길입니다. 물 위로 늘어진 벚꽃 사이로 타는 보트가 도쿄 봄의 상징과 같습니다.',
+                    tips: ['보트는 오전 9시 이전 방문 권장.', '라이트업 야경이 매우 기품 있습니다.'],
                     attractions: {
-                        museums: [
-                            { name: '국립근대미술관', img: 'images/att_han_momat.jpg', desc: '일본 최초의 국립 미술관으로 일본 근대 미술의 정수.' },
-                            { name: '공예관', img: 'images/att_han_craft.jpg', desc: '역사적인 붉은 벽돌 건물에서 일본의 정교한 공예 전시.' }
-                        ],
-                        historical: [
-                            { name: '황궁 해자길', img: 'images/att_han_moat.jpg', desc: '에도 성의 역사가 깃든 해자를 따라 걷는 벚꽃길.' },
-                            { name: '야스쿠니 신사', img: 'images/att_han_yasu.jpg', desc: '도쿄의 벚꽃 개화를 판단하는 표본 나무가 있는 곳.' }
-                        ],
-                        unique: [
-                            { name: '보트 하우스', img: 'images/att_han_boat.jpg', desc: '물 위에서 벚꽃 터널을 통과하는 도쿄 최고의 체험.' },
-                            { name: '벚꽃 터널', img: 'images/att_han_tunnel.jpg', desc: '머리 위로 꽃잎이 쏟아지는 듯한 환상적인 산책로.' }
-                        ]
+                        museums: [{ name: '국립근대미술관', img: 'images/att_han_momat.jpg', desc: '일본 근현대 미술의 정수.' }],
+                        historical: [{ name: '황궁 해자길', img: 'images/att_han_moat.jpg', desc: '에도 성 역사의 산책로.' }],
+                        unique: [{ name: '보트 하우스', img: 'images/att_han_boat.jpg', desc: '물 위에서 즐기는 최고의 체험.' }]
                     },
                     cafes: [
-                        { name: 'No.4', rank: 1, score: '3.9', desc: '이치가야 지역에서 가장 힙한 베이커리 브런치 카페' },
-                        { name: 'Bundy Beans', rank: 2, score: '3.7', desc: '한조몬 골목에 위치한 정성스런 로스터리 커피 전문점' },
-                        { name: 'Factory', rank: 3, score: '3.8', desc: '빵 맛이 훌륭하기로 소문난 쿠단시타의 숨은 명소' },
-                        { name: 'Chiliparun', rank: 4, score: '3.6', desc: '조용한 분위기에서 스페셜티 커피를 즐기는 공간' },
-                        { name: 'Coffee Kan', rank: 5, score: '3.5', desc: '전형적인 일본식 클래식 깃사텐 분위기의 카페' }
+                        { name: 'No.4', rank: 1, score: '3.9', desc: '힙한 분위기의 브런치 베이커리' },
+                        { name: 'Bundy Beans', rank: 2, score: '3.7', desc: '정성스런 로스터리 커피 전문점' },
+                        { name: 'Factory', rank: 3, score: '3.8', desc: '빵 맛이 훌륭한 쿠단시타 명소' },
+                        { name: 'Chiliparun', rank: 4, score: '3.6', desc: '조용한 스페셜티 커피 공간' },
+                        { name: 'Coffee Kan', rank: 5, score: '3.5', desc: '클래식한 깃사텐 분위기' }
                     ],
                     restaurants: [
-                        { name: 'Ajiman', rank: 1, score: '4.0', desc: '정통 일식의 품격을 보여주는 가이세키 요리 전문' },
-                        { name: 'Ichiryu Kudan', rank: 2, score: '3.9', desc: '현지인이 줄 서서 먹는 설렁탕 및 한식 베이스 맛집' },
-                        { name: 'Kyuyamate', rank: 3, score: '3.8', desc: '역사와 전통을 가진 품위 있는 서양식 레스토랑' },
-                        { name: 'Tsunahachi', rank: 4, score: '3.7', desc: '눈앞에서 튀겨내는 정통 에도마에 덴푸라 전문점' },
-                        { name: 'Sushi Kanesaka', rank: 5, score: '4.1', desc: '황궁 근처 최고급 퀄리티의 정통 스시 오마카세' }
+                        { name: 'Ajiman', rank: 1, score: '4.0', desc: '품격 있는 가이세키 요리' },
+                        { name: 'Ichiryu Kudan', rank: 2, score: '3.9', desc: '현지인이 줄 서는 설렁탕 맛집' },
+                        { name: 'Kyuyamate', rank: 3, score: '3.8', desc: '품위 있는 정통 서양식' },
+                        { name: 'Tsunahachi', rank: 4, score: '3.7', desc: '정통 에도마에 덴푸라 전문' },
+                        { name: 'Sushi Kanesaka', rank: 5, score: '4.1', desc: '황궁 근처 최고급 퀄리티의 정통 스시' }
                     ],
-                    station: 'KUDANSHITA (Hanzomon & Tozai Line)'
+                    station: 'Kudanshita Station',
+                    lines: [{ name: 'Z', color: '#9B52A1' }, { name: 'T', color: '#0099D1' }, { name: 'S', color: '#B0B523' }]
                 },
                 { 
                     id: 'roppongi', region: '롯폰기', spotName: '미드타운 가든', sub: '도심 속 화려한 라이트업', 
                     img: 'images/roppongi.jpg', vibe: 'MODERN', crowd: '보통',
                     timeline: { start: 'Mar 22', peak: 'Mar 29', end: 'Apr 05', progress: 60 },
-                    history: '현대적인 건축물과 벚꽃이 어우러진 가장 세련된 명소입니다. 밤이 되면 샴페인 기포처럼 반짝이는 화이트 라이트업은 도시적인 낭만의 정점을 보여줍니다.',
-                    tips: ['가든 테라스 좌석을 예약하면 명당 확보.', '모리 타워 전망대 뷰와 연계하여 즐겨보세요.', '샴페인 골드빛 라이트업이 사진 촬영 포인트.'],
+                    history: '현대적인 건축물과 벚꽃이 어우러진 가장 세련된 명소입니다. 샴페인 기포처럼 반짝이는 야간 조명이 매력적입니다.',
+                    tips: ['테라스 좌석 예약 추천.', '모리 타워 전망대 뷰 연계.'],
                     attractions: {
-                        museums: [
-                            { name: '산토리 미술관', img: 'images/att_rop_suntory.jpg', desc: '세련된 디자인과 생활 미술을 전시하는 모던 미술관.' },
-                            { name: '21_21 Design Sight', img: 'images/att_rop_2121.jpg', desc: '안도 타다오 설계의 건물에서 열리는 디자인 전시.' }
-                        ],
-                        historical: [
-                            { name: '노기 신사', img: 'images/att_rop_nogi.jpg', desc: '빌딩 숲 사이에서 평온함을 주는 도심 속 역사 신사.' },
-                            { name: '히노키초 공원', img: 'images/att_rop_park.jpg', desc: '에도 시대 정원을 복원한 미드타운 뒤편의 아름다운 공원.' }
-                        ],
-                        unique: [
-                            { name: '사쿠라 도리', img: 'images/att_rop_light.jpg', desc: '세련된 도시 조명과 벚꽃이 어우러진 럭셔리 야경 코스.' },
-                            { name: '롯폰기 힐즈 테라스', img: 'images/att_rop_hills.jpg', desc: '도쿄 타워와 벚꽃을 함께 조망할 수 있는 포인트.' }
-                        ]
+                        museums: [{ name: '산토리 미술관', img: 'images/att_rop_suntory.jpg', desc: '디자인과 생활 미술 전시.' }],
+                        historical: [{ name: '노기 신사', img: 'images/att_rop_nogi.jpg', desc: '도심 속 고요한 역사적 쉼터.' }],
+                        unique: [{ name: '사쿠라 도리', img: 'images/att_rop_light.jpg', desc: '도시 조명과 어우러진 야경.' }]
                     },
                     cafes: [
-                        { name: 'Toshi Yoroizuka', rank: 1, score: '3.9', desc: '일본 최고의 파티시에 요로이즈카의 디저트 바' },
-                        { name: 'Toraya Midtown', rank: 2, score: '3.8', desc: '일본 황실 납품 화과자 브랜드의 세련된 카페 공간' },
-                        { name: 'Blue Bottle', rank: 3, score: '3.7', desc: '도심 속 숲같은 고요한 분위기의 블루보틀 매장' },
-                        { name: 'Antico Caffe', rank: 4, score: '3.6', desc: '이탈리안 정통 에스프레소와 파니니를 즐기는 곳' },
-                        { name: 'Dean & DeLuca', rank: 5, score: '3.5', desc: '벚꽃 한정 피크닉 도시락을 사기에 가장 좋은 곳' }
+                        { name: 'Toshi Yoroizuka', rank: 1, score: '3.9', desc: '스타 파티시에의 디저트 바' },
+                        { name: 'Toraya Midtown', rank: 2, score: '3.8', desc: '전통 화과자의 현대적인 세련미' },
+                        { name: 'Blue Bottle', rank: 3, score: '3.7', desc: '도심 속 숲같은 고요한 매장' },
+                        { name: 'Antico Caffe', rank: 4, score: '3.6', desc: '이탈리안 정통 에스프레소' },
+                        { name: 'Dean & DeLuca', rank: 5, score: '3.5', desc: '벚꽃 한정 피크닉 도시락' }
                     ],
                     restaurants: [
-                        { name: 'Sushi Sora', rank: 1, score: '4.2', desc: '미드타운 고층에서 즐기는 럭셔리 정통 스시 오마카세' },
-                        { name: 'Union Square', rank: 2, score: '4.0', desc: '뉴욕 감성을 그대로 가져온 프리미엄 아메리칸 그릴' },
-                        { name: 'Hal Yamashita', rank: 3, score: '3.9', desc: '창의적인 퓨전 일식을 선보이는 미드타운 테라스 맛집' },
-                        { name: 'Napule', rank: 4, score: '3.8', desc: '벚꽃 정원을 바라보며 즐기는 도쿄 최고의 화덕 피자' },
-                        { name: 'Artisan Truffe', rank: 5, score: '3.7', desc: '세계적인 트러플 요리 전문점으로 미식가들의 성지' }
+                        { name: 'Sushi Sora', rank: 1, score: '4.2', desc: '고층의 럭셔리 정통 스시' },
+                        { name: 'Union Square', rank: 2, score: '4.0', desc: '뉴욕 감성의 프리미엄 그릴' },
+                        { name: 'Hal Yamashita', rank: 3, score: '3.9', desc: '창의적인 퓨전 일식 테라스' },
+                        { name: 'Napule', rank: 4, score: '3.8', desc: '벚꽃 정원 뷰 화덕 피자' },
+                        { name: 'Artisan Truffe', rank: 5, score: '3.7', desc: '트러플 요리 전문 미식 성지' }
                     ],
-                    station: 'ROPPONGI (Metro & Oedo Line)'
+                    station: 'Roppongi Station',
+                    lines: [{ name: 'H', color: '#B10619' }, { name: 'E', color: '#B1066C' }]
                 }
             ],
             famous: [
-                { id: 'shinjuku', name: '신주쿠 교엔', sub: '광활한 피크닉 성지', icon: 'fa-leaf', img: 'images/shinjuku.jpg' },
-                { id: 'sumida', name: '스미다 공원', sub: '스카이트리 명품 뷰', icon: 'fa-bridge', img: 'images/sumida.jpg' },
-                { id: 'inokashira', name: '이노카시라', sub: '연못과 오리 보트', icon: 'fa-water', img: 'images/inokashira.jpg' },
-                { id: 'rikugien', name: '육의원', sub: '쏟아지는 수양벚꽃', icon: 'fa-mountain-sun', img: 'images/rikugien.jpg' }
+                { 
+                    id: 'shinjuku', region: '신주쿠', spotName: '신주쿠 교엔', sub: '광활한 피크닉 성지', icon: 'fa-leaf', 
+                    img: 'images/shinjuku.jpg', vibe: 'SERENE', crowd: '높음',
+                    timeline: { start: 'Mar 21', peak: 'Mar 28', end: 'Apr 04', progress: 80 },
+                    history: '에도 시대 다이묘 저택 부지에서 시작된 황실 정원입니다. 프랑스식, 영국식, 일본식 정원이 조화를 이룬 도심 속 거대 안식처입니다.',
+                    tips: ['주류 반입 금지로 매우 쾌적합니다.', '정원 내 스타벅스는 도쿄 최고의 명당.'],
+                    attractions: {
+                        museums: [{ name: '교엔 대온실', img: 'images/att_shi_green.jpg', desc: '전 세계 희귀 식물 수집 공간.' }],
+                        historical: [{ name: '구 양관 휴게소', img: 'images/att_shi_rest.jpg', desc: '황실 가족의 역사적 서양 건물.' }],
+                        unique: [{ name: '언어의 정원 벤치', img: 'images/att_shi_anime.jpg', desc: '애니메이션 속 실제 장소.' }]
+                    },
+                    cafes: [
+                        { name: 'Starbucks Shinjuku Gyoen', rank: 1, score: '4.0', desc: '정원 뷰를 바라보는 명당 매장' },
+                        { name: 'Cafe La Boheme', rank: 2, score: '3.7', desc: '영화/애니 촬영지로 유명한 곳' },
+                        { name: 'All Seasons Coffee', rank: 3, score: '3.8', desc: '인생 푸딩과 훌륭한 스페셜티' },
+                        { name: 'Eight Coffee', rank: 4, score: '3.6', desc: '조용한 로컬 로스터리 카페' },
+                        { name: 'Verve Coffee', rank: 5, score: '3.7', desc: '세련된 감각의 캘리포니아 스타일' }
+                    ],
+                    restaurants: [
+                        { name: 'Sobahouse Hototogisu', rank: 1, score: '4.3', desc: '미슐랭 1스타 조개 육수 라멘' },
+                        { name: 'Ramen Ouka', rank: 2, score: '4.1', desc: '비건 대응으로 유명한 신주쿠 맛집' },
+                        { name: 'Hamburg Will', rank: 3, score: '3.8', desc: '이베리코 돼지 함바그 성지' },
+                        { name: 'Manna', rank: 4, score: '3.9', desc: '정통 인도풍 카레 전문점' },
+                        { name: 'Udon Shin', rank: 5, score: '4.0', desc: '줄 서서 먹는 수제 우동 명소' }
+                    ],
+                    station: 'Shinjuku-gyoenmae Station',
+                    lines: [{ name: 'M', color: '#F62E36' }]
+                },
+                { 
+                    id: 'sumida', region: '아사쿠사', spotName: '스미다 공원', sub: '스카이트리 명품 뷰', icon: 'fa-bridge', 
+                    img: 'images/sumida.jpg', vibe: 'LIVELY', crowd: '매우 높음',
+                    timeline: { start: 'Mar 19', peak: 'Mar 26', end: 'Apr 02', progress: 90 },
+                    history: '스미다 강 양안을 따라 펼쳐진 벚꽃길입니다. 도쿄 스카이트리를 배경으로 사진을 남기기 가장 좋은 곳입니다.',
+                    tips: ['수상 버스에서 보는 벚꽃 추천.', '아사쿠사 센소지 관광과 병행하세요.'],
+                    attractions: {
+                        museums: [{ name: '호쿠사이 미술관', img: 'images/att_sum_hokusai.jpg', desc: '우키요에 거장 호쿠사이의 작품.' }],
+                        historical: [{ name: '우시지마 신사', img: 'images/att_sum_ushi.jpg', desc: '검은 도리이가 인상적인 신사.' }],
+                        unique: [{ name: '스미다 리버 테라스', img: 'images/att_sum_terrace.jpg', desc: '스카이트리 뷰 산책로.' }]
+                    },
+                    cafes: [
+                        { name: 'Fukumitsuya', rank: 1, score: '4.1', desc: '전통 화과자와 말차 전문점' },
+                        { name: 'Koume Cafe', rank: 2, score: '3.7', desc: '조용한 골목의 감성 카페' },
+                        { name: 'Suke6 Diner', rank: 3, score: '3.8', desc: '든든한 브런치를 즐기기 좋은 곳' },
+                        { name: 'Starbucks River Summit', rank: 4, score: '3.6', desc: '강변 뷰를 감상하는 스타벅스' },
+                        { name: 'Nishiya', rank: 5, score: '3.9', desc: '정겨운 아사쿠사 커피 카운터' }
+                    ],
+                    restaurants: [
+                        { name: 'Asakusa Imahan', rank: 1, score: '4.2', desc: '100년 전통의 스키야키 명가' },
+                        { name: 'Kameya Soba', rank: 2, score: '3.8', desc: '가성비 훌륭한 공원 옆 소바' },
+                        { name: 'Unatetsu', rank: 3, score: '4.1', desc: '장어 덮밥과 히츠마부시 전문' },
+                        { name: 'Daikokuya', rank: 4, score: '3.7', desc: '아사쿠사식 진한 양념 텐동' },
+                        { name: 'Yadoroku', rank: 5, score: '4.0', desc: '가장 오래된 주먹밥 미슐랭 맛집' }
+                    ],
+                    station: 'Asakusa Station',
+                    lines: [{ name: 'G', color: '#FF9500' }, { name: 'A', color: '#E4007F' }]
+                },
+                { 
+                    id: 'inokashira', region: '키치죠지', spotName: '이노카시라 공원', sub: '연못과 오리 보트', icon: 'fa-water', 
+                    img: 'images/inokashira.jpg', vibe: '感性的', crowd: '높음',
+                    timeline: { start: 'Mar 22', peak: 'Mar 29', end: 'Apr 05', progress: 65 },
+                    history: '연못 위로 드리워진 벚꽃이 환상적인 반영을 만듭니다. 젊은이들이 가장 살고 싶어 하는 동네의 심장입니다.',
+                    tips: ['보트에서 보는 벚꽃 터널 강추.', '키치죠지 맛집 투어와 연계.'],
+                    attractions: {
+                        museums: [{ name: '지브리 미술관', img: 'images/att_ino_ghibli.jpg', desc: '판타지가 현실이 되는 곳.' }],
+                        historical: [{ name: '벤자이텐 사찰', img: 'images/att_ino_ben.jpg', desc: '연못 중앙의 신비로운 붉은 사찰.' }],
+                        unique: [{ name: '이노카시라 동물원', img: 'images/att_ino_zoo.jpg', desc: '동물들과 즐기는 꽃구경.' }]
+                    },
+                    cafes: [
+                        { name: 'Chai Break', rank: 1, score: '3.8', desc: '진한 밀크티와 프렌치 토스트' },
+                        { name: 'Ryumon Coffee', rank: 2, score: '3.9', desc: '미니멀한 공간의 스페셜티' },
+                        { name: 'Cafe du Lievre', rank: 3, score: '3.6', desc: '숲속 오두막 분위기 크레페' },
+                        { name: 'Hattifnatt', rank: 4, score: '3.7', desc: '동화 속 세상 일러스트 카페' },
+                        { name: 'Light Up Coffee', rank: 5, score: '3.8', desc: '맛에 집중하는 로스터리' }
+                    ],
+                    restaurants: [
+                        { name: 'Iseya Yakitori', rank: 1, score: '3.9', desc: '공원 명물 연기 자욱한 맛집' },
+                        { name: 'Sato Menchi', rank: 2, score: '3.8', desc: '줄 서서 먹는 대표 간식 멘치카츠' },
+                        { name: 'Sajilo Cafe', rank: 3, score: '4.1', desc: '세련된 맛의 인도 카레' },
+                        { name: 'Pizzeria GG', rank: 4, score: '4.2', desc: '나폴리 정통 화덕 피자' },
+                        { name: 'Inokashira Tei', rank: 5, score: '3.7', desc: '연못 뷰 일식 도시락 맛집' }
+                    ],
+                    station: 'Kichijoji Station',
+                    lines: [{ name: 'JC', color: '#F15A22' }, { name: 'IN', color: '#DA0442' }]
+                },
+                { 
+                    id: 'rikugien', region: '고마고메', spotName: '육의원 (리쿠기엔)', sub: '쏟아지는 수양벚꽃', icon: 'fa-mountain-sun', 
+                    img: 'images/rikugien.jpg', vibe: 'ACADEMIC', crowd: '보통',
+                    timeline: { start: 'Mar 17', peak: 'Mar 24', end: 'Mar 31', progress: 100 },
+                    history: '에도 시대의 2대 정원 중 하나입니다. 높이 15m의 거대 수양벚꽃이 폭포처럼 쏟아지는 야경이 압권입니다.',
+                    tips: ['수양벚꽃 야간권 사전 예매 권장.', '말차 찻집에서 여유를 느껴보세요.'],
+                    attractions: {
+                        museums: [{ name: '동양문고 박물관', img: 'images/att_rik_toyobunko.jpg', desc: '거대 서가가 인상적인 박물관.' }],
+                        historical: [{ name: '나이테이 몬', img: 'images/att_rik_gate.jpg', desc: '역사적인 위용의 정원 입구.' }],
+                        unique: [{ name: '후키아게 차야', img: 'images/att_rik_tea.jpg', desc: '연못을 바라보는 말차 체험.' }]
+                    },
+                    cafes: [
+                        { name: 'Fukiage Chaya', rank: 1, score: '3.6', desc: '정원 안 최고의 벚꽃 뷰 찻집' },
+                        { name: 'Koushin-en', rank: 2, score: '3.8', desc: '조용한 골목 숨은 고택 카페' },
+                        { name: 'Tops Cafe', rank: 3, score: '3.5', desc: '전통의 초콜릿 케이크 맛집' },
+                        { name: 'Muji Cafe Sugamo', rank: 4, score: '3.6', desc: '건강하고 깔끔한 무인양품 식사' },
+                        { name: 'Saint Marc', rank: 5, score: '3.4', desc: '초코 크로와상과 편안한 휴식' }
+                    ],
+                    restaurants: [
+                        { name: 'Nakano Unagi', rank: 1, score: '4.1', desc: '정갈한 맛의 현지인 추천 장어' },
+                        { name: 'Soba Tsuta', rank: 2, score: '3.9', desc: '직접 만드는 자가제면 소바' },
+                        { name: 'Komagome Ramen', rank: 3, score: '3.7', desc: '진한 국물 맛의 골목 맛집' },
+                        { name: 'Tonki', rank: 4, score: '4.2', desc: '역사 깊은 돈카츠 명가' },
+                        { name: 'Ikinari Steak', rank: 5, score: '3.5', desc: '가성비 훌륭한 스테이크' }
+                    ],
+                    station: 'Komagome Station',
+                    lines: [{ name: 'JY', color: '#00B21B' }, { name: 'N', color: '#00AC9B' }]
+                }
             ],
             suburbs: [
                 { id: 'kawaguchi', name: '가와구치코', sub: '후지산과 벚꽃 절경', img: 'images/sub_kawaguchi.jpg', transport: '버스 2시간' },
@@ -355,7 +436,7 @@
             if (now < startDay) {
                 forecastStatus.innerHTML = `아직 도쿄의 벚꽃은 <br/><span class="underline underline-offset-8 decoration-4 decoration-white/40 font-black">개화 전 !</span>`;
             } else {
-                forecastStatus.innerHTML = `지금 도쿄는 <br/><span class="underline underline-offset-8 decoration-4 decoration-white/40 font-black">만개(Peak) 중!</span>`;
+                forecastStatus.innerHTML = `지금 도쿄는 <br/><span class="underline underline-offset-8 decoration-4 decoration-white/40 font-black text-left text-left">만개(Peak) 중!</span>`;
             }
         }
 
@@ -368,7 +449,7 @@
                     <div class="absolute bottom-12 left-10 right-10 text-left">
                         <span class="inline-block px-3 py-1 rounded-full bg-primary text-[9px] font-black text-white uppercase mb-4 tracking-wider text-left">${spot.spotName}</span>
                         <h4 class="text-white text-3xl font-black mb-3 tracking-tighter leading-tight text-left">${spot.region}</h4>
-                        <p class="text-white/70 text-[11px] font-medium leading-relaxed text-left">${spot.sub}</p>
+                        <p class="text-white/70 text-[11px] font-medium leading-relaxed text-left text-left">${spot.sub}</p>
                     </div>
                 </div>
             `).join('');
@@ -379,8 +460,11 @@
             container.innerHTML = data.famous.map(spot => `
                 <div onclick="openDetail('${spot.id}')" class="bg-white dark:bg-white/5 p-6 md:p-8 rounded-[2.5rem] border border-white/60 dark:border-white/10 active:scale-95 transition-all cursor-pointer shadow-sm hover:shadow-xl hover:bg-white text-left">
                     <div class="size-11 md:size-14 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-5 shadow-inner text-left"><i class="fa-solid ${spot.icon} text-lg md:text-2xl text-left"></i></div>
-                    <h4 class="font-black text-base md:text-lg mb-1.5 text-left">${spot.name}</h4>
-                    <p class="text-[10px] md:text-xs text-gray-400 font-bold leading-tight text-left">${spot.sub}</p>
+                    <div class="text-left">
+                        <span class="inline-block px-2.5 py-0.5 rounded-md bg-primary/10 text-primary text-[9px] font-black uppercase mb-2 tracking-wide text-left">${spot.spotName}</span>
+                        <h4 class="font-black text-base md:text-lg mb-1.5 text-left">${spot.region}</h4>
+                        <p class="text-[10px] md:text-xs text-gray-400 font-bold leading-tight text-left">${spot.sub}</p>
+                    </div>
                 </div>
             `).join('');
         }
@@ -391,17 +475,17 @@
                 <div onclick="openDetail('${spot.id}')" class="min-w-[240px] md:min-w-0 w-full bg-white dark:bg-white/5 rounded-[2.8rem] overflow-hidden border border-white/50 active:scale-95 transition-all shadow-sm hover:shadow-xl transition-all text-left">
                     <div class="h-36 md:h-48 overflow-hidden bg-sakura-pink/10 text-left"><img src="${spot.img}" class="w-full h-full object-cover text-left" alt="${spot.name}" onerror="this.src='https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=800'"></div>
                     <div class="p-6 md:p-8 text-left">
-                        <h4 class="font-black text-lg md:text-xl mb-1.5 text-left">${spot.name}</h4>
-                        <p class="text-[10px] md:text-xs text-gray-400 font-bold mb-4 text-left">${spot.sub}</p>
-                        <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-background-light dark:bg-white/10 rounded-full text-[9px] font-black text-primary uppercase text-left"><i class="fa-solid fa-train-subway text-left"></i> ${spot.transport}</div>
+                        <h4 class="font-black text-lg md:text-xl mb-1.5 text-left text-left">${spot.name}</h4>
+                        <p class="text-[10px] md:text-xs text-gray-400 font-bold mb-4 text-left text-left">${spot.sub}</p>
+                        <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-background-light dark:bg-white/10 rounded-full text-[9px] font-black text-primary uppercase text-left"><i class="fa-solid fa-train-subway text-left text-left"></i> ${spot.transport}</div>
                     </div>
                 </div>
             `).join('');
         }
 
-        // --- DETAIL VIEW LOGIC (DATA-RICH VERSION) ---
+        // --- DETAIL VIEW LOGIC ---
         function openDetail(id) {
-            const spot = data.best.find(s => s.id === id) || data.suburbs.find(s => s.id === id) || data.famous.find(s => s.id === id);
+            const spot = data.best.find(s => s.id === id) || data.famous.find(s => s.id === id) || data.suburbs.find(s => s.id === id);
             if (!spot) return;
             
             const overlay = document.getElementById('detailOverlay');
@@ -411,13 +495,13 @@
                 if (!items || items.length === 0) return '';
                 return `
                     <div class="mb-14 text-left">
-                        <div class="flex justify-between items-center mb-6 text-left text-left"><h3 class="text-sm font-black text-left"><i class="fa-solid ${icon} text-primary mr-1"></i> ${title}</h3></div>
-                        <div class="flex overflow-x-auto hide-scrollbar gap-5 pb-4 text-left">
+                        <div class="flex justify-between items-center mb-6 text-left text-left"><h3 class="text-sm font-black text-left"><i class="fa-solid ${icon} text-primary mr-1 text-left"></i> ${title}</h3></div>
+                        <div class="flex overflow-x-auto hide-scrollbar gap-5 pb-4 text-left text-left">
                             ${items.map(item => `
-                                <div class="min-w-[220px] flex flex-col gap-3 group active:scale-95 transition-all text-left">
-                                    <div class="h-52 w-full rounded-[2.5rem] bg-cover bg-center shadow-xl border border-white/50 bg-gray-100 text-left" style="background-image: url('${item.img}')" onerror="this.style.backgroundColor='#ffd1dc'"></div>
-                                    <p class="text-[13px] font-black text-left px-1 mt-1 leading-tight text-left">${item.name}</p>
-                                    <p class="text-[10px] text-gray-400 leading-snug px-1 line-clamp-2 text-left text-left text-left">${item.desc}</p>
+                                <div class="min-w-[220px] flex flex-col gap-3 group active:scale-95 transition-all text-left text-left">
+                                    <div class="h-52 w-full rounded-[2.5rem] bg-cover bg-center shadow-xl border border-white/50 bg-gray-100 text-left text-left" style="background-image: url('${item.img}')" onerror="this.style.backgroundColor='#ffd1dc'"></div>
+                                    <p class="text-[13px] font-black text-left px-1 mt-1 leading-tight text-left text-left text-left">${item.name}</p>
+                                    <p class="text-[10px] text-gray-400 leading-snug px-1 line-clamp-2 text-left text-left text-left text-left">${item.desc}</p>
                                 </div>
                             `).join('')}
                         </div>
@@ -428,20 +512,20 @@
             const renderRanking = (title, items, icon, colorClass) => {
                 if (!items || items.length === 0) return '';
                 return `
-                    <div class="mb-14 text-left text-left text-left">
-                        <h3 class="text-sm font-black mb-6 text-left text-left"><i class="fa-solid ${icon} text-primary mr-1 text-left"></i> ${title}</h3>
-                        <div class="space-y-4 text-left text-left">
+                    <div class="mb-14 text-left text-left text-left text-left">
+                        <h3 class="text-sm font-black mb-6 text-left text-left text-left text-left"><i class="fa-solid ${icon} text-primary mr-1 text-left text-left text-left"></i> ${title}</h3>
+                        <div class="space-y-4 text-left text-left text-left text-left">
                             ${items.map(item => `
-                                <div class="flex items-center justify-between p-5 bg-white dark:bg-white/5 rounded-3xl border border-gray-50 dark:border-white/5 shadow-sm active:scale-[0.98] transition-all text-left text-left text-left">
-                                    <div class="flex items-center gap-4 text-left text-left">
-                                        <div class="rank-badge rank-${item.rank <= 3 ? item.rank : 'other'} text-left text-left">${item.rank}</div>
-                                        <div class="text-left text-left text-left">
-                                            <p class="text-[13px] font-black leading-tight text-left text-left text-left">${item.name}</p>
-                                            <p class="text-[10px] text-gray-400 mt-1 text-left text-left text-left">${item.desc}</p>
+                                <div class="flex items-center justify-between p-5 bg-white dark:bg-white/5 rounded-3xl border border-gray-50 dark:border-white/5 shadow-sm active:scale-[0.98] transition-all text-left text-left text-left text-left">
+                                    <div class="flex items-center gap-4 text-left text-left text-left text-left">
+                                        <div class="rank-badge rank-${item.rank <= 3 ? item.rank : 'other'} text-left text-left text-left text-left">${item.rank}</div>
+                                        <div class="text-left text-left text-left text-left text-left">
+                                            <p class="text-[13px] font-black leading-tight text-left text-left text-left text-left">${item.name}</p>
+                                            <p class="text-[10px] text-gray-400 mt-1 text-left text-left text-left text-left">${item.desc}</p>
                                         </div>
                                     </div>
-                                    <div class="text-right text-left text-left">
-                                        <p class="text-[11px] font-black ${colorClass} text-left text-left"><i class="fa-solid fa-star text-[9px] text-left text-left"></i> ${item.score}</p>
+                                    <div class="text-right text-left text-left text-left text-left text-left text-left text-left">
+                                        <p class="text-[11px] font-black ${colorClass} text-left text-left text-left text-left text-left"><i class="fa-solid fa-star text-[9px] text-left text-left text-left text-left text-left"></i> ${item.score}</p>
                                     </div>
                                 </div>
                             `).join('')}
@@ -451,46 +535,46 @@
             };
 
             overlay.innerHTML = `
-                <div class="w-full h-full md:h-[90vh] md:max-w-xl md:rounded-[3.5rem] bg-white dark:bg-background-dark overflow-hidden md:shadow-2xl relative flex flex-col slide-up shadow-inner text-left cursor-default text-left" onclick="event.stopPropagation()">
+                <div class="w-full h-full md:h-[90vh] md:max-w-xl md:rounded-[3.5rem] bg-white dark:bg-background-dark overflow-hidden md:shadow-2xl relative flex flex-col slide-up shadow-inner text-left cursor-default text-left text-left text-left text-left" onclick="event.stopPropagation()">
                     
-                    <div class="shrink-0 h-16 px-6 flex justify-between items-center bg-white dark:bg-background-dark sticky top-0 z-[120] border-b border-gray-50 dark:border-white/5 shadow-sm text-left text-left">
-                        <button onclick="closeDetail()" class="text-[#181111] dark:text-white p-2 active:scale-75 transition-transform text-left text-left"><i class="fa-solid fa-chevron-left text-xl text-left"></i></button>
-                        <h2 class="text-[#181111] dark:text-white font-black text-lg text-left text-left">${spot.spotName || spot.name}</h2>
-                        <button class="text-[#ea2a33] p-2 active:scale-75 transition-transform text-left text-left"><i class="fa-solid fa-arrow-up-from-bracket text-xl text-left text-left"></i></button>
+                    <div class="shrink-0 h-16 px-6 flex justify-between items-center bg-white dark:bg-background-dark sticky top-0 z-[120] border-b border-gray-50 dark:border-white/5 shadow-sm text-left text-left text-left text-left text-left">
+                        <button onclick="closeDetail()" class="text-[#181111] dark:text-white p-2 active:scale-75 transition-transform text-left text-left text-left text-left text-left text-left"><i class="fa-solid fa-chevron-left text-xl text-left text-left text-left text-left text-left"></i></button>
+                        <h2 class="text-[#181111] dark:text-white font-black text-lg text-left text-left text-left text-left text-left text-left">${spot.spotName || spot.name}</h2>
+                        <button class="text-[#ea2a33] p-2 active:scale-75 transition-transform text-left text-left text-left text-left text-left text-left text-left text-left text-left"><i class="fa-solid fa-arrow-up-from-bracket text-xl text-left text-left text-left text-left text-left text-left"></i></button>
                     </div>
 
-                    <div class="flex-1 overflow-y-auto hide-scrollbar pb-40 text-left text-left text-left">
-                        <div class="px-6 pt-4 text-center text-left text-left">
-                            <div class="relative w-full aspect-[4/3] rounded-[2.5rem] overflow-hidden shadow-2xl bg-gray-100 inline-block text-left text-left text-left">
-                                <img src="${spot.img}" class="w-full h-full object-cover text-left text-left text-left" alt="${spot.region}" onerror="this.src='https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=800'">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent text-left text-left"></div>
-                                <div class="absolute bottom-6 left-6 text-left text-left">
-                                    <span class="bg-[#ea2a33] text-white text-[9px] font-black uppercase tracking-[0.2em] px-3 py-1.5 rounded-full shadow-lg border border-white/20 text-left text-left text-left">${spot.spotName || 'RECOMMENDED'}</span>
+                    <div class="flex-1 overflow-y-auto hide-scrollbar pb-40 text-left text-left text-left text-left text-left text-left text-left">
+                        <div class="px-6 pt-4 text-center text-left text-left text-left text-left text-left text-left text-left text-left">
+                            <div class="relative w-full aspect-[4/3] rounded-[2.5rem] overflow-hidden shadow-2xl bg-gray-100 inline-block text-left text-left text-left text-left text-left text-left text-left text-left text-left">
+                                <img src="${spot.img}" class="w-full h-full object-cover text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left" alt="${spot.region}" onerror="this.src='https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=800'">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent text-left text-left text-left text-left text-left text-left text-left text-left text-left"></div>
+                                <div class="absolute bottom-6 left-6 text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">
+                                    <span class="bg-[#ea2a33] text-white text-[9px] font-black uppercase tracking-[0.2em] px-3 py-1.5 rounded-full shadow-lg border border-white/20 text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">${spot.spotName || 'RECOMMENDED'}</span>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="px-8 pt-8 text-left text-left text-left text-left">
-                            <div class="text-center mb-10 text-left text-left text-left text-left">
-                                <h2 class="text-4xl font-black mb-3 text-left tracking-tighter leading-tight text-left text-left text-left">${spot.region || spot.name}</h2>
-                                <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-primary/5 rounded-full border border-primary/10 text-left text-left text-left text-left">
-                                    <i class="fa-solid fa-location-dot text-primary text-[10px] text-left text-left text-left"></i>
-                                    <p class="text-primary text-[10px] font-black uppercase tracking-tight text-left text-left text-left text-left">스팟 : ${spot.spotName || '도쿄'}</p>
+                        <div class="px-8 pt-8 text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">
+                            <div class="text-center mb-10 text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">
+                                <h2 class="text-4xl font-black mb-3 text-left tracking-tighter leading-tight text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">${spot.region || spot.name}</h2>
+                                <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-primary/5 rounded-full border border-primary/10 text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">
+                                    <i class="fa-solid fa-location-dot text-primary text-[10px] text-left text-left text-left text-left text-left text-left text-left"></i>
+                                    <p class="text-primary text-[10px] font-black uppercase tracking-tight text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">스팟 : ${spot.spotName || '도쿄 일대'}</p>
                                 </div>
                             </div>
 
-                            <div class="mb-10 px-1 bg-white/50 dark:bg-white/5 rounded-3xl p-6 border border-gray-50 dark:border-white/5 shadow-sm text-left text-left text-left text-left">
-                                <h3 class="flex items-center gap-2 text-sm font-black mb-10 text-left text-left text-left text-left"><i class="fa-solid fa-calendar-check text-primary text-left text-left text-left"></i> 벚꽃 타임라인</h3>
-                                <div class="timeline-bar mb-10 text-left text-left text-left">
-                                    <div class="timeline-progress text-left text-left" style="width: ${spot.timeline?.progress || 50}%"></div>
-                                    <div class="timeline-dot text-left text-left" style="left: ${spot.timeline?.progress || 50}%"></div>
-                                    <div class="absolute -bottom-10 left-0 text-center text-left text-left text-left text-left text-left text-left"><p class="text-[8px] font-bold text-gray-400 uppercase text-left">개화</p><p class="text-[9px] font-black text-left text-left">${spot.timeline?.start || 'Mar 20'}</p></div>
-                                    <div class="absolute -bottom-10 left-1/2 -translate-x-1/2 text-center text-left text-left text-left text-left text-left text-left"><p class="text-[8px] font-bold text-primary uppercase text-left text-left">만개</p><p class="text-[9px] font-black text-primary text-left text-left">${spot.timeline?.peak || 'Mar 27'}</p></div>
-                                    <div class="absolute -bottom-10 right-0 text-center text-left text-left text-left text-left text-left text-left text-left"><p class="text-[8px] font-bold text-gray-400 uppercase text-left text-left">낙화</p><p class="text-[9px] font-black text-left text-left">${spot.timeline?.end || 'Apr 03'}</p></div>
+                            <div class="mb-10 px-1 bg-white/50 dark:bg-white/5 rounded-3xl p-6 border border-gray-50 dark:border-white/5 shadow-sm text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">
+                                <h3 class="flex items-center gap-2 text-sm font-black mb-10 text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left"><i class="fa-solid fa-calendar-check text-primary text-left text-left text-left text-left text-left text-left text-left text-left text-left"></i> 벚꽃 타임라인</h3>
+                                <div class="timeline-bar mb-10 text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">
+                                    <div class="timeline-progress text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left" style="width: ${spot.timeline?.progress || 50}%"></div>
+                                    <div class="timeline-dot text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left" style="left: ${spot.timeline?.progress || 50}%"></div>
+                                    <div class="absolute -bottom-10 left-0 text-center text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left"><p class="text-[8px] font-bold text-gray-400 uppercase text-left text-left text-left text-left text-left text-left text-left text-left text-left">개화</p><p class="text-[9px] font-black text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">${spot.timeline?.start || 'Mar 20'}</p></div>
+                                    <div class="absolute -bottom-10 left-1/2 -translate-x-1/2 text-center text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left"><p class="text-[8px] font-bold text-primary uppercase text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">만개</p><p class="text-[9px] font-black text-primary text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">${spot.timeline?.peak || 'Mar 27'}</p></div>
+                                    <div class="absolute -bottom-10 right-0 text-center text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left"><p class="text-[8px] font-bold text-gray-400 uppercase text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">낙화</p><p class="text-[9px] font-black text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">${spot.timeline?.end || 'Apr 03'}</p></div>
                                 </div>
                             </div>
 
-                            <div class="mb-14 text-left text-left text-left text-left text-left text-left"><h3 class="flex items-center gap-2 text-sm font-black mb-4 border-l-4 border-primary pl-3 text-left text-left">정보</h3><p class="text-gray-600 dark:text-gray-400 text-[15px] leading-relaxed font-medium text-left text-left text-left text-left text-left">${spot.history || '상세 정보 준비 중입니다.'}</p></div>
+                            <div class="mb-14 text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left"><h3 class="flex items-center gap-2 text-sm font-black mb-4 border-l-4 border-primary pl-3 text-left text-left text-left text-left text-left text-left text-left text-left">정보</h3><p class="text-gray-600 dark:text-gray-400 text-[15px] leading-relaxed font-medium text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">${spot.history || '상세 정보 준비 중입니다.'}</p></div>
 
                             ${renderAttrSection('Must-Visit 박물관', spot.attractions?.museums, 'fa-university')}
                             ${renderAttrSection('역사적인 장소', spot.attractions?.historical, 'fa-landmark')}
@@ -499,30 +583,35 @@
                             ${renderRanking('TOP 5 카페 (Tabelog)', spot.cafes, 'fa-coffee', 'text-primary')}
                             ${renderRanking('TOP 5 로컬 맛집', spot.restaurants, 'fa-utensils', 'text-[#facc15]')}
 
-                            <div class="bg-[#fff9f9] dark:bg-primary/5 p-8 rounded-[2.5rem] mb-14 border border-red-50 dark:border-primary/10 text-left text-left text-left text-left text-left">
-                                <h3 class="flex items-center gap-2 text-primary font-black mb-5 text-left text-left text-left text-left text-left text-left"><i class="fa-solid fa-wand-magic-sparkles text-left text-left text-left text-left text-left text-left"></i> 가이드 꿀팁</h3>
-                                <ul class="space-y-4 text-left text-left text-left text-left">
-                                    ${(spot.tips || []).map(tip => `<li class="flex gap-4 text-[13px] font-bold text-gray-700 dark:text-gray-300 text-left text-left text-left text-left text-left text-left"><span class="text-primary mt-1 shrink-0 text-left text-left text-left text-left text-left">●</span> <span class="leading-relaxed text-left text-left text-left text-left text-left text-left">${tip}</span></li>`).join('')}
+                            <div class="bg-[#fff9f9] dark:bg-primary/5 p-8 rounded-[2.5rem] mb-14 border border-red-50 dark:border-primary/10 text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">
+                                <h3 class="flex items-center gap-2 text-primary font-black mb-5 text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left"><i class="fa-solid fa-wand-magic-sparkles text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left"></i> 가이드 꿀팁</h3>
+                                <ul class="space-y-4 text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">
+                                    ${(spot.tips || []).map(tip => `<li class="flex gap-4 text-[13px] font-bold text-gray-700 dark:text-gray-300 text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left"><span class="text-primary mt-1 shrink-0 text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">●</span> <span class="leading-relaxed text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">${tip}</span></li>`).join('')}
                                 </ul>
                             </div>
 
-                            <div class="mb-10 text-left text-left text-left text-left text-left text-left">
-                                <h3 class="text-sm font-black mb-6 text-left text-left text-left text-left text-left">위치</h3>
-                                <div class="relative w-full h-52 rounded-[2.5rem] overflow-hidden shadow-inner border border-gray-100 text-left text-left text-left text-left">
-                                    <div class="absolute inset-0 bg-gray-50 flex items-center justify-center font-black text-gray-200 uppercase tracking-tighter text-4xl opacity-50 text-left text-left text-left">MAP VIEW</div>
-                                    <div class="absolute inset-0 flex items-center justify-center text-left text-left text-left text-left text-left text-left text-left"><i class="fa-solid fa-location-dot text-primary text-5xl drop-shadow-2xl text-left text-left text-left"></i></div>
-                                    <div class="absolute bottom-5 left-5 right-5 bg-white/95 dark:bg-background-dark/95 p-4 rounded-2xl flex items-center justify-between shadow-2xl border border-white/50 text-left text-left text-left text-left text-left">
-                                        <p class="text-[10px] font-black uppercase tracking-tight truncate mr-4 text-left text-left text-left text-left text-left text-left">${spot.station || 'TOKYO, JAPAN'}</p>
-                                        <i class="fa-solid fa-up-right-from-square text-primary text-sm cursor-pointer active:scale-75 transition-all text-left text-left text-left text-left"></i>
+                            <div class="mb-10 text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">
+                                <h3 class="text-sm font-black mb-6 text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">위치</h3>
+                                <div class="relative w-full h-52 rounded-[2.5rem] overflow-hidden shadow-inner border border-gray-100 text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">
+                                    <div class="absolute inset-0 bg-gray-50 flex items-center justify-center font-black text-gray-200 uppercase tracking-tighter text-4xl opacity-50 text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">MAP VIEW</div>
+                                    <div class="absolute inset-0 flex items-center justify-center text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left"><i class="fa-solid fa-location-dot text-primary text-5xl drop-shadow-2xl text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left"></i></div>
+                                    <div class="absolute bottom-5 left-5 right-5 bg-white/95 dark:bg-background-dark/95 p-4 rounded-2xl flex items-center justify-between shadow-2xl border border-white/50 text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">
+                                        <div class="text-left text-left text-left text-left text-left text-left text-left text-left">
+                                            <p class="text-[11px] font-black tracking-tight truncate text-left text-left text-left text-left text-left text-left text-left text-left">${spot.station || 'TOKYO, JAPAN'}</p>
+                                            <div class="flex gap-1 mt-1 text-left text-left text-left text-left text-left text-left text-left text-left">
+                                                ${(spot.lines || []).map(line => `<span class="line-badge" style="background-color: ${line.color}">${line.name}</span>`).join('')}
+                                            </div>
+                                        </div>
+                                        <i class="fa-solid fa-up-right-from-square text-primary text-sm cursor-pointer active:scale-75 transition-all text-left text-left text-left text-left text-left text-left text-left text-left text-left"></i>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="shrink-0 bg-white/95 dark:bg-background-dark/95 backdrop-blur-xl border-t border-gray-100 dark:border-white/5 px-6 py-5 pb-8 flex items-center gap-3 z-[130] shadow-[0_-5px_20px_rgba(0,0,0,0.05)] text-left text-left text-left text-left">
-                        <button class="flex-[1] h-14 rounded-2xl bg-primary/5 dark:bg-primary/10 text-primary font-black text-sm flex items-center justify-center gap-2 active:scale-95 transition-all border border-primary/10 text-left text-left text-left text-left text-left text-left"><i class="fa-solid fa-map-marked-alt text-left text-left text-left"></i><span>길찾기</span></button>
-                        <button class="flex-[1.5] h-14 rounded-2xl bg-primary text-white font-black text-sm flex items-center justify-center gap-2 shadow-xl shadow-primary/30 active:scale-95 transition-all text-left text-left text-left text-left text-left text-left"><i class="fa-solid fa-heart text-left text-left text-left"></i><span>내 일정에 추가</span></button>
+                    <div class="shrink-0 bg-white/95 dark:bg-background-dark/95 backdrop-blur-xl border-t border-gray-100 dark:border-white/5 px-6 py-5 pb-8 flex items-center gap-3 z-[130] shadow-[0_-5px_20px_rgba(0,0,0,0.05)] text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left">
+                        <button class="flex-[1] h-14 rounded-2xl bg-primary/5 dark:bg-primary/10 text-primary font-black text-sm flex items-center justify-center gap-2 active:scale-95 transition-all border border-primary/10 text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left"><span>길찾기</span></button>
+                        <button class="flex-[1.5] h-14 rounded-2xl bg-primary text-white font-black text-sm flex items-center justify-center gap-2 shadow-xl shadow-primary/30 active:scale-95 transition-all text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left text-left"><span>내 일정에 추가</span></button>
                     </div>
                 </div>
             `;
