@@ -377,9 +377,9 @@
                     </div>
                     <div id="bookingContainer" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
                 </div>
-                <div class="py-20 text-center opacity-30">
+                <div class="py-10 text-center opacity-30">
                     <p class="text-[10px] md:text-xs font-black tracking-widest uppercase">Japan City Guide Project 2026</p>
-                    <p class="mt-2 text-[9px] font-bold">Standardized Regional Mapping & Expert Curation</p>
+                    <button onclick="openPrivacy()" class="mt-2 text-[9px] font-bold hover:underline cursor-pointer">Privacy Policy (개인정보처리방침)</button>
                 </div>
             </div>            
         </div>
@@ -1846,8 +1846,26 @@
                 icon.classList.toggle('fa-sun');
             };
         }
-
+        function openPrivacy() {
+            document.getElementById('privacyModal').classList.remove('hidden');
+        }
+        function closePrivacy() {
+            document.getElementById('privacyModal').classList.add('hidden');
+        }
+        
         window.addEventListener('DOMContentLoaded', initApp);
     </script>
+    <div id="privacyModal" class="fixed inset-0 z-[300] hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-6">
+        <div class="bg-white dark:bg-gray-900 w-full max-w-lg rounded-[2.5rem] p-8 shadow-2xl max-h-[80vh] overflow-y-auto hide-scrollbar text-left">
+            <h3 class="text-xl font-black mb-6">개인정보처리방침</h3>
+            <div class="text-[11px] text-gray-500 leading-relaxed space-y-4 font-medium">
+                <p><strong>1. 수집하는 개인정보</strong><br>본 사이트는 별도의 회원가입 없이 이용 가능하며, 직접적인 개인정보를 수집하지 않습니다. 다만, 구글 애드센스 및 구글 애널리틱스 이용 과정에서 쿠키(Cookie)가 사용될 수 있습니다.</p>
+                <p><strong>2. 쿠키의 사용</strong><br>구글 등 제3자 제공업체는 사용자의 이전 방문 기록을 바탕으로 맞춤형 광고를 게재합니다. 사용자는 구글 광고 설정에서 맞춤 광고를 해제할 수 있습니다.</p>
+                <p><strong>3. 정보의 보호</strong><br>본 사이트는 사용자 데이터를 서버에 저장하지 않으며, 모든 명소 저장 기능은 사용자의 브라우저(LocalStorage) 내에만 보관됩니다.</p>
+                <p><strong>4. 문의처</strong><br>개인정보 관련 문의는 사이트 내 블로그 링크를 통해 연락 주시기 바랍니다.</p>
+            </div>
+            <button onclick="closePrivacy()" class="w-full mt-8 py-4 bg-gray-100 dark:bg-white/10 rounded-2xl font-black text-sm active:scale-95 transition-all">닫기</button>
+        </div>
+    </div>
 </body>
 </html>
