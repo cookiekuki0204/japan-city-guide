@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌸</text></svg>">
-    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6682864237624164"
+     crossorigin="anonymous"></script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -446,7 +447,8 @@
         function searchMap(keyword) {
             if (!keyword) return;
             const finalKeyword = keyword.includes('도쿄') ? keyword : `도쿄 ${keyword}`;
-            const url = `https://www.google.com/maps/search/${encodeURIComponent(finalKeyword)}`;
+            // 📍 숫자가 없는 `${}` 형식이 정답입니다!
+            const url = `https://www.google.com/maps/search/$?q=${encodeURIComponent(finalKeyword)}`;
             window.open(url, '_blank');
         }
         // --- MASTER DATA SECTION ---
@@ -889,6 +891,15 @@
                     icon: 'fa-hotel',
                     color: 'from-indigo-500 to-purple-600',
                     link: 'https://3ha.in/r/372593'
+                },
+                // 📍 1위 제안: 에디터 호텔 리뷰 카드 추가!
+                {
+                    id: 'blog-review',
+                    name: '에디터의 도쿄 호텔 실박 후기',
+                    desc: 'IT PM이 직접 묵어보고 검증한 추천 숙소',
+                    icon: 'fa-pen-to-square',
+                    color: 'from-amber-400 to-orange-500', // 따뜻하고 믿음직한 오렌지 계열
+                    link: 'https://blog.naver.com/kuki0204/223878970916'
                 }
             ]
         };
