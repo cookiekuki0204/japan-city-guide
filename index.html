@@ -1734,6 +1734,14 @@
             }
         }
         // Weather API Logic
+        // 1. 보안처리된 키 (index.html 하단 스크립트 시작 부분에 넣으세요)
+        const _sec = "YTdiMTc0NDlhZTYzYmQ5OGQ4MGUyNTNmNjNiZjEyMmY="; 
+
+        // 2. 환경 설정 객체
+        const WEATHER_CONFIG = {
+            API_KEY: atob(_sec), // 실행 시점에 Base64를 디코딩하여 실제 키로 변환
+            CITY: 'Tokyo'
+        };
         async function fetchWeather() {
             try {
                 const url = `https://api.openweathermap.org/data/2.5/weather?q=${WEATHER_CONFIG.CITY}&appid=${WEATHER_CONFIG.API_KEY}&units=metric&lang=kr`;
