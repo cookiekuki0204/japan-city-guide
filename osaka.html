@@ -1,0 +1,987 @@
+<html lang="ko" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌸</text></svg>">
+    <title>Japan City Guide: 오사카 벚꽃 2026 마스터</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ff4d6d",
+                        "background-light": "#fdf8f8",
+                        "background-dark": "#120a0a",
+                        "sakura-pink": "#ffd1dc",
+                    },
+                    fontFamily: { "display": ["Plus Jakarta Sans", "Noto Sans JP", "sans-serif"] },
+                },
+            },
+        }
+    </script>
+    
+    <style>
+        body { font-family: 'Plus Jakarta Sans', 'Noto Sans JP', sans-serif; -webkit-font-smoothing: antialiased; }
+        /* 수정된 배경 그라데이션 */
+        .app-gradient { 
+            background: linear-gradient(180deg, #e0f2fe 0%, #ffffff 50%, #fff1f2 100%); 
+            background-attachment: fixed; 
+        }
+        .dark .app-gradient { background: linear-gradient(180deg, #1a1111 0%, #120a0a 100%); }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        @media (max-width: 768px) {
+            #resetMapBtn { top: 20px !important; right: 20px !important; bottom: auto !important; left: auto !important; z-index: 170 !important; }
+            #mapTooltip { bottom: 120px !important; left: 16px !important; right: 16px !important; width: auto !important; transform: translateY(250px); transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1); z-index: 160 !important; }
+        }
+        @media (min-width: 1024px) {
+            #mapTooltip { bottom: 40px !important; left: 40px !important; right: auto !important; width: 360px !important; transform: translateX(-400px); }
+        }
+        .slide-up { animation: slideUp 0.4s ease-out; }
+        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        
+        .petal { position: absolute; background-color: #ffdae9; border-radius: 150% 0 150% 0; opacity: 0.6; pointer-events: none; z-index: 5; animation: fall linear infinite; filter: blur(0.5px); }
+        @keyframes fall {
+            0% { top: -10%; transform: translateX(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.7; }
+            90% { opacity: 0.7; }
+            100% { top: 110%; transform: translateX(150px) rotate(450deg); opacity: 0; }
+        }
+        #mapCanvas { width: 100%; height: 100%; transition: filter 0.5s ease; }
+        .leaflet-marker-icon { border: none !important; background: none !important; }
+        .dark .leaflet-tile-container { filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%); }
+        .station-label { background: rgba(255, 255, 255, 0.95); border: 1px solid rgba(255, 77, 109, 0.2); border-radius: 8px; padding: 3px 8px; font-size: 11px; font-weight: 800; color: #1a1a1a; box-shadow: 0 4px 12px rgba(0,0,0,0.08); white-space: nowrap; }
+        .dark .station-label { background: rgba(31, 41, 55, 0.95); border-color: rgba(255, 255, 255, 0.1); color: #ffffff; }
+        .timeline-bar { height: 6px; background: #f1f1f1; border-radius: 10px; position: relative; }
+        .timeline-progress { height: 100%; background: #ff4d6d; border-radius: 10px; position: absolute; left: 0; top: 0; transition: width 1s ease-in-out; }
+        .timeline-dot { position: absolute; top: 50%; width: 16px; height: 16px; background: #fff; border: 4px solid #ff4d6d; border-radius: 50%; transform: translate(-50%, -50%); box-shadow: 0 0 10px rgba(255, 77, 109, 0.3); z-index: 2; transition: left 1s ease-in-out; }
+        .nav-active { color: #ff4d6d !important; }
+        .rank-badge { width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; border-radius: 6px; font-weight: 800; font-size: 10px; }
+        .rank-1 { background: #FFD700; color: #8B4513; }
+        .rank-2 { background: #C0C0C0; color: #4B4B4B; }
+        .rank-3 { background: #CD7F32; color: #ffffff; }
+        .rank-other { background: #f1f5f9; color: #64748b; }
+        /* 하단 내비게이션 바를 최상단으로 (z-index 210) */
+        .fixed.bottom-0 { 
+            z-index: 210 !important; 
+            pointer-events: none; /* 컨테이너 자체는 클릭 투과 */
+        }
+        .fixed.bottom-0 > div { 
+            pointer-events: auto; /* 버튼 박스는 클릭 허용 */
+        }
+
+        /* 상세 페이지 레이어 (z-index 200) */
+        #detailOverlay { 
+            z-index: 200; 
+            padding-bottom: 100px !important; /* 내비게이션 바 공간 확보 */
+        }
+        /* 도쿄 스타일 일정 카드 */
+        .schedule-card {
+            background: white;
+            border-radius: 2rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #f1f1f1;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .dark .schedule-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        .delete-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #fff1f2;
+            color: #ff4d6d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .delete-btn:hover { background: #ff4d6d; color: white; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#181111] dark:text-white transition-colors duration-300 min-h-screen overflow-x-hidden text-left">
+    
+    <div id="app" class="relative mx-auto flex h-screen w-full flex-col overflow-hidden bg-white/30 dark:bg-background-dark/30 backdrop-blur-[2px] app-gradient shadow-2xl">
+        <div id="petalContainer" class="absolute inset-0 pointer-events-none overflow-hidden z-0"></div>
+
+        <div id="mainContent" class="flex-1 overflow-y-auto hide-scrollbar pb-32 relative z-10">
+            <div class="max-w-6xl mx-auto w-full px-6 md:px-12">
+                
+                <div class="pt-12 md:pt-20 pb-10 flex justify-between items-end">
+                    <div class="text-left">
+                        <p class="text-[10px] md:text-xs font-black text-primary uppercase tracking-[0.2em] mb-1">2026 KANSAI EDITION</p>
+                        <h1 class="text-3xl md:text-5xl font-black tracking-tighter">오사카 벚꽃 명소</h1>
+                    </div>
+                    <button id="themeToggle" class="size-10 md:size-12 rounded-full bg-white/80 dark:bg-white/10 flex items-center justify-center border border-white/40 shadow-sm active:scale-90 transition-all">
+                        <i class="fa-solid fa-moon text-primary md:text-xl"></i>
+                    </button>
+                </div>
+
+                <div class="mb-12">
+                    <div class="bg-primary rounded-[2.5rem] p-8 md:p-14 text-white shadow-2xl shadow-primary/20 relative overflow-hidden slide-up">
+                        <div class="relative z-10 max-w-2xl">
+                            <p class="text-[11px] md:text-xs font-black opacity-90 uppercase tracking-widest mb-4">2026 벚꽃 개화 예측</p>
+                            <div id="countdownContainer" class="mb-6 flex items-center gap-3">
+                                <div class="px-3 py-1.5 bg-white/20 backdrop-blur-md rounded-xl border border-white/10 flex items-center gap-2">
+                                    <p id="countdownTimer" class="text-[13px] font-black tracking-wider">데이터 로딩 중...</p>
+                                </div>
+                            </div>
+                            <h3 id="forecastStatus" class="text-[32px] md:text-[48px] font-bold leading-tight mb-8 text-left">곧 다가올 오사카의<br/><span class="underline decoration-4">분홍빛 설렘을 준비하세요</span></h3>
+                            <div class="grid grid-cols-3 gap-3 items-center text-center">
+                                <div class="bg-white/20 backdrop-blur-md rounded-2xl py-3 border border-white/10">
+                                    <p class="text-[8px] md:text-[10px] font-black uppercase mb-1">개화 시작</p>
+                                    <p class="text-lg md:text-2xl font-black italic">03.22</p>
+                                </div>
+                                <div class="bg-white/30 backdrop-blur-md rounded-2xl py-4 border-2 border-white/40 shadow-lg -mt-2">
+                                    <p class="text-[8px] md:text-[10px] font-black mb-1 flex items-center justify-center gap-1"><i class="fa-solid fa-crown text-[8px]"></i> 만개 피크</p>
+                                    <p class="text-xl md:text-3xl font-black">03.29</p>
+                                </div>
+                                <div class="bg-white/20 backdrop-blur-md rounded-2xl py-3 border border-white/10">
+                                    <p class="text-[8px] md:text-[10px] font-black uppercase mb-1">벚꽃 엔딩</p>
+                                    <p class="text-lg md:text-2xl font-black italic">04.05</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-12 slide-up">
+                    <div id="weatherCard" class="bg-white/80 dark:bg-white/5 backdrop-blur-xl rounded-[2.5rem] p-8 border border-white/50 shadow-sm transition-all duration-500">
+                        <div class="flex items-center justify-between mb-8 text-left">
+                            <h3 class="text-[12px] font-black uppercase tracking-[0.15em] text-gray-400">오사카 실시간 날씨</h3>
+                            <div class="px-3 py-1 bg-blue-500/10 text-blue-500 rounded-full text-[9px] font-black uppercase">Live</div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                            <div class="flex items-center gap-5">
+                                <div id="weatherIconBox" class="size-16 shrink-0 rounded-[1.5rem] bg-amber-50 dark:bg-amber-900/20 flex items-center justify-center text-amber-500 text-3xl"><i class="fa-solid fa-spinner fa-spin"></i></div>
+                                <div class="text-left"><p id="currentTemp" class="text-3xl font-black mb-1.5">--°</p><p id="weatherDesc" class="text-[11px] font-bold text-gray-500">데이터 로딩 중...</p></div>
+                            </div>
+                            <div class="flex items-center gap-5">
+                                <div class="size-16 shrink-0 rounded-[1.5rem] bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-blue-500 text-3xl"><i class="fa-solid fa-shirt"></i></div>
+                                <div class="text-left"><p id="clothTitle" class="text-[15px] font-black mb-1">추천 복장</p><p id="clothDesc" class="text-[11px] font-bold text-gray-500">분석 중</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-20 text-left w-full overflow-hidden">
+                    <div class="flex items-end justify-between mb-8">
+                        <h3 class="text-2xl md:text-3xl font-black">2026 베스트 명소</h3>
+                        <p class="text-[10px] font-black text-gray-400 pb-1 flex items-center gap-1 animate-pulse">옆으로 밀기 <i class="fa-solid fa-arrow-right-long"></i></p>
+                    </div>
+                    <div id="bestSpotsContainer" class="flex flex-row flex-nowrap overflow-x-auto hide-scrollbar gap-5 pb-8 snap-x-mandatory"></div>
+                </div>
+
+                <div class="mb-20 text-left w-full overflow-hidden">
+                    <div class="flex items-end justify-between mb-8">
+                        <h3 class="text-2xl md:text-3xl font-black">오사카 인기 명소</h3>
+                        <p class="text-[10px] font-black text-gray-400 pb-1 flex items-center gap-1 animate-pulse">옆으로 밀기 <i class="fa-solid fa-arrow-right-long"></i></p>
+                    </div>
+                    <div id="famousSpotsContainer" class="flex flex-row flex-nowrap overflow-x-auto hide-scrollbar gap-5 pb-8 snap-x-mandatory"></div>
+                </div>
+
+                <div class="mb-20 text-left w-full overflow-hidden">
+                    <div class="flex items-end justify-between mb-8">
+                        <h3 class="text-2xl md:text-3xl font-black">오사카 근교 명소</h3>
+                        <p class="text-[10px] font-black text-gray-400 pb-1 flex items-center gap-1 animate-pulse">옆으로 밀기 <i class="fa-solid fa-arrow-right-long"></i></p>
+                    </div>
+                    <div id="suburbSpotsContainer" class="flex flex-row flex-nowrap overflow-x-auto hide-scrollbar gap-5 pb-8 snap-x-mandatory"></div>
+                </div>
+
+                <div class="mb-24 text-left w-full overflow-hidden">
+                    <div class="flex items-end justify-between mb-8">
+                        <h3 class="text-2xl md:text-3xl font-black">벚꽃 여행 필람 리스트</h3>
+                        <p class="text-[10px] font-black text-gray-400 pb-1 flex items-center gap-1 animate-pulse">옆으로 밀기 <i class="fa-solid fa-arrow-right-long"></i></p>
+                    </div>
+                    <div id="entertainmentContainer" class="flex flex-row flex-nowrap overflow-x-auto hide-scrollbar gap-6 pb-8 snap-x-mandatory"></div>
+                </div>
+
+                <div class="mb-24 px-2 slide-up">
+                    <div class="mb-8 text-left">
+                        <h3 class="text-2xl md:text-3xl font-black tracking-tighter">여행 준비의 시작</h3>
+                        <p class="text-[11px] font-bold text-gray-400 mt-1 uppercase tracking-widest">Travel Essentials</p>
+                    </div>
+                    <div id="bookingContainer" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+                </div>
+
+                <div class="py-10 text-center opacity-30">
+                    <p class="text-[10px] md:text-xs font-black tracking-widest uppercase">Japan City Guide Project 2026</p>
+                    <button onclick="openPrivacy()" class="mt-2 text-[9px] font-bold hover:underline cursor-pointer">Privacy Policy (개인정보처리방침)</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="fixed bottom-0 left-0 right-0 z-[100]">
+            <div class="max-w-[600px] mx-auto bg-white/95 dark:bg-background-dark/95 backdrop-blur-xl border-t md:border border-gray-100 dark:border-white/5 md:rounded-t-[2.5rem] px-10 pt-4 pb-8 md:pb-6 flex justify-between items-center shadow-2xl">
+                <button id="nav-home" onclick="goHome()" class="nav-btn flex flex-col items-center gap-1 nav-active active:scale-90 transition-all"><i class="fa-solid fa-house text-xl"></i><span class="text-[10px] font-bold">홈</span></button>
+                <button id="nav-explore" onclick="openExplorePage()" class="nav-btn flex flex-col items-center gap-1 text-gray-400 active:scale-90 transition-all"><i class="fa-solid fa-map-location-dot text-xl"></i><span class="text-[10px] font-bold">탐색</span></button>
+                <button id="nav-trip" onclick="openMySchedule()" class="nav-btn flex flex-col items-center gap-1 text-gray-400 active:scale-90 transition-all"><i class="fa-solid fa-calendar-check text-xl"></i><span class="text-[10px] font-bold">내 일정</span></button>
+            </div>
+        </div>
+
+        <div id="explorePage" class="hidden absolute inset-0 z-20 bg-background-light dark:bg-background-dark overflow-hidden flex flex-col pt-12">
+            <div class="px-6 mb-6 text-left"><h2 class="text-3xl font-black tracking-tighter">벚꽃 지도 탐색</h2><p class="text-xs font-bold text-gray-400 mt-1 uppercase">Kansai Region Interactive Map</p></div>
+            <div class="flex-1 relative bg-white/50 dark:bg-white/5 mb-32 rounded-[3rem] border border-white/60 overflow-hidden shadow-inner">
+                <div id="mapCanvas" class="absolute inset-0 w-full h-full z-10"></div>
+                <button id="resetMapBtn" class="absolute bottom-10 right-8 z-[150] size-14 bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-2xl shadow-2xl flex items-center justify-center text-primary active:scale-90 transition-all"><i class="fa-solid fa-arrow-rotate-left text-xl"></i></button>
+                <div id="mapTooltip" class="absolute bg-white dark:bg-gray-900 p-6 rounded-[2rem] shadow-2xl border border-primary/10 z-50">
+                    <div class="flex justify-between items-start text-left">
+                        <div><span id="tooltipRegion" class="text-[10px] font-black text-primary uppercase">지역명</span><h3 id="tooltipSpot" class="text-xl font-black">명소 이름</h3></div>
+                        <button id="tooltipBtn" class="size-12 rounded-2xl bg-primary text-white flex items-center justify-center active:scale-90 transition-transform shadow-lg shadow-primary/30"><i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="myTripPage" class="hidden absolute inset-0 z-20 bg-background-light dark:bg-background-dark pt-12 px-6 overflow-y-auto"></div>
+        <div id="detailOverlay" class="fixed inset-0 z-[200] translate-x-full bg-white dark:bg-background-dark overflow-y-auto hide-scrollbar hidden flex flex-col text-left"></div>
+    </div>
+    <script>
+        const data = {
+            best: [
+                { id: 'osaka-castle', region: '오사카성', spotName: '오사카성 공원', sub: '천수각과 3천 그루의 벚꽃', img: 'https://images.unsplash.com/photo-1589451907357-2f03122fe218?q=80&w=1760&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', vibe: '웅장함', crowd: '매우 높음', timeline: { start: '3월 22일', peak: '3월 29일', end: '4월 5일', progress: 80 }, history: '오사카의 랜드마크입니다. 니시노마루 정원의 야경이 일품입니다', station: '오사카조코엔역',tips: [
+                    '니시노마루 정원의 야간 라이트업은 유료(약 350엔)지만, 천수각과 밤 벚꽃을 한 프레임에 담을 수 있는 최고의 유료 스팟입니다',
+                    '고부자부네(놀잇배)는 당일 아침 일찍 현장 예약이 마감되는 경우가 많으니 오전 방문을 추천합니다',
+                    '공원 내 스타벅스(조테라스 점) 창가 자리는 벚꽃 나무를 바로 눈앞에서 보며 커피를 즐길 수 있는 숨은 명당입니다'
+                ],
+                cafes: [
+                    { name: "R Baker 오사카성", rank: 1, score: "4.3", desc: "벚꽃 숲속에서 즐기는 베이커리", link: "R Baker 大阪城公園店" },
+                    { name: "Motto Coffee", rank: 2, score: "4.1", desc: "강변 뷰가 아름다운 감성 카페", link: "Motto Coffee 大阪" },
+                    { name: "& Island", rank: 3, score: "4.0", desc: "나카노시마 강변 테라스 카페", link: "and Island 北浜" },
+                    { name: "Brooklyn Roasting", rank: 4, score: "4.2", desc: "인더스트리얼 감성의 로스터리", link: "Brooklyn Roasting Company Kitahama" },
+                    { name: "MOUNT", rank: 5, score: "4.1", desc: "강변 뷰와 함께 즐기는 디저트", link: "MOUNT 北浜" }
+                ],
+                restaurants: [
+                    { name: "토쿠마사", rank: 1, score: "4.2", desc: "전설의 카레우동 본점", link: "得正 空堀店" },
+                    { name: "이즈모 덴마", rank: 2, score: "4.5", desc: "장어 계란말이 덮밥의 성지", link: "いづも 大阪天満" },
+                    { name: "카무쿠라 라멘", rank: 3, score: "4.1", desc: "시원하고 담백한 배추 라멘", link: "どうとんぼ리神座" },
+                    { name: "폰테베키오", rank: 4, score: "4.4", desc: "강변 조망 고급 이탈리안", link: "Ponte Vecchio 北浜" },
+                    { name: "고분카쿠", rank: 5, score: "4.0", desc: "정갈한 일식 코스 전문점", link: "五福閣 大阪" }
+                ]},
+                { id: 'mint', region: '텐마바시', spotName: '조폐국 벚꽃 통로', sub: '희귀 겹벚꽃 140종의 향연', img: 'images/桜の通り抜け.png', vibe: '특별함', crowd: '높음(예약제)', timeline: { start: '4월 초', peak: '4월 중순', end: '4월 하순', progress: 30 }, history: '1년에 단 7일만 개방되는 한정판 벚꽃 명소입니다', station: '덴마바시역', tips: [
+                    '겹벚꽃이 위주라 일반 벚꽃 시즌보다 1~2주 늦게 방문해야 최고의 절경을 볼 수 있습니다',
+                    '온라인 사전 예약(무료) 시스템은 보통 개방 2주 전에 열리니 공식 홈페이지를 수시로 체크하세요',
+                    '일방통행으로만 진행되며 중간에 되돌아갈 수 없으니, 입구(남문) 진입 전 카메라 세팅을 미리 끝내두세요'
+                ],
+                cafes: [
+                    { name: "카페 토키오나", rank: 1, score: "4.3", desc: "빈티지한 감성의 브런치 카페", link: "Cafe Tokiona" },
+                    { name: "코메다 커피", rank: 2, score: "4.0", desc: "일본 정통 스타일의 편안한 카페", link: "コメダ珈琲店 天満橋店" },
+                    { name: "타코 커피", rank: 3, score: "4.2", desc: "로컬들이 사랑하는 핸드드립 전문", link: "Taco Coffee 大阪" },
+                    { name: "오카와 테라스", rank: 4, score: "4.1", desc: "강변을 마주한 탁 트인 야외석", link: "川の駅 はちけんや" },
+                    { name: "스타벅스 텐마", rank: 5, score: "4.0", desc: "강변 산책로 옆 친절한 매장", link: "Starbucks 京阪天満橋店" }
+                ],
+                restaurants: [
+                    { name: "스시 치하루", rank: 1, score: "4.6", desc: "미슐랭 가이드 선정 가성비 스시", link: "鮨 千陽" },
+                    { name: "라멘 린", rank: 2, score: "4.3", desc: "진한 닭육수 베이스의 줄 서는 맛집", link: "らーめん 鱗" },
+                    { name: "후지야", rank: 3, score: "4.5", desc: "창의적인 가이세키 요리의 정수", link: "Fujiya 1935" },
+                    { name: "규카츠 모토무라", rank: 4, score: "4.4", desc: "입에서 녹는 부드러운 규카츠", link: "牛かつもと村 텐마바시" },
+                    { name: "덴마 가든", rank: 5, score: "4.1", desc: "정원 분위기의 세련된 이탈리안", link: "Tenma Garden" }
+                ]
+            },
+                { id: 'kema', region: '사쿠라노미야', spotName: '케마 사쿠라노미야', sub: '4.2km 강변 분홍 산책로', img: 'images/毛馬桜之宮公園.jpg', vibe: '로맨틱', crowd: '높음', timeline: { start: '3월 21일', peak: '3월 28일', end: '4월 4일', progress: 85 }, history: '오카와 강변을 따라 조성된 도심 속 벚꽃 숲입니다.', station: '사쿠라노미야역', tips: [
+                    '오사카 시립 근대미술관 방향으로 갈수록 인파가 적어지며, 조용히 꽃비(벚꽃 눈)를 즐기기 좋습니다',
+                    '수상버스(아쿠아 라이너)를 타면 강 양안을 따라 핀 수천 그루의 벚꽃 터널을 물 위에서 입체적으로 감상할 수 있습니다',
+                    '강변 산책로가 4km 이상으로 매우 길기 때문에 편한 운동화를 착용하는 것이 필수입니다'
+                ],
+                cafes: [
+                    { name: "제국호텔 라운지", rank: 1, score: "4.4", desc: "호텔급 서비스와 화려한 전망", link: "Imperial Hotel Osaka The Park" },
+                    { name: "카페 레이", rank: 2, score: "4.2", desc: "조용한 주택가 속 숨은 로스터리", link: "Cafe Rei 大阪" },
+                    { name: "오자와 커피", rank: 3, score: "4.0", desc: "맛있는 커피와 아침 메뉴를 즐길 수 있는 곳", link: "小沢コーヒー店" },
+                    { name: "unecafe", rank: 4, score: "3.9", desc: "강변 산책 중 들르기 좋은 쉼터", link: "unecafe" },
+                    { name: "Cafebar.8", rank: 5, score: "4.1", desc: "강변에서 즐기는 커피와 디저트", link: "Cafebar.8" }
+                ],
+                restaurants: [
+                    { name: "제국호텔 카망", rank: 1, score: "4.7", desc: "최고급 철판 요리의 명가", link: "Kamon Imperial Hotel" },
+                    { name: "미후쿠엔", rank: 2, score: "4.4", desc: "강변에서 즐기는 야키니쿠", link: "焼肉冷麺 三福園" },
+                    { name: "시게 스시", rank: 3, score: "4.2", desc: "강변 근처 노포지만 신선한 초밥", link: "繁鮨" },
+                    { name: "덴마바시 이자카야", rank: 4, score: "4.0", desc: "현지인들이 즐겨 찾는 꼬치구이", link: "天満橋 居酒屋" },
+                    { name: "비스트로 큐", rank: 5, score: "4.1", desc: "합리적인 가격의 양식 코스", link: "Bistro Q Osaka" }
+                ]
+            },
+                { id: 'expo', region: '반파쿠', spotName: '만박 기념공원', sub: '태양의 탑 아래 펼쳐진 성지', img: 'images/万博記念.jpg', vibe: '활기참', crowd: '높음', timeline: { start: '3월 23일', peak: '3월 30일', end: '4월 6일', progress: 75 }, history: '5,500그루의 벚꽃이 피어나는 광활한 공원입니다', station: '만박기념공원역',  tips: [
+                    '오사카 북부 지역이라 시내보다 기온이 약간 낮아 1~2일 정도 벚꽃이 더 오래 유지되는 편입니다',
+                    '태양의 탑 바로 아래 광장보다는 동쪽 정원(Japanese Garden) 근처 벚꽃길이 사진이 더 화사하게 나옵니다',
+                    '공원 규모가 워낙 방대하므로 피크닉 매트와 간단한 간식을 미리 챙겨가면 여유로운 하나미(꽃구경)가 가능합니다'
+                ],
+                cafes: [
+                    { name: "에라라", rank: 1, score: "4.2", desc: "공원 내 숲속의 고요한 티하우스", link: "Elala Osaka" },
+                    { name: "노스 가든 카페", rank: 2, score: "4.0", desc: "정원을 감상하는 통유리 카페", link: "North Garden Cafe" },
+                    { name: "스타벅스 엑스포", rank: 3, score: "4.1", desc: "쇼핑몰 내 넓고 쾌적한 매장", link: "Starbucks Expo City" },
+                    { name: "Eggs 'n Things", rank: 4, score: "4.3", desc: "하와이안 감성의 팬케이크 맛집", link: "Eggs 'n Things Expo City" },
+                    { name: "카페 반파쿠", rank: 5, score: "3.9", desc: "박람회 기념품과 즐기는 커피", link: "Bampaku Shokudo" }
+                ],
+                restaurants: [
+                    { name: "만박 식당", rank: 1, score: "4.1", desc: "70년대 박람회 향수를 담은 메뉴", link: "Bampaku Shokudo" },
+                    { name: "오사카 휠 레스토랑", rank: 2, score: "4.0", desc: "관람차 뷰를 감상하는 이탈리안", link: "Osaka Wheel Restaurant" },
+                    { name: "쿠시카츠 다루마", rank: 3, score: "4.2", desc: "쇼핑몰에서 즐기는 유명 튀김", link: "串かつだるま 엑스포시티" },
+                    { name: "츠지 요리학교", rank: 4, score: "4.5", desc: "요리 명문의 정갈한 실습 식당", link: "Tsuji Cooking School Restaurant" },
+                    { name: "엑스포 그릴", rank: 5, score: "4.1", desc: "육즙 가득한 수제 스테이크", link: "Expo Garden Grill" }
+                ]
+            }
+            ],
+            famous: [
+                { id: 'shitennoji', region: '텐노지', spotName: '시텐노지', sub: '고찰의 고요함과 벚꽃', icon: 'fa-vihara', img: 'images/sitennoji.png',tips: [
+                    '일본에서 가장 오래된 사찰의 고요함 속에서 즐기는 벚꽃은 인파에 지친 여행자에게 최고의 힐링을 선사합니다',
+                    '본존 내부의 극락정원은 유료(약 300엔)지만, 연못과 어우러진 수양벚꽃을 찍을 수 있는 최고의 포토 스팟입니다',
+                    '사찰 근처의 유명한 모나카 노포를 들러 간식을 사서 경내 벤치에서 즐겨보세요'
+                ],
+                cafes: [
+                    { name: "카페 스완", rank: 1, score: "4.0", desc: "정통 쇼와 스타일 깃사텐", link: "喫茶 スワン 阿倍野" },
+                    { name: "YARD Coffee", rank: 2, score: "4.4", desc: "스페셜티 커피와 수제 초콜릿", link: "YARD Coffee" },
+                    { name: "모노로그", rank: 3, score: "4.2", desc: "고요한 분위기의 세련된 카페", link: "Monolog 天王寺" },
+                    { name: "스타벅스 아베노", rank: 4, score: "4.1", desc: "가장 높은 빌딩 내 통창 매장", link: "Starbucks Abeno" },
+                    { name: "카페 하루카스", rank: 5, score: "4.0", desc: "전망대에서 즐기는 구름 커피", link: "Abeno Harukas Cafe" }
+                ],
+                restaurants: [
+                    { name: "동양정", rank: 1, score: "4.3", desc: "전통의 함박 스테이크 명가", link: "グ릴キャピ탈東洋亭" },
+                    { name: "야오젠 우동", rank: 2, score: "4.0", desc: "현지인 추천 가성비 우동집", link: "八百善" },
+                    { name: "아베노 스시", rank: 3, score: "4.4", desc: "백화점 내 고품격 스시 다이닝", link: "Abeno Harukas Sushi" },
+                    { name: "덴노지 소바", rank: 4, score: "4.1", desc: "담백한 육수의 자가제면 소바", link: "Tennoji Soba" },
+                    { name: "시텐노지 함바그", rank: 5, score: "4.2", desc: "육즙 가득한 수제 함바그", link: "Tennoji Hamburg" }
+                ]
+            },
+                { id: 'tsutenkaku', region: '신세카이', spotName: '텐노지 공원', sub: '쓰텐카쿠 뷰 피크닉', icon: 'fa-tower-observation', img: 'images/天王寺公園.jpg', tips: [
+                    '잔디 광장인 텐시바에 돗자리를 펴고 앉으면, 현대적인 아베노 하루카스 빌딩과 벚꽃을 한눈에 담을 수 있습니다',
+                    '공원 내 동물원 쪽 담벼락을 따라 핀 벚꽃길이 가장 화사하며, 신세카이의 쓰텐카쿠 타워를 배경으로 기념사진을 남기기 좋습니다',
+                    '공원 입구의 카페 테라스석을 이용하면 피크닉 장비 없이도 벚꽃 놀이 분위기를 낼 수 있습니다'
+                ],
+                cafes: [
+                    { name: "카나리야", rank: 1, score: "4.1", desc: "압도적 크기의 인생 파르페", link: "カナリヤ 鶴橋" },
+                    { name: "텐시바 가든", rank: 2, score: "3.9", desc: "잔디밭 테라스 피크닉 카페", link: "Tenshiba" },
+                    { name: "카페 드 루나", rank: 3, score: "4.0", desc: "신세카이 감성의 레트로 카페", link: "Cafe de Luna" },
+                    { name: "아즈마 깃사텐", rank: 4, score: "4.1", desc: "오래된 구가옥 형태의 찻집", link: "Azuma Shinsekai" },
+                    { name: "커피 스탠드 S", rank: 5, score: "4.2", desc: "테이크아웃 전문 고품질 커피", link: "Shinsekai Coffee" }
+                ],
+                restaurants: [
+                    { name: "쿠시카츠 다루마", rank: 1, score: "4.1", desc: "오사카 쿠시카츠의 원조", link: "串かつだるま 新世界" },
+                    { name: "와나카 타코야키", rank: 2, score: "4.3", desc: "겉바속촉 정통 타코야키", link: "たこ焼道楽 わなか" },
+                    { name: "미즈노", rank: 3, score: "4.2", desc: "미슐랭 가이드 단골 맛집", link: "お好み焼 美津の" },
+                    { name: "신세카이 야키소바", rank: 4, score: "4.0", desc: "철판에서 구워주는 로컬 국수", link: "Shinsekai Yakisoba" },
+                    { name: "텐노지 이자카야", rank: 5, score: "4.1", desc: "신선한 해산물과 사케", link: "Shinsekai Izakaya" }
+                ]
+            },
+                { id: 'kishiwada', region: '기시와다', spotName: '기시와다성', sub: '성곽 해자의 벚꽃 반영', icon: 'fa-fort-awesome', img: 'https://images.unsplash.com/photo-1619639522705-d416aabbc3d8?q=80&w=2148&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', tips: [
+                    '성곽을 둘러싼 해자 주변으로 벚꽃 나무가 낮게 드리워져 있어, 물에 비친 반영 샷을 찍기에 최적의 장소입니다',
+                    '간사이 공항과 오사카 시내 사이에 위치해 있어, 여행 첫날이나 마지막 날 일정으로 넣기 매우 편리합니다',
+                    '밤이 되면 해자 주변에 제등(초롱불)이 켜지며 에도 시대 성곽의 운치 있는 야경이 펼쳐집니다'
+                ],
+                cafes: [
+                    { name: "성 정원 카페", rank: 1, score: "4.2", desc: "성곽을 바라보며 마시는 차", link: "岸和田城 庭園" },
+                    { name: "카페 드 샹송", rank: 2, score: "4.0", desc: "우아한 유럽풍 인테리어 카페", link: "Cafe de Chanson" },
+                    { name: "타마야 디저트", rank: 3, score: "4.3", desc: "현지 유명 수제 푸딩 샵", link: "Tamaya Kishiwada" },
+                    { name: "스타벅스 기시와다", rank: 4, score: "4.1", desc: "드라이브 스루가 가능한 대형 매장", link: "Starbucks Kishiwada" },
+                    { name: "레트로 카페 유", rank: 5, score: "3.9", desc: "정겨운 동네 아담한 카페", link: "Cafe Yu Kishiwada" }
+                ],
+                restaurants: [
+                    { name: "기시와다 카니", rank: 1, score: "4.4", desc: "신선한 대게 요리 전문점", link: "Kani Doraku Kishiwada" },
+                    { name: "성곽 앞 소바", rank: 2, score: "4.1", desc: "메밀 향 가득한 정통 소바", link: "Kishiwada Soba" },
+                    { name: "항구 횟집", rank: 3, score: "4.5", desc: "매일 아침 공수하는 신선한 회", link: "Kishiwada Fish Market" },
+                    { name: "텟판 오코노미", rank: 4, score: "4.2", desc: "기시와다식 두툼한 철판구이", link: "Kishiwada Okonomiyaki" },
+                    { name: "정식당 이즈미", rank: 5, score: "4.0", desc: "가정식 백반의 따뜻한 맛", link: "Izumi Kishiwada" }
+                ]
+            },
+                { id: 'nagai', region: '나가이', spotName: '나가이 공원', sub: '지역민이 사랑하는 벚꽃길', icon: 'fa-leaf', img: 'images/長居公園.jpg', tips: [
+                    '관광객보다는 현지인이 주로 찾는 곳이라, 오사카 시내 명소들에 비해 훨씬 여유로운 꽃구경이 가능합니다',
+                    '공원 내 보타니컬 가든(식물원) 섹션에 가면 벚꽃 외에도 다양한 봄꽃들을 입체적으로 감상할 수 있습니다',
+                    '인근에 대형 마트와 로컬 빵집이 많아 저렴하게 피크닉 음식을 준비하기 매우 좋습니다'
+                ],
+                cafes: [
+                    { name: "보타니컬 카페", rank: 1, score: "4.1", desc: "꽃들에 둘러싸인 야외 테이블", link: "Nagai Botanical Garden" },
+                    { name: "카페 원", rank: 2, score: "4.3", desc: "직접 구운 스콘이 맛있는 곳", link: "Cafe One Nagai" },
+                    { name: "나가이 베이커리", rank: 3, score: "4.4", desc: "현지인 줄 서는 빵 맛집", link: "Nagai Bakery" },
+                    { name: "로스터리 쉼", rank: 4, score: "4.2", desc: "깊은 풍미의 스페셜티 커피", link: "Nagai Coffee" },
+                    { name: "그린 티 하우스", rank: 5, score: "4.0", desc: "말차와 전통 다과 세트", link: "Nagai Tea" }
+                ],
+                restaurants: [
+                    { name: "나가이 이탈리안", rank: 1, score: "4.3", desc: "화덕에서 구운 나폴리 피자", link: "Nagai Pizza" },
+                    { name: "공원 앞 수제버거", rank: 2, score: "4.5", desc: "육즙 가득한 프리미엄 버거", link: "Nagai Burger" },
+                    { name: "라멘 거리 맛집", rank: 3, score: "4.2", desc: "나가이 역 근처의 진한 라멘", link: "Nagai Ramen" },
+                    { name: "정갈한 일식당", rank: 4, score: "4.1", desc: "매일 바뀌는 오마카세 정식", link: "Nagai Japanese food" },
+                    { name: "로컬 돈카츠", rank: 5, score: "4.4", desc: "두툼한 제주 흑돼지 스타일", link: "Nagai Tonkatsu" }
+                ]}
+            ],
+            suburbs: [
+                { id: 'nara', region: '나라', spotName: '나라 공원', sub: '사슴과 함께 즐기는 벚꽃', img: 'https://images.unsplash.com/photo-1578507080088-e843868f8f13?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', transport: '전철 45분', tips: [
+                    '사슴 센베를 구입한 후 카메라를 미리 준비하세요. 벚꽃 나무 아래에서 사슴과 눈이 마주치는 순간이 최고의 인생샷 타이밍입니다',
+                    '공원 내 우키미도 정자는 연못 위에 떠 있는 듯한 모습과 주변 벚꽃이 어우러져 나라에서 가장 우아한 풍경을 자랑합니다',
+                    '인근 도다이사의 거대 불상을 관람한 후, 가스카 타이샤로 이어지는 숲길을 따라 걷는 코스를 추천합니다'
+                ],
+                cafes: [
+                    { name: "공원 내 티하우스", rank: 1, score: "4.3", desc: "숲속에서 즐기는 말차 한 잔", link: "Nara Park Tea" },
+                    { name: "사슴 카페", rank: 2, score: "4.2", desc: "귀여운 사슴 모양 디저트", link: "Nara Deer Cafe" },
+                    { name: "수제 빙수 맛집", rank: 3, score: "4.6", desc: "나라 특산 수제 빙수의 정수", link: "Nara Shaved Ice" },
+                    { name: "스타벅스 나라", rank: 4, score: "4.1", desc: "전통 가옥 형태의 랜드마크", link: "Starbucks Nara Park" },
+                    { name: "카페 코토", rank: 5, score: "4.0", desc: "나라 시내가 내려다보이는 뷰", link: "Cafe Koto Nara" }
+                ],
+                restaurants: [
+                    { name: "시즈카 솥밥", rank: 1, score: "4.2", desc: "나라 대표 줄 서는 전통 솥밥", link: "志津香 公園店" },
+                    { name: "나라 전통 면", rank: 2, score: "4.1", desc: "슴슴하고 깊은 맛의 온소바", link: "Nara Noodle" },
+                    { name: "도다이사 정식집", rank: 3, score: "4.0", desc: "정갈한 일본식 시골 밥상", link: "Todaiji food" },
+                    { name: "나라 규 전문점", rank: 4, score: "4.5", desc: "입에서 녹는 나라 소고기", link: "Nara Beef" },
+                    { name: "로컬 오코노미", rank: 5, score: "4.2", desc: "나라식 깔끔한 철판 요리", link: "Nara Okonomiyaki" }
+                ]
+            },
+                { id: 'shukugawa', region: '고베 사쿠라슈쿠가와', spotName: '슈쿠가와 공원', sub: '강을 가로지르는 벚꽃 향연', img: 'images/DSC_0843.jpg', transport: '전철 30분', tips: [
+                    '한큐 슈쿠가와역에서 내리자마자 강변을 따라 펼쳐지는 2.3km의 벚꽃 터널은 간사이 최고의 산책 코스입니다',
+                    '강 중간중간 놓인 징검다리 위에서 강물에 비친 벚꽃을 배경으로 찍는 사진이 가장 인기가 많습니다',
+                    '인근의 "고베 미카게" 지역은 유명한 디저트 카페가 많으니, 산책 후 조각 케이크를 곁들인 티타임을 추천합니다'
+                ],
+                cafes: [
+                    { name: "요카시야", rank: 1, score: "4.5", desc: "조용한 주택가 수제 디저트", link: "菓子工房 夙川" },
+                    { name: "카페 라 아부리", rank: 2, score: "4.0", desc: "평화로운 분위기의 정원 카페", link: "La Avril 夙川" },
+                    { name: "슈쿠가와 로컬", rank: 3, score: "4.2", desc: "아담하고 정겨운 동네 카페", link: "Shukugawa Cafe" },
+                    { name: "미카게 커피", rank: 4, score: "4.3", desc: "커피 애호가들의 성지", link: "Mikage Coffee" },
+                    { name: "티룸 앨리스", rank: 5, score: "4.1", desc: "영국식 애프터눈 티 세트", link: "Shukugawa Tea" }
+                ],
+                restaurants: [
+                    { name: "미츠보시 소바", rank: 1, score: "4.2", desc: "정취와 어울리는 수제 소바", link: "蕎麦 三ツ矢 夙川" },
+                    { name: "타카미 야키니쿠", rank: 2, score: "4.3", desc: "입에서 녹는 고베규 전문", link: "神戶 貴み" },
+                    { name: "슈쿠가와 파스타", rank: 3, score: "4.1", desc: "신선한 재료의 이탈리안", link: "Shukugawa Pasta" },
+                    { name: "추천 스시야", rank: 4, score: "4.4", desc: "현지인이 아끼는 작은 스시집", link: "Shukugawa Sushi" },
+                    { name: "스테이크 하우스", rank: 5, score: "4.5", desc: "철판에서 굽는 고베 스테이크", link: "Kobe Steak House" }
+                ]
+            },
+                { id: 'nunobiki', region: '고베 누노비키', spotName: '누노비키 허브원', sub: '고베항 뷰와 즐기는 벚꽃', img: 'images/神戸布引ハーブ園.jpg', transport: '로프웨이 10분', tips: [
+                    '로프웨이를 타고 올라가며 내려다보는 고베 시내 전경과 벚꽃의 조화는 이곳에서만 볼 수 있는 장관입니다',
+                    '벚꽃 시즌 한정으로 운영되는 야간 영업 시간을 확인하여 고베의 100만 불짜리 야경과 밤 벚꽃을 동시에 즐기세요',
+                    '허브원 내 테라스 카페에서 판매하는 "허브 소프트 아이스크림"은 산행의 피로를 녹여주는 필수 코스입니다'
+                ],
+                cafes: [
+                    { name: "프로인들립", rank: 1, score: "4.3", desc: "옛 교회를 개조한 웅장한 공간", link: "フロインドリーブ" },
+                    { name: "스타벅스 기타노", rank: 2, score: "4.2", desc: "유서 깊은 서양식 건물 매장", link: "Starbucks Kitano" },
+                    { name: "허브원 베란다", rank: 3, score: "4.1", desc: "산 정상에서 즐기는 허브티", link: "ザ・ヴェランダ" },
+                    { name: "기타노 감성 카페", rank: 4, score: "4.4", desc: "아기자기한 소품 가득한 곳", link: "Kitano Cafe" },
+                    { name: "고베 로스터리", rank: 5, score: "4.2", desc: "직접 볶은 원두의 진한 맛", link: "Kobe Roast" }
+                ],
+                restaurants: [
+                    { name: "스테이크랜드", rank: 1, score: "4.1", desc: "가장 유명한 고베규 맛집", link: "ステーキランド" },
+                    { name: "기타노 규 하우스", rank: 2, score: "4.3", desc: "프라이빗한 철판 스테이크", link: "Kitano Beef House" },
+                    { name: "고베 로컬 야키", rank: 3, score: "4.2", desc: "로컬들이 찾는 야키니쿠 명소", link: "Kobe Roast Meat" },
+                    { name: "기타노 양식당", rank: 4, score: "4.0", desc: "일본식 경양식의 정수", link: "Kitano Western food" },
+                    { name: "항구 뷰 식당", rank: 5, score: "4.4", desc: "고베 야경을 담은 다이닝", link: "Kobe Port View" }
+                ]
+            },
+                { id: 'himeji', region: '히메지', spotName: '히메지성', sub: '백로의 성과 분홍빛 대조', img: 'https://images.unsplash.com/photo-1708656376421-8db46939bcfe?q=80&w=1289&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', transport: '전철 1시간', tips: [
+                    '일본 3대 성 중 하나로, 하얀 성벽과 연분홍 벚꽃의 대비가 강렬하여 백로의 성이라는 별명을 몸소 체험할 수 있습니다',
+                    '성 내부 관람도 좋지만, 성을 둘러싼 해자 밖 산노마루 광장에서 성 전체를 배경으로 찍는 사진이 가장 화사하게 나옵니다',
+                    '신오사카역에서 산요 신칸센을 이용하면 30분 만에 도착하므로, 이동 시간을 아끼려면 신칸센 이용을 강력 추천합니다'
+                ],
+                cafes: [
+                    { name: "히메지 조망 카페", rank: 1, score: "4.2", desc: "성 전체를 조망하는 테라스", link: "Himeji Castle View" },
+                    { name: "카페 드 무슈", rank: 2, score: "4.3", desc: "히메지 명물 아몬드 토스트", link: "Cafe de Muche" },
+                    { name: "로컬 전통 찻집", rank: 3, score: "4.1", desc: "일본 전통의 맛과 멋", link: "Himeji Tea House" },
+                    { name: "성곽 인근 빵집", rank: 4, score: "4.4", desc: "갓 구운 벚꽃 앙금빵", link: "Himeji Bakery" },
+                    { name: "스타벅스 히메지", rank: 5, score: "4.0", desc: "히메지 역 앞 편리한 매장", link: "Starbucks Himeji" }
+                ],
+                restaurants: [
+                    { name: "야마요시", rank: 1, score: "4.4", desc: "히메지 성 관람 후 필수 장어", link: "やま義 姫路" },
+                    { name: "장어 덮밥 전문", rank: 2, score: "4.2", desc: "부드럽고 고소한 아나고", link: "Himeji Anago" },
+                    { name: "히메지 오뎅", rank: 3, score: "4.1", desc: "생강 간장에 찍어 먹는 별미", link: "Himeji Oden" },
+                    { name: "수제 우동집", rank: 4, score: "4.0", desc: "쫄깃한 면발의 로컬 우동", link: "Himeji Udon" },
+                    { name: "히메지 규 스테이크", rank: 5, score: "4.5", desc: "로컬 소고기의 진한 풍미", link: "Himeji Beef" }
+                ]
+            }
+            ],
+            // data 객체 마지막 부분에 추가
+            entertainment: [
+               {
+                    title: "초속 5센티미터",
+                    sub: "신카이 마코토 | 애니메이션",
+                    desc: "벚꽃 잎이 떨어지는 속도, 첫사랑의 거리감",
+                    img: "images/5byo_1.jpg",
+                    link: "https://search.naver.com/search.naver?query=영화+초속5센티미터",
+                    tag: "Classic",
+                    ott: ["웨이브"]
+                },
+                {
+                    title: "너의 췌장을 먹고 싶어",
+                    sub: "츠키카와 쇼 | 영화/애니",
+                    desc: "벚꽃처럼 찬란하고 짧았던 두 사람의 기록",
+                    img: "images/kimino_1.jpg",
+                    link: "https://search.naver.com/search.naver?query=영화+너의췌장을먹고싶어",
+                    tag: "Must-Watch",
+                    ott: ["넷플릭스", "왓챠"]
+                },
+                {
+                    title: "4월은 너의 거짓말",
+                    sub: "이시구로 쿄헤이 | 애니메이션",
+                    desc: "모노톤이었던 세상이 컬러로 변하기 시작한 봄",
+                    img: "images/4gatu_1.jpg",
+                    link: "https://search.naver.com/search.naver?query=애니+4월은너의거짓말",
+                    tag: "Masterpiece",
+                    ott: ["티빙", "웨이브", "왓챠"]
+                },
+                {
+                    title: "언어의 정원",
+                    sub: "신카이 마코토 | 애니메이션",
+                    desc: "비 오는 정원과 벚꽃, 신카이 마코토 특유의 서정적 영상미",
+                    img: "images/kotoba_2.jpg",
+                    link: "https://search.naver.com/search.naver?query=영화+언어의정원",
+                    tag: "Visual Art",
+                    ott: ["넷플릭스", "티빙"]
+                },
+                {
+                    title: "바닷마을 다이어리",
+                    sub: "고레에다 히로카즈 | 영화",
+                    desc: "가마쿠라의 평온한 풍경과 눈부신 벚꽃 터널",
+                    img: "images/diary_1.jpg",
+                    link: "https://search.naver.com/search.naver?query=영화+바닷마을다이어리",
+                    tag: "Healing",
+                    ott: ["넷플릭스", "디즈니+"]
+                }
+            ],
+            travelBooking: [
+                {
+                    id: 'flights',
+                    name: '오사카 특가 항공권 검색',
+                    desc: '간사이 공항 실시간 최저가 비교',
+                    icon: 'fa-plane-up',
+                    color: 'from-sky-400 to-blue-600',
+                    link: 'https://flight.naver.com/flights/international/SEL-KIX-20260320?adult=1&isDirect=true' 
+                },
+                {
+                    id: 'hotels',
+                    name: '명소 근처 인기 호텔',
+                    desc: '오사카성/난바 인근 숙소 찾기',
+                    icon: 'fa-hotel',
+                    color: 'from-indigo-500 to-purple-600',
+                    link: 'https://3ha.in/r/372593'
+                },
+                {
+                    id: 'osaka-review',
+                    name: '에디터의 오사카 호텔 실박 후기',
+                    desc: '직접 묵어보고 검증한 추천 숙소',
+                    icon: 'fa-pen-to-square',
+                    color: 'from-amber-400 to-orange-500',
+                    link: 'https://blog.naver.com/kuki0204'
+                }
+            ]
+        };
+
+        let map, mySchedule = JSON.parse(localStorage.getItem('osaka_schedule')) || [];
+
+        function initApp() {
+            renderBestSpots(); renderFamousSpots(); renderSuburbSpots();
+            renderEntertainment(); renderBookingButtons();
+            setupHorizontalScroll(); createPetals(); startCountdown(); fetchWeather();
+            setupEvents(); setupMapResetFeature(); setActiveNav('nav-home');
+        }
+
+        // Search Map Shared Function
+        function searchMap(keyword) {
+            if (!keyword) return;
+            const finalKeyword = keyword.includes('오사카') ? keyword : `오사카 ${keyword}`;
+            window.open(`https://www.google.com/maps/search/$?q=${encodeURIComponent(finalKeyword)}`, '_blank');
+        }
+
+        function openDirectLink(event, keyword) {
+            if (event) event.stopPropagation();
+            if (!keyword) return;
+            window.open(`https://www.google.com/maps/search/$?q=${encodeURIComponent(keyword)}`, '_blank');
+        }
+
+        function setupHorizontalScroll() {
+            ['bestSpotsContainer', 'famousSpotsContainer', 'suburbSpotsContainer', 'entertainmentContainer'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.addEventListener('wheel', (e) => { if (e.deltaY !== 0) { e.preventDefault(); el.scrollLeft += e.deltaY; } }, { passive: false });
+            });
+        }
+
+        function renderBestSpots() {
+            document.getElementById('bestSpotsContainer').innerHTML = data.best.map(spot => `
+                <div onclick="openDetail('${spot.id}')" class="flex-shrink-0 w-[75vw] md:w-[400px] relative rounded-[2.5rem] overflow-hidden group cursor-pointer snap-center shadow-xl bg-gray-100">
+                    <img src="${spot.img}" class="w-full aspect-[3/4] object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                    <div class="absolute inset-x-0 bottom-0 p-8 text-left">
+                        <span class="inline-block px-2.5 py-1 rounded-lg bg-primary text-[9px] font-black text-white mb-3 uppercase tracking-tighter">${spot.spotName}</span>
+                        <h4 class="text-white text-3xl font-black mb-1">${spot.region}</h4>
+                        <p class="text-white/70 text-[11px] font-bold line-clamp-1">${spot.sub}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderFamousSpots() {
+            document.getElementById('famousSpotsContainer').innerHTML = data.famous.map(spot => `
+                <div onclick="openDetail('${spot.id}')" class="flex-shrink-0 w-[72vw] md:w-[280px] bg-white dark:bg-white/5 p-7 rounded-[2.5rem] border border-white/60 dark:border-white/10 active:scale-95 transition-all cursor-pointer shadow-sm snap-center text-left">
+                    <div class="size-12 rounded-2xl bg-primary/5 flex items-center justify-center text-primary mb-6"><i class="fa-solid ${spot.icon || 'fa-location-dot'} text-xl"></i></div>
+                    <h4 class="font-black text-xl mb-1">${spot.region}</h4>
+                    <p class="text-[11px] text-gray-400 font-bold line-clamp-2">${spot.sub || '현지 인기 명소'}</p>
+                </div>
+            `).join('');
+        }
+
+        function renderSuburbSpots() {
+            document.getElementById('suburbSpotsContainer').innerHTML = data.suburbs.map(spot => `
+                <div onclick="openDetail('${spot.id}')" class="flex-shrink-0 w-[80vw] md:w-[380px] bg-white dark:bg-white/5 p-6 rounded-[2.8rem] border border-white/60 dark:border-white/10 active:scale-95 transition-all cursor-pointer shadow-sm snap-center text-left">
+                    <img src="${spot.img}" class="h-48 w-full rounded-[2.2rem] object-cover mb-6">
+                    <h4 class="font-black text-2xl mb-2">${spot.region}</h4>
+                    <p class="text-[11px] text-gray-400 font-bold mb-4 line-clamp-1">${spot.sub}</p>
+                    <span class="inline-flex items-center gap-2 px-4 py-1.5 bg-background-light dark:bg-white/10 rounded-full text-[9px] font-black text-primary uppercase"><i class="fa-solid fa-train"></i> ${spot.transport}</span>
+                </div>
+            `).join('');
+        }
+
+        function renderEntertainment() {
+            document.getElementById('entertainmentContainer').innerHTML = data.entertainment.map(item => `
+                <div onclick="window.open('${item.link}', '_blank')" class="flex-shrink-0 w-[80vw] md:w-[380px] bg-white dark:bg-white/5 p-6 rounded-[2.8rem] border border-white/60 dark:border-white/10 shadow-sm snap-center cursor-pointer active:scale-[0.98] transition-all">
+                    <div class="h-48 w-full rounded-[2.2rem] overflow-hidden mb-5 relative">
+                        <img src="${item.img}" class="w-full h-full object-cover">
+                        <div class="absolute top-4 left-4"><span class="px-2.5 py-1 bg-white/90 rounded-lg text-[8px] font-black text-primary uppercase shadow-sm">${item.tag}</span></div>
+                    </div>
+                    <div class="px-1 flex-1 flex flex-col text-left">
+                        <p class="text-[9px] font-black text-primary uppercase mb-1 tracking-tighter">${item.sub}</p>
+                        <h4 class="text-xl font-black mb-2 dark:text-white">${item.title}</h4>
+                        <p class="text-[11px] text-gray-400 font-bold leading-snug line-clamp-2 mb-5">${item.desc}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderBookingButtons() {
+            const container = document.getElementById('bookingContainer');
+            container.innerHTML = data.travelBooking.map(item => `
+                <div onclick="window.open('${item.link}', '_blank')" class="relative group cursor-pointer active:scale-[0.98] transition-all">
+                    <div class="flex items-center gap-5 p-6 bg-white dark:bg-white/5 rounded-[2.5rem] border border-gray-100 dark:border-white/10 shadow-sm overflow-hidden text-left">
+                        <div class="size-14 bg-gradient-to-br ${item.color} rounded-3xl flex items-center justify-center text-white text-2xl shadow-inner shrink-0">
+                            <i class="fa-solid ${item.icon}"></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center gap-2">
+                                <h4 class="font-black text-[17px] dark:text-white truncate">${item.name}</h4>
+                                <span class="text-[8px] bg-gray-100 dark:bg-white/10 text-gray-400 px-1.5 py-0.5 rounded font-bold uppercase tracking-tighter shrink-0">Recommend</span>
+                            </div>
+                            <p class="text-[11px] text-gray-400 font-medium mt-0.5 truncate">${item.desc}</p>
+                        </div>
+                        <div class="size-8 rounded-full bg-gray-50 dark:bg-white/5 flex items-center justify-center text-gray-300 group-hover:text-primary transition-all shrink-0">
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // 핵심: 랭킹 렌더링 함수
+        const renderRanking = (title, items, icon, colorClass) => {
+            if (!items || items.length === 0) return '';
+            return `
+                <div class="mb-14 px-8">
+                    <h3 class="text-sm font-black mb-6 flex items-center gap-2">
+                        <i class="fa-solid ${icon} text-primary"></i> ${title}
+                    </h3>
+                    <div class="space-y-4">
+                        ${items.map(item => `
+                            <div class="flex items-center justify-between p-5 bg-gray-50 dark:bg-white/5 rounded-3xl border border-gray-100 group transition-all">
+                                <div onclick="openDirectLink(event, '${item.link}')" class="flex items-center gap-4 cursor-pointer flex-1 min-w-0 active:scale-[0.97] transition-transform">
+                                    <div class="rank-badge rank-${item.rank <= 3 ? item.rank : 'other'} shrink-0">${item.rank}</div>
+                                    <div class="text-left min-w-0">
+                                        <p class="text-[13px] font-black leading-tight group-hover:text-primary truncate">
+                                            ${item.name} <i class="fa-solid fa-magnifying-glass-location text-[9px] ml-1 opacity-30"></i>
+                                        </p>
+                                        <p class="text-[10px] text-gray-400 mt-1 truncate">${item.desc || ''}</p>
+                                    </div>
+                                </div>
+                                <div onclick="openDirectLink(event, '${item.link}')" class="text-right flex items-center gap-3 shrink-0 ml-4 cursor-pointer hover:bg-white dark:hover:bg-white/10 p-2 rounded-2xl active:scale-90 transition-all">
+                                    <div class="flex flex-col items-end">
+                                        <p class="text-[11px] font-black ${colorClass}"><i class="fa-solid fa-star text-[9px]"></i> ${item.score || '0.0'}</p>
+                                        <span class="text-[8px] text-gray-400 font-bold uppercase mt-0.5 tracking-tighter">Google Maps</span>
+                                    </div>
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-gray-300 group-hover:text-primary"></i>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        };
+        function removeFromSchedule(id) {
+            if(confirm('이 명소를 일정에서 삭제할까요?')) {
+                mySchedule = mySchedule.filter(item => item.id !== id);
+                localStorage.setItem('sakura_master_schedule', JSON.stringify(mySchedule));
+                openMySchedule(); // UI 즉시 갱신
+                console.log("일정이 삭제되었습니다.");
+            }
+        }
+        function openDetail(id) {
+            const spot = [...data.best, ...data.famous, ...data.suburbs].find(s => s.id === id);
+            if (!spot) return;
+            const overlay = document.getElementById('detailOverlay');
+            
+            overlay.innerHTML = `
+                <div class="shrink-0 h-16 px-6 flex justify-between items-center bg-white dark:bg-background-dark sticky top-0 z-[120] border-b border-gray-100 dark:border-white/5">
+                    <button onclick="closeDetail()" class="p-2 active:scale-75 transition-transform"><i class="fa-solid fa-chevron-left text-xl"></i></button>
+                    <h2 class="font-black text-lg">${spot.spotName}</h2>
+                    <button onclick="addToSchedule('${spot.id}')" class="p-2 text-primary active:scale-75 transition-transform"><i class="fa-solid fa-heart"></i></button>
+                </div>
+                <div class="flex-1 overflow-y-auto hide-scrollbar pb-32">
+                    <div class="relative w-full aspect-video md:aspect-[21/9]"><img src="${spot.img}" class="w-full h-full object-cover"></div>
+                    <div class="pt-10 px-0 text-left">
+                        <div class="px-8"><h2 class="text-4xl font-black mb-4 tracking-tighter">${spot.spotName}</h2></div>
+                        
+                        <div class="px-8 mb-12">
+                            <div class="p-6 bg-gray-50 dark:bg-white/5 rounded-3xl border border-gray-100 dark:border-white/5">
+                                <h3 class="flex items-center gap-2 text-sm font-black mb-10"><i class="fa-solid fa-calendar-check text-primary"></i> 벚꽃 타임라인</h3>
+                                <div class="timeline-bar mb-10 relative">
+                                    <div class="timeline-progress" style="width: ${spot.timeline?.progress || 50}%"></div>
+                                    <div class="timeline-dot" style="left: ${spot.timeline?.progress || 50}%"></div>
+                                    
+                                    <div class="absolute -bottom-10 left-0 text-center">
+                                        <p class="text-[8px] font-bold text-gray-400 uppercase">개화</p>
+                                        <p class="text-[10px] font-black">${spot.timeline?.start || '3.22'}</p>
+                                    </div>
+                                    <div class="absolute -bottom-10 left-1/2 -translate-x-1/2 text-center">
+                                        <p class="text-[8px] font-bold text-primary uppercase">만개</p>
+                                        <p class="text-[10px] font-black text-primary">${spot.timeline?.peak || '3.29'}</p>
+                                    </div>
+                                    <div class="absolute -bottom-10 right-0 text-center">
+                                        <p class="text-[8px] font-bold text-gray-400 uppercase">낙화</p>
+                                        <p class="text-[10px] font-black">${spot.timeline?.end || '4.05'}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="px-8 mb-10">
+                            <h3 class="text-sm font-black mb-4 border-l-4 border-primary pl-3">전문가 팁</h3>
+                            <ul class="space-y-4">
+                                ${(spot.tips || []).map(tip => `<li class="flex gap-4 text-[13px] font-bold text-gray-700 dark:text-gray-300">● <span class="leading-relaxed">${tip}</span></li>`).join('')}
+                            </ul>
+                        </div>
+
+                        ${renderRanking('인기 카페 TOP 5', spot.cafes, 'fa-coffee', 'text-primary')}
+                        ${renderRanking('미식 가이드 TOP 5', spot.restaurants, 'fa-utensils', 'text-amber-500')}
+
+                        <div class="px-8 flex items-center gap-3 mt-12 mb-10">
+                            <button onclick="window.open('https://www.google.com/maps/search/${encodeURIComponent(spot.spotName)}', '_blank')" 
+                                    class="flex-1 h-16 rounded-[2rem] bg-gray-100 dark:bg-white/10 text-gray-900 dark:text-white font-black text-sm active:scale-95 transition-all flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-route"></i> 길찾기
+                            </button>
+                            <button onclick="addToSchedule('${spot.id}')" 
+                                    class="flex-[1.5] h-16 rounded-[2rem] bg-primary text-white font-black text-sm shadow-xl shadow-primary/30 active:scale-95 transition-all">
+                                내 일정에 추가
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            overlay.classList.remove('hidden'); setTimeout(() => overlay.classList.remove('translate-x-full'), 10);
+        }
+
+        function closeDetail() { const overlay = document.getElementById('detailOverlay'); overlay.classList.add('translate-x-full'); setTimeout(() => overlay.classList.add('hidden'), 400); }
+        
+        function renderMapMarkers() {
+            if (map) return;
+            map = L.map('mapCanvas', { zoomControl: false, attributionControl: false }).setView([34.6937, 135.5023], 11);
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png').addTo(map);
+            const mapPositions = { 'osaka-castle': [34.6873, 135.5262], 'mint': [34.6948, 135.5186], 'kema': [34.7042, 135.5230], 'expo': [34.8062, 135.5312], 'nara': [34.6851, 135.8430], 'shukugawa': [34.7397, 135.3315], 'nunobiki': [34.7093, 135.1917], 'himeji': [34.8394, 134.6939] };
+            Object.entries(mapPositions).forEach(([id, pos]) => {
+                const spot = [...data.best, ...data.famous, ...data.suburbs].find(s => s.id === id); if (!spot) return;
+                L.marker(pos, { icon: L.divIcon({ className: 'custom-marker', html: `<div class="size-8 bg-white border-[3px] border-primary rounded-full flex items-center justify-center shadow-lg"><i class="fa-solid fa-location-dot text-primary"></i></div>` }) }).addTo(map).on('click', () => { map.flyTo(pos, 14); showMapTooltip(spot); });
+            });
+        }
+
+        function startCountdown() {
+            const targetDate = new Date('2026-03-22T00:00:00');
+            const timerEl = document.getElementById('countdownTimer');
+            const statusEl = document.getElementById('forecastStatus');
+            function update() {
+                const now = new Date(); const dist = targetDate - now; const days = Math.floor(dist / (1000 * 60 * 60 * 24));
+                if (dist <= 0) { timerEl.innerText = "🌸 시즌 시작!"; statusEl.innerHTML = `오사카 벚꽃 개화<br/><span class="underline decoration-4">지금부터 만개까지!</span>`; }
+                else if (days <= 7) { timerEl.innerText = `개화까지 D-${days}일`; statusEl.innerHTML = `오사카 벚꽃 개화<br/><span class="underline decoration-4">D-Day 카운트다운</span>`; }
+                else { timerEl.innerText = "벚꽃 소식을 기다리는 중"; statusEl.innerHTML = `곧 다가올 오사카의<br/><span class="underline decoration-4">분홍빛 설렘을 준비하세요</span>`; }
+            }
+            update(); setInterval(update, 60000);
+        }
+
+        async function fetchWeather() {
+            const _k = atob("YTdiMTc0NDlhZTYzYmQ5OGQ4MGUyNTNmNjNiZjEyMmY=");
+            try { const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=Osaka&appid=${_k}&units=metric&lang=kr`); const json = await res.json(); if(res.ok) { document.getElementById('currentTemp').innerText = `${Math.round(json.main.temp)}°`; document.getElementById('weatherDesc').innerText = json.weather[0].description; document.getElementById('clothTitle').innerText = json.main.temp > 15 ? "가벼운 외투" : "도톰한 코트"; document.getElementById('clothDesc').innerText = "일교차가 큽니다."; document.getElementById('weatherIconBox').innerHTML = `<img src="https://openweathermap.org/img/wn/${json.weather[0].icon}@2x.png" class="size-12">`; } } catch(e) {}
+        }
+
+        function showMapTooltip(spot) {
+            const tooltip = document.getElementById('mapTooltip');
+            const spotEl = document.getElementById('tooltipSpot');
+            const regionEl = document.getElementById('tooltipRegion');
+            const btnEl = document.getElementById('tooltipBtn');
+
+            if (!tooltip || !spotEl || !regionEl) return;
+
+            spotEl.innerText = spot.spotName;
+            regionEl.innerText = spot.region;
+            
+            btnEl.onclick = (e) => {
+                e.stopPropagation();
+                openDetail(spot.id);
+            };
+
+            // 📍 핵심: PC/모바일 관계없이 중앙 위치(0,0)로 슬라이딩
+            tooltip.style.transform = 'translate(0, 0)';
+            tooltip.classList.remove('opacity-0');
+        }
+        function hideMapTooltip() {
+            const tooltip = document.getElementById('mapTooltip');
+            if (!tooltip) return;
+
+            if (window.innerWidth <= 768) {
+                tooltip.style.transform = 'translateY(300px)'; // 모바일: 아래로 숨김
+            } else {
+                tooltip.style.transform = 'translateX(-500px)'; // PC: 왼쪽 밖으로 숨김
+            }
+        }
+
+        // 지도 영역 밖 클릭 시 숨기기 이벤트 설정
+        document.getElementById('explorePage').onclick = (e) => {
+            if (e.target.id === 'explorePage' || e.target.id === 'mapCanvas') {
+                hideMapTooltip();
+            }
+        };
+        function closeAllPages() {
+            const pages = ['mainContent', 'explorePage', 'myTripPage', 'detailOverlay'];
+            pages.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.classList.add('hidden');
+            });
+            // 상세 페이지의 애니메이션 클래스도 초기화
+            document.getElementById('detailOverlay').classList.add('translate-x-full');
+        }
+        function goHome() {
+            closeAllPages();
+            document.getElementById('mainContent').classList.remove('hidden');
+            setActiveNav('nav-home');
+        }
+        function openExplorePage() {
+            closeAllPages();
+            document.getElementById('explorePage').classList.remove('hidden');
+            setActiveNav('nav-explore');
+            // 지도가 깨지지 않도록 리사이즈 후 마커 렌더링
+            setTimeout(() => {
+                renderMapMarkers();
+                if(map) map.invalidateSize();
+            }, 300);
+        }
+        function openMySchedule() {
+            closeAllPages();
+            setActiveNav('nav-trip');
+            const page = document.getElementById('myTripPage');
+            page.classList.remove('hidden');
+
+            // 현재 페이지 도시 설정 (오사카 파일이면 "Osaka", 도쿄 파일이면 "Tokyo")
+            const currentCity = "Osaka"; 
+            const currentCitySchedule = mySchedule.filter(item => item.city === currentCity);
+
+            page.innerHTML = `
+                <div class="max-w-xl mx-auto pt-10 pb-32 text-left px-6">
+                    <h2 class="text-3xl font-black mb-2 tracking-tighter">My Schedule</h2>
+                    <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-10">나의 ${currentCity === 'Osaka' ? '오사카' : '도쿄'} 여행 계획</p>
+                    <div id="scheduleList" class="space-y-4">
+                        ${currentCitySchedule.length === 0 ? `
+                            <div class="py-20 text-center opacity-40">
+                                <i class="fa-solid fa-calendar-plus text-5xl mb-4"></i>
+                                <p class="font-bold">아직 저장된 일정이 없어요</p>
+                            </div>
+                        ` : currentCitySchedule.map((spot, index) => `
+                            <div class="schedule-card slide-up" style="animation-delay: ${index * 0.1}s">
+                                <img src="${spot.img}" class="w-16 h-16 rounded-2xl object-cover shadow-sm">
+                                <div class="flex-1 text-left">
+                                    <div class="flex items-center gap-2 mb-0.5">
+                                        <span class="px-1.5 py-0.5 bg-gray-100 text-[9px] font-black text-gray-500 rounded-md uppercase">${spot.city}</span>
+                                        <p class="text-[10px] font-black text-primary uppercase">${spot.region}</p>
+                                    </div>
+                                    <h4 class="font-black text-lg tracking-tight">${spot.name}</h4>
+                                </div>
+                                <button onclick="removeFromSchedule('${spot.id}')" class="delete-btn">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </button>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+        function addToSchedule(id) {
+            if (mySchedule.some(item => item.id === id)) {
+                alert('이미 일정에 추가된 명소입니다.');
+                return;
+            }
+            const spot = [...data.best, ...data.famous, ...data.suburbs].find(s => s.id === id);
+            
+            // 데이터 형식을 객체로 통일하고 city 정보를 넣습니다.
+            mySchedule.push({
+                id: spot.id,
+                name: spot.spotName,
+                region: spot.region,
+                img: spot.img,
+                city: "Osaka" // 📍 오사카 표시
+            });
+            
+            localStorage.setItem('sakura_master_schedule', JSON.stringify(mySchedule));
+            if(confirm('일정에 추가되었습니다! 지금 확인해볼까요?')) {
+                closeDetail();
+                openMySchedule();
+            }
+        }        
+        function setActiveNav(id) { document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('nav-active')); document.getElementById(id).classList.add('nav-active'); }
+        function createPetals() {
+            const container = document.getElementById('petalContainer');
+            const count = window.innerWidth > 768 ? 40 : 20;
+            for(let i=0; i<count; i++) {
+                const petal = document.createElement('div'); petal.className = 'petal';
+                petal.style.width = petal.style.height = `${Math.random() * 8 + 6}px`;
+                petal.style.left = `${Math.random() * 100}vw`; petal.style.animationDuration = `${Math.random() * 8 + 7}s`; petal.style.animationDelay = `-${Math.random() * 10}s`;
+                container.appendChild(petal);
+            }
+        }
+        function setupEvents() { document.getElementById('themeToggle').onclick = () => document.documentElement.classList.toggle('dark'); }
+        function setupMapResetFeature() { 
+            document.getElementById('resetMapBtn').onclick = () => { 
+                if(map) {
+                    map.flyTo([34.6937, 135.5023], 11);
+                    hideMapTooltip(); // 리셋 시 툴팁 닫기
+                }
+            }; 
+        }
+        function openPrivacy() {
+            document.getElementById('privacyModal').classList.remove('hidden');
+        }
+        function closePrivacy() {
+            document.getElementById('privacyModal').classList.add('hidden');
+        }
+        
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+        <div id="privacyModal" class="fixed inset-0 z-[300] hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-6">
+            <div class="bg-white dark:bg-gray-900 w-full max-w-lg rounded-[2.5rem] p-8 shadow-2xl max-h-[80vh] overflow-y-auto hide-scrollbar text-left">
+                <h3 class="text-xl font-black mb-6">개인정보처리방침</h3>
+                <div class="text-[11px] text-gray-500 leading-relaxed space-y-4 font-medium">
+                    <p><strong>1. 수집하는 개인정보</strong><br>본 사이트는 별도의 회원가입 없이 이용 가능하며, 직접적인 개인정보를 수집하지 않습니다. 다만, 구글 애드센스 및 구글 애널리틱스 이용 과정에서 쿠키(Cookie)가 사용될 수 있습니다.</p>
+                    <p><strong>2. 쿠키의 사용</strong><br>구글 등 제3자 제공업체는 사용자의 이전 방문 기록을 바탕으로 맞춤형 광고를 게재합니다. 사용자는 구글 광고 설정에서 맞춤 광고를 해제할 수 있습니다.</p>
+                    <p><strong>3. 정보의 보호</strong><br>본 사이트는 사용자 데이터를 서버에 저장하지 않으며, 모든 명소 저장 기능은 사용자의 브라우저(LocalStorage) 내에만 보관됩니다.</p>
+                    <p><strong>4. 문의처</strong><br>개인정보 관련 문의는 사이트 내 블로그 링크를 통해 연락 주시기 바랍니다.</p>
+                </div>
+                <button onclick="closePrivacy()" class="w-full mt-8 py-4 bg-gray-100 dark:bg-white/10 rounded-2xl font-black text-sm active:scale-95 transition-all">닫기</button>
+            </div>
+        </div>
+</body>
+</html>
