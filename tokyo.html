@@ -225,17 +225,18 @@
                         <p class="text-[10px] md:text-xs font-black text-primary uppercase tracking-[0.2em] mb-1">2026 TOKYO EDITION</p>
                         <h1 class="text-3xl md:text-5xl font-black tracking-tighter">도쿄 벚꽃 명소</h1>
                     </div>
-                    <button onclick="location.href='index.html'" 
-                            class="flex items-center gap-1.5 px-2 md:px-3 py-2 transition-all active:scale-90 group relative z-[60]">
-                        <span class="text-[11px] md:text-xs font-black text-primary uppercase tracking-tighter md:tracking-[0.1em] animate-blink group-hover:opacity-100 whitespace-nowrap">
-                            다른 도시 보러가기 🌸
-                        </span>
-                    </button>
-                    <button id="themeToggle" class="size-10 md:size-12 rounded-full bg-white/80 dark:bg-white/10 flex items-center justify-center border border-white/40 shadow-sm active:scale-90 transition-all">
-                        <i class="fa-solid fa-moon text-primary md:text-xl"></i>
-                    </button>
-                </div>
+                    <div class="flex flex-col items-end gap-2 relative z-[60]">
+                        <button onclick="location.href='index.html'" 
+                                class="flex items-center transition-all active:scale-90 group px-1">
+                            <span class="text-[11px] md:text-xs font-black text-primary uppercase tracking-tighter md:tracking-[0.1em] animate-blink whitespace-nowrap">
+                                다른 도시 보러가기 🌸
+                            </span>
+                        </button>
 
+                        <button id="themeToggle" class="size-10 md:size-12 rounded-full bg-white/80 dark:bg-white/10 flex items-center justify-center border border-white/40 shadow-sm active:scale-90 transition-all">
+                            <i class="fa-solid fa-moon text-primary md:text-xl"></i>
+                        </button>
+                    </div>
                 <div class="mb-12">
                     <div class="bg-[#ea2a33] rounded-[2.5rem] md:rounded-[3.5rem] p-8 md:p-14 text-white shadow-2xl shadow-primary/20 relative overflow-hidden slide-up text-left">
                         <div class="absolute right-[-10px] top-[10px] opacity-20 pointer-events-none text-left">

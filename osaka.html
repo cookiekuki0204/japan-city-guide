@@ -142,17 +142,18 @@
                         <p class="text-[10px] md:text-xs font-black text-primary uppercase tracking-[0.2em] mb-1">2026 KANSAI EDITION</p>
                         <h1 class="text-3xl md:text-5xl font-black tracking-tighter">오사카 벚꽃 명소</h1>
                     </div>
-                    <button onclick="location.href='index.html'" 
-                            class="flex items-center gap-1.5 px-2 md:px-3 py-2 transition-all active:scale-90 group relative z-[60]">
-                        <span class="text-[11px] md:text-xs font-black text-primary uppercase tracking-tighter md:tracking-[0.1em] animate-blink group-hover:opacity-100 whitespace-nowrap">
-                            다른 도시 보러가기 🌸
-                        </span>
-                    </button>
-                    <button id="themeToggle" class="size-10 md:size-12 rounded-full bg-white/80 dark:bg-white/10 flex items-center justify-center border border-white/40 shadow-sm active:scale-90 transition-all">
-                        <i class="fa-solid fa-moon text-primary md:text-xl"></i>
-                    </button>
-                </div>
+                    <div class="flex flex-col items-end gap-2 relative z-[60]">
+                        <button onclick="location.href='index.html'" 
+                                class="flex items-center transition-all active:scale-90 group px-1">
+                            <span class="text-[11px] md:text-xs font-black text-primary uppercase tracking-tighter md:tracking-[0.1em] animate-blink whitespace-nowrap">
+                                다른 도시 보러가기 🌸
+                            </span>
+                        </button>
 
+                        <button id="themeToggle" class="size-10 md:size-12 rounded-full bg-white/80 dark:bg-white/10 flex items-center justify-center border border-white/40 shadow-sm active:scale-90 transition-all">
+                            <i class="fa-solid fa-moon text-primary md:text-xl"></i>
+                        </button>
+                    </div>
                 <div class="mb-12">
                     <div class="bg-primary rounded-[2.5rem] p-8 md:p-14 text-white shadow-2xl shadow-primary/20 relative overflow-hidden slide-up">
                         <div class="relative z-10 max-w-2xl">
@@ -294,7 +295,7 @@
                     { name: "폰테베키오", rank: 4, score: "4.4", desc: "강변 조망 고급 이탈리안", link: "Ponte Vecchio 北浜" },
                     { name: "고분카쿠", rank: 5, score: "4.0", desc: "정갈한 일식 코스 전문점", link: "五福閣 大阪" }
                 ]},
-                { id: 'mint', region: '텐마바시', spotName: '조폐국 벚꽃 통로', sub: '희귀 겹벚꽃 140종의 향연', img: 'images/sakura_tenmabashi_1.png', vibe: '특별함', crowd: '높음(예약제)', timeline: { start: '4월 초', peak: '4월 중순', end: '4월 하순', progress: 30 }, history: '1년에 단 7일만 개방되는 한정판 벚꽃 명소입니다', station: '덴마바시역', tips: [
+                { id: 'mint', region: '텐마바시', spotName: '조폐국 벚꽃 통로', sub: '희귀 겹벚꽃 140종의 향연', img: 'images/sakura_tenmabashi.jpg', vibe: '특별함', crowd: '높음(예약제)', timeline: { start: '4월 초', peak: '4월 중순', end: '4월 하순', progress: 30 }, history: '1년에 단 7일만 개방되는 한정판 벚꽃 명소입니다', station: '덴마바시역', tips: [
                     '겹벚꽃이 위주라 일반 벚꽃 시즌보다 1~2주 늦게 방문해야 최고의 절경을 볼 수 있습니다',
                     '온라인 사전 예약(무료) 시스템은 보통 개방 2주 전에 열리니 공식 홈페이지를 수시로 체크하세요',
                     '일방통행으로만 진행되며 중간에 되돌아갈 수 없으니, 입구(남문) 진입 전 카메라 세팅을 미리 끝내두세요'
@@ -457,7 +458,7 @@
                     { name: "로컬 오코노미", rank: 5, score: "4.2", desc: "나라식 깔끔한 철판 요리", link: "Nara Okonomiyaki" }
                 ]
             },
-                { id: 'shukugawa', region: '고베 사쿠라슈쿠가와', spotName: '슈쿠가와 공원', sub: '강을 가로지르는 벚꽃 향연', img: 'images/DSC_0843.jpg', transport: '전철 30분', tips: [
+                { id: 'shukugawa', region: '고베 사쿠라슈쿠가와', spotName: '슈쿠가와 공원', sub: '강을 가로지르는 벚꽃 향연', img: 'images/kobe_sakura.jpg', transport: '전철 30분', tips: [
                     '한큐 슈쿠가와역에서 내리자마자 강변을 따라 펼쳐지는 2.3km의 벚꽃 터널은 간사이 최고의 산책 코스입니다',
                     '강 중간중간 놓인 징검다리 위에서 강물에 비친 벚꽃을 배경으로 찍는 사진이 가장 인기가 많습니다',
                     '인근의 "고베 미카게" 지역은 유명한 디저트 카페가 많으니, 산책 후 조각 케이크를 곁들인 티타임을 추천합니다'
