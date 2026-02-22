@@ -1311,35 +1311,28 @@
 
         function goHome() {
             closeAllPages();
+            document.getElementById('mainContent').classList.remove('hidden');
             setActiveNav('nav-home');
-            const mainContent = document.getElementById('mainContent');
-            if (mainContent) {
-                mainContent.scrollTo({ top: 0, behavior: 'smooth' });
-            }
         }
 
         function openExplorePage() {
-            closeAllPages(); // 먼저 다른 페이지를 닫음
-            const page = document.getElementById('explorePage');
-            if (page) {
-                page.classList.remove('hidden');
-                page.classList.add('slide-up');
-            }
-            setActiveNav('nav-explore'); // 아이콘 강조
+            closeAllPages();
+            document.getElementById('explorePage').classList.remove('hidden');
+            setActiveNav('nav-explore');
             
-            // 지도가 화면에 나타난 후 마커 렌더링 (0.3초 뒤)
-            setTimeout(renderMapMarkers, 300);
+            // 지도가 깨지지 않도록 리사이즈 후 렌더링
+            setTimeout(() => {
+                renderMapMarkers();
+                if(map) map.invalidateSize();
+            }, 300);
         }
 
         function openMySchedule() {
             closeAllPages();
-            const page = document.getElementById('myTripPage');
-            if (page) {
-                page.classList.remove('hidden');
-                page.classList.add('slide-up');
-                renderMySchedule(); // 탭을 누를 때 렌더링 함수를 반드시 호출!
-            }
             setActiveNav('nav-trip');
+            const page = document.getElementById('myTripPage');
+            page.classList.remove('hidden');
+            renderMySchedule(); // 기존의 렌더링 함수 호출
         }
         function openGoogleMapsDirections(spotId) {
             const allSpots = [...data.best, ...data.famous, ...data.suburbs];
@@ -1636,15 +1629,19 @@
             tooltip.classList.remove('active');
         }
         function closeAllPages() {
-            // 모든 페이지 섹션 숨기기
-            const explorePage = document.getElementById('explorePage');
-            const myTripPage = document.getElementById('myTripPage');
-            if (explorePage) explorePage.classList.add('hidden');
-            if (myTripPage) myTripPage.classList.add('hidden');
+            const pages = ['mainContent', 'explorePage', 'myTripPage', 'detailOverlay'];
+            pages.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.classList.add('hidden');
+            });
+            
+            // 상세 페이지가 열려있을 경우를 대비해 애니메이션 클래스 원복
+            const overlay = document.getElementById('detailOverlay');
+            if (overlay) overlay.classList.add('translate-x-full');
 
-            // 내비게이션 아이콘 색상 리셋 (모두 회색으로)
+            // 내비게이션 아이콘 색상 초기화
             document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.classList.remove('nav-active', 'text-primary');
+                btn.classList.remove('nav-active');
                 btn.classList.add('text-gray-400');
             });
         }
