@@ -37,84 +37,144 @@
     </script>
     
     <style>
-        /* 1. 기본 레이아웃 및 폰트 설정 */
-        body { 
-            font-family: 'Plus Jakarta Sans', 'Noto Sans JP', sans-serif; 
-            -webkit-font-smoothing: antialiased; 
-        }
-        .app-gradient { 
-            background: linear-gradient(180deg, #e0f2fe 0%, #ffffff 50%, #fff1f2 100%); 
-            background-attachment: fixed; 
-        }
-        .dark .app-gradient { 
-            background: linear-gradient(180deg, #1a1111 0%, #120a0a 100%); 
-        }
+        body { font-family: 'Plus Jakarta Sans', 'Noto Sans JP', sans-serif; -webkit-font-smoothing: antialiased; }
+        .app-gradient { background: linear-gradient(180deg, #e0f2fe 0%, #ffffff 50%, #fff1f2 100%); background-attachment: fixed; }
+        .dark .app-gradient { background: linear-gradient(180deg, #1a1111 0%, #120a0a 100%); }
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-
-        /* 2. 지도 및 UI 컴포넌트 레이어 설정 (z-index) */
-        .fixed.bottom-0 { z-index: 210 !important; pointer-events: none; } /* 하단 바 최상단 */
-        .fixed.bottom-0 > div { pointer-events: auto; }
-        #detailOverlay { z-index: 200; padding-bottom: 100px !important; } /* 상세페이지 */
-        #resetMapBtn { z-index: 150 !important; pointer-events: auto !important; }
-        #mapTooltip { 
-            position: absolute;
-            z-index: 160 !important; 
-            transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s;
-        }
-
-        /* 3. 명소 정보 박스(mapTooltip) 반응형 레이아웃 통합 */
+        
         @media (max-width: 768px) {
-            #resetMapBtn { bottom: 120px !important; right: 20px !important; }
-            #mapTooltip { 
-                bottom: 95px !important; 
-                left: 16px !important; 
-                right: 16px !important; 
-                transform: translateY(300px); /* 모바일: 아래로 숨김 */
-                border-radius: 2.5rem !important; 
+            /* 📍 리프레시 버튼: 우측 상단으로 확실히 고정 */
+            #resetMapBtn {
+                top: 20px !important;
+                right: 20px !important;
+                bottom: auto !important;
+                left: auto !important;
+                z-index: 170 !important;
             }
-        }
-        @media (min-width: 1024px) {
-            #mapTooltip { 
-                bottom: 40px !important; 
-                left: 40px !important; 
-                width: 360px !important; 
-                transform: translateX(-450px); /* PC: 왼쪽 밖으로 숨김 */
-            }
-        }
 
-        /* 4. 애니메이션 및 지도 그래픽 */
+            /* 📍 지도 정보 박스: 하단 탭 바 바로 위로 밀착 */
+            #mapTooltip {
+                bottom: 95px !important; /* 하단 네비게이션 높이를 고려한 위치 */
+                left: 16px !important;
+                right: 16px !important;
+                width: auto !important;
+                transform: translateY(250px); /* 평소엔 아래로 숨김 */
+                transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+                z-index: 160 !important;
+            }
+        }
+        /* PC 버전 (1024px 이상)을 위한 설정도 추가하면 더 디테일해집니다 */
+        @media (min-width: 1024px) {
+            #mapTooltip {
+                bottom: 40px !important;
+                left: 40px !important;
+                right: auto !important;
+                width: 360px !important;
+                transform: translateX(-400px); /* 평소엔 왼쪽 밖 숨김 */
+            }
+        }
         .slide-up { animation: slideUp 0.4s ease-out; }
         @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         
         .petal { 
             position: absolute; background-color: #ffdae9; border-radius: 150% 0 150% 0; 
-            opacity: 0.6; pointer-events: none; z-index: 5; animation: fall linear infinite; filter: blur(0.5px);
+            opacity: 0.6; pointer-events: none; z-index: 5; animation: fall linear infinite;
+            filter: blur(0.5px);
         }
         @keyframes fall {
             0% { top: -10%; transform: translateX(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.7; }
+            90% { opacity: 0.7; }
             100% { top: 110%; transform: translateX(150px) rotate(450deg); opacity: 0; }
         }
-
-        /* 5. Leaflet 지도 및 마커 스타일 커스텀 */
-        #mapCanvas { width: 100%; height: 100%; transition: filter 0.5s ease; }
-        .leaflet-container { background: #f8f6f6 !important; font-family: inherit; }
-        .leaflet-marker-icon { border: none !important; background: none !important; }
-        .leaflet-tooltip-right:before { display: none; } /* 화살표 숨김 */
-        
-        .station-label {
-            background: rgba(255, 255, 255, 0.95); border: 1px solid rgba(234, 42, 51, 0.2);
-            border-radius: 8px; padding: 3px 8px; font-size: 11px; font-weight: 800; color: #1a1a1a;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08); white-space: nowrap; transition: all 0.3s ease;
+        #mapCanvas {
+            width: 100%;
+            height: 100%;
+            transition: filter 0.5s ease; /* 모드 전환 시 부드럽게 변경 */
+        }
+        /* Leaflet 마커의 기본 파란 테두리 제거 */
+        .leaflet-marker-icon {
+            border: none !important;
+            background: none !important;
+        }
+        /* Leaflet 워터마크 및 배경 정리 */
+        .leaflet-container {
+            background: #f8f6f6 !important;
+            font-family: inherit;
+        }
+        /* 다크 모드일 때 지도 타일에 필터 적용 */
+        .dark .leaflet-tile-container {
+            filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
         }
 
-        /* 6. 다크모드 전용 보정 */
-        .dark .leaflet-tile-container { filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%); }
-        .dark .leaflet-container { background: #111827 !important; }
-        .dark .custom-map-marker .bg-white { background-color: #1f2937 !important; }
-        .dark .station-label { background: rgba(31, 41, 55, 0.95); border-color: rgba(255, 255, 255, 0.1); color: #ffffff; }
+        /* 다크 모드에서 지도 배경색 조절 (타일 로딩 전 여백) */
+        .dark .leaflet-container {
+            background: #111827 !important; /* 다크 모드 배경색과 통일 */
+        }
 
-        /* 7. 타임라인 및 랭킹 배지 디자인 */
+        /* 마커가 다크 모드 지도에서 너무 튀지 않게 보정 */
+        .dark .custom-map-marker .bg-white {
+            background-color: #1f2937 !important; /* 마커 내부 배경을 어둡게 */
+            border-width: 2px;
+        }
+        /* mapTooltip 스타일 수정 */
+        #mapTooltip {
+            /* 기존 bottom: 10px -> 네비게이션 높이만큼 더 띄우기 (약 100px~120px) */
+            bottom: 120px !important; 
+            left: 24px;
+            right: 24px;
+            z-index: 50; /* 네비게이션보다 높거나 적절히 조절 */
+            
+            /* 모바일에서 네비게이션 바와 겹치지 않게 위로 띄우는 애니메이션 */
+            transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s;
+        }
+        /* 버튼이 무조건 클릭되도록 z-index 강제 */
+        #resetMapBtn {
+            z-index: 150 !important;
+            pointer-events: auto !important; /* 마우스 이벤트를 강제로 받음 */
+        }
+        /* 1. 하단 네비게이션 바 컨테이너 */
+        .fixed.bottom-0 {
+            /* 기존 z-[100]에서 z-[210] 정도로 높여 상세 페이지(z-200)보다 위에 오게 합니다 */
+            z-index: 210 !important; 
+            pointer-events: none; /* 컨테이너 자체는 클릭 투과 */
+        }
+
+        .fixed.bottom-0 > div {
+            pointer-events: auto; /* 실제 버튼 박스는 클릭 허용 */
+        }
+
+        /* 2. 상세 페이지 레이어 (기존 z-[200] 유지 또는 확인) */
+        #detailOverlay {
+            z-index: 200; 
+            /* 네비게이션 바 높이(약 80-90px)만큼 바닥에 여백을 주어 컨텐츠가 가려지지 않게 합니다 */
+            padding-bottom: 100px !important; 
+        }
+        /* 역명/장소명 라벨 공통 스타일 */
+        .station-label {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(234, 42, 51, 0.2);
+            border-radius: 8px;
+            padding: 3px 8px;
+            font-size: 11px;
+            font-weight: 800;
+            color: #1a1a1a;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+
+        .dark .station-label {
+            background: rgba(31, 41, 55, 0.95);
+            border-color: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+
+        /* 툴팁 화살표 숨기기 */
+        .leaflet-tooltip-right:before {
+            display: none;
+        }        
         .timeline-bar { height: 6px; background: #f1f1f1; border-radius: 10px; position: relative; }
         .timeline-progress { height: 100%; background: #ea2a33; border-radius: 10px; position: absolute; left: 0; top: 0; transition: width 1s ease-in-out; }
         .timeline-dot {
@@ -122,17 +182,33 @@
             border: 4px solid #ea2a33; border-radius: 50%; transform: translate(-50%, -50%);
             box-shadow: 0 0 10px rgba(234, 42, 51, 0.3); z-index: 2; transition: left 1s ease-in-out;
         }
-        .rank-badge { width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; border-radius: 6px; font-weight: 800; font-size: 10px; }
+
+        .rank-badge {
+            width: 22px; height: 22px; display: flex; align-items: center; justify-content: center;
+            border-radius: 6px; font-weight: 800; font-size: 10px;
+        }
         .rank-1 { background: #FFD700; color: #8B4513; }
         .rank-2 { background: #C0C0C0; color: #4B4B4B; }
         .rank-3 { background: #CD7F32; color: #ffffff; }
         .rank-other { background: #f1f5f9; color: #64748b; }
         .dark .rank-other { background: rgba(255,255,255,0.1); color: #fff; }
 
-        /* 8. 기타 유틸리티 */
+        .line-badge {
+            font-size: 8px; font-weight: 900; padding: 2px 5px; border-radius: 4px; color: white;
+            text-transform: uppercase; margin-right: 4px;
+        }
+
         .nav-active { color: #ea2a33 !important; }
-        [onclick^="openTabelog"] { cursor: pointer; -webkit-tap-highlight-color: transparent; }
-        [onclick^="openTabelog"]:hover { background-color: rgba(234, 42, 51, 0.03); }
+        .nav-active i { transform: scale(1.1); }
+        /* 클릭 가능한 랭킹 아이템 스타일 */
+        [onclick^="openTabelog"] {
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        [onclick^="openTabelog"]:hover {
+            background-color: rgba(234, 42, 51, 0.03); /* 아주 연한 핑크빛 배경 */
+        }
     </style>
 </head>
 <body class="bg-background-light dark:bg-background-dark text-[#181111] dark:text-white transition-colors duration-300 min-h-screen overflow-x-hidden text-left">
@@ -1495,10 +1571,27 @@
                 openDetail(spot.id);
             };
 
-            // 📍 핵심: PC(X축)와 모바일(Y축) 어디서 왔든 중앙(0,0)으로 이동
-            tooltip.style.transform = 'translate(0, 0)';
+            // 📍 핵심: 강제로 Y축 이동을 0으로 만들어 CSS 위치에 고정시킵니다.
+            tooltip.style.transform = 'translateY(0)';
             tooltip.classList.remove('opacity-0');
         }
+        // 지도 영역 밖 클릭 시 툴팁 숨기기 (이 부분도 PC/모바일에 맞춰 업데이트)
+        document.getElementById('explorePage').onclick = (e) => {
+            if (e.target.id === 'explorePage' || e.target.id === 'mapCanvas') {
+                const tooltip = document.getElementById('mapTooltip');
+                
+                if (window.innerWidth <= 768) {
+                    tooltip.style.transform = 'translateY(200px)'; // 모바일: 아래로 숨김
+                } else {
+                    tooltip.style.transform = 'translateX(-450px)'; // PC: 왼쪽 밖으로 숨김
+                }
+                
+                // 지도 마커 강조 효과 제거
+                document.querySelectorAll('#mapCanvas .custom-map-marker').forEach(m => {
+                    m.classList.remove('border-black', 'scale-125');
+                });
+            }
+        };
         function setupMapResetFeature() {
             const resetBtn = document.getElementById('resetMapBtn');
             if (!resetBtn) return;
@@ -1539,28 +1632,9 @@
         }
         function hideMapTooltip() {
             const tooltip = document.getElementById('mapTooltip');
-            if (!tooltip) return;
-
-            if (window.innerWidth <= 768) {
-                tooltip.style.transform = 'translateY(300px)'; // 모바일: 아래로
-            } else {
-                tooltip.style.transform = 'translateX(-500px)'; // PC: 왼쪽 밖으로
-            }
-            tooltip.classList.add('opacity-0');
-
-            // 마커 강조 효과 일괄 제거
-            document.querySelectorAll('.marker-body').forEach(b => {
-                b.style.transform = 'scale(1)';
-            });
+            tooltip.classList.add('translate-y-full', 'opacity-0');
+            tooltip.classList.remove('active');
         }
-
-        // 지도 영역 밖 클릭 시 이벤트 바인딩
-        document.getElementById('explorePage').onclick = (e) => {
-            // 클릭 대상이 배경(explorePage)이거나 지도 컨테이너(mapCanvas)일 때만 숨김
-            if (e.target.id === 'explorePage' || e.target.id === 'mapCanvas') {
-                hideMapTooltip();
-            }
-        };
         function closeAllPages() {
             // 모든 페이지 섹션 숨기기
             const explorePage = document.getElementById('explorePage');
