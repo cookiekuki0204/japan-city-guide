@@ -65,26 +65,26 @@
 
         .card-zoom:hover img { transform: scale(1.05); }
         
-        /* 도쿄 페이지 방식의 CSS 벚꽃 잎 스타일링 */
-        .petal {
-            position: fixed;
-            top: -10%;
-            background-color: #ffdae9;
-            border-radius: 150% 0 150% 0;
-            pointer-events: none;
-            z-index: 1;
-            filter: blur(0.5px);
-            opacity: 0.6;
+        /* 📍 꽃잎(Petal) 스타일 및 애니메이션 */
+        .petal { 
+            position: fixed; 
+            top: -10%; 
+            background-color: #ffdae9; 
+            border-radius: 150% 0 150% 0; 
+            opacity: 0.6; 
+            pointer-events: none; 
+            z-index: 5; 
+            animation: fall linear infinite; 
+            filter: blur(0.5px); 
         }
-
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         
         @keyframes fall {
-            0% { transform: translateY(-10vh) translateX(0) rotate(0deg); opacity: 0; }
+            0% { top: -10%; transform: translateX(0) rotate(0deg); opacity: 0; }
             10% { opacity: 0.7; }
             90% { opacity: 0.7; }
-            100% { transform: translateY(110vh) translateX(120px) rotate(450deg); opacity: 0; }
+            100% { top: 110%; transform: translateX(150px) rotate(450deg); opacity: 0; }
         }
         .animate-petal-fall { animation: fall 10s linear infinite; }
 
@@ -323,24 +323,51 @@
 
         function createPetals() {
             const container = document.getElementById('petal-container');
+            if (!container) return;
+
+            // 📍 사용할 아이콘 리스트
+            const icons = ['🌸', '✨', '🍃'];
             const count = window.innerWidth > 768 ? 40 : 20; 
-            for(let i=0; i<count; i++) {
+
+            for(let i = 0; i < count; i++) {
                 const petal = document.createElement('div');
-                petal.className = 'petal animate-petal-fall';
+                
+                // 랜덤 아이콘 선택
+                const icon = icons[Math.floor(Math.random() * icons.length)];
+                
+                // 아이콘이 🌸인 경우 기존 핑크색 사각형으로, 나머지는 텍스트로 처리
+                if (icon === '🌸' && Math.random() > 0.5) {
+                    petal.className = 'petal'; // 기존 핑크색 꽃잎 스타일
+                } else {
+                    petal.innerText = icon;
+                    petal.style.position = 'fixed';
+                    petal.style.zIndex = '5';
+                    petal.style.fontSize = `${Math.random() * 10 + 10}px`;
+                    petal.className = 'animate-petal-fall'; // 기존 애니메이션 클래스 활용
+                }
+
                 const size = Math.random() * 8 + 6;
                 petal.style.width = `${size}px`; 
                 petal.style.height = `${size}px`;
                 petal.style.left = `${Math.random() * 100}vw`;
                 petal.style.animationDuration = `${Math.random() * 8 + 7}s`;
                 petal.style.animationDelay = `-${Math.random() * 10}s`;
+                
+                // 공통 애니메이션 스타일 강제 부여 (아이콘일 때 대비)
+                petal.style.top = '-10%';
+                petal.style.pointerEvents = 'none';
+                
                 container.appendChild(petal);
             }
         }
 
+        window.onload = () => {
+            createPetals();
+        };
+
         function openPrivacy() { document.getElementById('privacyModal').classList.remove('hidden'); }
         function closePrivacy() { document.getElementById('privacyModal').classList.add('hidden'); }
 
-        window.onload = createPetals;
     </script>
 </body>
 </html>
