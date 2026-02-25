@@ -3,11 +3,11 @@
 <head>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6682864237624164"
      crossorigin="anonymous"></script>
-    <meta name='impact-site-verification' value='da570fb4-fd59-4dab-8c71-9ec48a894bc2' /> 
+    <meta name='impact-site-verification' value='da570fb4-fd59-4dab-8c71-9ec48a894bc2' />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌸</text></svg>">
-    <title>Japan City Guide: 교토 벚꽃 2026 마스터</title>
+    <title>Japan City Guide: 삿포로 벚꽃 2026 마스터</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -131,6 +131,25 @@
             transition: all 0.2s;
         }
         .delete-btn:hover { background: #ff4d6d; color: white; }
+
+        .blossom-card-red {
+            background: #ED667A; 
+            background: linear-gradient(135deg, #f87185 0%, #ED667A 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sun-icon-bg {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 220px;
+            height: 220px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='white' opacity='0.15' d='M50 0 L60 35 L95 25 L75 55 L100 80 L65 75 L50 100 L35 75 L0 80 L25 55 L5 25 L40 35 Z'/%3E%3C/svg%3E") no-repeat center;
+            background-size: contain;
+            pointer-events: none;
+            z-index: 1;
+        }
     </style>
 </head>
 <body class="bg-background-light dark:bg-background-dark text-[#181111] dark:text-white transition-colors duration-300 min-h-screen overflow-x-hidden text-left">
@@ -143,8 +162,8 @@
                 
                 <div class="pt-12 md:pt-20 pb-10 relative flex justify-between items-end">
                     <div class="text-left">
-                        <p class="text-[10px] md:text-xs font-black text-primary uppercase tracking-[0.2em] mb-1">2026 KANSAI EDITION</p>
-                        <h1 class="text-3xl md:text-5xl font-black tracking-tighter">교토 벚꽃 명소</h1>
+                        <p class="text-[10px] md:text-xs font-black text-primary uppercase tracking-[0.2em] mb-1">2026 SAPPORO EDITION</p>
+                        <h1 class="text-3xl md:text-5xl font-black tracking-tighter">삿포로 벚꽃 명소</h1>
                     </div>
 
                     <div class="absolute top-10 md:top-16 right-0 flex flex-col items-end gap-3 z-[60]">
@@ -161,27 +180,32 @@
                     </div>
                 </div>
                 <div class="mb-12">
-                    <div class="bg-primary rounded-[2.5rem] p-8 md:p-14 text-white shadow-2xl shadow-primary/20 relative overflow-hidden slide-up">
-                        <div class="relative z-10 max-w-2xl">
-                            <p class="text-[11px] md:text-xs font-black opacity-90 uppercase tracking-widest mb-4">2026 벚꽃 개화 예측</p>
-                            <div id="countdownContainer" class="mb-6 flex items-center gap-3">
-                                <div class="px-3 py-1.5 bg-white/20 backdrop-blur-md rounded-xl border border-white/10 flex items-center gap-2">
-                                    <p id="countdownTimer" class="text-[13px] font-black tracking-wider">데이터 로딩 중...</p>
-                                </div>
+                    <div class="blossom-card-red rounded-[3rem] p-8 md:p-14 text-white shadow-2xl shadow-rose-200/50 slide-up">
+                        <div class="sun-icon-bg"></div>
+                        
+                        <div class="relative z-10 max-w-2xl text-left">
+                            <p class="text-[10px] md:text-xs font-black opacity-90 uppercase tracking-[0.2em] mb-4">2026 벚꽃 개화 예측</p>
+                            
+                            <div id="countdownContainer" class="mb-8 inline-flex items-center px-4 py-2 bg-white/20 backdrop-blur-md rounded-full border border-white/10">
+                                <span class="w-2 h-2 bg-white rounded-full mr-2 animate-pulse"></span>
+                                <p id="countdownTimer" class="text-[12px] font-black tracking-wider text-white">데이터 로딩 중...</p>
                             </div>
-                            <h3 id="forecastStatus" class="text-[32px] md:text-[48px] font-bold leading-tight mb-8 text-left">곧 다가올 교토의<br/><span class="underline decoration-4">분홍빛 설렘을 준비하세요</span></h3>
-                            <div class="grid grid-cols-3 gap-3 items-center text-center">
-                                <div class="bg-white/20 backdrop-blur-md rounded-2xl py-3 border border-white/10">
-                                    <p class="text-[8px] md:text-[10px] font-black uppercase mb-1">개화 시작</p>
-                                    <p class="text-lg md:text-2xl font-black italic">03.22</p>
+                            <h3 id="forecastStatus" class="text-[34px] md:text-[52px] font-bold leading-tight mb-16">
+                                아직 삿포로의 벚꽃은<br/>
+                                <span class="inline-block" style="text-decoration: underline; text-decoration-color: rgba(255, 255, 255, 0.4); text-decoration-thickness: 6px; text-underline-offset: 8px;">개화 전 !</span>
+                            </h3>
+                            <div class="grid grid-cols-3 gap-3 md:gap-5 items-center text-center">
+                                <div class="bg-white/15 backdrop-blur-lg rounded-[1.8rem] py-5 border border-white/10">
+                                    <p class="text-[9px] font-bold opacity-70 uppercase mb-1">개화 시작</p>
+                                    <p class="text-xl md:text-3xl font-black italic tracking-tighter">04.25</p>
                                 </div>
-                                <div class="bg-white/30 backdrop-blur-md rounded-2xl py-4 border-2 border-white/40 shadow-lg -mt-2">
-                                    <p class="text-[8px] md:text-[10px] font-black mb-1 flex items-center justify-center gap-1"><i class="fa-solid fa-crown text-[8px]"></i> 만개 피크</p>
-                                    <p class="text-xl md:text-3xl font-black">03.29</p>
+                                <div class="bg-white/30 backdrop-blur-lg rounded-[1.8rem] py-7 border-2 border-white/40 shadow-xl -mt-2">
+                                    <p class="text-[9px] font-bold mb-1 flex items-center justify-center gap-1">👑 만개 피크</p>
+                                    <p class="text-2xl md:text-4xl font-black tracking-tighter">04.29</p>
                                 </div>
-                                <div class="bg-white/20 backdrop-blur-md rounded-2xl py-3 border border-white/10">
-                                    <p class="text-[8px] md:text-[10px] font-black uppercase mb-1">벚꽃 엔딩</p>
-                                    <p class="text-lg md:text-2xl font-black italic">04.05</p>
+                                <div class="bg-white/15 backdrop-blur-lg rounded-[1.8rem] py-5 border border-white/10">
+                                    <p class="text-[9px] font-bold opacity-70 uppercase mb-1">벚꽃 엔딩</p>
+                                    <p class="text-xl md:text-3xl font-black italic tracking-tighter">05.05</p>
                                 </div>
                             </div>
                         </div>
@@ -191,7 +215,7 @@
                 <div class="mb-12 slide-up">
                     <div id="weatherCard" class="bg-white/80 dark:bg-white/5 backdrop-blur-xl rounded-[2.5rem] p-8 border border-white/50 shadow-sm transition-all duration-500">
                         <div class="flex items-center justify-between mb-8 text-left">
-                            <h3 class="text-[12px] font-black uppercase tracking-[0.15em] text-gray-400">교토 실시간 날씨</h3>
+                            <h3 class="text-[12px] font-black uppercase tracking-[0.15em] text-gray-400">삿포로 실시간 날씨</h3>
                             <div class="px-3 py-1 bg-blue-500/10 text-blue-500 rounded-full text-[9px] font-black uppercase">Live</div>
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
@@ -217,11 +241,11 @@
 
                 <div class="mb-20 text-left w-full overflow-hidden">
                     <div class="flex items-end justify-between mb-8">
-                        <h3 class="text-2xl md:text-3xl font-black">교토 인기 명소</h3>
+                        <h3 class="text-2xl md:text-3xl font-black">삿포로 인기 명소</h3>
                         <p class="text-[10px] font-black text-gray-400 pb-1 flex items-center gap-1 animate-pulse">옆으로 밀기 <i class="fa-solid fa-arrow-right-long"></i></p>
                     </div>
                     <div id="famousSpotsContainer" class="flex flex-row flex-nowrap overflow-x-auto hide-scrollbar gap-5 pb-8 snap-x-mandatory"></div>
-                     <div class="mt-4 px-6 overflow-hidden flex flex-col items-center">
+                    <div class="mt-4 px-6 overflow-hidden flex flex-col items-center">
                         <p class="text-[7px] text-gray-300 font-bold uppercase tracking-widest mb-2">Sponsor Ad</p>
                         <div class="w-full min-h-[100px] flex justify-center bg-gray-50/50 dark:bg-white/5 rounded-[2rem]">
                             <ins class="adsbygoogle"
@@ -232,12 +256,12 @@
                                 data-ad-slot="XXXXXXXXXX"></ins>
                             <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
                         </div>
-                    </div>               
+                    </div>                
                 </div>
 
                 <div class="mb-20 text-left w-full overflow-hidden">
                     <div class="flex items-end justify-between mb-8">
-                        <h3 class="text-2xl md:text-3xl font-black">교토 근교 명소</h3>
+                        <h3 class="text-2xl md:text-3xl font-black">삿포로 근교 명소</h3>
                         <p class="text-[10px] font-black text-gray-400 pb-1 flex items-center gap-1 animate-pulse">옆으로 밀기 <i class="fa-solid fa-arrow-right-long"></i></p>
                     </div>
                     <div id="suburbSpotsContainer" class="flex flex-row flex-nowrap overflow-x-auto hide-scrollbar gap-5 pb-8 snap-x-mandatory"></div>
@@ -292,195 +316,290 @@
         <div id="detailOverlay" class="fixed inset-0 z-[200] translate-x-full bg-white dark:bg-background-dark overflow-y-auto hide-scrollbar hidden flex flex-col text-left"></div>
     </div>
     <script>
-        const data = {
+    const data = {
+        // 🏆 Best: 삿포로 대표 명소 (카페/레스토랑 완비)
         best: [
-                { 
-                    id: 'philosopher', 
-                    region: '사쿄구', 
-                    spotName: '철학의 길', 
-                    sub: '수로 따라 이어지는 벚꽃 터널', 
-                    img: 'images/tetsugaku_1.jpg', 
-                    vibe: '사색적', 
-                    crowd: '매우 높음', 
-                    timeline: { start: '3월 23일', peak: '3월 30일', end: '4월 6일', progress: 0 },
-                    history: '은각사에서 난젠지 부근까지 이어지는 약 2km의 수로길입니다. 일본의 철학자 니시다 키타로가 이 길을 산책하며 사색에 잠겼다 하여 이름 붙여졌습니다.',
-                    station: '긴카쿠지미치(버스)',
-                    tips: [
-                        '아침 7시 이전에 방문해야 인파 없는 수로 사진을 찍을 수 있습니다',
-                        '길 중간중간 나타나는 길고양이들과 인사를 나눠보세요',
-                        '은각사(긴카쿠지) 입구에서 시작해 난젠지 방향으로 내려오는 코스가 가장 걷기 좋습니다'
-                    ],
-                    cafes: [
-                        { name: "요지야 카페", rank: 1, score: "4.1", desc: "정원을 바라보는 전통 다다미 카페", link: "よじやカフェ 銀閣寺店" },
-                        { name: "카페 테르미누스", rank: 2, score: "4.3", desc: "철길 옆 빈티지한 감성", link: "Cafe Terminus" },
-                        { name: "고스펠", rank: 3, score: "4.2", desc: "앤틱한 유럽풍 건물의 디저트 카페", link: "Gospel Kyoto" }
-                    ],
-                    restaurants: [
-                        { name: "오멘", rank: 1, score: "4.4", desc: "정갈한 우동과 텐푸라 전문점", link: "おめん 銀閣寺本店" },
-                        { name: "히노데 우동", rank: 2, score: "4.5", desc: "걸쭉한 카레우동의 성지", link: "日の出うどん" },
-                        { name: "에이칸도 오차야", rank: 3, score: "4.0", desc: "사찰 내에서 즐기는 정갈한 소바", link: "永観堂 茶店" }
-                    ]
-                },
-                { 
-                    id: 'kiyomizu', 
-                    region: '히가시야마', 
-                    spotName: '청수사(기요미즈데라)', 
-                    sub: '절벽 위 무대에서 내려다보는 분홍 바다', 
-                    img: 'images/kiyomizutera_1.jpg', 
-                    vibe: '웅장함', 
-                    crowd: '최상', 
-                    timeline: { start: '3월 24일', peak: '3월 31일', end: '4월 7일', progress: 0 },
-                    history: '유네스코 세계문화유산으로, 못을 하나도 사용하지 않고 세워진 목조 무대가 유명합니다. 봄이면 1,500그루의 벚꽃이 사찰을 감쌉니다.',
-                    station: '기요미즈미치(버스)',
-                    tips: [
-                        '야간 특별 관람(라이트업) 기간을 반드시 확인하세요. 밤의 푸른 조명이 벚꽃과 어우러져 환상적입니다',
-                        '니넨자카, 산넨자카 산책로와 연결하면 최고의 코스이지만 계단이 많으니 편한 신발을 추천합니다',
-                        '매년 봄에만 열리는 특별 공개 구역이 있으니 현장 안내판을 꼭 확인하세요'
-                    ],
-                    cafes: [
-                        { name: "카스미", rank: 1, score: "4.2", desc: "청수사 근처 말차 디저트 맛집", link: "Kasumi Kyoto" },
-                        { name: "스타벅스 니넨자카", rank: 2, score: "4.4", desc: "다다미가 있는 세계 유일의 매장", link: "スターバックス コーヒー 京都二寧坂ヤサカ茶屋店" },
-                        { name: "후지나미", rank: 3, score: "4.1", desc: "당고와 녹차 세트가 유명한 곳", link: "藤菜美" }
-                    ],
-                    restaurants: [
-                        { name: "오카베야", rank: 1, score: "4.3", desc: "교토 전통 유바 요리 전문", link: "おかべ家" },
-                        { name: "가츠쿠라", rank: 2, score: "4.5", desc: "바삭함이 일품인 교토식 돈카츠", link: "かつくら 名代とんかつ" },
-                        { name: "유도후 분쇼고", rank: 3, score: "4.2", desc: "정갈한 교토식 두부 요리", link: "湯豆腐 噴水" }
-                    ]
-                },
-                { 
-                    id: 'arashiyama', 
-                    region: '아라시야마', 
-                    spotName: '도게츠교 & 카메야마 공원', 
-                    sub: '산 전체가 분홍빛으로 물드는 절경', 
-                    img: 'images/arashiyama_1.jpg', 
-                    vibe: '자연적', 
-                    crowd: '매우 높음', 
-                    lat: 35.0129, 
-                    lng: 135.6776,
-                    timeline: { start: '3월 25일', peak: '4월 1일', end: '4월 8일', progress: 0 },
-                    history: '달이 건너는 다리라는 뜻의 도게츠교와 주변 산들이 어우러진 명승지입니다. 헤이안 시대부터 귀족들의 휴양지로 사랑받아온 교토 최고의 풍경 명소입니다.',
-                    station: '아라시야마역(한큐/란덴)',
-                    tips: [
-                        '사가노 토로코 열차(관광열차)를 미리 예약하면 호즈강 계곡 사이 피어난 벚꽃을 가장 가까이서 감상할 수 있습니다',
-                        '강변에서 보트를 대여해 도게츠교를 배경으로 여유롭게 벚꽃놀이를 즐겨보세요',
-                        '치쿠린(대나무 숲)은 벚꽃은 없지만 도보로 바로 연결되니 함께 둘러보는 코스를 강력 추천합니다'
-                    ],
-                    cafes: [
-                        { name: "아라비카 커피(%)", rank: 1, score: "4.4", desc: "도게츠교 뷰가 보이는 세계적 명소", link: "Arabica Kyoto Arashiyama" },
-                        { name: "사가노유", rank: 2, score: "4.2", desc: "공중목욕탕을 개조한 이색적인 분위기의 카페", link: "사가노유" },
-                        { name: "리락쿠마 차야", rank: 3, score: "4.1", desc: "귀여운 캐릭터 디저트가 가득한 곳", link: "Rilakkuma Sabo Arashiyama" }
-                    ],
-                    restaurants: [
-                        { name: "요시무라", rank: 1, score: "4.3", desc: "강을 바라보며 먹는 수제 소바 정식", link: "아라시야마 요시무라" },
-                        { name: "타이차즈케 하누", rank: 2, score: "4.6", desc: "고소한 참깨 소스 도미 오차즈케", link: "아라시야마 하누" },
-                        { name: "히로카와", rank: 3, score: "4.5", desc: "교토에서 손꼽히는 장어덮밥 전문점", link: "우나기 히로카와" }
-                    ]
-                }
-            ],
-        famous: [
-                { 
-                    id: 'maruyama', 
-                    region: '기온', 
-                    spotName: '마루야마 공원', 
-                    sub: '교토의 여왕, 거대 수양벚꽃', 
-                    icon: 'fa-tree', 
-                    img: 'images/maruyama_1.jpg', 
-                    lat: 35.0037, lng: 135.7815,
-                    timeline: { start: '3월 22일', peak: '3월 29일', end: '4월 5일', progress: 0 },
-                    history: '교토에서 가장 오래된 공원으로, 중앙의 거대한 "시다레자쿠라(수양벚꽃)"는 밤에 조명을 받으면 마치 불꽃이 터지는 듯한 절경을 선사합니다.',
-                    station: '기온시조역',
-                    tips: [
-                        '공원 내 야타이(길거리 음식점)에서 야키소바나 당고를 사서 노천 자리에 앉아 즐기는 것이 이곳의 묘미입니다.',
-                        '수양벚꽃은 일반 벚꽃보다 개화가 약간 빠르니 일정을 잡을 때 참고하세요.',
-                        '바로 옆 야사카 신궁과 연결되어 있어 함께 둘러보기 좋습니다.'
-                    ],
-                    cafes: [
-                        { name: "기온 키타가와 한베", rank: 2, score: "4.4", desc: "150년 전통의 고급 말차 디저트 카페", link: "Gion Kitagawa Hanbee" },
-                        { name: "카기젠 요시후사", rank: 2, score: "4.5", desc: "쿠즈키리(칡국수)가 유명한 전통 디저트 맛집", link: "鍵善良房 四条本店" }
-                    ],
-                    restaurants: [
-                        { name: "이즈우", rank: 1, score: "4.4", desc: "교토식 고등어 초밥의 명가", link: "いづう" },
-                        { name: "기온 후지토라", rank: 2, score: "4.1", desc: "고택에서 즐기는 정갈한 솥밥 정식", link: "祇園 藤寅" }
-                    ]
-                },
-                { 
-                    id: 'nijo', 
-                    region: '나카교구', 
-                    spotName: '니조성', 
-                    sub: '성벽 따라 흐르는 화려한 야간 벚꽃', 
-                    icon: 'fa-fort-awesome', 
-                    img: 'images/nijyo_1.jpg', 
-                    lat: 35.0142, lng: 135.7482,
-                    timeline: { start: '3월 25일', peak: '4월 1일', end: '4월 8일', progress: 0 },
-                    history: '도쿠가와 이에야스가 세운 성으로, 50종류 이상의 다양한 벚꽃 품종이 심어져 있어 개화 기간이 매우 깁니다',
-                    station: '니조조마에역',
-                    tips: [
-                        '야간 라이트업 행사 시 성벽에 투사되는 프로젝션 맵핑은 교토 최고의 볼거리 중 하나입니다',
-                        '복도를 걸을 때 나는 "휘파람새 소리(나이팅게일 플로어)"를 직접 들어보세요',
-                        '성 내부 정원인 세이류엔은 벚꽃과 정원이 어우러진 최고의 사진 명당입니다'
-                    ],
-                    cafes: [
-                        { name: "클램프 커피 사라사", rank: 1, score: "4.4", desc: "식물에 둘러싸인 빈티지한 로스터리", link: "Clamp Coffee Sarasa" },
-                        { name: "사보 마에다", rank: 2, score: "4.3", desc: "고택에서 즐기는 전통 말차와 디저트", link: "茶房 前田" }
-                    ],
-                    restaurants: [
-                        { name: "멘야 유코", rank: 1, score: "4.5", desc: "조개 육수가 일품인 세련된 라멘", link: "Men-ya Yukou" },
-                        { name: "교토 가츠규", rank: 2, score: "4.2", desc: "교토에서 시작된 정통 규카츠 전문점", link: "牛カツ京都勝牛 三条河原町店" }
-                    ]
-                }
-            ],
+            { 
+                id: 'maruyama', 
+                region: '추오구', 
+                spotName: '마루야마 공원', 
+                sub: '벚꽃과 매화가 동시에 피어나는 삿포로 최고의 성지', 
+                img: 'images/image-1714433737244.jpeg',
+                transport: '지하철 토자이선 마루야마코엔역(T06) 하차 후 3번 출구에서 도보 약 5분',
+                timeline: { start: '4월 26일', peak: '4월 30일', end: '5월 5일', progress: 0 },
+                station: '마루야마코엔역',
+                tips: [
+                    '역에서 공원까지 이어지는 길에 예쁜 베이커리와 카페가 많으니 구경하며 걷기 좋습니다',
+                    '신궁 내부의 찻집 판로카에서 파는 구운 떡 판로무이는 이곳에서만 맛볼 수 있는 정성 어린 별미입니다',
+                    '벚꽃과 매화가 같은 시기에 피어나기 때문에 두 가지 향기를 동시에 느낄 수 있는 세심한 즐거움이 있습니다'
+                ],
+                cafes: [
+                    { name: "카페 모리히코 (森彦)", rank: 1, score: "4.6", desc: "빨간 지붕 고택에서 즐기는 정성 가득한 핸드드립 커피", link: "모리히코" },
+                    { name: "롯카테 마루야마점", rank: 2, score: "4.4", desc: "정갈한 일본식 디저트와 마루야마 공원 뷰", link: "六花亭 円山店" }
+                ],
+                restaurants: [
+                    { name: "징기스칸 다루마", rank: 1, score: "4.4", desc: "삿포로 꽃놀이 뒤엔 역시 육즙 가득한 양고기", link: "成吉思汗だるま 本店" },
+                    { name: "마루야마 판케키", rank: 2, score: "4.3", desc: "입안에서 녹아내리는 구름 같은 수플레 팬케이크", link: "Maruyama Pancake" }
+                ]
+            },
+                        { 
+                id: 'moerenuma', 
+                region: '히가시구', 
+                spotName: '모에레누마 공원', 
+                sub: '예술 공간 속에 펼쳐진 2,000그루의 사쿠라노모리', 
+                img: 'images/moerenuma_1.jpg', 
+                transport: '지하철 칸죠도오리히가시역(토호선) 하차 후, 중앙버스[동61] 또는 [동79]번 탑승하여 모에레누마 공원 동쪽 입구 정류장에서 하차',
+                timeline: { start: '4월 28일', peak: '5월 2일', end: '5월 8일', progress: 0 },
+                history: '조각가 이사무 노구치가 "공원 전체를 하나의 조각으로"라는 컨셉으로 설계한 광대한 대지 예술입니다. 벚꽃이 가득한 사쿠라노모리(벚꽃 숲)는 이 거대한 작품의 일부입니다.',
+                station: '버스 이용 권장',
+                tips: [
+                    '공원 면적이 엄청나게 넓으므로 입구 근처 렌털 샵에서 자전거를 대여하는 것을 강력 추천합니다',
+                    '유리 피라미드 HIDAMARI 내부에 들어가면 벚꽃과 어우러진 공원 전체의 풍경을 세밀하게 감상할 수 있습니다',
+                    '벚꽃 숲 사이사이에 숨겨진 독특한 디자인의 놀이기구 조각들을 찾아보는 재미가 쏠쏠합니다'
+                ],
+                cafes: [
+                    { name: "Panier", rank: 1, score: "4.2", desc: "유리 피라미드 안에서 즐기는 디저트", link: "ガラスのピラミッド Panier" },
+                    { name: "Cafe Moeru", rank: 1, score: "4.1", desc: "소박하지만 느낌 좋은 카페", link: "Cafe Moeru" }
+                ],
+                restaurants: [
+                    { name: "레스토랑 랑팡키레브", rank: 1, score: "4.6", desc: "공원 전체를 조망하며 즐기는 고품격 프렌치 다이닝", link: "ランファン・キ・レーヴ" },
+                    { name: "Tonkatsu Kazoku", rank: 1, score: "4.6", desc: "현지 돈가스 원탑 맛집", link: "とんかつ家族" }
+                ]
+            },
+            { 
+                id: 'makomanai', 
+                region: '미나미구', 
+                spotName: '마코마나이 공원', 
+                sub: '1,000그루의 벚꽃이 만드는 압도적인 분홍빛 물결', 
+                img: 'images/makomanai_1.jpg',
+                // 🚩 요청하신 대로 상세 페이지용 transport 정리
+                transport: '지하철 난보쿠선 마코마나이역(N16, 종점) 하차 후 1번 출구에서 도보 약 15~20분, 또는 역 앞 버스 터미널에서 [남90]번 또는 [남95]번 버스 탑승 후 마코마나이 공원 정류장 하차',
+                timeline: { start: '4월 27일', peak: '5월 2일', end: '5월 8일', progress: 0 },
+                history: '1972년 삿포로 동계 올림픽의 주 무대였던 곳으로, 지금은 삿포로를 대표하는 휴식처이자 거대한 벚꽃 숲으로 사랑받고 있습니다.',
+                tips: [
+                        '역에서 공원까지 가는 길에 마코마나이 강을 따라 산책로가 잘 조성되어 있어, 날씨가 좋다면 걷는 것을 추천합니다',
+                        '공원 규모가 매우 크기 때문에 돗자리와 간단한 도시락을 챙겨가서 여유 있게 피크닉을 즐기기 가장 좋은 곳입니다',
+                        '일반 벚꽃(소메이요시노)이 지기 시작할 때 겹벚꽃(야에자쿠라)이 만개하여 5월 초순까지도 충분히 아름다운 꽃놀이가 가능합니다' 
+                ],
+                cafes: [
+                    {
+                        name: "CAFE de ROMAN Moiwa", 
+                        rank: 1, 
+                        score: "4.1", 
+                        desc: "모이와 산의 중간에 위치한 분위기 좋은 카페", 
+                        link: "カフェ・ド・ロマン 藻岩店" 
+                    },
+                    { 
+                        name: "Rokkatei Makomanai Hall Store", 
+                        rank: 1, 
+                        score: "4.1", 
+                        desc: "통창 밖으로 보이는 숲뷰, 삿포로를 대표하는 제과점", 
+                        link: "六花亭 真駒内ホール店" 
+                    }
+                ],
+                restaurants: [
+                    {
+                        name: "Asahi Sushi", 
+                        rank: 1, 
+                        score: "4.1", 
+                        desc: "가성비 갑 스시집", 
+                        link: "朝日鮨"
+                    },
+                    { 
+                        name: "Heibon Kujira-ya Ramen", 
+                        rank: 1, 
+                        score: "4.1", 
+                        desc: "법의 해산물 스프와 독특한 세가지 종류의 스파이시가 올려진 라멘이 맛있기로 유명한 곳", 
+                        link: "平凡くじら屋" 
+                    }
+                ]
+            }
+        ],
+        
 
-        // 근교 명소
+        // 🌟 Famous: SNS 핫플레이스 (카페/레스토랑 완비)
+        famous: [
+
+            { 
+                id: 'odori', 
+                region: '추오구', 
+                spotName: '오도리 공원', 
+                sub: '삿포로 TV 타워를 배경으로 한 도심 꽃놀이', 
+                img: 'images/odori_1.jpg', 
+                transport: '지하철 오도리역(난보쿠선·토자이선·토호선) 하차 후 2번, 5번, 6번, 8번 또는 27번 출구와 바로 연결',
+                timeline: { start: '4월 26일', peak: '4월 30일', end: '5월 5일' },
+                station: '오도리역',
+                tips: [
+                    '공원의 1초메(TV타워 쪽)부터 12초메까지 길게 뻗어 있어, TV 타워 전망대에서 내려다보는 뷰가 가장 아름답습니다',
+                    '삿포로역에서부터 이어진 지하보도(치카호)를 이용하면 날씨에 상관없이 쾌적하게 걸어올 수 있습니다'
+                ],
+                cafes: [
+                    { name: "바리스타트 커피", rank: 1, score: "4.5", desc: "홋카이도산 우유를 선택할 수 있는 라떼 맛집", link: "Baristart" },
+                    { name: "파르페 커피 술 사토", rank: 2, score: "4.4", desc: "밤에 더 화려한 삿포로식 마감 파르페 전문점", link: "佐藤堂本店" }
+                ],
+                restaurants: [
+                    { name: "스프카레 가라쿠 삿포로 본점", rank: 1, score: "4.3", desc: "TV 타워 근처 가볍게 즐기는 로컬 비스트로", link: "スープカレーGARAKU札幌本店" },
+                    { name: "토시 함바그", rank: 1, score: "4.3", desc: "촉촉하고 고소한 현지인 추천 수제 함바그", link: "手作りハンバーグ工房 Toshi" }
+                ]
+            },
+            { 
+                id: 'nakajima', 
+                region: '추오구', 
+                spotName: '나카지마 공원', 
+                sub: '푸른 호수와 수양벚꽃의 낭만적인 조화', 
+                img: 'images/nakajima_1.jpg', 
+                transport: '지하철 난보쿠선 나카지마코엔역(N09) 하차 후 1번 또는 3번 출구와 바로 연결',
+                timeline: { start: '4월 25일', peak: '4월 29일', end: '5월 4일' },
+                station: '나카지마코엔역',
+                tips: [
+                    '역에서 내리자마자 바로 공원이 시작되어 동선이 매우 편리합니다',
+                    '창포 연못(菖蒲池)에서 보트를 빌려 타고 수면 위로 늘어진 벚꽃을 감상하는 것을 강력 추천해요',
+                    '국가 중요 문화재인 호헤이칸 건물의 하늘색 외벽은 벚꽃과 함께 찍을 때 가장 예쁜 포토존입니다'
+                ],
+                cafes: [
+                    { name: "스무치 커피 스탠드", rank: 2, score: "4.2", desc: "공원 산책하며 마시기 좋은 뉴욕 감성 커피", link: "スムーチコーヒースタンド" },
+                    { name: "Michikusa Sand Cafe - coffee trailer", rank: 1, score: "5.0", desc: "깊은 풍미의 커피가 유명한 숨은 아지트", link: "Michikusa Sand Cafe - coffee trailer" }
+                ],
+                restaurants: [
+                    { name: "테라스 레스토랑 키타라", rank: 1, score: "4.1", desc: "밖을 보면서 먹는 이탈리아 음식과 예쁜 디저트가 일품", link: "テラスレストラン キタラ" },
+                    { name: "누쿠미", rank: 2, score: "4.3", desc: "완벽에 가까운 음식의 미슐랭 2 스타 가이세키 레스토랑", link: "温味" }
+                ]
+            }
+        ],
+
+        // 🚌 Suburbs: 근교 여행지 (카페/레스토랑 완비)
         suburbs: [
-                { 
-                    id: 'daigoji', 
-                    region: '후시미', 
-                    spotName: '다이고지 사찰', 
-                    sub: '도요토미 히데요시가 사랑한 벚꽃', 
-                    img: 'images/daigoji_1.jpg', 
-                    lat: 34.9510, lng: 135.8196,
-                    transport: '교토역 기준 지하철 40분',
-                    timeline: { start: '3월 20일', peak: '3월 27일', end: '4월 3일', progress: 0 },
-                    history: '도요토미 히데요시가 마지막으로 성대한 벚꽃 파티를 열었던 장소로 유명하며, 일본에서 가장 오래된 오층탑을 보유하고 있습니다',
-                    station: '다이고역',
-                    tips: [
-                        '삼보인 정원은 벚꽃과 연못의 조화가 교토에서 가장 아름다운 곳 중 하나입니다',
-                        '규모가 매우 넓으니 입구에서 통합 관람권을 구매하는 것이 경제적입니다',
-                        '산 위쪽의 상다이고까지 가려면 등산이 필요하니 가벼운 마음으로 가실 분은 하다이고(아래쪽) 위주로 보세요'
-                    ],
-                    cafes: [
-                        { name: "다이고 카페 & 바", rank: 1, score: "4.7", desc: "다이고지 근처의 고즈넉한 분위기 맛집", link: "醍醐cafe＆bar" }
-                    ],
-                    restaurants: [
-                        { name: "수 르 세리지에", rank: 1, score: "4.2", desc: "교토에서 즐기는 양식집", link: "Sous Le Cerisier" }
-                    ]
-                },
-                { 
-                    id: 'uji', 
-                    region: '우지', 
-                    spotName: '뵤도인 & 우지강', 
-                    sub: '녹차의 고향에서 즐기는 여유', 
-                    img: 'images/byodoin_1.jpg', 
-                    lat: 34.8893, lng: 135.8077,
-                    transport: '교토역 기준 JR 30분',
-                    timeline: { start: '3월 24일', peak: '3월 31일', end: '4월 7일', progress: 0 },
-                    history: '10엔 동전 뒷면의 모델인 뵤도인 봉황당이 있는 곳으로, 우지강변을 따라 피는 벚꽃길이 매우 평화롭습니다.',
-                    station: '우지역(JR)',
-                    tips: [
-                        '우지는 녹차의 성지입니다. 어디를 가든 녹차 아이스크림이나 녹차 우동을 꼭 드셔보세요',
-                        '강 중앙의 섬(나카노시마)은 피크닉 하기에 최적의 장소입니다',
-                        '뵤도인 내부 박물관(호쇼칸)은 현대적인 건축미와 국보급 유물을 볼 수 있어 추천합니다'
-                    ],
-                    cafes: [
-                        { name: "나카무라 토키치", rank: 1, score: "4.6", desc: "교토 최고 명성의 말차 카페 본점", link: "中村藤吉本店" },
-                        { name: "뵤도인 오모테산도 치쿠린", rank: 2, score: "4.5", desc: "화려한 말차 파르페의 성지", link: "伊藤久右衛門 本店" }
-                    ],
-                    restaurants: [
-                        { name: "우지 가와이", rank: 1, score: "4.3", desc: "강변 풍경과 함께 즐기는 정갈한 가이세키", link: "平等院表参道 竹林" }
-                    ]
-                }
-            ],
+            { 
+                id: 'otaru', 
+                region: '오타루', 
+                spotName: '테미야 공원', 
+                sub: '오타루항 바다를 내려다보는 절벽 위 벚꽃 언덕', 
+                img: 'images/temiya_1.jpg', 
+                timeline: { start: '4월 28일', peak: '5월 2일', end: '5월 8일' },
+                transport:'오타루역 앞 중앙버스 터미널 3번 승강장에서 [11번] 또는 [12번] 버스 탑승 후 테미야(手宮) 정류장 하차(약 10분), 이후 언덕길을 따라 도보 10분',
+                station: '오타루역',
+                tips: [
+                    '공원 가장 높은 곳에 올라가면 오타루항의 파란 바다와 분홍색 벚꽃이 한 화면에 담기는 최고의 포토스팟이 나옵니다',
+                    '언덕길이 다소 가파를 수 있으니 편안한 운동화를 신으시는 것을 권장합니다',
+                    '관광객이 몰리는 오타루 운하에 비해 고즈넉하고 조용하게 꽃놀이를 즐기기 좋습니다'
+                ],
+                cafes: [
+                    { name: "키타이치 홀", rank: 1, score: "4.4", desc: "167개의 석유 램프가 켜진 신비로운 공간", link: "北一硝子 北一ホール" },
+                    { name: "르타오 본점", rank: 2, score: "4.3", desc: "오타루의 상징, 입안에서 녹는 치즈케이크", link: "小樽洋菓子舗ルタオ本店" }
+                ],
+                restaurants: [
+                    { name: "쿠키젠", rank: 1, score: "4.7", desc: "미쉐린 가이드에 소개된 정성 어린 스시 한 점", link: "Kukizen" },
+                    { name: "나루토 본점", rank: 2, score: "4.1", desc: "겉바속촉 오타루 명물 영계 정식", link: "若鶏時代 なると 本店" }
+                ]
+            },
+            { 
+                id: 'tenguyama', 
+                region: '오타루', 
+                spotName: '텐구산 로프웨이', 
+                sub: '하늘과 바다 사이, 오타루를 굽어보는 수령 100년의 벚꽃', 
+                img: 'images/tengu_1.jpg', 
+                transport: '오타루역 앞 4번 승강장에서 [9번] 텐구산 로프웨이행 버스 탑승 후 종점 하차(약 15분). 이후 로프웨이로 정상까지 이동', 
+                timeline: { start: '4월 29일', peak: '5월 3일', end: '5월 9일', progress: 0 },
+                history: '오타루의 상징적인 산으로, 정상에는 수령 100년이 넘은 외따로 떨어진 벚꽃나무 텐구자쿠라가 유명합니다.',
+                station: '오타루 텐구산 로프웨이',
+                tips: [
+                        '정상 전망대에서는 오타루 시내뿐만 아니라 멀리 샤코탄 반도까지 조망할 수 있는 세밀한 풍경이 펼쳐집니다',
+                        '밤이 되면 하트 모양의 텐구자쿠라에 조명이 켜지는데, 오타루의 야경과 어우러져 매우 정성스러운 분위기를 연출합니다',
+                        '로프웨이 승강장 근처의 텐구 신사에서 코를 만지면 소원이 이루어진다는 전설이 있으니 한 번 들러보세요'
+                ],
+                cafes: [
+                    { 
+                        name: "텐구 카페 (TENGU CAFE)", 
+                        rank: 1, 
+                        score: "4.2", 
+                        desc: "통창 너머로 오타루 시내 파노라마 뷰가 펼쳐지는 하늘 위 휴식처", 
+                        link: "Tenguyama Cafe" 
+                    }
+                ],
+                restaurants: [
+                    { 
+                        name: "오타루 바인 (Otaru Vine)", 
+                        rank: 1, 
+                        score: "4.0", 
+                        desc: "하산 후 들르기 좋은 곳. 19세기 옛 은행 건물을 개조한 고즈넉한 와인 레스토랑", 
+                        link: "ワイン＆カフェレストラン 小樽バイン" 
+                    }
+                ]
+            },
+            { 
+                id: 'ishizaki', 
+                region: '하코다테', 
+                spotName: '이시자키 지누시카이 신사', 
+                sub: '바다로 이어지는 겹벚꽃 터널, 하코다테 봄의 대미', 
+                img: 'images/hakotate_1.jpeg', // 실제 경로에 맞춰 수정
+                transport: 'JR 하코다테역에서 버스(91계통) 탑승 후 이시자키 하차(약 50분) 후 도보 15분',
+                timeline: { start: '5월 5일', peak: '5월 12일', end: '5월 18일' },
+                tips: [
+                        '겹벚꽃은 일반 벚꽃보다 만개 시기가 1~2주 늦으므로, 5월 중순 일정을 잡으시는 것이 가장 정성스러운 풍경을 보는 방법입니다',
+                        '버스 정류장에서 내려 신사로 걸어가는 길에 펼쳐지는 쓰가루 해협의 바다 풍경도 놓치지 마세요',
+                        '대중교통 이용 시 돌아가는 버스 배차 간격이 매우 길기 때문에, 내리신 곳에서 반대편 버스 시간표를 미리 사진 찍어두시는 세심함이 필요합니다'
+                ],
+                cafes: [
+                    {
+                        name: "홍차전문점 하비스트", 
+                        rank: 1, 
+                        score: "4.4", 
+                        desc: "조용한 분위기에서 즐기는 홍차와 스콘", 
+                        link: "紅茶専門店ハーヴェスト" 
+                    },
+                    {
+                        name: "쁘띠멜뷰 하코다테에키마에", 
+                        rank: 2, 
+                        score: "4.2", 
+                        desc: "귀여운 가게 한정 상품과 맛있는 디저트가 한가득", 
+                        link: "プティ・メルヴィーユ 函館駅前店"    
+                    }
+                ],
+                restaurants: [
+                    { 
+                        name: "럭키 삐에로 하코다테에키마에점", 
+                        rank: 1, 
+                        score: "4.0", 
+                        desc: "하코다테의 명물! 신사에서 돌아오는 길에 들르기 좋은 테마파크형 버거 전문점", 
+                        link: "ラッキーピエロ 函館駅前店" 
+                    }
+                ]
+            },
+            { 
+                id: 'trappist', 
+                region: '하코다테 근교', 
+                spotName: '트라피스트 대수도원', 
+                sub: '하늘로 뻗은 가로수길 끝에서 만나는 고요한 안식', 
+                img: 'images/trappist_1.jpg', 
+                // 🚩 상세 페이지용 transport 내용
+                transport: '도난 이사리비 철도 오시마토베쓰역(渡島当別駅) 하차 후 도보 약 20분 (하코다테역에서 열차로 약 40분 소요)',
+                timeline: { start: '5월 1일', peak: '5월 6일', end: '5월 12일', progress: 0 },
+                history: '1896년 프랑스에서 온 수사들이 설립한 일본 최초의 남성 트라피스트 수도원입니다. 로마네스크 양식의 붉은 벽돌 건물과 쭉 뻗은 진입로가 이국적인 풍경을 자아냅니다.',
+                tips: [
+                    '기차역에서 수도원까지 이어지는 로마로 통하는 길은 삼나무와 벚꽃이 어우러져 걷는 것만으로도 정화되는 기분을 줍니다',
+                    '매점(직영 샵)에서 판매하는 소프트크림은 이곳의 버터와 우유를 사용해 풍미가 압도적이니 꼭 드셔보세요',
+                    '수도원 내부는 남성만 예약제로 참관 가능하지만, 외부 정원과 가로수길만으로도 충분히 방문할 가치가 있는 세밀한 아름다움을 지닌 곳입니다'
+                ],
+                cafes: [
+                    { 
+                        name: "트라피스트 수도원 매점", 
+                        rank: 1, 
+                        score: "4.2", 
+                        desc: "전설적인 트라피스트 버터 쿠키와 진한 우유 맛의 소프트크림을 맛볼 수 있는 곳", 
+                        link: "トラピスト修道院売店" 
+                    }
+                ],
+                restaurants: [
+                    { 
+                        name: "식사처 시즈카와", 
+                        rank: 2, 
+                        score: "4.1", 
+                        desc: "현지인들이 즐겨 찾는 로컬 맛집. 바삭한 돈카츠 정식과 신선한 생선 구이가 일품인 정성스러운 공간", 
+                        link: "食事処 志づ川" 
+                    }
+                ]
+            }
+        ],
             // data 객체 마지막 부분에 추가
             entertainment: [
                {
@@ -532,27 +651,19 @@
             travelBooking: [
                 {
                     id: 'flights',
-                    name: '교토 특가 항공권 검색',
-                    desc: '간사이 공항 실시간 최저가 비교',
+                    name: '삿포로 최저가 항공권',
+                    desc: '인천/부산 출발 실시간 검색',
                     icon: 'fa-plane-up',
                     color: 'from-sky-400 to-blue-600',
-                    link: 'https://skyscanner.pxf.io/2RrVJa' 
+                    link: 'https://skyscanner.pxf.io/NGK2mb'
                 },
                 {
                     id: 'hotels',
-                    name: '명소 근처 인기 호텔',
-                    desc: '교토역 인근 숙소 찾기',
+                    name: '삿포로 인기 호텔',
+                    desc: '벚꽃 축제장 도보 이동 가능 숙소',
                     icon: 'fa-hotel',
                     color: 'from-indigo-500 to-purple-600',
                     link: 'https://3ha.in/r/372593'
-                },
-                {
-                    id: 'osaka-review',
-                    name: '에디터의 간사이 호텔 실박 후기',
-                    desc: '직접 묵어보고 검증한 추천 숙소',
-                    icon: 'fa-pen-to-square',
-                    color: 'from-amber-400 to-orange-500',
-                    link: 'https://blog.naver.com/kuki0204'
                 }
             ]
         };
@@ -569,7 +680,7 @@
         // Search Map Shared Function
         function searchMap(keyword) {
             if (!keyword) return;
-            const finalKeyword = keyword.includes('교토') ? keyword : `교토 ${keyword}`;
+            const finalKeyword = keyword.includes('삿포로') ? keyword : `삿포로 ${keyword}`;
             window.open(`https://www.google.com/maps/search/$?q=${encodeURIComponent(finalKeyword)}`, '_blank');
         }
 
@@ -592,8 +703,8 @@
                     <img src="${spot.img}" class="w-full aspect-[3/4] object-cover group-hover:scale-110 transition-transform duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
                     <div class="absolute inset-x-0 bottom-0 p-8 text-left">
-                        <span class="inline-block px-2.5 py-1 rounded-lg bg-primary text-[9px] font-black text-white mb-3 uppercase tracking-tighter">${spot.spotName}</span>
-                        <h4 class="text-white text-3xl font-black mb-1">${spot.region}</h4>
+                        <span class="inline-block px-2.5 py-1 rounded-lg bg-primary text-[9px] font-black text-white mb-3 uppercase tracking-tighter">${spot.region}</span>
+                        <h4 class="text-white text-3xl font-black mb-1">${spot.spotName}</h4>
                         <p class="text-white/70 text-[11px] font-bold line-clamp-1">${spot.sub}</p>
                     </div>
                 </div>
@@ -604,14 +715,14 @@
             document.getElementById('famousSpotsContainer').innerHTML = data.famous.map(spot => `
                 <div onclick="openDetail('${spot.id}')" class="flex-shrink-0 w-[72vw] md:w-[280px] bg-white dark:bg-white/5 p-7 rounded-[2.5rem] border border-white/60 dark:border-white/10 active:scale-95 transition-all cursor-pointer shadow-sm snap-center text-left">
                     <span class="inline-block text-[10px] font-black text-primary bg-primary/10 px-2 py-0.5 rounded-full mb-3 uppercase tracking-wider">
-                        ${spot.spotName}
+                        ${spot.region}
                     </span>
                     
                     <div class="size-12 rounded-2xl bg-primary/5 flex items-center justify-center text-primary mb-4">
                         <i class="fa-solid ${spot.icon || 'fa-location-dot'} text-xl"></i>
                     </div>
                     
-                    <h4 class="font-black text-xl mb-1">${spot.region}</h4>
+                    <h4 class="font-black text-xl mb-1">${spot.spotName}</h4>
                     
                     <p class="text-[11px] text-gray-400 font-bold line-clamp-2">${spot.sub || '현지 인기 명소'}</p>
                 </div>
@@ -624,20 +735,17 @@
                     <img src="${spot.img}" class="h-48 w-full rounded-[2.2rem] object-cover mb-6">
                     
                     <span class="inline-block text-[10px] font-black text-primary bg-primary/10 px-2 py-0.5 rounded-full mb-3 uppercase tracking-wider">
-                        ${spot.spotName}
+                        ${spot.region}
                     </span>
 
-                    <h4 class="font-black text-2xl mb-2 text-[#181111] dark:text-white">${spot.region}</h4>
+                    <h4 class="font-black text-2xl mb-2 text-[#181111] dark:text-white">${spot.spotName}</h4>
                     
                     <p class="text-[11px] text-gray-400 font-bold mb-4 line-clamp-1">${spot.sub}</p>
                     
-                    <span class="inline-flex items-center gap-2 px-4 py-1.5 bg-background-light dark:bg-white/10 rounded-full text-[9px] font-black text-primary uppercase">
-                        <i class="fa-solid fa-train"></i> 
-                        ${spot.transport} 
-                    </span>
-                </div>
+                    </div>
             `).join('');
         }
+
         function renderEntertainment() {
             const container = document.getElementById('entertainmentContainer');
             
@@ -758,29 +866,49 @@
                     <h2 class="font-black text-lg">${spot.spotName}</h2>
                     <button onclick="addToSchedule('${spot.id}')" class="p-2 text-primary active:scale-75 transition-transform"><i class="fa-solid fa-heart"></i></button>
                 </div>
+
                 <div class="flex-1 overflow-y-auto hide-scrollbar pb-32">
                     <div class="relative w-full aspect-video md:aspect-[21/9]"><img src="${spot.img}" class="w-full h-full object-cover"></div>
+                    
                     <div class="pt-10 px-0 text-left">
-                        <div class="px-8"><h2 class="text-4xl font-black mb-4 tracking-tighter">${spot.spotName}</h2></div>
+                        <div class="px-8 mb-6">
+                            <h2 class="text-4xl font-black mb-2 tracking-tighter">${spot.spotName}</h2>
+                        </div>
                         
+                        <div class="px-8 mb-10">
+                            <div class="flex items-start gap-4 p-5 bg-primary/5 rounded-[2rem] border border-primary/10">
+                                <div class="size-10 shrink-0 bg-primary rounded-2xl flex items-center justify-center text-white text-sm shadow-lg shadow-primary/20">
+                                    <i class="fa-solid fa-bus-simple"></i>
+                                </div>
+                                <div class="text-left">
+                                    <p class="text-[10px] font-black text-primary uppercase mb-1 tracking-tighter">가는 방법 (Transport)</p>
+                                    <p class="text-[13px] font-bold text-gray-700 dark:text-gray-200 leading-snug">
+                                        ${spot.transport || '정보 준비 중'}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="px-8 mb-12">
                             <div class="p-6 bg-gray-50 dark:bg-white/5 rounded-3xl border border-gray-100 dark:border-white/5">
-                                <h3 class="flex items-center gap-2 text-sm font-black mb-10"><i class="fa-solid fa-calendar-check text-primary"></i> 벚꽃 타임라인</h3>
+                                <h3 class="flex items-center gap-2 text-sm font-black mb-10">
+                                    <i class="fa-solid fa-calendar-check text-primary"></i> 벚꽃 타임라인
+                                </h3>
                                 <div class="timeline-bar mb-10 relative">
                                     <div class="timeline-progress" style="width: ${spot.timeline?.progress || 50}%"></div>
                                     <div class="timeline-dot" style="left: ${spot.timeline?.progress || 50}%"></div>
                                     
                                     <div class="absolute -bottom-10 left-0 text-center">
                                         <p class="text-[8px] font-bold text-gray-400 uppercase">개화</p>
-                                        <p class="text-[10px] font-black">${spot.timeline?.start || '3.22'}</p>
+                                        <p class="text-[10px] font-black">${spot.timeline?.start || '4.25'}</p>
                                     </div>
                                     <div class="absolute -bottom-10 left-1/2 -translate-x-1/2 text-center">
                                         <p class="text-[8px] font-bold text-primary uppercase">만개</p>
-                                        <p class="text-[10px] font-black text-primary">${spot.timeline?.peak || '3.29'}</p>
+                                        <p class="text-[10px] font-black text-primary">${spot.timeline?.peak || '4.29'}</p>
                                     </div>
                                     <div class="absolute -bottom-10 right-0 text-center">
                                         <p class="text-[8px] font-bold text-gray-400 uppercase">낙화</p>
-                                        <p class="text-[10px] font-black">${spot.timeline?.end || '4.05'}</p>
+                                        <p class="text-[10px] font-black">${spot.timeline?.end || '5.05'}</p>
                                     </div>
                                 </div>
                             </div>
@@ -797,7 +925,7 @@
                         ${renderRanking('미식 가이드 TOP 5', spot.restaurants, 'fa-utensils', 'text-amber-500')}
 
                         <div class="px-8 flex items-center gap-3 mt-12 mb-10">
-                            <button onclick="window.open('https://www.google.com/maps/search/${encodeURIComponent(spot.spotName)}', '_blank')" 
+                            <button onclick="window.open('https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(spot.spotName)}', '_blank')" 
                                     class="flex-1 h-16 rounded-[2rem] bg-gray-100 dark:bg-white/10 text-gray-900 dark:text-white font-black text-sm active:scale-95 transition-all flex items-center justify-center gap-2">
                                 <i class="fa-solid fa-route"></i> 길찾기
                             </button>
@@ -809,65 +937,128 @@
                     </div>
                 </div>
             `;
-            overlay.classList.remove('hidden'); setTimeout(() => overlay.classList.remove('translate-x-full'), 10);
+            overlay.classList.remove('hidden'); 
+            setTimeout(() => overlay.classList.remove('translate-x-full'), 10);
         }
-
         function closeDetail() { const overlay = document.getElementById('detailOverlay'); overlay.classList.add('translate-x-full'); setTimeout(() => overlay.classList.add('hidden'), 400); }
         
         function renderMapMarkers() {
             if (map) return;
             
-            // 📍 1. 교토 시청 부근을 중심으로 지도 초기화
-            map = L.map('mapCanvas', { zoomControl: false, attributionControl: false }).setView([35.0116, 135.7681], 12);
-            
+            map = L.map('mapCanvas', { zoomControl: false, attributionControl: false }).setView([43.0611, 141.3564], 10);
             L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png').addTo(map);
 
-            // 📍 2. 교토 명소들의 실제 위경도 좌표 데이터
             const mapPositions = { 
-                'philosopher': [35.0270, 135.7958], 
-                'kiyomizu': [34.9949, 135.7850], 
-                'arashiyama': [35.0129, 135.6776], 
-                'maruyama': [35.0037, 135.7815], 
-                'nijo': [35.0142, 135.7482], 
-                'daigoji': [34.9510, 135.8196], 
-                'uji': [34.8893, 135.8077] 
+                // --- 벚꽃 명소 (기존 데이터) ---
+                'maruyama': [43.0532, 141.3041],     
+                'nakajima': [43.0456, 141.3534],     
+                'odori': [43.0601, 141.3508],        
+                'akarenga': [43.0639, 141.3479],     
+                'moerenuma': [43.1232, 141.4285],    
+                'otaru': [43.2104, 141.0021],        
+                'shizunai': [42.3482, 142.3921],
+
+                // --- 🚩 추가된 주요 랜드마크 (거점) ---
+                'sapporo_st': [43.0686, 141.3507],   // 삿포로역
+                'otaru_canal': [43.1990, 141.0021]   // 오타루 운하
             };
 
             Object.entries(mapPositions).forEach(([id, pos]) => {
-                // best, famous, suburbs 데이터를 모두 합쳐서 해당 ID의 장소 찾기
                 const spot = [...data.best, ...data.famous, ...data.suburbs].find(s => s.id === id); 
-                if (!spot) return;
+                
+                // 랜드마크 전용 기본 데이터 설정
+                const displaySpot = spot || {
+                    spotName: id === 'sapporo_st' ? '삿포로역' : '오타루 운하',
+                    region: id === 'sapporo_st' ? '삿포로' : '오타루',
+                    sub: id === 'sapporo_st' ? '여행의 시작점이자 교통의 중심' : '가스등이 켜지는 낭만적인 야경 명소',
+                    vibe: '랜드마크'
+                };
 
                 L.marker(pos, { 
                     icon: L.divIcon({ 
                         className: 'custom-marker', 
-                        html: `<div class="size-8 bg-white border-[3px] border-primary rounded-full flex items-center justify-center shadow-lg"><i class="fa-solid fa-location-dot text-primary"></i></div>` 
+                        html: `<div class="size-8 bg-white border-[3px] border-primary rounded-full flex items-center justify-center shadow-lg">
+                                <i class="fa-solid ${
+                                    id.includes('st') || id.includes('canal') 
+                                    ? 'fa-flag text-blue-500' // 랜드마크는 파란색 깃발 아이콘
+                                    : (id === 'shizunai' || id === 'moerenuma' ? 'fa-star text-yellow-500' : 'fa-location-dot text-primary')
+                                }"></i>
+                            </div>` 
                     }) 
                 }).addTo(map).on('click', () => { 
-                    map.flyTo(pos, 14); 
-                    showMapTooltip(spot); 
+                    const zoomLevel = (id === 'shizunai') ? 11 : 14;
+                    map.flyTo(pos, zoomLevel); 
+                    showMapTooltip(displaySpot); 
                 });
             });
+        }
+
+        // 📍 추가: 삿포로 중심지로 지도 리셋하는 함수
+        function setupMapResetFeature() { 
+            document.getElementById('resetMapBtn').onclick = () => { 
+                if(map) {
+                    map.flyTo([43.0611, 141.3564], 10); 
+                    hideMapTooltip(); 
+                }
+            }; 
         }
 
         function startCountdown() {
             const targetDate = new Date('2026-03-22T00:00:00');
             const timerEl = document.getElementById('countdownTimer');
             const statusEl = document.getElementById('forecastStatus');
+            
             function update() {
-                const now = new Date(); const dist = targetDate - now; const days = Math.floor(dist / (1000 * 60 * 60 * 24));
-                if (dist <= 0) { timerEl.innerText = "🌸 시즌 시작!"; statusEl.innerHTML = `교토 벚꽃 개화<br/><span class="underline decoration-4">지금부터 만개까지!</span>`; }
-                else if (days <= 7) { timerEl.innerText = `개화까지 D-${days}일`; statusEl.innerHTML = `교토 벚꽃 개화<br/><span class="underline decoration-4">D-Day 카운트다운</span>`; }
-                else { timerEl.innerText = "벚꽃 소식을 기다리는 중"; statusEl.innerHTML = `곧 다가올 교토의<br/><span class="underline decoration-4">분홍빛 설렘을 준비하세요</span>`; }
+                const now = new Date();
+                const dist = targetDate - now;
+                
+                // 이미지와 동일한 스타일의 밑줄 태그를 포함하여 업데이트
+                const underlineStyle = `style="text-decoration: underline; text-decoration-color: rgba(255, 255, 255, 0.4); text-decoration-thickness: 6px; text-underline-offset: 8px;"`;
+
+                if (dist <= 0) {
+                    timerEl.innerText = "🌸 시즌이 시작되었습니다!";
+                    statusEl.innerHTML = `삿포로의 벚꽃이<br/><span class="inline-block" ${underlineStyle}>활짝 피었습니다 !</span>`;
+                } else {
+                    const days = Math.floor(dist / (1000 * 60 * 60 * 24));
+                    timerEl.innerText = `개화까지 D-${days}일`; 
+                    statusEl.innerHTML = `아직 삿포로의 벚꽃은<br/><span class="inline-block" ${underlineStyle}>개화 전 !</span>`;
+                }
             }
-            update(); setInterval(update, 60000);
+            update();
+            setInterval(update, 1000);
         }
-
         async function fetchWeather() {
+            // API 키 디코딩 (전달해주신 키 그대로 사용)
             const _k = atob("YTdiMTc0NDlhZTYzYmQ5OGQ4MGUyNTNmNjNiZjEyMmY=");
-            try { const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=Osaka&appid=${_k}&units=metric&lang=kr`); const json = await res.json(); if(res.ok) { document.getElementById('currentTemp').innerText = `${Math.round(json.main.temp)}°`; document.getElementById('weatherDesc').innerText = json.weather[0].description; document.getElementById('clothTitle').innerText = json.main.temp > 15 ? "가벼운 외투" : "도톰한 코트"; document.getElementById('clothDesc').innerText = "일교차가 큽니다."; document.getElementById('weatherIconBox').innerHTML = `<img src="https://openweathermap.org/img/wn/${json.weather[0].icon}@2x.png" class="size-12">`; } } catch(e) {}
+            
+            try { 
+                // 📍 1. 쿼리 파라미터를 'Sappro'로 설정하여 호출
+                const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=Sapporo&appid=${_k}&units=metric&lang=kr`); 
+                const json = await res.json(); 
+                
+                if(res.ok) { 
+                    // 📍 2. 온도와 날씨 설명 업데이트
+                    document.getElementById('currentTemp').innerText = `${Math.round(json.main.temp)}°`; 
+                    document.getElementById('weatherDesc').innerText = json.weather[0].description; 
+                    
+                    // 📍 3. 온도에 따른 추천 복장 로직
+                    const temp = json.main.temp;
+                    if (temp > 15) {
+                        document.getElementById('clothTitle').innerText = "가벼운 외투";
+                        document.getElementById('clothDesc').innerText = "낮에는 따뜻하지만 일교차에 주의하세요.";
+                    } else {
+                        document.getElementById('clothTitle').innerText = "도톰한 자켓";
+                        document.getElementById('clothDesc').innerText = "바닷바람이 쌀쌀할 수 있으니 챙겨가세요.";
+                    }
+                    
+                    // 📍 4. 날씨 아이콘 업데이트
+                    document.getElementById('weatherIconBox').innerHTML = 
+                        `<img src="https://openweathermap.org/img/wn/${json.weather[0].icon}@2x.png" class="size-12">`; 
+                } 
+            } catch(e) {
+                console.error("날씨 데이터를 가져오는 중 오류 발생:", e);
+            }
         }
-
         function showMapTooltip(spot) {
             const tooltip = document.getElementById('mapTooltip');
             const spotEl = document.getElementById('tooltipSpot');
@@ -936,13 +1127,13 @@
             page.classList.remove('hidden');
 
             // 현재 페이지 도시 설정 (오사카 파일이면 "Osaka", 도쿄 파일이면 "Tokyo")
-            const currentCity = "Kyoto"; 
+            const currentCity = "Sapporo"; 
             const currentCitySchedule = mySchedule.filter(item => item.city === currentCity);
 
             page.innerHTML = `
                 <div class="max-w-xl mx-auto pt-10 pb-32 text-left px-6">
                     <h2 class="text-3xl font-black mb-2 tracking-tighter">My Schedule</h2>
-                    <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-10">나의 ${currentCity === 'Kyoto' ? '교토' : '도쿄'} 여행 계획</p>
+                    <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-10">나의 ${currentCity === 'Sapporo' ? '삿포로' : '도쿄'} 여행 계획</p>
                     <div id="scheduleList" class="space-y-4">
                         ${currentCitySchedule.length === 0 ? `
                             <div class="py-20 text-center opacity-40">
@@ -981,7 +1172,7 @@
                 name: spot.spotName,
                 region: spot.region,
                 img: spot.img,
-                city: "Kyoto" // 📍 오사카 표시
+                city: "Sapporo" // 📍 오사카 표시
             });
             
             localStorage.setItem('sakura_master_schedule', JSON.stringify(mySchedule));
@@ -1002,14 +1193,6 @@
             }
         }
         function setupEvents() { document.getElementById('themeToggle').onclick = () => document.documentElement.classList.toggle('dark'); }
-        function setupMapResetFeature() { 
-            document.getElementById('resetMapBtn').onclick = () => { 
-                if(map) {
-                    map.flyTo([34.6937, 135.5023], 11);
-                    hideMapTooltip(); // 리셋 시 툴팁 닫기
-                }
-            }; 
-        }
         function openPrivacy() {
             document.getElementById('privacyModal').classList.remove('hidden');
         }
