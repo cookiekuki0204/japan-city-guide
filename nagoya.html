@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌸</text></svg>">
-    <title>Japan City Guide: 삿포로 벚꽃 2026 마스터</title>
+    <title>Japan City Guide: 나고야 벚꽃 2026 마스터</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -162,8 +162,8 @@
                 
                 <div class="pt-12 md:pt-20 pb-10 relative flex justify-between items-end">
                     <div class="text-left">
-                        <p class="text-[10px] md:text-xs font-black text-primary uppercase tracking-[0.2em] mb-1">2026 SAPPORO EDITION</p>
-                        <h1 class="text-3xl md:text-5xl font-black tracking-tighter">삿포로 벚꽃 명소</h1>
+                        <p class="text-[10px] md:text-xs font-black text-primary uppercase tracking-[0.2em] mb-1">2026 NAGOYA EDITION</p>
+                        <h1 class="text-3xl md:text-5xl font-black tracking-tighter">나고야 벚꽃 명소</h1>
                     </div>
 
                     <div class="absolute top-10 md:top-16 right-0 flex flex-col items-end gap-3 z-[60]">
@@ -191,21 +191,21 @@
                                 <p id="countdownTimer" class="text-[12px] font-black tracking-wider text-white">데이터 로딩 중...</p>
                             </div>
                             <h3 id="forecastStatus" class="text-[34px] md:text-[52px] font-bold leading-tight mb-16">
-                                아직 삿포로의 벚꽃은<br/>
+                                아직 나고야의 벚꽃은<br/>
                                 <span class="inline-block" style="text-decoration: underline; text-decoration-color: rgba(255, 255, 255, 0.4); text-decoration-thickness: 6px; text-underline-offset: 8px;">개화 전 !</span>
                             </h3>
                             <div class="grid grid-cols-3 gap-3 md:gap-5 items-center text-center">
                                 <div class="bg-white/15 backdrop-blur-lg rounded-[1.8rem] py-5 border border-white/10">
                                     <p class="text-[9px] font-bold opacity-70 uppercase mb-1">개화 시작</p>
-                                    <p class="text-xl md:text-3xl font-black italic tracking-tighter">04.25</p>
+                                    <p class="text-xl md:text-3xl font-black italic tracking-tighter">03.24</p>
                                 </div>
                                 <div class="bg-white/30 backdrop-blur-lg rounded-[1.8rem] py-7 border-2 border-white/40 shadow-xl -mt-2">
                                     <p class="text-[9px] font-bold mb-1 flex items-center justify-center gap-1">👑 만개 피크</p>
-                                    <p class="text-2xl md:text-4xl font-black tracking-tighter">04.29</p>
+                                    <p class="text-2xl md:text-4xl font-black tracking-tighter">04.02</p>
                                 </div>
                                 <div class="bg-white/15 backdrop-blur-lg rounded-[1.8rem] py-5 border border-white/10">
                                     <p class="text-[9px] font-bold opacity-70 uppercase mb-1">벚꽃 엔딩</p>
-                                    <p class="text-xl md:text-3xl font-black italic tracking-tighter">05.05</p>
+                                    <p class="text-xl md:text-3xl font-black italic tracking-tighter">04.05</p>
                                 </div>
                             </div>
                         </div>
@@ -215,7 +215,7 @@
                 <div class="mb-12 slide-up">
                     <div id="weatherCard" class="bg-white/80 dark:bg-white/5 backdrop-blur-xl rounded-[2.5rem] p-8 border border-white/50 shadow-sm transition-all duration-500">
                         <div class="flex items-center justify-between mb-8 text-left">
-                            <h3 class="text-[12px] font-black uppercase tracking-[0.15em] text-gray-400">삿포로 실시간 날씨</h3>
+                            <h3 class="text-[12px] font-black uppercase tracking-[0.15em] text-gray-400">나고야 실시간 날씨</h3>
                             <div class="px-3 py-1 bg-blue-500/10 text-blue-500 rounded-full text-[9px] font-black uppercase">Live</div>
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
@@ -241,7 +241,7 @@
 
                 <div class="mb-20 text-left w-full overflow-hidden">
                     <div class="flex items-end justify-between mb-8">
-                        <h3 class="text-2xl md:text-3xl font-black">삿포로 인기 명소</h3>
+                        <h3 class="text-2xl md:text-3xl font-black">나고야 인기 명소</h3>
                         <p class="text-[10px] font-black text-gray-400 pb-1 flex items-center gap-1 animate-pulse">옆으로 밀기 <i class="fa-solid fa-arrow-right-long"></i></p>
                     </div>
                     <div id="famousSpotsContainer" class="flex flex-row flex-nowrap overflow-x-auto hide-scrollbar gap-5 pb-8 snap-x-mandatory"></div>
@@ -261,7 +261,7 @@
 
                 <div class="mb-20 text-left w-full overflow-hidden">
                     <div class="flex items-end justify-between mb-8">
-                        <h3 class="text-2xl md:text-3xl font-black">삿포로 근교 명소</h3>
+                        <h3 class="text-2xl md:text-3xl font-black">나고야 근교 명소</h3>
                         <p class="text-[10px] font-black text-gray-400 pb-1 flex items-center gap-1 animate-pulse">옆으로 밀기 <i class="fa-solid fa-arrow-right-long"></i></p>
                     </div>
                     <div id="suburbSpotsContainer" class="flex flex-row flex-nowrap overflow-x-auto hide-scrollbar gap-5 pb-8 snap-x-mandatory"></div>
@@ -317,289 +317,358 @@
     </div>
     <script>
     const data = {
-        // 🏆 Best: 삿포로 대표 명소 (카페/레스토랑 완비)
+        // 🏆 Best: 나고야 대표 명소 (카페/레스토랑 완비)
+        mustVisit: 
+            {
+                name: "지브리 파크",
+                desc: "애니메이션 속으로 들어온 듯한 특별한 경험"
+            },
+        localFood: 
+            {
+                name: "히츠마부시",
+                desc: "세 가지 방법으로 즐기는 나고야식 명품 장어덮밥"
+            },
+        springLimited: 
+            {
+                name: "나고야성 사쿠라 안빵",
+                desc: "벚꽃 향 가득한 시즌 한정 디저트"
+            },
+        nightView: 
+            {
+                location: "오아시스 21 & 미라이타워",
+                desc: "우주선을 닮은 야경 명소와 화려한 라이트업"
+            },
+        transport: 
+            {
+                airport: "뮤스카이 이용 시 시내까지 28분",
+                pass: "도니치 에코 패스(주말권) 추천"
+            },
         best: [
-            { 
-                id: 'maruyama', 
-                region: '추오구', 
-                spotName: '마루야마 공원', 
-                sub: '벚꽃과 매화가 동시에 피어나는 삿포로 최고의 성지', 
-                img: 'images/image-1714433737244.jpeg',
-                transport: '지하철 토자이선 마루야마코엔역(T06) 하차 후 3번 출구에서 도보 약 5분',
-                timeline: { start: '4월 26일', peak: '4월 30일', end: '5월 5일', progress: 0 },
-                station: '마루야마코엔역',
-                tips: [
-                    '역에서 공원까지 이어지는 길에 예쁜 베이커리와 카페가 많으니 구경하며 걷기 좋습니다',
-                    '신궁 내부의 찻집 판로카에서 파는 구운 떡 판로무이는 이곳에서만 맛볼 수 있는 정성 어린 별미입니다',
-                    '벚꽃과 매화가 같은 시기에 피어나기 때문에 두 가지 향기를 동시에 느낄 수 있는 세심한 즐거움이 있습니다'
-                ],
-                cafes: [
-                    { name: "카페 모리히코 (森彦)", rank: 1, score: "4.6", desc: "빨간 지붕 고택에서 즐기는 정성 가득한 핸드드립 커피", link: "모리히코" },
-                    { name: "롯카테 마루야마점", rank: 2, score: "4.4", desc: "정갈한 일본식 디저트와 마루야마 공원 뷰", link: "六花亭 円山店" }
-                ],
-                restaurants: [
-                    { name: "징기스칸 다루마", rank: 1, score: "4.4", desc: "삿포로 꽃놀이 뒤엔 역시 육즙 가득한 양고기", link: "成吉思汗だるま 本店" },
-                    { name: "마루야마 판케키", rank: 2, score: "4.3", desc: "입안에서 녹아내리는 구름 같은 수플레 팬케이크", link: "Maruyama Pancake" }
-                ]
-            },
+                { 
+                    id: 'nagoyajo', 
+                    region: '나카구', 
+                    spotName: '나고야 성', 
+                    img:'images/nagoya_1.jpg',
+                    sub: '금빛 샤치호코와 분홍빛 벚꽃이 빚어내는 웅장한 조화', 
+                    transport: '지하철 메이죠선 나고야죠(나고야성)역 7번 출구에서 도보 약 5분',
+                    live: 'LarHRzvLanQ', // 요청하신 나고야 히사야오도리 실시간 라이브 (나고야 대표 영상으로 설정)
+                    isChannel: false,
+                    timeline: { start: '3월 23일', peak: '3월 31일', end: '4월 7일', progress: 0 },
+                    tips: [
+                        '야간 개장 기간에는 천수각과 벚꽃에 조명이 켜져 압도적인 야경을 선사합니다',
+                        '성벽 주위 해자에 비치는 벚꽃 반영은 나고야 최고의 포토스팟입니다',
+                        '복원된 혼마루 어전의 화려한 금박 벽화도 놓치지 마세요'
+                    ],
+                    cafes: [
                         { 
-                id: 'moerenuma', 
-                region: '히가시구', 
-                spotName: '모에레누마 공원', 
-                sub: '예술 공간 속에 펼쳐진 2,000그루의 사쿠라노모리', 
-                img: 'images/moerenuma_1.jpg', 
-                transport: '지하철 칸죠도오리히가시역(토호선) 하차 후, 중앙버스[동61] 또는 [동79]번 탑승하여 모에레누마 공원 동쪽 입구 정류장에서 하차',
-                timeline: { start: '4월 28일', peak: '5월 2일', end: '5월 8일', progress: 0 },
-                history: '조각가 이사무 노구치가 "공원 전체를 하나의 조각으로"라는 컨셉으로 설계한 광대한 대지 예술입니다. 벚꽃이 가득한 사쿠라노모리(벚꽃 숲)는 이 거대한 작품의 일부입니다.',
-                station: '버스 이용 권장',
-                tips: [
-                    '공원 면적이 엄청나게 넓으므로 입구 근처 렌털 샵에서 자전거를 대여하는 것을 강력 추천합니다',
-                    '유리 피라미드 HIDAMARI 내부에 들어가면 벚꽃과 어우러진 공원 전체의 풍경을 세밀하게 감상할 수 있습니다',
-                    '벚꽃 숲 사이사이에 숨겨진 독특한 디자인의 놀이기구 조각들을 찾아보는 재미가 쏠쏠합니다'
-                ],
-                cafes: [
-                    { name: "Panier", rank: 1, score: "4.2", desc: "유리 피라미드 안에서 즐기는 디저트", link: "ガラスのピラミッド Panier" },
-                    { name: "Cafe Moeru", rank: 1, score: "4.1", desc: "소박하지만 느낌 좋은 카페", link: "Cafe Moeru" }
-                ],
-                restaurants: [
-                    { name: "레스토랑 랑팡키레브", rank: 1, score: "4.6", desc: "공원 전체를 조망하며 즐기는 고품격 프렌치 다이닝", link: "ランファン・キ・レーヴ" },
-                    { name: "Tonkatsu Kazoku", rank: 1, score: "4.6", desc: "현지 돈가스 원탑 맛집", link: "とんかつ家族" }
-                ]
-            },
-            { 
-                id: 'makomanai', 
-                region: '미나미구', 
-                spotName: '마코마나이 공원', 
-                sub: '1,000그루의 벚꽃이 만드는 압도적인 분홍빛 물결', 
-                img: 'images/makomanai_1.jpg',
-                // 🚩 요청하신 대로 상세 페이지용 transport 정리
-                transport: '지하철 난보쿠선 마코마나이역(N16, 종점) 하차 후 1번 출구에서 도보 약 15~20분, 또는 역 앞 버스 터미널에서 [남90]번 또는 [남95]번 버스 탑승 후 마코마나이 공원 정류장 하차',
-                timeline: { start: '4월 27일', peak: '5월 2일', end: '5월 8일', progress: 0 },
-                history: '1972년 삿포로 동계 올림픽의 주 무대였던 곳으로, 지금은 삿포로를 대표하는 휴식처이자 거대한 벚꽃 숲으로 사랑받고 있습니다.',
-                tips: [
-                        '역에서 공원까지 가는 길에 마코마나이 강을 따라 산책로가 잘 조성되어 있어, 날씨가 좋다면 걷는 것을 추천합니다',
-                        '공원 규모가 매우 크기 때문에 돗자리와 간단한 도시락을 챙겨가서 여유 있게 피크닉을 즐기기 가장 좋은 곳입니다',
-                        '일반 벚꽃(소메이요시노)이 지기 시작할 때 겹벚꽃(야에자쿠라)이 만개하여 5월 초순까지도 충분히 아름다운 꽃놀이가 가능합니다' 
-                ],
-                cafes: [
-                    {
-                        name: "CAFE de ROMAN Moiwa", 
-                        rank: 1, 
-                        score: "4.1", 
-                        desc: "모이와 산의 중간에 위치한 분위기 좋은 카페", 
-                        link: "カフェ・ド・ロマン 藻岩店" 
+                            name: "Hōsa", 
+                            rank: 1, 
+                            score: "4.2", 
+                            desc: "에도 시대 분위기의 거리에서 즐기는 말차 디저트", 
+                            link: "蓬左"                         
+                        },
+                        { 
+                            name: "Ni-no-maru Tea House", 
+                            rank: 2, 
+                            score: "4.0", 
+                            desc: "나고야성 안에서 즐기는 일본 전통 찻집", 
+                            link: "二の丸茶亭"                         
+                        }
+                        
+                    ],
+                    restaurants: [
+                        { 
+                            name: "야바톤", 
+                            rank: 1,
+                            score: "4.1", 
+                            desc: "나고야의 명물, 진한 미소카츠의 정석",
+                            link: "矢場とん 名古屋城金シャチ横丁店"                         
+                        }, 
+                        { 
+                            name: "키시멘테이", 
+                            rank: 2,
+                            score: "3.9", 
+                            desc: "쫄긴한 키시면을 이용한 면요리가 맛있는 곳",
+                            link: "きしめん亭"                         
+                        }
+                    ]
+                },
+                { 
+                    id: 'tsuruma', 
+                    region: '쇼와구', 
+                    spotName: '츠루마 공원', 
+                    img:'images/tsuruma_1.jpg',
+                    sub: '100년의 역사가 흐르는 벚꽃 명소 100선', 
+                    transport: '지하철 츠루마선 또는 JR 주오본선 츠루마역 4번 출구 바로 앞',
+                    timeline: { start: '3월 24일', peak: '4월 1일', end: '4월 8일', progress: 0 },
+                    tips: [
+                        '공원 중앙의 분수탑 주변이 야간 조명을 가장 아름답게 받는 구역입니다',
+                        '수많은 제등(초롱불)이 켜지는 밤의 정취는 축제 분위기를 세밀하게 느끼게 해줍니다',
+                        '현지인들의 꽃놀이(하나미) 문화를 가장 가까이서 볼 수 있는 곳입니다'
+                    ],
+                    cafes: [
+                        { 
+                            name: "Cafe Sala", 
+                            rank: 1,
+                            score: "4.0",
+                            desc: "공원 산책 후 들르기 좋은 세련된 베이커리",
+                            link: "名古屋工業大学 Cafe Sala"     
+                        },
+                        { 
+                            name: "Picasso", 
+                            rank: 2,
+                            score: "3.8", 
+                            desc: "3.8",
+                            link: "ベーカリーピカソ ASTY鶴舞店"                         
+                        }
+                        
+                    ],
+                    restaurants: [
+                        { 
+                            name: "아츠타 호라이켄", 
+                            desc: "나고야식 장어덮밥(히츠마부시)의 명소" 
+                        },
+                        { 
+                            name: "", 
+                            rank: 2,
+                            score: "", 
+                            desc: "",
+                            link: ""                         
+                        }
+                    ]
+                }
+            ],
+
+            // 🌟 Famous: 야경 터널 & 근교 국보
+            famous: [
+                { 
+                    id: 'yamazaki', 
+                    region: '미즈호구', 
+                    spotName: '야마자키강 시키노미치', 
+                    img: 'images/shikinomichi_1.jpeg',
+                    sub: '끝없이 이어지는 벚꽃 터널의 우아한 산책로', 
+                    transport: '지하철 사쿠라도리선 미즈호운도죠니시역 2번 출구에서 도보 약 10분',
+                    timeline: { start: '3월 25일', peak: '4월 2일', end: '4월 9일', progress: 0 },
+                    tips: [
+                        '카나에 다리(かなえ橋) 부근의 야간 라이트업은 환상적인 벚꽃 터널을 만들어냅니다',
+                        '강변을 따라 조성된 산책로 시키노미치는 조용히 사색하며 걷기에 최적입니다',
+                        '도심에서 살짝 벗어나 있어 비교적 여유롭고 정성스러운 사진 촬영이 가능합니다'
+                    ],
+                    cafes: [
+                        { 
+                            name: "미즈호 로컬 베이커리", 
+                            desc: "동네 주민들이 사랑하는 고즈넉한 빵집" 
+                        },
+                        { 
+                            name: "", 
+                            rank: 2,
+                            score: "", 
+                            desc: "",
+                            link: ""                         
+                        }, 
+                    ]
+                },
+                { 
+                    id: 'noritake', 
+                    region: '나고야역 인근', 
+                    spotName: '노리타케의 숲', 
+                    sub: '붉은 벽돌과 대형 잉어 깃발, 감성적인 도심 산책로', 
+                    live: 'LarHRzvLanQ', // 나고야 시내 라이브 영상 (나고야역 인근 현장감 전달)
+                    isChannel: false,
+                    img: 'images/noritake_1.jpg', 
+                    vibe: '세련됨/힐링', 
+                    crowd: '보통',
+                    timeline: { start: '3월 25일', peak: '4월 1일', end: '4월 8일', progress: 55 },
+                    history: '1904년 설립된 세계적인 도자기 브랜드 "노리타케"의 구 공장 부지를 공원으로 조성한 곳입니다. 메이지 시대의 붉은 벽돌 건물과 푸른 잔디, 그리고 봄이면 피어나는 벚꽃이 어우러져 나고야에서 가장 사진이 잘 나오는 감성 명소로 손꼽힙니다.',
+                    tips: [
+                        '나고야역에서 도보 15분 거리라 여행 첫날이나 마지막 날 들르기 좋습니다',
+                        '벚꽃 시즌부터 5월 초까지 하늘에 매달리는 거대한 잉어 깃발(코이노보리)은 이곳만의 상징적인 풍경입니다',
+                        '공원 바로 옆 "이온몰 노리타케 가든"의 거대한 서점 포토존도 놓치지 마세요'
+                    ],
+                    attractions: {
+                        museums: [{ name: '노리타케 뮤지엄', img: 'images/noritake_mus.jpg', desc: '초창기 노리타케의 화려한 도자기 컬렉션'}],
+                        unique: [{ name: '이온몰 츠타야 서점', img: 'images/noritake_tsutaya.jpg', desc: 'SNS에서 화제가 된 2층 높이의 거대 거울 서가'}]
                     },
-                    { 
-                        name: "Rokkatei Makomanai Hall Store", 
-                        rank: 1, 
-                        score: "4.1", 
-                        desc: "통창 밖으로 보이는 숲뷰, 삿포로를 대표하는 제과점", 
-                        link: "六花亭 真駒内ホール店" 
-                    }
-                ],
-                restaurants: [
-                    {
-                        name: "Asahi Sushi", 
-                        rank: 1, 
-                        score: "4.1", 
-                        desc: "가성비 갑 스시집", 
-                        link: "朝日鮨"
-                    },
-                    { 
-                        name: "Heibon Kujira-ya Ramen", 
-                        rank: 1, 
-                        score: "4.1", 
-                        desc: "법의 해산물 스프와 독특한 세가지 종류의 스파이시가 올려진 라멘이 맛있기로 유명한 곳", 
-                        link: "平凡くじら屋" 
-                    }
-                ]
-            }
-        ],
-        
+                    cafes: [
+                        { 
+                            name: 'Littletree', 
+                            rank: 1, 
+                            score: '4.7', 
+                            desc: '취향저격의 책과 레코드와 함께 즐길 수 있는 카페', 
+                            link: 'コーヒーと本とレコードの店リトルトリー' 
+                        },
+                        { 
+                            name: 'Konparu (Aeon Mall)', 
+                            rank: 2, 
+                            score: '4.6', 
+                            desc: '푹신한데 거대한 수플레 팬케이크와 수제 함바그가 일품인 곳', 
+                            link: 'yellow則武新町店' 
+                        }
+                    ],
+                    restaurants: [
+                        { 
+                            name: 'Restaurant Kiln', 
+                            rank: 1, 
+                            score: '4.2', 
+                            desc: '붉은 벽돌 창고에서 즐기는 정통 프랑스 요리', 
+                            link: 'ノリタケの森 レストランキルン' 
+                        },
+                        { 
+                            name: 'Miyabi Japo', 
+                            rank: 2, 
+                            score: '4.5', 
+                            desc: '이온몰 내에서 즐기는 나고야 명물 히츠마부시', 
+                            link: '雅じゃぽ イオンモール名古屋則武新町店' 
+                        }
+                    ],
+                    station: '나고야역/가메지마역 (Nagoya/Kamejima Station)',
+                    lines: [{ name: 'JR', color: '#F15A22' }, { name: 'H', color: '#FFD700' }]
+                }
+            ],
 
-        // 🌟 Famous: SNS 핫플레이스 (카페/레스토랑 완비)
-        famous: [
-
-            { 
-                id: 'odori', 
-                region: '추오구', 
-                spotName: '오도리 공원', 
-                sub: '삿포로 TV 타워를 배경으로 한 도심 꽃놀이', 
-                img: 'images/odori_1.jpg', 
-                transport: '지하철 오도리역(난보쿠선·토자이선·토호선) 하차 후 2번, 5번, 6번, 8번 또는 27번 출구와 바로 연결',
-                timeline: { start: '4월 26일', peak: '4월 30일', end: '5월 5일' },
-                station: '오도리역',
-                tips: [
-                    '공원의 1초메(TV타워 쪽)부터 12초메까지 길게 뻗어 있어, TV 타워 전망대에서 내려다보는 뷰가 가장 아름답습니다',
-                    '삿포로역에서부터 이어진 지하보도(치카호)를 이용하면 날씨에 상관없이 쾌적하게 걸어올 수 있습니다'
-                ],
-                cafes: [
-                    { name: "바리스타트 커피", rank: 1, score: "4.5", desc: "홋카이도산 우유를 선택할 수 있는 라떼 맛집", link: "Baristart" },
-                    { name: "파르페 커피 술 사토", rank: 2, score: "4.4", desc: "밤에 더 화려한 삿포로식 마감 파르페 전문점", link: "佐藤堂本店" }
-                ],
-                restaurants: [
-                    { name: "스프카레 가라쿠 삿포로 본점", rank: 1, score: "4.3", desc: "TV 타워 근처 가볍게 즐기는 로컬 비스트로", link: "スープカレーGARAKU札幌本店" },
-                    { name: "토시 함바그", rank: 1, score: "4.3", desc: "촉촉하고 고소한 현지인 추천 수제 함바그", link: "手作りハンバーグ工房 Toshi" }
-                ]
-            },
-            { 
-                id: 'nakajima', 
-                region: '추오구', 
-                spotName: '나카지마 공원', 
-                sub: '푸른 호수와 수양벚꽃의 낭만적인 조화', 
-                img: 'images/nakajima_1.jpg', 
-                transport: '지하철 난보쿠선 나카지마코엔역(N09) 하차 후 1번 또는 3번 출구와 바로 연결',
-                timeline: { start: '4월 25일', peak: '4월 29일', end: '5월 4일' },
-                station: '나카지마코엔역',
-                tips: [
-                    '역에서 내리자마자 바로 공원이 시작되어 동선이 매우 편리합니다',
-                    '창포 연못(菖蒲池)에서 보트를 빌려 타고 수면 위로 늘어진 벚꽃을 감상하는 것을 강력 추천해요',
-                    '국가 중요 문화재인 호헤이칸 건물의 하늘색 외벽은 벚꽃과 함께 찍을 때 가장 예쁜 포토존입니다'
-                ],
-                cafes: [
-                    { name: "스무치 커피 스탠드", rank: 2, score: "4.2", desc: "공원 산책하며 마시기 좋은 뉴욕 감성 커피", link: "スムーチコーヒースタンド" },
-                    { name: "Michikusa Sand Cafe - coffee trailer", rank: 1, score: "5.0", desc: "깊은 풍미의 커피가 유명한 숨은 아지트", link: "Michikusa Sand Cafe - coffee trailer" }
-                ],
-                restaurants: [
-                    { name: "테라스 레스토랑 키타라", rank: 1, score: "4.1", desc: "밖을 보면서 먹는 이탈리아 음식과 예쁜 디저트가 일품", link: "テラスレストラン キタラ" },
-                    { name: "누쿠미", rank: 2, score: "4.3", desc: "완벽에 가까운 음식의 미슐랭 2 스타 가이세키 레스토랑", link: "温味" }
-                ]
-            }
-        ],
-
-        // 🚌 Suburbs: 근교 여행지 (카페/레스토랑 완비)
         suburbs: [
-            { 
-                id: 'otaru', 
-                region: '오타루', 
-                spotName: '테미야 공원', 
-                sub: '오타루항 바다를 내려다보는 절벽 위 벚꽃 언덕', 
-                img: 'images/temiya_1.jpg', 
-                timeline: { start: '4월 28일', peak: '5월 2일', end: '5월 8일' },
-                transport:'오타루역 앞 중앙버스 터미널 3번 승강장에서 [11번] 또는 [12번] 버스 탑승 후 테미야(手宮) 정류장 하차(약 10분), 이후 언덕길을 따라 도보 10분',
-                station: '오타루역',
-                tips: [
-                    '공원 가장 높은 곳에 올라가면 오타루항의 파란 바다와 분홍색 벚꽃이 한 화면에 담기는 최고의 포토스팟이 나옵니다',
-                    '언덕길이 다소 가파를 수 있으니 편안한 운동화를 신으시는 것을 권장합니다',
-                    '관광객이 몰리는 오타루 운하에 비해 고즈넉하고 조용하게 꽃놀이를 즐기기 좋습니다'
-                ],
-                cafes: [
-                    { name: "키타이치 홀", rank: 1, score: "4.4", desc: "167개의 석유 램프가 켜진 신비로운 공간", link: "北一硝子 北一ホール" },
-                    { name: "르타오 본점", rank: 2, score: "4.3", desc: "오타루의 상징, 입안에서 녹는 치즈케이크", link: "小樽洋菓子舗ルタオ本店" }
-                ],
-                restaurants: [
-                    { name: "쿠키젠", rank: 1, score: "4.7", desc: "미쉐린 가이드에 소개된 정성 어린 스시 한 점", link: "Kukizen" },
-                    { name: "나루토 본점", rank: 2, score: "4.1", desc: "겉바속촉 오타루 명물 영계 정식", link: "若鶏時代 なると 本店" }
-                ]
-            },
-            { 
-                id: 'tenguyama', 
-                region: '오타루', 
-                spotName: '텐구산 로프웨이', 
-                sub: '하늘과 바다 사이, 오타루를 굽어보는 수령 100년의 벚꽃', 
-                img: 'images/tengu_1.jpg', 
-                transport: '오타루역 앞 4번 승강장에서 [9번] 텐구산 로프웨이행 버스 탑승 후 종점 하차(약 15분). 이후 로프웨이로 정상까지 이동', 
-                timeline: { start: '4월 29일', peak: '5월 3일', end: '5월 9일', progress: 0 },
-                history: '오타루의 상징적인 산으로, 정상에는 수령 100년이 넘은 외따로 떨어진 벚꽃나무 텐구자쿠라가 유명합니다.',
-                station: '오타루 텐구산 로프웨이',
-                tips: [
-                        '정상 전망대에서는 오타루 시내뿐만 아니라 멀리 샤코탄 반도까지 조망할 수 있는 세밀한 풍경이 펼쳐집니다',
-                        '밤이 되면 하트 모양의 텐구자쿠라에 조명이 켜지는데, 오타루의 야경과 어우러져 매우 정성스러운 분위기를 연출합니다',
-                        '로프웨이 승강장 근처의 텐구 신사에서 코를 만지면 소원이 이루어진다는 전설이 있으니 한 번 들러보세요'
-                ],
-                cafes: [
-                    { 
-                        name: "텐구 카페 (TENGU CAFE)", 
-                        rank: 1, 
-                        score: "4.2", 
-                        desc: "통창 너머로 오타루 시내 파노라마 뷰가 펼쳐지는 하늘 위 휴식처", 
-                        link: "Tenguyama Cafe" 
-                    }
-                ],
-                restaurants: [
-                    { 
-                        name: "오타루 바인 (Otaru Vine)", 
-                        rank: 1, 
-                        score: "4.0", 
-                        desc: "하산 후 들르기 좋은 곳. 19세기 옛 은행 건물을 개조한 고즈넉한 와인 레스토랑", 
-                        link: "ワイン＆カフェレストラン 小樽バイン" 
-                    }
-                ]
-            },
-            { 
-                id: 'ishizaki', 
-                region: '하코다테', 
-                spotName: '이시자키 지누시카이 신사', 
-                sub: '바다로 이어지는 겹벚꽃 터널, 하코다테 봄의 대미', 
-                img: 'images/hakotate_1.jpeg', // 실제 경로에 맞춰 수정
-                transport: 'JR 하코다테역에서 버스(91계통) 탑승 후 이시자키 하차(약 50분) 후 도보 15분',
-                timeline: { start: '5월 5일', peak: '5월 12일', end: '5월 18일' },
-                tips: [
-                        '겹벚꽃은 일반 벚꽃보다 만개 시기가 1~2주 늦으므로, 5월 중순 일정을 잡으시는 것이 가장 정성스러운 풍경을 보는 방법입니다',
-                        '버스 정류장에서 내려 신사로 걸어가는 길에 펼쳐지는 쓰가루 해협의 바다 풍경도 놓치지 마세요',
-                        '대중교통 이용 시 돌아가는 버스 배차 간격이 매우 길기 때문에, 내리신 곳에서 반대편 버스 시간표를 미리 사진 찍어두시는 세심함이 필요합니다'
-                ],
-                cafes: [
-                    {
-                        name: "홍차전문점 하비스트", 
-                        rank: 1, 
-                        score: "4.4", 
-                        desc: "조용한 분위기에서 즐기는 홍차와 스콘", 
-                        link: "紅茶専門店ハーヴェスト" 
-                    },
-                    {
-                        name: "쁘띠멜뷰 하코다테에키마에", 
-                        rank: 2, 
-                        score: "4.2", 
-                        desc: "귀여운 가게 한정 상품과 맛있는 디저트가 한가득", 
-                        link: "プティ・メルヴィーユ 函館駅前店"    
-                    }
-                ],
-                restaurants: [
-                    { 
-                        name: "럭키 삐에로 하코다테에키마에점", 
-                        rank: 1, 
-                        score: "4.0", 
-                        desc: "하코다테의 명물! 신사에서 돌아오는 길에 들르기 좋은 테마파크형 버거 전문점", 
-                        link: "ラッキーピエロ 函館駅前店" 
-                    }
-                ]
-            },
-            { 
-                id: 'trappist', 
-                region: '하코다테 근교', 
-                spotName: '트라피스트 대수도원', 
-                sub: '하늘로 뻗은 가로수길 끝에서 만나는 고요한 안식', 
-                img: 'images/trappist_1.jpg', 
-                // 🚩 상세 페이지용 transport 내용
-                transport: '도난 이사리비 철도 오시마토베쓰역(渡島当別駅) 하차 후 도보 약 20분 (하코다테역에서 열차로 약 40분 소요)',
-                timeline: { start: '5월 1일', peak: '5월 6일', end: '5월 12일', progress: 0 },
-                history: '1896년 프랑스에서 온 수사들이 설립한 일본 최초의 남성 트라피스트 수도원입니다. 로마네스크 양식의 붉은 벽돌 건물과 쭉 뻗은 진입로가 이국적인 풍경을 자아냅니다.',
-                tips: [
-                    '기차역에서 수도원까지 이어지는 로마로 통하는 길은 삼나무와 벚꽃이 어우러져 걷는 것만으로도 정화되는 기분을 줍니다',
-                    '매점(직영 샵)에서 판매하는 소프트크림은 이곳의 버터와 우유를 사용해 풍미가 압도적이니 꼭 드셔보세요',
-                    '수도원 내부는 남성만 예약제로 참관 가능하지만, 외부 정원과 가로수길만으로도 충분히 방문할 가치가 있는 세밀한 아름다움을 지닌 곳입니다'
-                ],
-                cafes: [
-                    { 
-                        name: "트라피스트 수도원 매점", 
-                        rank: 1, 
-                        score: "4.2", 
-                        desc: "전설적인 트라피스트 버터 쿠키와 진한 우유 맛의 소프트크림을 맛볼 수 있는 곳", 
-                        link: "トラピスト修道院売店" 
-                    }
-                ],
-                restaurants: [
-                    { 
-                        name: "식사처 시즈카와", 
-                        rank: 2, 
-                        score: "4.1", 
-                        desc: "현지인들이 즐겨 찾는 로컬 맛집. 바삭한 돈카츠 정식과 신선한 생선 구이가 일품인 정성스러운 공간", 
-                        link: "食事処 志づ川" 
-                    }
-                ]
-            }
-        ],
+                { 
+                    id: 'inuyama', 
+                    region: '이누야마', 
+                    spotName: '이누야마성 & 기소강', 
+                    sub: '국보 성곽과 강변을 따라 펼쳐지는 400그루의 벚꽃 터널', 
+                    img: 'images/inuyama_1.jpg', 
+                    timeline: { start: '3월 25일', peak: '4월 1일', end: '4월 8일' },
+                    transport: '나고야역에서 메이테쓰 이누야마선 급행 탑승 후 이누야마유엔역 하차(약 30분), 도보 15분',
+                    station: '이누야마유엔역',
+                    tips: [
+                        '이누야마성은 일본에 단 5개뿐인 국보 성 중 하나로, 천수각에서 내려다보는 기소강의 벚꽃 풍경이 압권입니다',
+                        '벚꽃 시즌에는 기소강에서 유람선을 운행하니 배 위에서 성과 꽃을 한꺼번에 담아보세요',
+                        '성 아래 성하마을(조카마치)에는 아기자기한 길거리 음식이 많아 먹거리 여행으로도 좋습니다'
+                    ],
+                    cafes: [
+                        { 
+                            name: "챠도코로 타마후쿠", 
+                            rank: 1, 
+                            score: "4.4", 
+                            desc: "고택에서 즐기는 알록달록한 당고 세트", 
+                            link: "茶処 玉冨久" 
+                        },
+                        { 
+                            name: "혼마치 사료", 
+                            rank: 2, 
+                            score: "4.1", 
+                            desc: "이누야마 성하마을의 감성 넘치는 디저트 카페", 
+                            link: "本町茶寮" 
+                        }
+                    ],
+                    restaurants: [
+                        { 
+                            name: "모모야", 
+                            rank: 2, 
+                            score: "4.3", 
+                            desc: "이누야마 명물, 고소한 된장 소스를 바른 두부 꼬치구이", 
+                            link: "でんがく お食事 桃屋" 
+                        },
+                        { 
+                            name: "우나기토 카마메시 코코", 
+                            rank: 1,
+                            score: "4.8", 
+                            desc: "레트로하지만 모던한 곳에서 즐기는 솥밥",
+                            link: "鰻と釜めし 九（ここ）"                         
+                        }, 
+                    ]
+                },
+                { 
+                    id: 'iwakura', 
+                    region: '이와쿠라', 
+                    spotName: '고조강 벚꽃길', 
+                    sub: '일본 벚꽃 명소 100선, 강물을 수놓는 분홍빛 꽃배', 
+                    img: 'images/hanaikada_1.jpg', 
+                    transport: '나고야역에서 메이테쓰 이누야마선 탑승 후 이와쿠라역 하차(약 15분), 동쪽 출구에서 도보 5분', 
+                    timeline: { start: '3월 26일', peak: '4월 2일', end: '4월 9일' },
+                    history: '강을 따라 약 7.6km에 걸쳐 1,400그루의 벚꽃이 이어지며, 잉어 깃발을 씻는 논보리 아라이 전통으로 유명합니다.',
+                    station: '이와쿠라역',
+                    tips: [
+                        '강폭이 좁아 양쪽에서 뻗어 나온 벚꽃 가지가 하늘을 가리는 천연 터널을 형성합니다',
+                        '밤이 되면 라이트업 행사가 열려 낮과는 전혀 다른 몽환적인 분위기를 자아냅니다',
+                        '전통적인 잉어 깃발 세척 작업인 "논보리 아라이"를 직접 볼 수 있다면 행운입니다'
+                    ],
+                    cafes: [
+                        { 
+                            name: "오요네 카페 이와쿠라", 
+                            rank: 1, 
+                            score: "4.1", 
+                            desc: "강변 산책 후 들르기 좋은 아늑한 로컬 카페", 
+                            link: "およねカフェ 岩倉" 
+                        },
+                        { 
+                            name: "아라지운 킷소우", 
+                            rank: 2,
+                            score: "4.1", 
+                            desc: "나무 향 가득한 공간에서 천천히 내려지는 한 잔",
+                            link: "明楽時運 吉創"                         
+                        }
+                    ],
+                    restaurants: [
+                        { 
+                            name: "Kyouya", 
+                            rank: 2, 
+                            score: "3.8", 
+                            desc: "이와쿠라역 근처의 깔끔한 일식 정식 전문점", 
+                            link: "京屋" 
+                        },
+                        { 
+                            name: "Namazuya Iwakura", 
+                            rank: 1,
+                            score: "4.2", 
+                            desc: "고조 강변에서 현지인에게 유명한 히마츠부시",
+                            link: "なまずや 岩倉分店"                         
+                        }, 
+                    ]
+                },
+                { 
+                    id: 'okazaki', 
+                    region: '오카자키', 
+                    spotName: '오카자키 공원', 
+                    sub: '도쿠가와 이에야스의 탄생지에서 즐기는 화려한 밤벚꽃', 
+                    img: 'images/okazaki_1.jpg',
+                    transport: '나고야역에서 메이테쓰 나고야 본선 탑승 후 히가시오카자키역 하차(약 30분), 도보 15분',
+                    timeline: { start: '3월 24일', peak: '3월 31일', end: '4월 7일' },
+                    tips: [
+                        '토카이 지역에서 밤벚꽃이 가장 아름다운 곳으로 손꼽히니 꼭 해 질 녘에 방문하세요',
+                        '공원 내 오카자키 성을 배경으로 찍는 사진은 일본 봄 여행의 정석과도 같습니다',
+                        '공원 주변에 노점이 많이 들어서서 일본 축제(마츠리) 분위기를 제대로 느낄 수 있습니다'
+                    ],
+                    cafes: [
+                        { 
+                            name: "오카자키성 혼마루 차야", 
+                            rank: 1, 
+                            score: "4.9", 
+                            desc: "공원 안에서 벚꽃을 보며 말차를 즐길 수 있는 전통 찻집", 
+                            link: "岡崎城本丸茶屋" 
+                        },
+                        { 
+                            name: "챠야 아오이쇼안", 
+                            rank: 2,
+                            score: "4.3", 
+                            desc: "고즈넉한 분위기 속에서 일본 다도의 정취를 느낄 수 있는 공간",
+                            link: "茶室 葵松庵"                         
+                        }, 
+                    ],
+                    restaurants: [
+                        { 
+                            name: "야치요 본점", 
+                            rank: 1, 
+                            score: "4.1", 
+                            desc: "800년 역사의 핫초 미소를 듬뿍 뿌린 두부로 만든 정식을 즐길 수 있는 공간 ", 
+                            link: "八千代 本店" 
+                        },
+                        { 
+                            name: "이치카와", 
+                            rank: 2,
+                            score: "3.9", 
+                            desc: "핫초 미소를 이용한 된장 커틀릿 정식과 미소 오뎅이 일품인 곳",
+                            link: "岡崎城公園 いちかわ"                         
+                        }, 
+                    ]
+                }
+            ],
             // data 객체 마지막 부분에 추가
             entertainment: [
                {
@@ -651,15 +720,15 @@
             travelBooking: [
                 {
                     id: 'flights',
-                    name: '삿포로 최저가 항공권',
+                    name: '나고야 최저가 항공권',
                     desc: '인천/부산 출발 실시간 검색',
                     icon: 'fa-plane-up',
                     color: 'from-sky-400 to-blue-600',
-                    link: 'https://skyscanner.pxf.io/NGK2mb'
+                    link: 'https://skyscanner.pxf.io/dyovMk'
                 },
                 {
                     id: 'hotels',
-                    name: '삿포로 인기 호텔',
+                    name: '나고야 인기 호텔',
                     desc: '벚꽃 축제장 도보 이동 가능 숙소',
                     icon: 'fa-hotel',
                     color: 'from-indigo-500 to-purple-600',
@@ -680,7 +749,7 @@
         // Search Map Shared Function
         function searchMap(keyword) {
             if (!keyword) return;
-            const finalKeyword = keyword.includes('삿포로') ? keyword : `삿포로 ${keyword}`;
+            const finalKeyword = keyword.includes('나고야') ? keyword : `나고야 ${keyword}`;
             window.open(`https://www.google.com/maps/search/$?q=${encodeURIComponent(finalKeyword)}`, '_blank');
         }
 
@@ -930,6 +999,7 @@
                                 <div class="flex items-center justify-center text-[10px] text-gray-300 italic">AD 구역 (승인 후 코드를 삽입하세요)</div>
                             </div>
                         </div>
+                        
                         ${spot.live ? `
                         <div class="mb-14 px-8"> 
                             <h3 class="text-sm font-black mb-6 flex items-center gap-2">
@@ -939,16 +1009,16 @@
                                 <iframe 
                                     class="w-full h-full"
                                     src="${spot.isChannel 
-                                        ? `https://www.youtube.com/embed/live_stream?channel=${spot.live}&autoplay=0&mute=1` 
-                                        : `https://www.youtube.com/embed/kfIQBC0hrII?autoplay=0&mute=1`}" 
-                                    title="YouTube video player" 
+                                        ? `https://www.youtube.com/embed/live_stream?channel=${spot.live}&autoplay=1&mute=1` 
+                                        : `https://www.youtube.com/embed/LarHRzvLanQ?autoplay=1&mute=1`}" 
+                                    title="나고야 히사야오도리 공원 라이브" 
                                     frameborder="0" 
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                                     allowfullscreen>
                                 </iframe>
                             </div>
                             <p class="text-[10px] text-gray-400 mt-3 ml-2 font-bold italic">
-                                * ${spot.region}의 실시간 현장 상황입니다. (1분 단위 자동 업데이트 라이브)
+                                * ${spot.region}의 실시간 현장 상황입니다. (나고야 시내 실시간 라이브)
                             </p>
                         </div>
                         ` : ''}
@@ -973,32 +1043,33 @@
         function renderMapMarkers() {
             if (map) return;
             
-            map = L.map('mapCanvas', { zoomControl: false, attributionControl: false }).setView([43.0611, 141.3564], 10);
+            // 📍 나고야 시청 인근을 중심으로 설정 (줌 레벨 10)
+            map = L.map('mapCanvas', { zoomControl: false, attributionControl: false }).setView([35.1815, 136.9066], 10);
             L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png').addTo(map);
 
             const mapPositions = { 
-                // --- 벚꽃 명소 (기존 데이터) ---
-                'maruyama': [43.0532, 141.3041],     
-                'nakajima': [43.0456, 141.3534],     
-                'odori': [43.0601, 141.3508],        
-                'akarenga': [43.0639, 141.3479],     
-                'moerenuma': [43.1232, 141.4285],    
-                'otaru': [43.2104, 141.0021],        
-                'shizunai': [42.3482, 142.3921],
+                // --- 벚꽃 명소 (나고야 실제 좌표) ---
+                'nagoyajo': [35.1856, 136.9015],    // 나고야성
+                'tsuruma': [35.1553, 136.9208],      // 츠루마 공원
+                'noritake': [35.1795, 136.8819],     // 노리타케의 숲
+                'hisaya': [35.1724, 136.9083],       // 히사야오도리 공원 (라이브 캠 위치)
+                'inuyama': [35.3883, 136.9391],      // 이누야마성 (근교)
+                'iwakura': [35.2784, 136.8732],      // 이와쿠라 고조강 (근교)
+                'okazaki': [34.9562, 137.1588],      // 오카자키 공원 (근교)
 
                 // --- 🚩 추가된 주요 랜드마크 (거점) ---
-                'sapporo_st': [43.0686, 141.3507],   // 삿포로역
-                'otaru_canal': [43.1990, 141.0021]   // 오타루 운하
+                'nagoya_st': [35.1709, 136.8815],    // 나고야역 (교통의 중심)
+                'sakae': [35.1698, 136.9082]         // 사카에 (나고야 최대 번화가)
             };
 
             Object.entries(mapPositions).forEach(([id, pos]) => {
                 const spot = [...data.best, ...data.famous, ...data.suburbs].find(s => s.id === id); 
                 
-                // 랜드마크 전용 기본 데이터 설정
+                // 랜드마크 및 명소 데이터 설정
                 const displaySpot = spot || {
-                    spotName: id === 'sapporo_st' ? '삿포로역' : '오타루 운하',
-                    region: id === 'sapporo_st' ? '삿포로' : '오타루',
-                    sub: id === 'sapporo_st' ? '여행의 시작점이자 교통의 중심' : '가스등이 켜지는 낭만적인 야경 명소',
+                    spotName: id === 'nagoya_st' ? '나고야역' : (id === 'sakae' ? '사카에' : '주요 명소'),
+                    region: '나고야',
+                    sub: id === 'nagoya_st' ? '중부 지방 여행의 시작점' : '오아시스 21과 TV탑이 있는 중심지',
                     vibe: '랜드마크'
                 };
 
@@ -1007,32 +1078,36 @@
                         className: 'custom-marker', 
                         html: `<div class="size-8 bg-white border-[3px] border-primary rounded-full flex items-center justify-center shadow-lg">
                                 <i class="fa-solid ${
-                                    id.includes('st') || id.includes('canal') 
-                                    ? 'fa-flag text-blue-500' // 랜드마크는 파란색 깃발 아이콘
-                                    : (id === 'shizunai' || id === 'moerenuma' ? 'fa-star text-yellow-500' : 'fa-location-dot text-primary')
+                                    id.includes('st') || id === 'sakae'
+                                    ? 'fa-flag text-blue-500' // 거점은 파란색 깃발
+                                    : (id === 'inuyama' || id === 'nagoyajo' ? 'fa-star text-yellow-500' : 'fa-location-dot text-primary')
                                 }"></i>
                             </div>` 
                     }) 
                 }).addTo(map).on('click', () => { 
-                    const zoomLevel = (id === 'shizunai') ? 11 : 14;
+                    // 이누야마나 오카자키처럼 먼 곳은 줌을 약간 낮춰서 보여줌
+                    const zoomLevel = (id === 'inuyama' || id === 'okazaki') ? 11 : 15;
                     map.flyTo(pos, zoomLevel); 
                     showMapTooltip(displaySpot); 
                 });
             });
         }
 
-        // 📍 추가: 삿포로 중심지로 지도 리셋하는 함수
+        // 📍 나고야 중심지로 지도 리셋하는 함수 (좌표 수정)
         function setupMapResetFeature() { 
-            document.getElementById('resetMapBtn').onclick = () => { 
-                if(map) {
-                    map.flyTo([43.0611, 141.3564], 10); 
-                    hideMapTooltip(); 
-                }
-            }; 
+            const resetBtn = document.getElementById('resetMapBtn');
+            if(resetBtn) {
+                resetBtn.onclick = () => { 
+                    if(map) {
+                        map.flyTo([35.1815, 136.9066], 10); 
+                        hideMapTooltip(); 
+                    }
+                }; 
+            }
         }
 
         function startCountdown() {
-            const targetDate = new Date('2026-04-25T00:00:00');
+            const targetDate = new Date('2026-03-24T00:00:00');
             const timerEl = document.getElementById('countdownTimer');
             const statusEl = document.getElementById('forecastStatus');
             
@@ -1045,11 +1120,11 @@
 
                 if (dist <= 0) {
                     timerEl.innerText = "🌸 시즌이 시작되었습니다!";
-                    statusEl.innerHTML = `삿포로의 벚꽃이<br/><span class="inline-block" ${underlineStyle}>활짝 피었습니다 !</span>`;
+                    statusEl.innerHTML = `나고야의 벚꽃이<br/><span class="inline-block" ${underlineStyle}>활짝 피었습니다 !</span>`;
                 } else {
                     const days = Math.floor(dist / (1000 * 60 * 60 * 24));
                     timerEl.innerText = `개화까지 D-${days}일`; 
-                    statusEl.innerHTML = `아직 삿포로의 벚꽃은<br/><span class="inline-block" ${underlineStyle}>개화 전 !</span>`;
+                    statusEl.innerHTML = `아직 나고야의 벚꽃은<br/><span class="inline-block" ${underlineStyle}>개화 전 !</span>`;
                 }
             }
             update();
@@ -1060,8 +1135,8 @@
             const _k = atob("YTdiMTc0NDlhZTYzYmQ5OGQ4MGUyNTNmNjNiZjEyMmY=");
             
             try { 
-                // 📍 1. 쿼리 파라미터를 'Sappro'로 설정하여 호출
-                const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=Sapporo&appid=${_k}&units=metric&lang=kr`); 
+                // 📍 1. 쿼리 파라미터를 'nagoya'로 설정하여 호출
+                const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=Nagoya&appid=${_k}&units=metric&lang=kr`); 
                 const json = await res.json(); 
                 
                 if(res.ok) { 
@@ -1155,13 +1230,13 @@
             page.classList.remove('hidden');
 
             // 현재 페이지 도시 설정 (오사카 파일이면 "Osaka", 도쿄 파일이면 "Tokyo")
-            const currentCity = "Sapporo"; 
+            const currentCity = "Nagoya"; 
             const currentCitySchedule = mySchedule.filter(item => item.city === currentCity);
 
             page.innerHTML = `
                 <div class="max-w-xl mx-auto pt-10 pb-32 text-left px-6">
                     <h2 class="text-3xl font-black mb-2 tracking-tighter">My Schedule</h2>
-                    <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-10">나의 ${currentCity === 'Sapporo' ? '삿포로' : '도쿄'} 여행 계획</p>
+                    <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-10">나의 ${currentCity === 'Nagoya' ? '나고야' : '도쿄'} 여행 계획</p>
                     <div id="scheduleList" class="space-y-4">
                         ${currentCitySchedule.length === 0 ? `
                             <div class="py-20 text-center opacity-40">
@@ -1200,7 +1275,7 @@
                 name: spot.spotName,
                 region: spot.region,
                 img: spot.img,
-                city: "Sapporo" // 📍 오사카 표시
+                city: "Nagoya" // 📍 오사카 표시
             });
             
             localStorage.setItem('sakura_master_schedule', JSON.stringify(mySchedule));
