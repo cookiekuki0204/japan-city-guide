@@ -95,11 +95,6 @@
             0%, 100% { opacity: 1; }
             50% { opacity: 0.3; }
         }
-        @keyframes zoom-in {
-            from { transform: scale(0.9); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-        .animate-zoom-in { animation: zoom-in 0.3s cubic-bezier(0.22, 1, 0.36, 1); }
 
         .animate-blink {
             animation: blink-soft 2s ease-in-out infinite;
@@ -467,12 +462,6 @@
 
         <div id="detailOverlay" class="fixed inset-0 z-[200] translate-x-full bg-white dark:bg-background-dark overflow-y-auto hide-scrollbar hidden flex flex-col text-left">
             </div>
-        <div id="imageLightbox" class="fixed inset-0 z-[400] hidden bg-black/95 backdrop-blur-md flex items-center justify-center p-4 cursor-zoom-out" onclick="closeLightbox()">
-            <button class="absolute top-8 right-8 text-white text-3xl p-4 active:scale-75 transition-transform">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <img id="lightboxImg" src="" class="max-w-full max-h-[90vh] rounded-2xl shadow-2xl object-contain animate-zoom-in">
-        </div>    
     </div>
 
     <script>
@@ -953,26 +942,6 @@
             setupMapResetFeature(); 
             setActiveNav('nav-home');
         }
-        // 라이트박스 열기 함수
-        function openLightbox(src) {
-            const lightbox = document.getElementById('imageLightbox');
-            const lightboxImg = document.getElementById('lightboxImg');
-            if (!lightbox || !lightboxImg) return;
-
-            lightboxImg.src = src;
-            lightbox.classList.remove('hidden');
-            document.body.style.overflow = 'hidden'; // 배경 스크롤 방지
-        }
-
-        // 라이트박스 닫기 함수
-        function closeLightbox() {
-            const lightbox = document.getElementById('imageLightbox');
-            if (lightbox) {
-                lightbox.classList.add('hidden');
-                document.body.style.overflow = ''; // 스크롤 복구
-            }
-        }
-
         function renderBookingButtons() {
             const container = document.getElementById('bookingContainer');
             if (!container) return;
@@ -1228,8 +1197,8 @@
                 </div>
 
                 <div class="flex-1 overflow-y-auto hide-scrollbar pb-32">
-                        <div class="relative w-full aspect-video md:aspect-[21/9] cursor-zoom-in" onclick="openLightbox('${spot.img}')">
-                            <img src="${spot.img}" class="w-full h-full object-cover"></div>
+                    <div class="relative w-full aspect-video md:aspect-[21/9]">
+                        <img src="${spot.img}" class="w-full h-full object-cover">
                         <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                         <div class="absolute bottom-6 left-8">
                             <span class="bg-[#ea2a33] text-white text-[9px] font-black uppercase tracking-[0.2em] px-3 py-1.5 rounded-full border border-white/20">${spot.region}</span>
