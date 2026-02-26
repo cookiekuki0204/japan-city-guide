@@ -150,6 +150,11 @@
             pointer-events: none;
             z-index: 1;
         }
+        @keyframes zoom-in {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        .animate-zoom-in { animation: zoom-in 0.3s cubic-bezier(0.22, 1, 0.36, 1); }
     </style>
 </head>
 <body class="bg-background-light dark:bg-background-dark text-[#181111] dark:text-white transition-colors duration-300 min-h-screen overflow-x-hidden text-left">
@@ -314,6 +319,12 @@
 
         <div id="myTripPage" class="hidden absolute inset-0 z-20 bg-background-light dark:bg-background-dark pt-12 px-6 overflow-y-auto"></div>
         <div id="detailOverlay" class="fixed inset-0 z-[200] translate-x-full bg-white dark:bg-background-dark overflow-y-auto hide-scrollbar hidden flex flex-col text-left"></div>
+        <div id="imageLightbox" class="fixed inset-0 z-[400] hidden bg-black/95 backdrop-blur-md flex items-center justify-center p-4 cursor-zoom-out" onclick="closeLightbox()">
+        <button class="absolute top-8 right-8 text-white text-3xl p-4 active:scale-75 transition-transform">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <img id="lightboxImg" src="" class="max-w-full max-h-[90vh] rounded-2xl shadow-2xl object-contain animate-zoom-in">
+    </div>
     </div>
     <script>
     const data = {
@@ -324,9 +335,9 @@
                 region: '추오구', 
                 spotName: '마루야마 공원', 
                 sub: '벚꽃과 매화가 동시에 피어나는 삿포로 최고의 성지', 
-                img: 'images/image-1714433737244.jpeg',
+                img: 'images/maruyama_kouen_2.jpeg',
                 transport: '지하철 토자이선 마루야마코엔역(T06) 하차 후 3번 출구에서 도보 약 5분',
-                timeline: { start: '4월 26일', peak: '4월 30일', end: '5월 5일', progress: 0 },
+                timeline: { start: '4월 26일', peak: '4월 30일', end: '5월 5일'},
                 station: '마루야마코엔역',
                 tips: [
                     '역에서 공원까지 이어지는 길에 예쁜 베이커리와 카페가 많으니 구경하며 걷기 좋습니다',
@@ -347,9 +358,9 @@
                 region: '히가시구', 
                 spotName: '모에레누마 공원', 
                 sub: '예술 공간 속에 펼쳐진 2,000그루의 사쿠라노모리', 
-                img: 'images/moerenuma_1.jpg', 
+                img: 'images/moerenuma_2.jpg', 
                 transport: '지하철 칸죠도오리히가시역(토호선) 하차 후, 중앙버스[동61] 또는 [동79]번 탑승하여 모에레누마 공원 동쪽 입구 정류장에서 하차',
-                timeline: { start: '4월 28일', peak: '5월 2일', end: '5월 8일', progress: 0 },
+                timeline: { start: '4월 28일', peak: '5월 2일', end: '5월 8일' },
                 history: '조각가 이사무 노구치가 "공원 전체를 하나의 조각으로"라는 컨셉으로 설계한 광대한 대지 예술입니다. 벚꽃이 가득한 사쿠라노모리(벚꽃 숲)는 이 거대한 작품의 일부입니다.',
                 station: '버스 이용 권장',
                 tips: [
@@ -371,7 +382,7 @@
                 region: '미나미구', 
                 spotName: '마코마나이 공원', 
                 sub: '1,000그루의 벚꽃이 만드는 압도적인 분홍빛 물결', 
-                img: 'images/makomanai_1.jpg',
+                img: 'images/makomanai_2.jpg',
                 // 🚩 요청하신 대로 상세 페이지용 transport 정리
                 transport: '지하철 난보쿠선 마코마나이역(N16, 종점) 하차 후 1번 출구에서 도보 약 15~20분, 또는 역 앞 버스 터미널에서 [남90]번 또는 [남95]번 버스 탑승 후 마코마나이 공원 정류장 하차',
                 timeline: { start: '4월 27일', peak: '5월 2일', end: '5월 8일', progress: 0 },
@@ -425,7 +436,7 @@
                 region: '추오구', 
                 spotName: '오도리 공원', 
                 sub: '삿포로 TV 타워를 배경으로 한 도심 꽃놀이', 
-                img: 'images/odori_1.jpg', 
+                img: 'images/odori_2.jpg', 
                 transport: '지하철 오도리역(난보쿠선·토자이선·토호선) 하차 후 2번, 5번, 6번, 8번 또는 27번 출구와 바로 연결',
                 timeline: { start: '4월 26일', peak: '4월 30일', end: '5월 5일' },
                 station: '오도리역',
@@ -447,7 +458,7 @@
                 region: '추오구', 
                 spotName: '나카지마 공원', 
                 sub: '푸른 호수와 수양벚꽃의 낭만적인 조화', 
-                img: 'images/nakajima_1.jpg', 
+                img: 'images/nakajima_2.jpg', 
                 transport: '지하철 난보쿠선 나카지마코엔역(N09) 하차 후 1번 또는 3번 출구와 바로 연결',
                 timeline: { start: '4월 25일', peak: '4월 29일', end: '5월 4일' },
                 station: '나카지마코엔역',
@@ -474,7 +485,7 @@
                 region: '오타루', 
                 spotName: '테미야 공원', 
                 sub: '오타루항 바다를 내려다보는 절벽 위 벚꽃 언덕', 
-                img: 'images/temiya_1.jpg', 
+                img: 'images/temiya_2.jpg', 
                 timeline: { start: '4월 28일', peak: '5월 2일', end: '5월 8일' },
                 transport:'오타루역 앞 중앙버스 터미널 3번 승강장에서 [11번] 또는 [12번] 버스 탑승 후 테미야(手宮) 정류장 하차(약 10분), 이후 언덕길을 따라 도보 10분',
                 station: '오타루역',
@@ -497,7 +508,7 @@
                 region: '오타루', 
                 spotName: '텐구산 로프웨이', 
                 sub: '하늘과 바다 사이, 오타루를 굽어보는 수령 100년의 벚꽃', 
-                img: 'images/tengu_1.jpg', 
+                img: 'images/tengu_2.jpg', 
                 transport: '오타루역 앞 4번 승강장에서 [9번] 텐구산 로프웨이행 버스 탑승 후 종점 하차(약 15분). 이후 로프웨이로 정상까지 이동', 
                 timeline: { start: '4월 29일', peak: '5월 3일', end: '5월 9일', progress: 0 },
                 history: '오타루의 상징적인 산으로, 정상에는 수령 100년이 넘은 외따로 떨어진 벚꽃나무 텐구자쿠라가 유명합니다.',
@@ -531,7 +542,7 @@
                 region: '하코다테', 
                 spotName: '이시자키 지누시카이 신사', 
                 sub: '바다로 이어지는 겹벚꽃 터널, 하코다테 봄의 대미', 
-                img: 'images/hakotate_1.jpeg', // 실제 경로에 맞춰 수정
+                img: 'images/hakotate_2.jpeg',
                 transport: 'JR 하코다테역에서 버스(91계통) 탑승 후 이시자키 하차(약 50분) 후 도보 15분',
                 timeline: { start: '5월 5일', peak: '5월 12일', end: '5월 18일' },
                 tips: [
@@ -570,7 +581,7 @@
                 region: '하코다테 근교', 
                 spotName: '트라피스트 대수도원', 
                 sub: '하늘로 뻗은 가로수길 끝에서 만나는 고요한 안식', 
-                img: 'images/trappist_1.jpg', 
+                img: 'images/trappist_2.jpg', 
                 // 🚩 상세 페이지용 transport 내용
                 transport: '도난 이사리비 철도 오시마토베쓰역(渡島当別駅) 하차 후 도보 약 20분 (하코다테역에서 열차로 약 40분 소요)',
                 timeline: { start: '5월 1일', peak: '5월 6일', end: '5월 12일', progress: 0 },
@@ -676,7 +687,25 @@
             setupHorizontalScroll(); createPetals(); startCountdown(); fetchWeather();
             setupEvents(); setupMapResetFeature(); setActiveNav('nav-home');
         }
+        // 라이트박스 열기 함수
+        function openLightbox(src) {
+            const lightbox = document.getElementById('imageLightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            if (!lightbox || !lightboxImg) return;
 
+            lightboxImg.src = src;
+            lightbox.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // 배경 스크롤 방지
+        }
+
+        // 라이트박스 닫기 함수
+        function closeLightbox() {
+            const lightbox = document.getElementById('imageLightbox');
+            if (lightbox) {
+                lightbox.classList.add('hidden');
+                document.body.style.overflow = ''; // 스크롤 복구
+            }
+        }
         // Search Map Shared Function
         function searchMap(keyword) {
             if (!keyword) return;
@@ -868,8 +897,9 @@
                 </div>
 
                 <div class="flex-1 overflow-y-auto hide-scrollbar pb-32">
-                    <div class="relative w-full aspect-video md:aspect-[21/9]"><img src="${spot.img}" class="w-full h-full object-cover"></div>
-                    
+                        <div class="relative w-full aspect-video md:aspect-[21/9] cursor-zoom-in" onclick="openLightbox('${spot.img}')">
+                            <img src="${spot.img}" class="w-full h-full object-cover">
+                        </div>
                     <div class="pt-10 px-0 text-left">
                         <div class="px-8 mb-6">
                             <h2 class="text-4xl font-black mb-2 tracking-tighter">${spot.spotName}</h2>
