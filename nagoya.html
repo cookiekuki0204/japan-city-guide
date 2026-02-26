@@ -150,6 +150,11 @@
             pointer-events: none;
             z-index: 1;
         }
+        @keyframes zoom-in {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        .animate-zoom-in { animation: zoom-in 0.3s cubic-bezier(0.22, 1, 0.36, 1); }        
     </style>
 </head>
 <body class="bg-background-light dark:bg-background-dark text-[#181111] dark:text-white transition-colors duration-300 min-h-screen overflow-x-hidden text-left">
@@ -197,15 +202,15 @@
                             <div class="grid grid-cols-3 gap-3 md:gap-5 items-center text-center">
                                 <div class="bg-white/15 backdrop-blur-lg rounded-[1.8rem] py-5 border border-white/10">
                                     <p class="text-[9px] font-bold opacity-70 uppercase mb-1">개화 시작</p>
-                                    <p class="text-xl md:text-3xl font-black italic tracking-tighter">03.24</p>
+                                    <p class="text-xl md:text-3xl font-black italic tracking-tighter">03.21</p>
                                 </div>
                                 <div class="bg-white/30 backdrop-blur-lg rounded-[1.8rem] py-7 border-2 border-white/40 shadow-xl -mt-2">
                                     <p class="text-[9px] font-bold mb-1 flex items-center justify-center gap-1">👑 만개 피크</p>
-                                    <p class="text-2xl md:text-4xl font-black tracking-tighter">04.02</p>
+                                    <p class="text-2xl md:text-4xl font-black tracking-tighter">03.28</p>
                                 </div>
                                 <div class="bg-white/15 backdrop-blur-lg rounded-[1.8rem] py-5 border border-white/10">
                                     <p class="text-[9px] font-bold opacity-70 uppercase mb-1">벚꽃 엔딩</p>
-                                    <p class="text-xl md:text-3xl font-black italic tracking-tighter">04.05</p>
+                                    <p class="text-xl md:text-3xl font-black italic tracking-tighter">04.04</p>
                                 </div>
                             </div>
                         </div>
@@ -314,6 +319,12 @@
 
         <div id="myTripPage" class="hidden absolute inset-0 z-20 bg-background-light dark:bg-background-dark pt-12 px-6 overflow-y-auto"></div>
         <div id="detailOverlay" class="fixed inset-0 z-[200] translate-x-full bg-white dark:bg-background-dark overflow-y-auto hide-scrollbar hidden flex flex-col text-left"></div>
+        <div id="imageLightbox" class="fixed inset-0 z-[400] hidden bg-black/95 backdrop-blur-md flex items-center justify-center p-4 cursor-zoom-out" onclick="closeLightbox()">
+            <button class="absolute top-8 right-8 text-white text-3xl p-4 active:scale-75 transition-transform">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <img id="lightboxImg" src="" class="max-w-full max-h-[90vh] rounded-2xl shadow-2xl object-contain animate-zoom-in">
+        </div>        
     </div>
     <script>
     const data = {
@@ -745,7 +756,25 @@
             setupHorizontalScroll(); createPetals(); startCountdown(); fetchWeather();
             setupEvents(); setupMapResetFeature(); setActiveNav('nav-home');
         }
+        // 라이트박스 열기 함수
+        function openLightbox(src) {
+            const lightbox = document.getElementById('imageLightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            if (!lightbox || !lightboxImg) return;
 
+            lightboxImg.src = src;
+            lightbox.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // 배경 스크롤 방지
+        }
+
+        // 라이트박스 닫기 함수
+        function closeLightbox() {
+            const lightbox = document.getElementById('imageLightbox');
+            if (lightbox) {
+                lightbox.classList.add('hidden');
+                document.body.style.overflow = ''; // 스크롤 복구
+            }
+        }
         // Search Map Shared Function
         function searchMap(keyword) {
             if (!keyword) return;
@@ -937,8 +966,9 @@
                 </div>
 
                 <div class="flex-1 overflow-y-auto hide-scrollbar pb-32">
-                    <div class="relative w-full aspect-video md:aspect-[21/9]"><img src="${spot.img}" class="w-full h-full object-cover"></div>
-                    
+                        <div class="relative w-full aspect-video md:aspect-[21/9] cursor-zoom-in" onclick="openLightbox('${spot.img}')">
+                            <img src="${spot.img}" class="w-full h-full object-cover">
+                        </div>
                     <div class="pt-10 px-0 text-left">
                         <div class="px-8 mb-6">
                             <h2 class="text-4xl font-black mb-2 tracking-tighter">${spot.spotName}</h2>
@@ -969,15 +999,15 @@
                                     
                                     <div class="absolute -bottom-10 left-0 text-center">
                                         <p class="text-[8px] font-bold text-gray-400 uppercase">개화</p>
-                                        <p class="text-[10px] font-black">${spot.timeline?.start || '4.25'}</p>
+                                        <p class="text-[10px] font-black">${spot.timeline?.start || '3.21'}</p>
                                     </div>
                                     <div class="absolute -bottom-10 left-1/2 -translate-x-1/2 text-center">
                                         <p class="text-[8px] font-bold text-primary uppercase">만개</p>
-                                        <p class="text-[10px] font-black text-primary">${spot.timeline?.peak || '4.29'}</p>
+                                        <p class="text-[10px] font-black text-primary">${spot.timeline?.peak || '3.28'}</p>
                                     </div>
                                     <div class="absolute -bottom-10 right-0 text-center">
                                         <p class="text-[8px] font-bold text-gray-400 uppercase">낙화</p>
-                                        <p class="text-[10px] font-black">${spot.timeline?.end || '5.05'}</p>
+                                        <p class="text-[10px] font-black">${spot.timeline?.end || '4.04'}</p>
                                     </div>
                                 </div>
                             </div>
@@ -1107,7 +1137,7 @@
         }
 
         function startCountdown() {
-            const targetDate = new Date('2026-03-24T00:00:00');
+            const targetDate = new Date('2026-03-21T00:00:00');
             const timerEl = document.getElementById('countdownTimer');
             const statusEl = document.getElementById('forecastStatus');
             

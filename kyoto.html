@@ -131,6 +131,11 @@
             transition: all 0.2s;
         }
         .delete-btn:hover { background: #ff4d6d; color: white; }
+        @keyframes zoom-in {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        .animate-zoom-in { animation: zoom-in 0.3s cubic-bezier(0.22, 1, 0.36, 1); }
     </style>
 </head>
 <body class="bg-background-light dark:bg-background-dark text-[#181111] dark:text-white transition-colors duration-300 min-h-screen overflow-x-hidden text-left">
@@ -173,7 +178,7 @@
                             <div class="grid grid-cols-3 gap-3 items-center text-center">
                                 <div class="bg-white/20 backdrop-blur-md rounded-2xl py-3 border border-white/10">
                                     <p class="text-[8px] md:text-[10px] font-black uppercase mb-1">개화 시작</p>
-                                    <p class="text-lg md:text-2xl font-black italic">03.22</p>
+                                    <p class="text-lg md:text-2xl font-black italic">03.24</p>
                                 </div>
                                 <div class="bg-white/30 backdrop-blur-md rounded-2xl py-4 border-2 border-white/40 shadow-lg -mt-2">
                                     <p class="text-[8px] md:text-[10px] font-black mb-1 flex items-center justify-center gap-1"><i class="fa-solid fa-crown text-[8px]"></i> 만개 피크</p>
@@ -290,6 +295,12 @@
 
         <div id="myTripPage" class="hidden absolute inset-0 z-20 bg-background-light dark:bg-background-dark pt-12 px-6 overflow-y-auto"></div>
         <div id="detailOverlay" class="fixed inset-0 z-[200] translate-x-full bg-white dark:bg-background-dark overflow-y-auto hide-scrollbar hidden flex flex-col text-left"></div>
+        <div id="imageLightbox" class="fixed inset-0 z-[400] hidden bg-black/95 backdrop-blur-md flex items-center justify-center p-4 cursor-zoom-out" onclick="closeLightbox()">
+            <button class="absolute top-8 right-8 text-white text-3xl p-4 active:scale-75 transition-transform">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <img id="lightboxImg" src="" class="max-w-full max-h-[90vh] rounded-2xl shadow-2xl object-contain animate-zoom-in">
+        </div>
     </div>
     <script>
         const data = {
@@ -565,7 +576,25 @@
             setupHorizontalScroll(); createPetals(); startCountdown(); fetchWeather();
             setupEvents(); setupMapResetFeature(); setActiveNav('nav-home');
         }
+        // 라이트박스 열기 함수
+        function openLightbox(src) {
+            const lightbox = document.getElementById('imageLightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            if (!lightbox || !lightboxImg) return;
 
+            lightboxImg.src = src;
+            lightbox.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // 배경 스크롤 방지
+        }
+
+        // 라이트박스 닫기 함수
+        function closeLightbox() {
+            const lightbox = document.getElementById('imageLightbox');
+            if (lightbox) {
+                lightbox.classList.add('hidden');
+                document.body.style.overflow = ''; // 스크롤 복구
+            }
+        }
         // Search Map Shared Function
         function searchMap(keyword) {
             if (!keyword) return;
@@ -759,7 +788,9 @@
                     <button onclick="addToSchedule('${spot.id}')" class="p-2 text-primary active:scale-75 transition-transform"><i class="fa-solid fa-heart"></i></button>
                 </div>
                 <div class="flex-1 overflow-y-auto hide-scrollbar pb-32">
-                    <div class="relative w-full aspect-video md:aspect-[21/9]"><img src="${spot.img}" class="w-full h-full object-cover"></div>
+                    <div class="relative w-full aspect-video md:aspect-[21/9] cursor-zoom-in" onclick="openLightbox('${spot.img}')">
+                        <img src="${spot.img}" class="w-full h-full object-cover">
+                    </div>
                     <div class="pt-10 px-0 text-left">
                         <div class="px-8"><h2 class="text-4xl font-black mb-4 tracking-tighter">${spot.spotName}</h2></div>
                         
@@ -772,7 +803,7 @@
                                     
                                     <div class="absolute -bottom-10 left-0 text-center">
                                         <p class="text-[8px] font-bold text-gray-400 uppercase">개화</p>
-                                        <p class="text-[10px] font-black">${spot.timeline?.start || '3.22'}</p>
+                                        <p class="text-[10px] font-black">${spot.timeline?.start || '3.24'}</p>
                                     </div>
                                     <div class="absolute -bottom-10 left-1/2 -translate-x-1/2 text-center">
                                         <p class="text-[8px] font-bold text-primary uppercase">만개</p>
@@ -851,16 +882,28 @@
         }
 
         function startCountdown() {
-            const targetDate = new Date('2026-03-22T00:00:00');
+            const targetDate = new Date('2026-03-24T00:00:00');
             const timerEl = document.getElementById('countdownTimer');
             const statusEl = document.getElementById('forecastStatus');
+        
             function update() {
-                const now = new Date(); const dist = targetDate - now; const days = Math.floor(dist / (1000 * 60 * 60 * 24));
-                if (dist <= 0) { timerEl.innerText = "🌸 시즌 시작!"; statusEl.innerHTML = `교토 벚꽃 개화<br/><span class="underline decoration-4">지금부터 만개까지!</span>`; }
-                else if (days <= 7) { timerEl.innerText = `개화까지 D-${days}일`; statusEl.innerHTML = `교토 벚꽃 개화<br/><span class="underline decoration-4">D-Day 카운트다운</span>`; }
-                else { timerEl.innerText = "벚꽃 소식을 기다리는 중"; statusEl.innerHTML = `곧 다가올 교토의<br/><span class="underline decoration-4">분홍빛 설렘을 준비하세요</span>`; }
+                const now = new Date();
+                const dist = targetDate - now;
+                
+                // 이미지와 동일한 스타일의 밑줄 태그를 포함하여 업데이트
+                const underlineStyle = `style="text-decoration: underline; text-decoration-color: rgba(255, 255, 255, 0.4); text-decoration-thickness: 6px; text-underline-offset: 8px;"`;
+
+                if (dist <= 0) {
+                    timerEl.innerText = "🌸 시즌이 시작되었습니다!";
+                    statusEl.innerHTML = `교토의 벚꽃이<br/><span class="inline-block" ${underlineStyle}>활짝 피었습니다 !</span>`;
+                } else {
+                    const days = Math.floor(dist / (1000 * 60 * 60 * 24));
+                    timerEl.innerText = `개화까지 D-${days}일`; 
+                    statusEl.innerHTML = `아직 교토의 벚꽃은<br/><span class="inline-block" ${underlineStyle}>개화 전 !</span>`;
+                }
             }
-            update(); setInterval(update, 60000);
+            update();
+            setInterval(update, 1000);
         }
 
         async function fetchWeather() {
