@@ -211,7 +211,49 @@
                         </div>
                     </div>
                 </div>
+                <div class="mb-12 slide-up">
+                    <div id="weeklyWeatherCard" class="bg-white/80 dark:bg-white/5 backdrop-blur-xl rounded-[2.5rem] p-8 md:p-10 border border-white/50 shadow-sm transition-all duration-500">
+                        
+                        <div class="flex items-center justify-between mb-8 text-left">
+                            <h3 class="text-[12px] font-black uppercase tracking-[0.15em] text-gray-400">교토 주간 날씨 예보</h3>
+                            <div class="px-3 py-1 bg-amber-500/10 text-amber-500 rounded-full text-[9px] font-black uppercase">7 Days</div>
+                        </div>
 
+                        <div class="w-full overflow-hidden">
+                            <a class="weatherwidget-io" 
+                            href="https://forecast7.com/en/35d01135d77/kyoto/" 
+                            data-label_1="KYOTO" 
+                            data-label_2="WEEKLY" 
+                            data-font="Roboto" 
+                            data-icons="Climacons Animated" 
+                            data-days="7" 
+                            data-theme="pure" 
+                            data-textcolor="#2c3e50" 
+                            data-highcolor="#e74c3c" 
+                            data-lowcolor="#3498db"
+                            style="display: block; border: none;">
+                            KYOTO WEEKLY WEATHER
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="mb-16 px-6 slide-up" style="animation-delay: 0.2s;">
+                    <div class="max-w-6xl mx-auto flex flex-col items-center">
+                        <p class="text-[8px] text-gray-300 font-bold uppercase tracking-widest mb-2">Sponsor Ad</p>
+                        
+                        <div class="w-full bg-white/40 dark:bg-white/5 rounded-[2.5rem] p-4 border border-white/40 overflow-hidden shadow-sm min-h-[100px] flex items-center justify-center">
+                            <ins class="adsbygoogle"
+                                style="display:block; width:100%;"
+                                data-ad-format="fluid"
+                                data-ad-layout-key="-fb+5w+4e-db+86"
+                                data-ad-client="ca-pub-6682864237624164" 
+                                data-ad-slot="XXXXXXXXXX"></ins> <script>
+                                (adsbygoogle = window.adsbygoogle || []).push({});
+                            </script>
+                            </div>
+                    </div>
+                </div>
                 <div class="mb-20 text-left w-full overflow-hidden">
                     <div class="flex items-end justify-between mb-8">
                         <h3 class="text-2xl md:text-3xl font-black">2026 베스트 명소</h3>
@@ -263,7 +305,22 @@
                     </div>
                     <div id="bookingContainer" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
                 </div>
-
+                <div class="mb-16 px-6 slide-up" style="animation-delay: 0.2s;">
+                    <div class="max-w-6xl mx-auto flex flex-col items-center">
+                        <p class="text-[8px] text-gray-300 font-bold uppercase tracking-widest mb-2">Sponsor Ad</p>
+                        
+                        <div class="w-full bg-white/40 dark:bg-white/5 rounded-[2.5rem] p-4 border border-white/40 overflow-hidden shadow-sm min-h-[100px] flex items-center justify-center">
+                            <ins class="adsbygoogle"
+                                style="display:block; width:100%;"
+                                data-ad-format="fluid"
+                                data-ad-layout-key="-fb+5w+4e-db+86"
+                                data-ad-client="ca-pub-6682864237624164" 
+                                data-ad-slot="XXXXXXXXXX"></ins> <script>
+                                (adsbygoogle = window.adsbygoogle || []).push({});
+                            </script>
+                            </div>
+                    </div>
+                </div>
                 <div class="py-10 text-center opacity-30">
                     <p class="text-[10px] md:text-xs font-black tracking-widest uppercase">Japan City Guide Project 2026</p>
                     <button onclick="openPrivacy()" class="mt-2 text-[9px] font-bold hover:underline cursor-pointer">Privacy Policy (개인정보처리방침)</button>
@@ -335,7 +392,7 @@
                 { 
                     id: 'kiyomizu', 
                     region: '히가시야마', 
-                    spotName: '청수사(기요미즈데라)', 
+                    spotName: '기요미즈데라', 
                     sub: '절벽 위 무대에서 내려다보는 분홍 바다', 
                     img: 'images/kiyomizutera_1.jpg', 
                     vibe: '웅장함', 
@@ -495,6 +552,15 @@
             // data 객체 마지막 부분에 추가
             entertainment: [
                {
+                    title: "나는 내일, 어제의 너와 만난다",
+                    sub: "미키 타카히로 | 영화",
+                    desc: "엇갈리는 시간 속에서 단 한 번 마주친 기적 같은 30일.",
+                    img: "images/me_and_you_meet.jpeg",
+                    link: "https://search.naver.com/search.naver?query=영화+나는내일어제의너와만난다",
+                    tag: "KYOTO 배경",
+                    ott: ["넷플릭스", "왓챠"]
+                },                
+               {
                     title: "초속 5센티미터",
                     sub: "신카이 마코토 | 애니메이션",
                     desc: "벚꽃 잎이 떨어지는 속도, 첫사랑의 거리감",
@@ -576,6 +642,9 @@
             setupHorizontalScroll(); createPetals(); startCountdown(); fetchWeather();
             setupEvents(); setupMapResetFeature(); setActiveNav('nav-home');
         }
+
+        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+
         // 라이트박스 열기 함수
         function openLightbox(src) {
             const lightbox = document.getElementById('imageLightbox');
@@ -621,8 +690,8 @@
                     <img src="${spot.img}" class="w-full aspect-[3/4] object-cover group-hover:scale-110 transition-transform duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
                     <div class="absolute inset-x-0 bottom-0 p-8 text-left">
-                        <span class="inline-block px-2.5 py-1 rounded-lg bg-primary text-[9px] font-black text-white mb-3 uppercase tracking-tighter">${spot.spotName}</span>
-                        <h4 class="text-white text-3xl font-black mb-1">${spot.region}</h4>
+                        <span class="inline-block px-2.5 py-1 rounded-lg bg-primary text-[9px] font-black text-white mb-3 uppercase tracking-tighter">${spot.region}</span>
+                        <h4 class="text-white text-3xl font-black mb-1">${spot.spotName}</h4>
                         <p class="text-white/70 text-[11px] font-bold line-clamp-1">${spot.sub}</p>
                     </div>
                 </div>
@@ -633,14 +702,14 @@
             document.getElementById('famousSpotsContainer').innerHTML = data.famous.map(spot => `
                 <div onclick="openDetail('${spot.id}')" class="flex-shrink-0 w-[72vw] md:w-[280px] bg-white dark:bg-white/5 p-7 rounded-[2.5rem] border border-white/60 dark:border-white/10 active:scale-95 transition-all cursor-pointer shadow-sm snap-center text-left">
                     <span class="inline-block text-[10px] font-black text-primary bg-primary/10 px-2 py-0.5 rounded-full mb-3 uppercase tracking-wider">
-                        ${spot.spotName}
+                        ${spot.region}
                     </span>
                     
                     <div class="size-12 rounded-2xl bg-primary/5 flex items-center justify-center text-primary mb-4">
                         <i class="fa-solid ${spot.icon || 'fa-location-dot'} text-xl"></i>
                     </div>
                     
-                    <h4 class="font-black text-xl mb-1">${spot.region}</h4>
+                    <h4 class="font-black text-xl mb-1">${spot.spotName}</h4>
                     
                     <p class="text-[11px] text-gray-400 font-bold line-clamp-2">${spot.sub || '현지 인기 명소'}</p>
                 </div>
@@ -653,10 +722,10 @@
                     <img src="${spot.img}" class="h-48 w-full rounded-[2.2rem] object-cover mb-6">
                     
                     <span class="inline-block text-[10px] font-black text-primary bg-primary/10 px-2 py-0.5 rounded-full mb-3 uppercase tracking-wider">
-                        ${spot.spotName}
+                        ${spot.region}
                     </span>
 
-                    <h4 class="font-black text-2xl mb-2 text-[#181111] dark:text-white">${spot.region}</h4>
+                    <h4 class="font-black text-2xl mb-2 text-[#181111] dark:text-white">${spot.spotName}</h4>
                     
                     <p class="text-[11px] text-gray-400 font-bold mb-4 line-clamp-1">${spot.sub}</p>
                     
@@ -908,7 +977,7 @@
 
         async function fetchWeather() {
             const _k = atob("YTdiMTc0NDlhZTYzYmQ5OGQ4MGUyNTNmNjNiZjEyMmY=");
-            try { const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=Osaka&appid=${_k}&units=metric&lang=kr`); const json = await res.json(); if(res.ok) { document.getElementById('currentTemp').innerText = `${Math.round(json.main.temp)}°`; document.getElementById('weatherDesc').innerText = json.weather[0].description; document.getElementById('clothTitle').innerText = json.main.temp > 15 ? "가벼운 외투" : "도톰한 코트"; document.getElementById('clothDesc').innerText = "일교차가 큽니다."; document.getElementById('weatherIconBox').innerHTML = `<img src="https://openweathermap.org/img/wn/${json.weather[0].icon}@2x.png" class="size-12">`; } } catch(e) {}
+            try { const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=Kyoto&appid=${_k}&units=metric&lang=kr`); const json = await res.json(); if(res.ok) { document.getElementById('currentTemp').innerText = `${Math.round(json.main.temp)}°`; document.getElementById('weatherDesc').innerText = json.weather[0].description; document.getElementById('clothTitle').innerText = json.main.temp > 15 ? "가벼운 외투" : "도톰한 코트"; document.getElementById('clothDesc').innerText = "일교차가 큽니다."; document.getElementById('weatherIconBox').innerHTML = `<img src="https://openweathermap.org/img/wn/${json.weather[0].icon}@2x.png" class="size-12">`; } } catch(e) {}
         }
 
         function showMapTooltip(spot) {

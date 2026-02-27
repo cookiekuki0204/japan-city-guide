@@ -235,7 +235,49 @@
                         </div>
                     </div>
                 </div>
+                <div class="mb-12 slide-up">
+                    <div id="weeklyWeatherCard" class="bg-white/80 dark:bg-white/5 backdrop-blur-xl rounded-[2.5rem] p-8 md:p-10 border border-white/50 shadow-sm transition-all duration-500">
+                        
+                        <div class="flex items-center justify-between mb-8 text-left">
+                            <h3 class="text-[12px] font-black uppercase tracking-[0.15em] text-gray-400">후쿠오카 주간 날씨 예보</h3>
+                            <div class="px-3 py-1 bg-amber-500/10 text-amber-500 rounded-full text-[9px] font-black uppercase">7 Days</div>
+                        </div>
 
+                        <div class="w-full overflow-hidden">
+                            <a class="weatherwidget-io" 
+                            href="https://forecast7.com/en/33d59130d40/fukuoka/" 
+                            data-label_1="FUKUOKA" 
+                            data-label_2="WEEKLY" 
+                            data-font="Roboto" 
+                            data-icons="Climacons Animated" 
+                            data-days="7" 
+                            data-theme="pure" 
+                            data-textcolor="#2c3e50" 
+                            data-highcolor="#e74c3c" 
+                            data-lowcolor="#3498db"
+                            style="display: block; border: none;">
+                            FUKUOKA WEEKLY WEATHER
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="mb-16 px-6 slide-up" style="animation-delay: 0.2s;">
+                    <div class="max-w-6xl mx-auto flex flex-col items-center">
+                        <p class="text-[8px] text-gray-300 font-bold uppercase tracking-widest mb-2">Sponsor Ad</p>
+                        
+                        <div class="w-full bg-white/40 dark:bg-white/5 rounded-[2.5rem] p-4 border border-white/40 overflow-hidden shadow-sm min-h-[100px] flex items-center justify-center">
+                            <ins class="adsbygoogle"
+                                style="display:block; width:100%;"
+                                data-ad-format="fluid"
+                                data-ad-layout-key="-fb+5w+4e-db+86"
+                                data-ad-client="ca-pub-6682864237624164" 
+                                data-ad-slot="XXXXXXXXXX"></ins> <script>
+                                (adsbygoogle = window.adsbygoogle || []).push({});
+                            </script>
+                            </div>
+                    </div>
+                </div>
                 <div class="mb-20 text-left w-full overflow-hidden">
                     <div class="flex items-end justify-between mb-8">
                         <h3 class="text-2xl md:text-3xl font-black">2026 베스트 명소</h3>
@@ -287,7 +329,22 @@
                     </div>
                     <div id="bookingContainer" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
                 </div>
-
+                <div class="mb-16 px-6 slide-up" style="animation-delay: 0.2s;">
+                    <div class="max-w-6xl mx-auto flex flex-col items-center">
+                        <p class="text-[8px] text-gray-300 font-bold uppercase tracking-widest mb-2">Sponsor Ad</p>
+                        
+                        <div class="w-full bg-white/40 dark:bg-white/5 rounded-[2.5rem] p-4 border border-white/40 overflow-hidden shadow-sm min-h-[100px] flex items-center justify-center">
+                            <ins class="adsbygoogle"
+                                style="display:block; width:100%;"
+                                data-ad-format="fluid"
+                                data-ad-layout-key="-fb+5w+4e-db+86"
+                                data-ad-client="ca-pub-6682864237624164" 
+                                data-ad-slot="XXXXXXXXXX"></ins> <script>
+                                (adsbygoogle = window.adsbygoogle || []).push({});
+                            </script>
+                            </div>
+                    </div>
+                </div>
                 <div class="py-10 text-center opacity-30">
                     <p class="text-[10px] md:text-xs font-black tracking-widest uppercase">Japan City Guide Project 2026</p>
                     <button onclick="openPrivacy()" class="mt-2 text-[9px] font-bold hover:underline cursor-pointer">Privacy Policy (개인정보처리방침)</button>
@@ -472,6 +529,15 @@
             ],
             // data 객체 마지막 부분에 추가
             entertainment: [
+                {
+                    title: "너의 췌장을 먹고 싶어",
+                    sub: "츠키카와 쇼 | 영화/애니",
+                    desc: "벚꽃처럼 찬란하고 짧았던 두 사람의 기록",
+                    img: "images/kimino_1.jpg",
+                    link: "https://search.naver.com/search.naver?query=영화+너의췌장을먹고싶어",
+                    tag: "Fukuoka 배경",
+                    ott: ["넷플릭스", "왓챠"]
+                },                
                {
                     title: "초속 5센티미터",
                     sub: "신카이 마코토 | 애니메이션",
@@ -480,15 +546,6 @@
                     link: "https://search.naver.com/search.naver?query=영화+초속5센티미터",
                     tag: "Classic",
                     ott: ["웨이브"]
-                },
-                {
-                    title: "너의 췌장을 먹고 싶어",
-                    sub: "츠키카와 쇼 | 영화/애니",
-                    desc: "벚꽃처럼 찬란하고 짧았던 두 사람의 기록",
-                    img: "images/kimino_1.jpg",
-                    link: "https://search.naver.com/search.naver?query=영화+너의췌장을먹고싶어",
-                    tag: "Must-Watch",
-                    ott: ["넷플릭스", "왓챠"]
                 },
                 {
                     title: "4월은 너의 거짓말",
@@ -554,6 +611,8 @@
             setupHorizontalScroll(); createPetals(); startCountdown(); fetchWeather();
             setupEvents(); setupMapResetFeature(); setActiveNav('nav-home');
         }
+        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+        
         // 라이트박스 열기 함수
         function openLightbox(src) {
             const lightbox = document.getElementById('imageLightbox');
