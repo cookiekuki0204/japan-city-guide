@@ -538,7 +538,7 @@
                     img: 'images/nakameguro_3.jpg', vibe: '낭만적', crowd: '매우 높음',
                     timeline: { start: '3월 20일', peak: '3월 27일', end: '4월 3일', progress: 85 },
                     history: '메구로 강을 따라 흐르는 800그루의 왕벚나무가 만드는 분홍빛 터널은 도쿄 최고의 낭만입니다. 밤이 되면 켜지는 핑크 제등과 강물에 비친 꽃잎은 전 세계 여행자들의 로망입니다.',
-                    tips: ['라이트업은 일몰 후 오후 8시까지.', '호라이바시 다리가 공식 포토 스팟.', '벚꽃 샴페인을 들고 산책해 보세요'],
+                    tips: ['라이트업은 일몰 후 오후 8시까지', '호라이바시 다리가 공식 포토 스팟', '벚꽃 샴페인을 들고 산책해 보세요'],
                     attractions: {
                         museums: [{ name: '사토 사쿠라 미술관', img: 'images/sato_sakura_1.jpg', desc: '벚꽃 그림 전문 일본화 미술관'}],
                         historical: [{ name: '유텐지 사찰', img: 'images/yutenji_1.jpg', desc: '에도 시대의 정취를 간직한 조용한 사찰'}],
@@ -970,7 +970,7 @@
                     desc: '실시간 최저가 및 스케줄 비교',
                     icon: 'fa-plane-up',
                     color: 'from-sky-400 to-blue-600', // 그라데이션 적용
-                    link: 'https://skyscanner.pxf.io/en4kBX' 
+                    link: 'https://skyscanner.pxf.io/X4xMrg' 
                 },
                 {
                     id: 'hotels',
@@ -1206,7 +1206,7 @@
                         </h3>
                         <div class="flex overflow-x-auto hide-scrollbar flex-nowrap gap-5 px-8 pb-4 scroll-smooth">
                             ${items.map(item => `
-                                <div onclick="searchMap('${item.name}')" 
+                                <div onclick="window.open('https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.name)}', '_blank')" 
                                     class="min-w-[200px] w-[200px] flex flex-col gap-3 group active:scale-95 transition-all shrink-0 cursor-pointer">
                                     <div class="h-48 w-full rounded-[2rem] bg-cover bg-center shadow-md border border-gray-100 overflow-hidden relative">
                                         <img src="${item.img}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
@@ -1425,10 +1425,17 @@
             const currentCity = "Tokyo";
             const currentCitySchedule = mySchedule.filter(item => item.city === "Tokyo");
 
-        page.innerHTML = `
-                <div class="max-w-xl mx-auto pt-10 pb-32 text-left px-6">
+            page.innerHTML = `
+                <div class="shrink-0 h-16 px-4 flex items-center bg-transparent sticky top-0 z-[120]">
+                    <button onclick="goBack()" class="p-2 active:scale-75 transition-transform">
+                        <i class="fa-solid fa-chevron-left text-xl text-gray-900 dark:text-white"></i>
+                    </button>
+                </div>
+
+                <div class="max-w-xl mx-auto pt-2 pb-32 text-left px-6">
                     <h2 class="text-3xl font-black mb-2 tracking-tighter">My Schedule</h2>
-                    <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-10">나의 ${currentCity === 'Tokyo' ? '오사카' : '도쿄'} 여행 계획</p>
+                    <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-10">
+                        나의 ${currentCity === 'Tokyo' ? '오사카' : '도쿄'} 여행 계획</p>
                     <div id="scheduleList" class="space-y-4">
                         ${currentCitySchedule.length === 0 ? `
                             <div class="py-20 text-center opacity-40">
@@ -1453,6 +1460,14 @@
                     </div>
                 </div>
             `;
+        }
+        // 🚩 뒤로가기 기능을 수행하는 함수
+        function goBack() {
+            // 현재 열려있는 일정 페이지를 숨기고 홈으로 돌아가는 로직
+            // 사용자님의 closeAllPages()와 setActiveNav를 활용하세요.
+            closeAllPages();
+            document.getElementById('mainContent').classList.remove('hidden'); // 홈 페이지 ID가 homePage라고 가정
+            setActiveNav('nav-home'); // 홈 하단 탭 활성화
         }
         function openGoogleMapsDirections(spotId) {
             const allSpots = [...data.best, ...data.famous, ...data.suburbs];
