@@ -826,11 +826,12 @@
                 document.body.style.overflow = ''; // 스크롤 복구
             }
         }
-        // Search Map Shared Function
-        function searchMap(keyword) {
-            if (!keyword) return;
-            const finalKeyword = keyword.includes('교토') ? keyword : `교토 ${keyword}`;
-            window.open(`https://www.google.com/maps/search/$?q=${encodeURIComponent(finalKeyword)}`, '_blank');
+        function searchMap(query) {
+            if (!query) return;
+            
+            const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+            
+            window.open(url, '_blank');
         }
 
         function openDirectLink(event, keyword) {
