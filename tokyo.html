@@ -525,14 +525,8 @@
         function searchMap(query) {
             if (!query) return;
             
-            // 1. 공백이나 한글을 URL 안전 문자로 변환 (필수!)
-            const encodedQuery = encodeURIComponent(query);
+            const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
             
-            // 2. 구글 지도 앱을 강제로 깨우는 '유니버셜 검색 API' 주소
-            // 이 주소는 모바일 앱에서 '결과 없음'을 방지하는 가장 정밀한 주소입니다.
-            const url = `https://www.google.com/maps/search/?api=1&query=${encodedQuery}`;
-            
-            // 3. 새 창(앱)으로 열기
             window.open(url, '_blank');
         }
         // --- MASTER DATA SECTION ---
@@ -1241,7 +1235,7 @@
                             ${items.map(item => `
                                 <div class="flex items-center justify-between p-5 bg-gray-50 dark:bg-white/5 rounded-3xl border border-gray-100 dark:border-white/5 group transition-all">
                                     
-                                    <div onclick="searchMap('${item.name.replace(/'/g, "\\'")}')" class="flex items-center gap-4 cursor-pointer flex-1 min-w-0 active:scale-[0.97] transition-transform">
+                                    <div onclick="window.open('https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.name)}', '_blank')" 
                                         class="flex items-center gap-4 cursor-pointer flex-1 min-w-0 active:scale-[0.97] transition-transform">
                                         
                                         <div class="rank-badge rank-${item.rank <= 3 ? item.rank : 'other'} shrink-0">${item.rank}</div>
