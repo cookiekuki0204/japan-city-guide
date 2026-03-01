@@ -829,7 +829,10 @@
         function searchMap(query) {
             if (!query) return;
             
-            const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+            // 핵심: ?api=1&query= 형식을 사용해야 모바일 구글맵 앱이 검색어로 정확히 인식합니다.
+            // 기존 /maps/search/ 방식은 교토의 한자나 복잡한 지명에서 오류가 잦습니다.
+            const encodedQuery = encodeURIComponent(query);
+            const url = `https://www.google.com/maps/search/?api=1&query=${encodedQuery}`;
             
             window.open(url, '_blank');
         }
