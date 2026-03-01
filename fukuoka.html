@@ -753,7 +753,10 @@
         function openDirectLink(event, keyword) {
             if (event) event.stopPropagation();
             if (!keyword) return;
-            window.open(`https://www.google.com/maps/search/$?q=${encodeURIComponent(keyword)}`, '_blank');
+
+            const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(keyword + ' 교토')}`;
+            
+            window.open(url, '_blank');
         }
 
         function setupHorizontalScroll() {

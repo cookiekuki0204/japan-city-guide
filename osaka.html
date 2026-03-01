@@ -1007,7 +1007,12 @@
         function openDirectLink(event, keyword) {
             if (event) event.stopPropagation();
             if (!keyword) return;
-            window.open(`https://www.google.com/maps/search/$?q=${encodeURIComponent(keyword)}`, '_blank');
+
+            // 🚩 핵심 수정: /search/ 대신 ?api=1&query= 형식을 사용합니다.
+            // 이 방식이 모바일 구글 지도 앱에서 '결과 없음'을 방지하는 가장 정밀한 방법입니다.
+            const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(keyword + ' 교토')}`;
+            
+            window.open(url, '_blank');
         }
 
         function setupHorizontalScroll() {
