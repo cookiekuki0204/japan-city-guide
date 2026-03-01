@@ -653,7 +653,7 @@
                     history: '황실 정원을 거쳐 국민 공원이 된 곳입니다. 프랑스식, 영국식, 일본식 정원이 조화를 이룬 도심 속 거대 안식처입니다',
                     tips: ['주류 반입 금지로 매우 쾌적합니다', '정원 내 스타벅스는 도쿄 최고의 명당'],
                     attractions: {
-                        museums: [{ name: '교엔 대온실', img: 'images/gyoendaionsitsu_1.jpg', desc: '전 세계 희귀 식물 수집 공간'}],
+                        museums: [{ name: '교엔 대온실', img: 'images/gyoendaionsitsu.jpg', desc: '전 세계 희귀 식물 수집 공간'}],
                         historical: [{ name: '구 양관 휴게소', img: 'images/kyukesyo_1.jpg', desc: '황실 가족의 역사적 서양 건물'}],
                         unique: [{ name: '언어의 정원 벤치', img: 'images/c.jpg', desc: '애니메이션 속 실제 장소'}]
                     },
@@ -1043,7 +1043,7 @@
         function updateForecastStatus() {
             const now = new Date();
             const forecastStatus = document.getElementById('forecastStatus');
-            const startDay = new Date(2026, 2, 20); // 3월 20일
+            const startDay = new Date(2026, 3, 20); // 3월 20일
             if (now < startDay) {
                 forecastStatus.innerHTML = `아직 도쿄의 벚꽃은 <br/><span class="underline underline-offset-8 decoration-4 decoration-white/40 font-black text-left">개화 전 !</span>`;
             } else {
