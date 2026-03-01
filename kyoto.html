@@ -974,25 +974,32 @@
         const renderRanking = (title, items, icon, colorClass) => {
             if (!items || items.length === 0) return '';
             return `
-                <div class="mb-14 px-8">
-                    <h3 class="text-sm font-black mb-6 flex items-center gap-2">
+                <div class="mb-14 px-8"> <h3 class="text-sm font-black mb-6 flex items-center gap-2">
                         <i class="fa-solid ${icon} text-primary"></i> ${title}
                     </h3>
                     <div class="space-y-4">
                         ${items.map(item => `
-                            <div class="flex items-center justify-between p-5 bg-gray-50 dark:bg-white/5 rounded-3xl border border-gray-100 group transition-all">
-                                <div onclick="openDirectLink(event, '${item.link}')" class="flex items-center gap-4 cursor-pointer flex-1 min-w-0 active:scale-[0.97] transition-transform">
+                            <div class="flex items-center justify-between p-5 bg-gray-50 dark:bg-white/5 rounded-3xl border border-gray-100 dark:border-white/5 group transition-all">
+                                
+                                <div onclick="window.open('https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.name + ' 교토')}', '_blank')" 
+                                    class="flex items-center gap-4 cursor-pointer flex-1 min-w-0 active:scale-[0.97] transition-transform">
+                                    
                                     <div class="rank-badge rank-${item.rank <= 3 ? item.rank : 'other'} shrink-0">${item.rank}</div>
+                                    
                                     <div class="text-left min-w-0">
                                         <p class="text-[13px] font-black leading-tight group-hover:text-primary truncate">
-                                            ${item.name} <i class="fa-solid fa-magnifying-glass-location text-[9px] ml-1 opacity-30"></i>
+                                            ${item.name} <i class="fa-solid fa-location-dot text-[9px] ml-1 opacity-30"></i>
                                         </p>
-                                        <p class="text-[10px] text-gray-400 mt-1 truncate">${item.desc || ''}</p>
+                                        <p class="text-[10px] text-gray-400 mt-1 truncate">${item.desc || '교토 추천 스팟'}</p>
                                     </div>
                                 </div>
-                                <div onclick="openDirectLink(event, '${item.link}')" class="text-right flex items-center gap-3 shrink-0 ml-4 cursor-pointer hover:bg-white dark:hover:bg-white/10 p-2 rounded-2xl active:scale-90 transition-all">
+
+                                <div onclick="window.open('https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.name + ' 교토')}', '_blank')" 
+                                    class="text-right flex items-center gap-3 shrink-0 ml-4 cursor-pointer hover:bg-white dark:hover:bg-white/10 p-2 rounded-2xl active:scale-90 transition-all">
                                     <div class="flex flex-col items-end">
-                                        <p class="text-[11px] font-black ${colorClass}"><i class="fa-solid fa-star text-[9px]"></i> ${item.score || '0.0'}</p>
+                                        <p class="text-[11px] font-black ${colorClass}">
+                                            <i class="fa-solid fa-star text-[9px]"></i> ${item.score || '4.0'}
+                                        </p>
                                         <span class="text-[8px] text-gray-400 font-bold uppercase mt-0.5 tracking-tighter">Google Maps</span>
                                     </div>
                                     <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-gray-300 group-hover:text-primary"></i>
