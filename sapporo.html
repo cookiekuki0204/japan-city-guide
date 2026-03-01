@@ -390,9 +390,11 @@
             { 
                 id: 'maruyama', 
                 region: '추오구', 
-                spotName: '마루야마 공원', 
+                spotName: '삿포로 마루야마 공원', 
                 sub: '벚꽃과 매화가 동시에 피어나는 삿포로 최고의 성지', 
                 img: 'images/maruyama_kouen_2.jpeg',
+                live: '779QpzUvdU4?si=mJmQpML8aBYs-LOg',
+                isChannel: false,
                 transport: '지하철 토자이선 마루야마코엔역(T06) 하차 후 3번 출구에서 도보 약 5분',
                 timeline: { start: '4월 26일', peak: '4월 30일', end: '5월 5일'},
                 station: '마루야마코엔역',
@@ -439,6 +441,8 @@
                 spotName: '모에레누마 공원', 
                 sub: '예술 공간 속에 펼쳐진 2,000그루의 사쿠라노모리', 
                 img: 'images/moerenuma_2.jpg', 
+                live:'DDhVuYW26fQ?si=k6TW3K6Y8AnW7xHS',
+                isChannel: false,
                 transport: '지하철 칸죠도오리히가시역(토호선) 하차 후, 중앙버스[동61] 또는 [동79]번 탑승하여 모에레누마 공원 동쪽 입구 정류장에서 하차',
                 timeline: { start: '4월 28일', peak: '5월 2일', end: '5월 8일' },
                 history: '조각가 이사무 노구치가 "공원 전체를 하나의 조각으로"라는 컨셉으로 설계한 광대한 대지 예술입니다. 벚꽃이 가득한 사쿠라노모리(벚꽃 숲)는 이 거대한 작품의 일부입니다.',
@@ -486,6 +490,8 @@
                 spotName: '마코마나이 공원', 
                 sub: '1,000그루의 벚꽃이 만드는 압도적인 분홍빛 물결', 
                 img: 'images/makomanai_2.jpg',
+                live:'779QpzUvdU4?si=TiEg2ZGOmcEVh4pr',
+                isChannel: false,
                 // 🚩 요청하신 대로 상세 페이지용 transport 정리
                 transport: '지하철 난보쿠선 마코마나이역(N16, 종점) 하차 후 1번 출구에서 도보 약 15~20분, 또는 역 앞 버스 터미널에서 [남90]번 또는 [남95]번 버스 탑승 후 마코마나이 공원 정류장 하차',
                 timeline: { start: '4월 27일', peak: '5월 2일', end: '5월 8일', progress: 0 },
@@ -564,6 +570,8 @@
                 spotName: '오도리 공원', 
                 sub: '삿포로 TV 타워를 배경으로 한 도심 꽃놀이', 
                 img: 'images/odori_2.jpg', 
+                live:'WUN-183KH7M?si=tUeNbhuMaDm0sJjS',
+                isChannel: false,
                 transport: '지하철 오도리역(난보쿠선·토자이선·토호선) 하차 후 2번, 5번, 6번, 8번 또는 27번 출구와 바로 연결',
                 timeline: { start: '4월 26일', peak: '4월 30일', end: '5월 5일' },
                 station: '오도리역',
@@ -1175,7 +1183,9 @@
             const spot = [...data.best, ...data.famous, ...data.suburbs].find(s => s.id === id);
             if (!spot) return;
             const overlay = document.getElementById('detailOverlay');
-            
+            const mapQuery = encodeURIComponent(((spot.region ? spot.region + ' ' : '') + spot.spotName).trim());
+            const mapEmbedUrl = `https://maps.google.com/maps?q=${mapQuery}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
+
             overlay.innerHTML = `
                 <div class="shrink-0 h-16 px-6 flex justify-between items-center bg-white dark:bg-background-dark sticky top-0 z-[120] border-b border-gray-100 dark:border-white/5">
                     <button onclick="closeDetail()" class="p-2 active:scale-75 transition-transform"><i class="fa-solid fa-chevron-left text-xl"></i></button>
@@ -1247,11 +1257,20 @@
                         ${renderRanking('인기 카페', spot.cafes, 'fa-coffee', 'text-primary')}
                         ${renderRanking('미식 가이드', spot.restaurants, 'fa-utensils', 'text-amber-500')}
 
-                        <div class="px-8 mb-10">
-                            <h3 class="text-sm font-black mb-4 border-l-4 border-primary pl-3">전문가 팁</h3>
+                        <!-- ✅ 전문가 팁 (안전 버전: 절대 안 잘리게) -->
+                        <div class="px-6 md:px-12 mb-14">
+                        <div class="bg-red-50 dark:bg-primary/5 p-8 rounded-[2.5rem] border border-red-100 dark:border-primary/10">
+                            <h3 class="text-primary font-black mb-5 flex items-center gap-2">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> 전문가 팁
+                            </h3>
                             <ul class="space-y-4">
-                                ${(spot.tips || []).map(tip => `<li class="flex gap-4 text-[13px] font-bold text-gray-700 dark:text-gray-300">● <span class="leading-relaxed">${tip}</span></li>`).join('')}
+                            ${(spot.tips || []).map(tip => `
+                                <li class="flex gap-4 text-[13px] font-bold text-gray-700 dark:text-gray-300">
+                                ● <span class="leading-relaxed">${tip}</span>
+                                </li>
+                            `).join('')}
                             </ul>
+                        </div>
                         </div>
 
                         <div class="my-10 border-y border-gray-100 dark:border-white/5 py-8">
@@ -1268,9 +1287,9 @@
                             <div class="w-full aspect-video rounded-[2.5rem] overflow-hidden bg-black shadow-xl border border-gray-100 dark:border-white/5">
                                 <iframe 
                                     class="w-full h-full"
-                                    src="${spot.isChannel 
-                                        ? `https://www.youtube.com/embed/live_stream?channel=${spot.live}&autoplay=0&mute=1` 
-                                        : `https://www.youtube.com/embed/kfIQBC0hrII?autoplay=0&mute=1`}" 
+                                    src="${spot.isChannel
+                                        ? `https://www.youtube.com/embed/live_stream?channel=${spot.live}&autoplay=0&mute=1`
+                                        : `https://www.youtube.com/embed/${spot.live}?autoplay=0&mute=1`}"
                                     title="YouTube video player" 
                                     frameborder="0" 
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
@@ -1282,6 +1301,27 @@
                             </p>
                         </div>
                         ` : ''}
+                        <div class="mb-14 px-8">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-sm font-black flex items-center gap-2">
+                            <i class="fa-solid fa-map-location-dot text-primary"></i> 오시는 길
+                            </h3>
+                            <span class="text-[10px] font-bold text-gray-400 uppercase tracking-tight">Interactive Mini Map</span>
+                        </div>
+
+                        <div class="relative w-full h-64 rounded-[2.5rem] overflow-hidden shadow-lg border border-gray-100 dark:border-white/10 bg-gray-100">
+                            <iframe
+                            class="w-full h-full border-0"
+                            loading="lazy"
+                            allowfullscreen
+                            src="${mapEmbedUrl}">
+                            </iframe>
+                        </div>
+
+                        <p class="text-[10px] text-center text-gray-400 mt-4 font-medium">
+                            지도를 확대하거나 이동하여 주변 위치를 확인해보세요.
+                        </p>
+                        </div>
                         <div class="px-8 flex items-center gap-3 mt-12 mb-10">
                             <button onclick="window.open('https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(spot.spotName)}', '_blank')" 
                                     class="flex-1 h-16 rounded-[2rem] bg-gray-100 dark:bg-white/10 text-gray-900 dark:text-white font-black text-sm active:scale-95 transition-all flex items-center justify-center gap-2">
