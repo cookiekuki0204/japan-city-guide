@@ -217,6 +217,42 @@
                     </div>
                 </div>
 
+                <!-- 🌸 시즌형 CTA (개화 예측 아래, 날씨 카드 위에 배치) -->
+                <div class="mb-12 slide-up">
+                <div class="bg-pink-50/70 dark:bg-white/5 backdrop-blur-xl rounded-[2.5rem] p-8 border border-pink-100/70 dark:border-white/10 shadow-sm">
+                    <p class="text-[10px] font-black uppercase tracking-[0.2em] text-pink-500 mb-3">Season Alert</p>
+
+                    <h3 class="text-2xl md:text-3xl font-black tracking-tighter leading-tight mb-3">
+                        삿포로 만개 피크<br>
+                    <span class="text-primary">5월 3일</span> 예상 🌸
+                    <span id="ctaDdayBadge"
+                            class="ml-2 inline-flex items-center text-[11px] px-2 py-0.5 bg-primary/10 text-primary rounded-full align-middle">
+                        D-?
+                    </span>
+                    </h3>
+
+                    
+
+                    <p class="text-[12px] md:text-[13px] font-bold text-gray-500 dark:text-gray-300 leading-relaxed mb-6">
+                    만개 주간에는 숙소가 빠르게 매진되는 편이에요.<br>
+                    지금 확인하면 선택지가 더 많습니다.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-3">
+                    <button
+                        onclick="document.getElementById('bookingContainer')?.scrollIntoView({behavior:'smooth', block:'start'});"
+                        class="w-full sm:w-auto px-6 py-3 rounded-2xl bg-primary text-white font-black text-sm active:scale-95 transition">
+                        근처 숙소/항공 바로 보기
+                    </button>
+
+                    <button
+                        onclick="openMySchedule?.();"
+                        class="w-full sm:w-auto px-6 py-3 rounded-2xl bg-white/80 dark:bg-white/10 border border-white/60 dark:border-white/10 text-gray-800 dark:text-white font-black text-sm active:scale-95 transition">
+                        내 일정 확인
+                    </button>
+                    </div>
+                </div>
+                </div>
                 <div class="mb-12 slide-up">
                     <div id="weatherCard" class="bg-white/80 dark:bg-white/5 backdrop-blur-xl rounded-[2.5rem] p-8 border border-white/50 shadow-sm transition-all duration-500">
                         <div class="flex items-center justify-between mb-8 text-left">
@@ -966,7 +1002,8 @@
             ]
         };
 
-        let map, mySchedule = JSON.parse(localStorage.getItem('osaka_schedule')) || [];
+        const SCHEDULE_KEY = 'sapporo_schedule';
+        let map, mySchedule = JSON.parse(localStorage.getItem(SCHEDULE_KEY)) || [];
 
         function initApp() {
             renderBestSpots(); renderFamousSpots(); renderSuburbSpots();
@@ -1125,10 +1162,10 @@
                         </div>
                         <div class="flex-1 min-w-0">
                             <div class="flex items-center gap-2">
-                                <h4 class="font-black text-[17px] dark:text-white truncate">${item.name}</h4>
+                                <h4 class="font-black text-[17px] dark:text-white">${item.name}</h4>
                                 <span class="text-[8px] bg-gray-100 dark:bg-white/10 text-gray-400 px-1.5 py-0.5 rounded font-bold uppercase tracking-tighter shrink-0">Recommend</span>
                             </div>
-                            <p class="text-[11px] text-gray-400 font-medium mt-0.5 truncate">${item.desc}</p>
+                            <p class="text-[11px] text-gray-400 font-medium mt-0.5">${item.desc}</p>
                         </div>
                         <div class="size-8 rounded-full bg-gray-50 dark:bg-white/5 flex items-center justify-center text-gray-300 group-hover:text-primary transition-all shrink-0">
                             <i class="fa-solid fa-arrow-right text-xs"></i>
@@ -1174,7 +1211,7 @@
         function removeFromSchedule(id) {
             if(confirm('이 명소를 일정에서 삭제할까요?')) {
                 mySchedule = mySchedule.filter(item => item.id !== id);
-                localStorage.setItem('sakura_master_schedule', JSON.stringify(mySchedule));
+                localStorage.setItem(SCHEDULE_KEY, JSON.stringify(mySchedule));
                 openMySchedule(); // UI 즉시 갱신
                 console.log("일정이 삭제되었습니다.");
             }
@@ -1337,6 +1374,7 @@
             `;
             overlay.classList.remove('hidden'); 
             setTimeout(() => overlay.classList.remove('translate-x-full'), 10);
+            window.__refreshFloatingActions?.();
         }
         function renderAttrSection(title, items, icon) {
             // 보여줄 아이템이 없으면 아무것도 렌더링하지 않음
@@ -1363,7 +1401,7 @@
                                 </div>
 
                                 <div class="px-1">
-                                    <p class="text-[13px] font-black mt-1 leading-tight truncate group-hover:text-primary transition-colors">
+                                    <p class="text-[13px] font-black mt-1 leading-tight group-hover:text-primary transition-colors">
                                         ${item.name || item} <i class="fa-solid fa-magnifying-glass-location text-[9px] ml-1 opacity-40"></i>
                                     </p>
                                     <p class="text-[10px] text-gray-400 leading-snug line-clamp-2 mt-1">
@@ -1376,7 +1414,7 @@
                 </div>
             `;
         }          
-        function closeDetail() { const overlay = document.getElementById('detailOverlay'); overlay.classList.add('translate-x-full'); setTimeout(() => overlay.classList.add('hidden'), 400); }
+        function closeDetail() { const overlay = document.getElementById('detailOverlay'); overlay.classList.add('translate-x-full'); setTimeout(() => overlay.classList.add('hidden'), 400); window.__refreshFloatingActions?.();}
         
         function renderMapMarkers() {
             if (map) return;
@@ -1501,17 +1539,29 @@
             const regionEl = document.getElementById('tooltipRegion');
             const btnEl = document.getElementById('tooltipBtn');
 
-            if (!tooltip || !spotEl || !regionEl) return;
+            if (!tooltip || !spotEl || !regionEl || !btnEl) return;
 
             spotEl.innerText = spot.spotName;
-            regionEl.innerText = spot.region;
-            
+            regionEl.innerText = spot.region || spot.city || ' ';
+
+            // ✅ 랜드마크면 구글맵, 아니면 기존 상세
+            const isLandmark = spot.vibe === '랜드마크' || !spot.id;
+
+            if (isLandmark) {
+            btnEl.innerHTML = `<i class="fa-solid fa-map-location-dot"></i>`;
+            btnEl.onclick = (e) => {
+                e.stopPropagation();
+                const query = encodeURIComponent(`${spot.region || ''} ${spot.spotName}`.trim());
+                window.open(`https://www.google.com/maps/search/?api=1&query=${query}`, '_blank');
+            };
+            } else {
+            btnEl.innerHTML = `<i class="fa-solid fa-arrow-right"></i>`;
             btnEl.onclick = (e) => {
                 e.stopPropagation();
                 openDetail(spot.id);
             };
+            }
 
-            // 📍 핵심: PC/모바일 관계없이 중앙 위치(0,0)로 슬라이딩
             tooltip.style.transform = 'translate(0, 0)';
             tooltip.classList.remove('opacity-0');
         }
@@ -1626,7 +1676,7 @@
                 city: "Sapporo" // 📍 지역 표시
             });
             
-            localStorage.setItem('sakura_master_schedule', JSON.stringify(mySchedule));
+            localStorage.setItem(SCHEDULE_KEY, JSON.stringify(mySchedule));
             if(confirm('일정에 추가되었습니다! 지금 확인해볼까요?')) {
                 closeDetail();
                 openMySchedule();
@@ -1650,7 +1700,34 @@
         function closePrivacy() {
             document.getElementById('privacyModal').classList.add('hidden');
         }
-        
+        function calcDday(targetISO) {
+            // targetISO 예: "2026-05-03"
+            const now = new Date();
+            const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()); // 00:00 고정
+
+            const [y, m, d] = targetISO.split('-').map(Number);
+            const target = new Date(y, m - 1, d);
+
+            const diffMs = target - today;
+            const diffDays = Math.round(diffMs / (1000 * 60 * 60 * 24));
+
+            if (diffDays > 0) return `D-${diffDays}`;
+            if (diffDays === 0) return 'D-Day';
+            return `D+${Math.abs(diffDays)}`;
+            }
+
+            function updateCtaDdayBadge() {
+            const badge = document.getElementById('ctaDdayBadge');
+            if (!badge) return;
+
+            // ✅ 도시별로 여기만 바꾸면 됨 (또는 citySeasonInfo에서 읽게 해도 됨)
+            const fullBloomISO = '2026-05-03';
+
+            badge.textContent = calcDday(fullBloomISO);
+            }
+
+            // 페이지 로드 후 1회 실행
+        updateCtaDdayBadge();
         window.addEventListener('DOMContentLoaded', initApp);
     </script>
         <div id="privacyModal" class="fixed inset-0 z-[300] hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-6">

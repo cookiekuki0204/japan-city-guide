@@ -291,7 +291,41 @@
                             </div>
                         </div>
                     </div>
-                </div>                
+                </div>
+                <!-- 🌸 시즌형 CTA (개화 예측 아래, 날씨 카드 위에 배치) -->
+                <div class="mb-12 slide-up">
+                <div class="bg-pink-50/70 dark:bg-white/5 backdrop-blur-xl rounded-[2.5rem] p-8 border border-pink-100/70 dark:border-white/10 shadow-sm">
+                    <p class="text-[10px] font-black uppercase tracking-[0.2em] text-pink-500 mb-3">Season Alert</p>
+
+                    <h3 class="text-2xl md:text-3xl font-black tracking-tighter leading-tight mb-3">
+                        도쿄 만개 피크<br>
+                    <span class="text-primary">3월 27일</span> 예상 🌸
+                    <span id="ctaDdayBadge"
+                            class="ml-2 inline-flex items-center text-[11px] px-2 py-0.5 bg-primary/10 text-primary rounded-full align-middle">
+                        D-?
+                    </span>
+                    </h3>
+
+                    <p class="text-[12px] md:text-[13px] font-bold text-gray-500 dark:text-gray-300 leading-relaxed mb-6">
+                    만개 주간에는 숙소가 빠르게 매진되는 편이에요.<br>
+                    지금 확인하면 선택지가 더 많습니다.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-3">
+                    <button
+                        onclick="document.getElementById('bookingContainer')?.scrollIntoView({behavior:'smooth', block:'start'});"
+                        class="w-full sm:w-auto px-6 py-3 rounded-2xl bg-primary text-white font-black text-sm active:scale-95 transition">
+                        근처 숙소/항공 바로 보기
+                    </button>
+
+                    <button
+                        onclick="openMySchedule?.();"
+                        class="w-full sm:w-auto px-6 py-3 rounded-2xl bg-white/80 dark:bg-white/10 border border-white/60 dark:border-white/10 text-gray-800 dark:text-white font-black text-sm active:scale-95 transition">
+                        내 일정 확인
+                    </button>
+                    </div>
+                </div>
+                </div>                                
                 <div class="mb-12 slide-up">
                     <div id="weatherCard" class="bg-white/80 dark:bg-white/5 backdrop-blur-xl rounded-[2.5rem] p-8 border border-white/50 shadow-sm relative z-20 transition-all duration-500">
                         <div class="flex items-center justify-between mb-8">
@@ -986,7 +1020,7 @@
                     desc: '에디터가 직접 묵어보고 검증한 추천 숙소',
                     icon: 'fa-pen-to-square',
                     color: 'from-amber-400 to-orange-500', // 따뜻하고 믿음직한 오렌지 계열
-                    link: 'https://blog.naver.com/kuki0204/223878970916'
+                    link: 'https://blog.naver.com/kuki0204/223625689588'
                 }
             ]
         };
@@ -1027,10 +1061,10 @@
                         
                         <div class="flex-1 text-left min-w-0">
                             <div class="flex items-center gap-2">
-                                <h4 class="font-black text-[17px] dark:text-white truncate">${item.name}</h4>
+                                <h4 class="font-black text-[17px] dark:text-white">${item.name}</h4>
                                 <span class="text-[8px] bg-gray-100 dark:bg-white/10 text-gray-400 px-1.5 py-0.5 rounded font-bold uppercase tracking-tighter shrink-0">Recommend</span>
                             </div>
-                            <p class="text-[11px] text-gray-400 font-medium mt-0.5 truncate">${item.desc}</p>
+                            <p class="text-[11px] text-gray-400 font-medium mt-0.5">${item.desc}</p>
                         </div>
 
                         <div class="size-8 rounded-full bg-gray-50 dark:bg-white/5 flex items-center justify-center text-gray-300 group-hover:text-primary transition-all shrink-0">
@@ -1214,7 +1248,7 @@
                                         </div>
                                     </div>
                                     <div class="px-1">
-                                        <p class="text-[13px] font-black mt-1 leading-tight truncate group-hover:text-primary transition-colors">
+                                        <p class="text-[13px] font-black mt-1 leading-tight group-hover:text-primary transition-colors">
                                             ${item.name} <i class="fa-solid fa-magnifying-glass-location text-[9px] ml-1 opacity-40"></i>
                                         </p>
                                         <p class="text-[10px] text-gray-400 leading-snug line-clamp-2 mt-1">${item.desc || '설명 준비 중'}</p>
@@ -1488,8 +1522,8 @@
             // 새 창으로 열기 (모바일에서는 Google Maps 앱이 설치되어 있으면 앱으로 연결됨)
             window.open(mapUrl, '_blank');
         }
-        // 키값을 'sakura_master_schedule'로 통일하여 데이터를 한 장바구니에 담습니다.
-        let map, mySchedule = JSON.parse(localStorage.getItem('sakura_master_schedule')) || [];
+        const SCHEDULE_KEY = 'tokyo_schedule';
+        let map, mySchedule = JSON.parse(localStorage.getItem(SCHEDULE_KEY)) || [];
 
         // 2. 일정 추가 함수
         function addToSchedule(spotId) {
@@ -1507,11 +1541,11 @@
                 city: "Tokyo" // 📍 도쿄 표시
             });
 
-            localStorage.setItem('sakura_master_schedule', JSON.stringify(mySchedule));
+            localStorage.setItem(SCHEDULE_KEY, JSON.stringify(mySchedule));
             alert(`${spot.spotName}을(를) 내 일정에 추가했습니다!`);
         }
         function saveAndRefresh() {
-            localStorage.setItem('sakura_schedule', JSON.stringify(mySchedule));
+            localStorage.setItem(SCHEDULE_KEY, JSON.stringify(mySchedule));
             renderMySchedule();
         }
         function renderMySchedule() {
@@ -1519,7 +1553,7 @@
             if (!container) return;
 
             // 1. 최신 데이터 로드
-            const stored = localStorage.getItem('sakura_schedule');
+            const stored = localStorage.getItem(SCHEDULE_KEY, JSON.stringify(mySchedule));
             mySchedule = stored ? JSON.parse(stored) : [];
 
             // 2. 페이지 기본 골격(헤더, 제목)을 먼저 그립니다.
@@ -1586,7 +1620,7 @@
         // 4. 개별 삭제 함수 (강제 리셋 추가)
         function removeFromSchedule(id) {
             mySchedule = mySchedule.filter(item => item.id !== id);
-            localStorage.setItem('sakura_master_schedule', JSON.stringify(mySchedule));
+            localStorage.setItem(SCHEDULE_KEY, JSON.stringify(mySchedule));
             openMySchedule();
             // UI 즉시 업데이트
             renderMySchedule();
@@ -1819,7 +1853,7 @@
             if (!container) return;
 
             // 1. 최신 데이터 로드 (함수 시작 시 강제 동기화)
-            const stored = localStorage.getItem('sakura_schedule');
+            const stored = localStorage.getItem(SCHEDULE_KEY, JSON.stringify(mySchedule));
             mySchedule = stored ? JSON.parse(stored) : [];
 
             // 2. 페이지 기본 골격을 먼저 무조건 그립니다. (상단바 + 제목)
@@ -1987,7 +2021,33 @@
         function closePrivacy() {
             document.getElementById('privacyModal').classList.add('hidden');
         }
-        
+        function calcDday(targetISO) {
+        // targetISO 예: "2026-05-03"
+            const now = new Date();
+            const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()); // 00:00 고정
+
+            const [y, m, d] = targetISO.split('-').map(Number);
+            const target = new Date(y, m - 1, d);
+
+            const diffMs = target - today;
+            const diffDays = Math.round(diffMs / (1000 * 60 * 60 * 24));
+
+            if (diffDays > 0) return `D-${diffDays}`;
+            if (diffDays === 0) return 'D-Day';
+            return `D+${Math.abs(diffDays)}`;
+            }
+
+            function updateCtaDdayBadge() {
+            const badge = document.getElementById('ctaDdayBadge');
+            if (!badge) return;
+
+            // ✅ 도시별로 여기만 바꾸면 됨 (또는 citySeasonInfo에서 읽게 해도 됨)
+            const fullBloomISO = '2026-03-27';
+
+            badge.textContent = calcDday(fullBloomISO);
+            }
+        // 페이지 로드 후 1회 실행
+        updateCtaDdayBadge();        
         window.addEventListener('DOMContentLoaded', initApp);
     </script>
     <div id="privacyModal" class="fixed inset-0 z-[300] hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-6">

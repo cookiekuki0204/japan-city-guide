@@ -1,43 +1,49 @@
 <!DOCTYPE html>
 <html lang="ko" class="light scroll-smooth">
 <head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6682864237624164"
-     crossorigin="anonymous"></script>
-    <meta name='impact-site-verification' value='da570fb4-fd59-4dab-8c71-9ec48a894bc2'>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌸</text></svg>">
-    <title>Japan Sakura Guide | 2026 일본 벚꽃 마스터 가이드 🌸</title>
-    
-    <!-- Google Adsense & Verification -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6682864237624164" crossorigin="anonymous"></script>
-    <meta name="google-site-verification" content="311s4klorBInl8fo1Dllf1GAdZAtMaM2Aemj4R_Ge-w" /> 
+  <!-- Google Adsense (ONLY ONCE) -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6682864237624164" crossorigin="anonymous"></script>
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Plus Jakarta Sans', 'sans-serif'],
-                    },
-                    colors: {
-                        sakura: {
-                            light: '#FFD1DC',
-                            DEFAULT: '#FFB7C5',
-                            dark: '#ea2a33', 
-                        }
-                    }
-                }
+  <!-- Verification -->
+  <meta name="impact-site-verification" content="da570fb4-fd59-4dab-8c71-9ec48a894bc2">
+  <meta name="google-site-verification" content="311s4klorBInl8fo1Dllf1GAdZAtMaM2Aemj4R_Ge-w">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌸</text></svg>">
+  <title>Japan Sakura Guide | 2026 일본 벚꽃 마스터 가이드 🌸</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Material Symbols (for trending_flat etc.) -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@300;400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] },
+          colors: {
+            sakura: {
+              light: '#FFD1DC',
+              DEFAULT: '#FFB7C5',
+              dark: '#ea2a33',
             }
+          }
         }
-    </script>
+      }
+    }
+  </script>
+</head>
 
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-font-smoothing: antialiased; }
@@ -152,13 +158,23 @@
             도시별 실시간 개화 정보부터 숨겨진 명소까지<br>
             에디터가 엄선한 전문 가이드가 안내합니다.
         </p>
-
-        <a href="#explore" class="scroll-hint flex flex-col items-center gap-2 text-slate-400 hover:text-rose-400 transition-colors no-underline">
+        <!-- Hanami CTA (compact) -->
+        <section class="px-6 mt-6">
+        <button
+            onclick="openHanamiModal()"
+            class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-white font-black shadow-lg hover:shadow-xl active:scale-95 transition-all mt-4 mb-6"
+            style="background-color:#ea2a33;">
+            🌸 하나미 문화 보기
+            <span class="material-symbols-outlined text-white text-sm">trending_flat</span>
+        </button>
+        </section>     
+        <a href="#explore" class="mt-8 scroll-hint flex flex-col items-center gap-2 text-slate-400 hover:text-rose-400 transition-colors no-underline">
             <span class="text-[9px] font-black uppercase tracking-[0.2em]">Explore Cities</span>
             <i class="fa-solid fa-chevron-down text-xl"></i>
         </a>
+      
     </main>
-    
+      
     <!-- City Selection Grid -->
     <section class="relative z-10 px-6 pb-40 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10" id="explore">
         
@@ -265,22 +281,38 @@
         </a> 
     </section>
 
-        <div class="mb-16 px-6 slide-up" style="animation-delay: 0.2s;">
+        <div class="mb-10 px-6 slide-up" style="animation-delay: 0.2s;">
             <div class="max-w-6xl mx-auto flex flex-col items-center">
                 <p class="text-[8px] text-gray-300 font-bold uppercase tracking-widest mb-2">Sponsor Ad</p>
                 
                 <div class="w-full bg-white/40 dark:bg-white/5 rounded-[2.5rem] p-4 border border-white/40 overflow-hidden shadow-sm min-h-[100px] flex items-center justify-center">
                     <ins class="adsbygoogle"
                         style="display:block; width:100%;"
-                        data-ad-format="fluid"
+                        data-ad-format="block"
                         data-ad-layout-key="-fb+5w+4e-db+86"
                         data-ad-client="ca-pub-6682864237624164" 
-                        data-ad-slot="XXXXXXXXXX"></ins> <script>
+                        data-ad-slot="5823515468"
+                        data-ad-format="auto"
+                        data-full-width-responsive="true">
+                    </ins>
+                    <script>
                         (adsbygoogle = window.adsbygoogle || []).push({});
                     </script>
+            </script>
                     </div>
             </div>
-        </div>    
+        </div> 
+        <div class="mt-12 mb-8 flex flex-col items-center text-center">
+            <p class="text-[10px] font-black text-rose-500 mb-2 uppercase tracking-widest">Share this Guide</p>
+            <h5 class="font-black text-slate-800 dark:text-white mb-5 leading-tight text-sm">이 가이드를 친구에게 공유하고<br>함께 벚꽃 여행을 계획해보세요!</h5>
+            
+            <button onclick="copyPageUrl()" id="copyBtn" class="flex items-center gap-3 px-10 py-4 bg-white dark:bg-slate-800 text-slate-800 dark:text-white font-black rounded-[1.5rem] shadow-lg hover:shadow-xl transition-all active:scale-95 border border-rose-100 dark:border-white/5">
+                <i class="fa-solid fa-link text-rose-500"></i>
+                <span id="copyBtnText">가이드 링크 복사하기</span>
+            </button>
+        </div>
+
+        <div class="h-16 w-full"></div>
     <!-- Footer -->
     <footer class="relative z-10 py-20 px-6 text-center border-t border-slate-200 dark:border-white/10 glass-effect">
         <p class="text-[10px] font-medium tracking-widest text-slate-400/60 dark:text-slate-500/50 mb-6 uppercase">
@@ -310,6 +342,20 @@
         const themeIcon = document.getElementById('themeIcon');
         const html = document.documentElement;
         const header = document.getElementById('mainHeader');
+
+        function openHanamiModal() {
+            const modal = document.getElementById('hanamiModal');
+            if (!modal) return;
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            }
+
+            function closeHanamiModal() {
+            const modal = document.getElementById('hanamiModal');
+            if (!modal) return;
+            modal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }       
 
         // 스크롤 이벤트 감지하여 헤더 스타일 변경
         window.addEventListener('scroll', () => {
@@ -390,7 +436,203 @@
 
         function openPrivacy() { document.getElementById('privacyModal').classList.remove('hidden'); }
         function closePrivacy() { document.getElementById('privacyModal').classList.add('hidden'); }
+        function copyPageUrl() {
+            const url = window.location.href; // 현재 페이지 주소
+            const btnText = document.getElementById('copyBtnText');
+            const btn = document.getElementById('copyBtn');
 
+            // 최신 브라우저의 클립보드 API 사용
+            navigator.clipboard.writeText(url).then(() => {
+                // 성공 시 피드백 시각화
+                btnText.innerText = "복사 완료! 채팅창에 붙여넣으세요 ✨";
+                btn.classList.add('bg-rose-500', 'text-white');
+                btn.classList.remove('bg-white', 'text-slate-800', 'dark:bg-slate-800', 'dark:text-white');
+                
+                // 2초 후 원래대로 복구
+                setTimeout(() => {
+                    btnText.innerText = "가이드 링크 복사하기";
+                    btn.classList.remove('bg-rose-500', 'text-white');
+                    btn.classList.add('bg-white', 'text-slate-800', 'dark:bg-slate-800', 'dark:text-white');
+                }, 2000);
+            }).catch(err => {
+                // 구형 브라우저 대응 (fallback)
+                const textArea = document.createElement("textarea");
+                textArea.value = url;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand("copy");
+                document.body.removeChild(textArea);
+                alert("링크가 복사되었습니다!");
+            });
+        }
     </script>
+    <!-- Hanami Modal -->
+    <div id="hanamiModal" 
+        class="fixed inset-0 z-[999] hidden flex items-center justify-center p-4 md:p-8 bg-slate-950/70 backdrop-blur-md" 
+        onclick="if(event.target === this) closeHanamiModal()">
+        
+        <div class="relative bg-white dark:bg-slate-900 w-full max-w-4xl rounded-[3rem] overflow-hidden shadow-2xl transform transition-all border border-white/20 flex flex-col max-h-[95vh]">
+            
+            <div class="sticky top-0 z-20 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-rose-100 dark:border-white/5 px-6 md:px-10 py-6 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 flex items-center justify-center rounded-full bg-rose-500 text-white shadow-lg">
+                        <i class="fa-solid fa-leaf"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-black text-slate-800 dark:text-white tracking-tight text-xl md:text-2xl">2026 하나미 마스터 가이드</h3>
+                        <p class="text-[10px] font-bold text-rose-400 uppercase tracking-[0.2em]">Sakura Limited Edition & Culture</p>
+                    </div>
+                </div>
+                <button onclick="closeHanamiModal()" class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-rose-50 dark:hover:bg-white/10 transition-all text-slate-400">
+                    <i class="fa-solid fa-xmark text-2xl"></i>
+                </button>
+            </div>
+
+            <div class="overflow-y-auto px-6 md:px-10 py-8 hide-scrollbar">
+                
+                <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 mb-12">
+                    <div class="lg:col-span-3 rounded-[2.5rem] overflow-hidden shadow-xl h-64 md:h-80">
+                        <img src="https://images.unsplash.com/photo-1522383225653-ed111181a951?q=80&w=1476&auto=format&fit=crop" 
+                            class="w-full h-full object-cover" alt="Hanami Picnic">
+                    </div>
+                    <div class="lg:col-span-2 flex flex-col justify-center">
+                        <span class="text-rose-500 font-black text-sm mb-2">#Hanami_Culture</span>
+                        <h4 class="text-2xl font-black text-slate-800 dark:text-white mb-4 leading-tight">벚꽃 아래에서의<br/>완벽한 피크닉</h4>
+                        <p class="text-slate-600 dark:text-slate-400 font-bold leading-relaxed text-sm">
+                            만개한 나무 아래 돗자리를 펴고 소중한 사람들과 음식을 나누는 일본의 정점입니다.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-12">
+                    <div class="p-5 rounded-[2rem] bg-rose-50/50 dark:bg-rose-500/5 border border-rose-100 dark:border-rose-500/10 text-center">
+                        <div class="text-2xl mb-2">🍱</div>
+                        <p class="text-[10px] font-black text-rose-500 uppercase">에티켓</p>
+                        <p class="font-bold text-slate-700 dark:text-slate-200 text-[11px]">자리 맡기·쓰레기·소음 준수</p>
+                    </div>
+                    <div class="p-5 rounded-[2rem] bg-sky-50/50 dark:bg-sky-500/5 border border-sky-100 dark:border-sky-500/10 text-center">
+                        <div class="text-2xl mb-2">🧺</div>
+                        <p class="text-[10px] font-black text-sky-500 uppercase">준비물</p>
+                        <p class="font-bold text-slate-700 dark:text-slate-200 text-[11px]">돗자리·벤또·따뜻한 음료</p>
+                    </div>
+                    <div class="p-5 rounded-[2rem] bg-amber-50/50 dark:bg-amber-500/5 border border-amber-100 dark:border-amber-500/10 text-center">
+                        <div class="text-2xl mb-2">📸</div>
+                        <p class="text-[10px] font-black text-amber-600 uppercase">타이밍</p>
+                        <p class="font-bold text-slate-700 dark:text-slate-200 text-[11px]">해질 무렵 → 라이트업 루트</p>
+                    </div>
+                </div>
+
+                <hr class="border-slate-100 dark:border-white/5 mb-12">
+
+                <div class="mb-14">
+                    <h4 class="text-xl font-black text-slate-800 dark:text-white mb-8 flex items-center gap-2">
+                        <span class="text-rose-500">🇯🇵</span> 일본 현지 필수 리스트
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="group">
+                            <div class="aspect-[4/5] rounded-[2rem] overflow-hidden mb-4 shadow-lg bg-slate-100">
+                                <img src="images/sakura_latte.jpg" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            </div>
+                            <h5 class="font-black text-slate-800 dark:text-white text-base mb-1">스타벅스 사쿠라 라떼</h5>
+                            <p class="text-xs text-slate-500 font-bold leading-relaxed">현지 매장에서만 만날 수 있는 핑크빛 벚꽃 풍미</p>
+                        </div>
+                        <div class="group">
+                            <div class="aspect-[4/5] rounded-[2rem] overflow-hidden mb-4 shadow-lg bg-slate-100">
+                                <img src="images/sakura4.jpg" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            </div>
+                            <h5 class="font-black text-slate-800 dark:text-white text-base mb-1">사쿠라향 섬유유연제</h5>
+                            <p class="text-xs text-slate-500 font-bold leading-relaxed">돈키호테 추천! 옷끝에서 느껴지는 봄의 향기.</p>
+                        </div>
+                        <div class="group">
+                            <div class="aspect-[4/5] rounded-[2rem] overflow-hidden mb-4 shadow-lg bg-slate-100">
+                                <img src="images/senbei.jpeg" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            </div>
+                            <h5 class="font-black text-slate-800 dark:text-white text-base mb-1">가마쿠라 한게츠 센베</h5>
+                            <p class="text-xs text-slate-500 font-bold leading-relaxed">바삭한 전병 사이 은은한 사쿠라 크림.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-10 space-y-12">
+                    
+                    <div>
+                        <h4 class="text-lg font-black text-slate-800 dark:text-white mb-6 flex items-center gap-2">
+                            <span class="text-rose-500 text-base">🍱</span> 사쿠라 푸드 (한국 배송)
+                        </h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <a href="https://naver.me/G4dAi3LQ" target="_blank" class="flex items-center gap-4 p-4 rounded-3xl bg-white dark:bg-white/5 border border-slate-100 dark:border-white/10 hover:shadow-lg transition-all group">
+                                <div class="w-20 h-20 rounded-2xl overflow-hidden bg-slate-100 shrink-0 shadow-inner">
+                                    <img src="images/sakura_muji.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform">
+                                </div>
+                                <div class="flex-grow">
+                                    <p class="text-[10px] font-black text-rose-500 mb-0.5 uppercase">MUJI</p>
+                                    <p class="font-black text-sm dark:text-white leading-tight">무인양품 사쿠라 라떼</p>
+                                    <p class="text-[10px] text-slate-400 mt-1">집에서 즐기는 봄</p>
+                                </div>
+                                <span class="text-slate-300 group-hover:text-rose-500 px-2 font-black">〉</span>
+                            </a>
+                            <a href="https://naver.me/GM36wc32" target="_blank" class="flex items-center gap-4 p-4 rounded-3xl bg-white dark:bg-white/5 border border-slate-100 dark:border-white/10 hover:shadow-lg transition-all group">
+                                <div class="w-20 h-20 rounded-2xl overflow-hidden bg-slate-100 shrink-0 shadow-inner">
+                                    <img src="images/pocky.png" class="w-full h-full object-cover group-hover:scale-110 transition-transform">
+                                </div>
+                                <div class="flex-grow">
+                                    <p class="text-[10px] font-black text-rose-500 mb-0.5 uppercase">GLICO</p>
+                                    <p class="font-black text-sm dark:text-white leading-tight">포키 사쿠라 말차 8봉</p>
+                                    <p class="text-[10px] text-slate-400 mt-1">대용량 라지팩 구성</p>
+                                </div>
+                                <span class="text-slate-300 group-hover:text-rose-500 px-2 font-black">〉</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="text-lg font-black text-slate-800 dark:text-white mb-6 flex items-center gap-2">
+                            <span class="text-sky-500 text-base">🧴</span> 뷰티 & 홈케어 (한정판)
+                        </h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            <div class="p-6 rounded-3xl bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/10">
+                                <div class="w-12 h-12 rounded-full bg-rose-100 flex items-center justify-center text-xl mb-4">💄</div>
+                                <p class="text-[10px] font-black text-sky-500 mb-2 uppercase tracking-tighter">CANMAKE Make-up</p>
+                                <h5 class="font-black text-sm mb-4 dark:text-white leading-tight tracking-tight">스마트 미니 아이브로우<br>(사쿠라 브라운)</h5>
+                                <a href="https://naver.me/5518Ooxp" target="_blank" class="block w-full py-2.5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-[10px] font-black rounded-xl text-center">네이버 쇼핑 〉</a>
+                            </div>
+                            <div class="p-6 rounded-3xl bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/10">
+                                <div class="w-12 h-12 rounded-full bg-sky-100 flex items-center justify-center text-xl mb-4">🧴</div>
+                                <p class="text-[10px] font-black text-sky-500 mb-2 uppercase tracking-tighter">DOVE Body Care</p>
+                                <h5 class="font-black text-sm mb-4 dark:text-white leading-tight">바디 크리미 스크럽<br>사쿠라머스크</h5>
+                                <div class="flex gap-2">
+                                    <a href="https://naver.me/FqID1Jiq" target="_blank" class="flex-1 py-2 bg-rose-100 text-rose-600 text-[10px] font-black rounded-xl text-center">기본</a>
+                                    <a href="https://naver.me/xCj9kzBS" target="_blank" class="flex-1 py-2 bg-rose-500 text-white text-[10px] font-black rounded-xl text-center">50g</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-4">
+                        <a href="https://naver.me/x7eT5aLY" target="_blank" class="flex items-center justify-between p-7 rounded-[2.5rem] bg-gradient-to-br from-rose-500 to-rose-600 text-white shadow-xl hover:scale-[1.01] transition-all group">
+                            <div class="flex items-center gap-5">
+                                <div class="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center text-3xl">🌸</div>
+                                <div>
+                                    <p class="font-black text-xl leading-tight">일본 도쿄 사쿠라 : 벚꽃 체험</p>
+                                    <p class="text-xs opacity-90 font-bold">인기 가이드 투어 / 인생샷 명소 예약</p>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-arrow-right group-hover:translate-x-2 transition-transform text-2xl px-4"></i>
+                        </a>
+                    </div>
+
+                </div>
+
+                <p class="text-center text-[10px] text-slate-400 font-medium mb-10 uppercase tracking-widest italic">
+                    ※ 일부 링크는 네이버 브랜드 커넥트 활동으로 소정의 수수료를 제공받을 수 있습니다.
+                </p>
+
+                <button onclick="closeHanamiModal()" 
+                class="w-full py-6 bg-rose-500 hover:bg-rose-600 text-white font-black rounded-[2rem] shadow-2xl shadow-rose-500/30 transition-all active:scale-[0.98]">
+                    정보 확인 완료! 도시 선택하기
+                </button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
