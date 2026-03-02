@@ -1494,7 +1494,7 @@
         }
 
         async function fetchWeather() {
-            const _k = "__WEATHER_API_KEY__";
+            const _k = atob("YTdiMTc0NDlhZTYzYmQ5OGQ4MGUyNTNmNjNiZjEyMmY=");
             try { const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=Osaka&appid=${_k}&units=metric&lang=kr`); const json = await res.json(); if(res.ok) { document.getElementById('currentTemp').innerText = `${Math.round(json.main.temp)}°`; document.getElementById('weatherDesc').innerText = json.weather[0].description; document.getElementById('clothTitle').innerText = json.main.temp > 15 ? "가벼운 외투" : "도톰한 코트"; document.getElementById('clothDesc').innerText = "일교차가 큽니다."; document.getElementById('weatherIconBox').innerHTML = `<img src="https://openweathermap.org/img/wn/${json.weather[0].icon}@2x.png" class="size-12">`; } } catch(e) {}
         }
 
