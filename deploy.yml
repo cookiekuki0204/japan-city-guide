@@ -1,0 +1,21 @@
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 모든 html 파일에서 __GA_MEASUREMENT_ID__를 실제 Secret 값으로 치환
+      - name: Replace GA ID
+        run: |
+          find . -name "*.html" -exec sed -i "s/__GA_MEASUREMENT_ID__/${{ secrets.GA_MEASUREMENT_ID }}/g" {} +
+
+      # 이후 Netlify로 배포하는 스텝 (기존 설정 유지)
+      - name: Deploy to Netlify
+        uses: nwtgck/actions-netlify@v2
+        with:
+          publish-dir: './'
+          production-deploy: true
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
