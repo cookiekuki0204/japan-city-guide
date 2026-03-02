@@ -19,3 +19,11 @@ jobs:
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          
+      - name: Inject API Keys
+              run: |
+                # GA ID 치환
+                find . -name "*.html" -exec sed -i "s/__GA_MEASUREMENT_ID__/${{ secrets.GA_MEASUREMENT_ID }}/g" {} +
+                
+                # Weather API Key 치환 (추가된 부분)
+                find . -name "*.html" -exec sed -i "s/__WEATHER_API_KEY__/${{ secrets.WEATHER_API_KEY }}/g" {} +
