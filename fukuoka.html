@@ -386,9 +386,28 @@
                             </div>
                     </div>
                 </div>
+                <h2 class="text-2xl md:text-3xl font-bold mb-6">
+                후쿠오카 벚꽃 여행 가이드 2026
+                </h2>
+
+                <div class="mb-6 text-gray-700 dark:text-gray-300">
+                후쿠오카는 비교적 따뜻해 일본에서 가장 먼저 벚꽃이 피는 지역 중 하나입니다.
+                </div>
+
+                <div class="space-y-4">
+                <div class="flex gap-3 items-start"><div class="text-lg">🌸</div><div>마이즈루 공원, 오호리 공원이 대표 명소</div></div>
+                <div class="flex gap-3 items-start"><div class="text-lg">🌸</div><div>도심과 가까워 이동이 편리</div></div>
+                <div class="flex gap-3 items-start"><div class="text-lg">🌸</div><div>벚꽃 시즌에도 비교적 덜 혼잡</div></div>
+                <div class="flex gap-3 items-start"><div class="text-lg">🌸</div><div>야타이(포장마차)와 함께 여행 추천</div></div>
+                </div>
                 <div class="py-10 text-center opacity-30">
-                    <p class="text-[10px] md:text-xs font-black tracking-widest uppercase">Japan City Guide Project 2026</p>
-                    <button onclick="openPrivacy()" class="mt-2 text-[9px] font-bold hover:underline cursor-pointer">Privacy Policy (개인정보처리방침)</button>
+                    <p class="text-[10px] md:text-xs font-black tracking-widest uppercase">© 2026 Japan Sakura Guide Project. All rights reserved.</p>
+                    <!--<button onclick="openPrivacy()" class="mt-2 text-[9px] font-bold hover:underline cursor-pointer">Privacy Policy (개인정보처리방침)</button>-->
+                </div>
+                <div class="flex gap-4 justify-center text-sm text-gray-400 mt-10">
+                    <a href="/about.html" class="hover:text-gray-600">About</a>
+                    <a href="/contact.html" class="hover:text-gray-600">Contact</a>
+                    <a href="/privacy.html" class="hover:text-gray-600">Privacy</a>
                 </div>
             </div>
         </div>
@@ -747,7 +766,7 @@
                 },
                 {
                     id: 'fukuoka-review',
-                    name: '에디터의 후쿠오카 호텔 실박 후기',
+                    name: '에디터의 추천 호텔',
                     desc: '직접 묵어보고 검증한 추천 숙소',
                     icon: 'fa-pen-to-square',
                     color: 'from-amber-400 to-orange-500',
@@ -918,12 +937,16 @@
                         <div class="size-14 bg-gradient-to-br ${item.color} rounded-3xl flex items-center justify-center text-white text-2xl shadow-inner shrink-0">
                             <i class="fa-solid ${item.icon}"></i>
                         </div>
-                        <div class="flex-1 min-w-0">
+                        <div class="flex-1 min-w-0 text-left">
                             <div class="flex items-center gap-2">
-                                <h4 class="font-black text-[17px] dark:text-white">${item.name}</h4>
-                                <span class="text-[8px] bg-gray-100 dark:bg-white/10 text-gray-400 px-1.5 py-0.5 rounded font-bold uppercase tracking-tighter shrink-0">Recommend</span>
+                                <h4 class="font-black text-[15px] md:text-[17px] dark:text-white leading-snug line-clamp-2 break-keep">
+                                    ${item.name}
+                                 </h4>
+                                <span class="text-[8px] bg-gray-100 dark:bg-white/10 text-gray-400 px-1.5 py-0.5 rounded font-bold uppercase tracking-tighter shrink-0">
+                                    Recommend
+                                </span>
                             </div>
-                            <p class="text-[11px] text-gray-400 font-medium mt-0.5">${item.desc}</p>
+                            <p class="text-[11px] text-gray-400 font-medium mt-0.5 line-clamp-2 break-keep">${item.desc}</p>
                         </div>
                         <div class="size-8 rounded-full bg-gray-50 dark:bg-white/5 flex items-center justify-center text-gray-300 group-hover:text-primary transition-all shrink-0">
                             <i class="fa-solid fa-arrow-right text-xs"></i>

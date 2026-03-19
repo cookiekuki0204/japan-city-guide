@@ -473,6 +473,7 @@
                     </div>
                     <div id="bookingContainer" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
                 </div>
+
                 <div class="mb-16 px-6 slide-up" style="animation-delay: 0.2s;">
                     <div class="max-w-6xl mx-auto flex flex-col items-center">
                         <p class="text-[8px] text-gray-300 font-bold uppercase tracking-widest mb-2">Sponsor Ad</p>
@@ -488,11 +489,64 @@
                             </script>
                             </div>
                     </div>
-                </div>                
-                <div class="py-10 text-center opacity-30">
-                    <p class="text-[10px] md:text-xs font-black tracking-widest uppercase">Japan City Guide Project 2026</p>
-                    <button onclick="openPrivacy()" class="mt-2 text-[9px] font-bold hover:underline cursor-pointer">Privacy Policy (개인정보처리방침)</button>
                 </div>
+               <section class="max-w-6xl mx-auto px-6 py-16">
+                
+                    <h2 class="text-2xl md:text-3xl font-bold mb-6">
+                    도쿄 벚꽃 여행 가이드 2026
+                    </h2>
+
+                    <!-- 핵심 요약 -->
+                    <div class="mb-6 text-gray-700 dark:text-gray-300">
+                    도쿄 벚꽃 시즌은 <span class="font-semibold text-rose-500">3월 말 ~ 4월 초</span>가 절정이며,
+                    지역별 개화 시기가 조금씩 달라 일정 계획이 중요합니다.
+                    </div>
+
+                    <!-- 포인트 리스트 -->
+                    <div class="space-y-4">
+
+                    <div class="flex gap-3">
+                        <div class="text-lg leading-none">🌸</div>
+                        <div class="text-sm md:text-base text-gray-700 dark:text-gray-300">
+                        우에노 공원, 신주쿠 교엔, 메구로 강은 대표 벚꽃 명소
+                        </div>
+                    </div>
+
+                    <div class="flex gap-3">
+                        <div class="text-lg leading-none">🌸</div>
+                        <div class="text-sm md:text-base text-gray-700 dark:text-gray-300">
+                        개화 후 5~7일이 가장 아름다운 시기
+                        </div>
+                    </div>
+
+                    <div class="flex gap-3">
+                        <div class="text-lg leading-none">🌸</div>
+                        <div class="text-sm md:text-base text-gray-700 dark:text-gray-300">
+                        아침 방문이 가장 쾌적하고 사진 찍기 좋음
+                        </div>
+                    </div>
+
+                    <div class="flex gap-3">
+                        <div class="text-lg leading-none">🌸</div>
+                        <div class="text-sm md:text-base text-gray-700 dark:text-gray-300">
+                        숙소는 최소 1~2개월 전 예약 추천
+                        </div>
+                    </div>
+
+                    </div>
+
+                </div>
+                </section>
+            
+                <div class="py-10 text-center opacity-30">
+                    <p class="text-[10px] md:text-xs font-black tracking-widest uppercase">© 2026 Japan Sakura Guide Project. All rights reserved.</p>
+                    <!--<button onclick="openPrivacy()" class="mt-2 text-[9px] font-bold hover:underline cursor-pointer">Privacy Policy (개인정보처리방침)</button>-->
+                </div>
+                <div class="flex gap-4 justify-center text-sm text-gray-400 mt-10">
+                    <a href="/about.html" class="hover:text-gray-600">About</a>
+                    <a href="/contact.html" class="hover:text-gray-600">Contact</a>
+                    <a href="/privacy.html" class="hover:text-gray-600">Privacy</a>
+                </div>            
             </div>            
         </div>
 
@@ -552,8 +606,7 @@
             </div>
         </div>
 
-        <div id="detailOverlay" class="fixed inset-0 z-[200] translate-x-full bg-white dark:bg-background-dark overflow-y-auto hide-scrollbar hidden flex flex-col text-left">
-            </div>
+        <div id="detailOverlay" class="fixed inset-0 z-[200] translate-x-full bg-white dark:bg-background-dark overflow-y-auto hide-scrollbar hidden flex flex-col text-left"></div>
     </div>
 
     <script>
@@ -1017,7 +1070,7 @@
                 // 📍 1위 제안: 에디터 호텔 리뷰 카드 추가!
                 {
                     id: 'blog-review',
-                    name: '에디터의 도쿄 호텔 실박 후기',
+                    name: '에디터의 추천 호텔',
                     desc: '에디터가 직접 묵어보고 검증한 추천 숙소',
                     icon: 'fa-pen-to-square',
                     color: 'from-amber-400 to-orange-500', // 따뜻하고 믿음직한 오렌지 계열
@@ -1060,12 +1113,16 @@
                             <i class="fa-solid ${item.icon}"></i>
                         </div>
                         
-                        <div class="flex-1 text-left min-w-0">
+                        <div class="flex-1 min-w-0 text-left">
                             <div class="flex items-center gap-2">
-                                <h4 class="font-black text-[17px] dark:text-white">${item.name}</h4>
-                                <span class="text-[8px] bg-gray-100 dark:bg-white/10 text-gray-400 px-1.5 py-0.5 rounded font-bold uppercase tracking-tighter shrink-0">Recommend</span>
+                                <h4 class="font-black text-[15px] md:text-[17px] dark:text-white leading-snug line-clamp-2 break-keep">
+                                    ${item.name}
+                                 </h4>
+                                <span class="text-[8px] bg-gray-100 dark:bg-white/10 text-gray-400 px-1.5 py-0.5 rounded font-bold uppercase tracking-tighter shrink-0">
+                                    Recommend
+                                </span>
                             </div>
-                            <p class="text-[11px] text-gray-400 font-medium mt-0.5">${item.desc}</p>
+                            <p class="text-[11px] text-gray-400 font-medium mt-0.5 line-clamp-2 break-keep">${item.desc}</p>
                         </div>
 
                         <div class="size-8 rounded-full bg-gray-50 dark:bg-white/5 flex items-center justify-center text-gray-300 group-hover:text-primary transition-all shrink-0">

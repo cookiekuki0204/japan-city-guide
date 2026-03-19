@@ -363,10 +363,29 @@
                             </div>
                     </div>
                 </div>
-                <div class="py-10 text-center opacity-30">
-                    <p class="text-[10px] md:text-xs font-black tracking-widest uppercase">Japan City Guide Project 2026</p>
-                    <button onclick="openPrivacy()" class="mt-2 text-[9px] font-bold hover:underline cursor-pointer">Privacy Policy (개인정보처리방침)</button>
+                <h2 class="text-2xl md:text-3xl font-bold mb-6">
+                오사카 벚꽃 여행 가이드 2026
+                </h2>
+
+                <div class="mb-6 text-gray-700 dark:text-gray-300">
+                오사카는 도쿄보다 약간 늦게 개화하며 성곽과 함께 벚꽃을 즐길 수 있는 도시입니다.
                 </div>
+
+                <div class="space-y-4">
+                <div class="flex gap-3 items-start"><div class="text-lg">🌸</div><div>오사카성 공원은 가장 인기 있는 벚꽃 명소</div></div>
+                <div class="flex gap-3 items-start"><div class="text-lg">🌸</div><div>니시노마루 정원은 야경 벚꽃으로 유명</div></div>
+                <div class="flex gap-3 items-start"><div class="text-lg">🌸</div><div>교토와 함께 일정 구성하면 효율적</div></div>
+                <div class="flex gap-3 items-start"><div class="text-lg">🌸</div><div>주말은 혼잡하므로 평일 방문 추천</div></div>
+                </div>
+                <div class="py-10 text-center opacity-30">
+                    <p class="text-[10px] md:text-xs font-black tracking-widest uppercase">© 2026 Japan Sakura Guide Project. All rights reserved.</p>
+                    <!--<button onclick="openPrivacy()" class="mt-2 text-[9px] font-bold hover:underline cursor-pointer">Privacy Policy (개인정보처리방침)</button>-->
+                </div>
+                <div class="flex gap-4 justify-center text-sm text-gray-400 mt-10">
+                    <a href="/about.html" class="hover:text-gray-600">About</a>
+                    <a href="/contact.html" class="hover:text-gray-600">Contact</a>
+                    <a href="/privacy.html" class="hover:text-gray-600">Privacy</a>
+                </div>                
             </div>
         </div>
 
@@ -660,7 +679,7 @@
                 cafes: [
                     { name: "카페 스완", rank: 1, score: "4.0", desc: "정통 쇼와 스타일 깃사텐", link: "喫茶 スワン 阿倍野" },
                     { name: "YARD Coffee", rank: 2, score: "4.4", desc: "스페셜티 커피와 수제 초콜릿", link: "YARD Coffee" },
-                    { name: "모노로그", rank: 3, score: "4.2", desc: "고요한 분위기의 세련된 카페", link: "Monolog 天王寺" },
+                    { name: "시텐노지 챠야", rank: 3, score: "4.2", desc: "고요한 분위기의 일본 전통 차를 즐길 수 있는 카페", link: "四天王寺茶屋" },
                     { name: "스타벅스 아베노", rank: 4, score: "4.1", desc: "가장 높은 빌딩 내 통창 매장", link: "Starbucks Abeno" },
                     { name: "카페 하루카스", rank: 5, score: "4.0", desc: "전망대에서 즐기는 구름 커피", link: "Abeno Harukas Cafe" }
                 ],
@@ -1066,7 +1085,7 @@
                 },
                 {
                     id: 'osaka-review',
-                    name: '에디터의 오사카 호텔 실박 후기',
+                    name: '에디터의 추천 호텔',
                     desc: '직접 묵어보고 검증한 추천 숙소',
                     icon: 'fa-pen-to-square',
                     color: 'from-amber-400 to-orange-500',
@@ -1220,12 +1239,16 @@
                         <div class="size-14 bg-gradient-to-br ${item.color} rounded-3xl flex items-center justify-center text-white text-2xl shadow-inner shrink-0">
                             <i class="fa-solid ${item.icon}"></i>
                         </div>
-                        <div class="flex-1 min-w-0">
+                        <div class="flex-1 min-w-0 text-left">
                             <div class="flex items-center gap-2">
-                                <h4 class="font-black text-[17px] dark:text-white">${item.name}</h4>
-                                <span class="text-[8px] bg-gray-100 dark:bg-white/10 text-gray-400 px-1.5 py-0.5 rounded font-bold uppercase tracking-tighter shrink-0">Recommend</span>
+                                <h4 class="font-black text-[15px] md:text-[17px] dark:text-white leading-snug line-clamp-2 break-keep">
+                                    ${item.name}
+                                 </h4>
+                                <span class="text-[8px] bg-gray-100 dark:bg-white/10 text-gray-400 px-1.5 py-0.5 rounded font-bold uppercase tracking-tighter shrink-0">
+                                    Recommend
+                                </span>
                             </div>
-                            <p class="text-[11px] text-gray-400 font-medium mt-0.5">${item.desc}</p>
+                            <p class="text-[11px] text-gray-400 font-medium mt-0.5 line-clamp-2 break-keep">${item.desc}</p>
                         </div>
                         <div class="size-8 rounded-full bg-gray-50 dark:bg-white/5 flex items-center justify-center text-gray-300 group-hover:text-primary transition-all shrink-0">
                             <i class="fa-solid fa-arrow-right text-xs"></i>
