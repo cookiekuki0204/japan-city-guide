@@ -1135,7 +1135,7 @@
         function updateForecastStatus() {
             const now = new Date();
             const forecastStatus = document.getElementById('forecastStatus');
-            const startDay = new Date(2026, 3, 20); // 3월 20일
+            const startDay = new Date(2026, 2, 20);
             if (now < startDay) {
                 forecastStatus.innerHTML = `아직 도쿄의 벚꽃은 <br/><span class="underline underline-offset-8 decoration-4 decoration-white/40 font-black text-left">개화 전 !</span>`;
             } 
