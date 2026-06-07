@@ -364,6 +364,8 @@ function gen(city, type) {
                     if (hasGuide) {
                         var footer = cardWrapper.querySelector('.mc-footer');
                         if (footer) {
+                            var existingCta = footer.querySelector('.mc-cta');
+                            if (existingCta) existingCta.remove();
                             var btn = document.createElement('button');
                             btn.type = 'button';
                             btn.className = 'mc-cta';
