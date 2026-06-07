@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="ko" class="light scroll-smooth">
+<head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6682864237624164" crossorigin="anonymous"></script>
+    <meta name='impact-site-verification' value='da570fb4-fd59-4dab-8c71-9ec48a894bc2' />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="google-site-verification" content="311s4klorBInl8fo1Dllf1GAdZAtMaM2Aemj4R_Ge-w" />
+    <meta name="description" content="2026 도쿄 여름 완벽 가이드. 스미다강 불꽃놀이, 마쓰리 일정, 야타이 먹거리, 유카타 렌탈까지.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎆</text></svg>">
+    <title>도쿄 여름 완벽 가이드 2026 | 마쓰리 · 불꽃놀이 · 야타이</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="config.js"></script>
+
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0ea5e9",
+                        "primary-dark": "#0284c7",
+                        "background-light": "#f0fdff",
+                        "background-dark": "#071a1a",
+                        "summer-teal": "#14b8a6",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "Noto Sans JP", "sans-serif"]
+                    },
+                },
+            },
+        }
+    </script>
+
+    <style>
+        body { font-family: 'Plus Jakarta Sans', 'Noto Sans JP', sans-serif; -webkit-font-smoothing: antialiased; }
+        .app-gradient {
+            background: linear-gradient(180deg, #ecfeff 0%, #ffffff 50%, #f0fdf4 100%);
+            background-attachment: fixed;
+        }
+        .dark .app-gradient { background: linear-gradient(180deg, #071a1a 0%, #050f0a 100%); }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* 파티클 */
+        .particle {
+            position: absolute; pointer-events: none; z-index: 5;
+            animation: floatUp linear infinite; opacity: 0;
+        }
+        @keyframes floatUp {
+            0%   { top: 110%; transform: translateX(0) rotate(0deg); opacity: 0; }
+            10%  { opacity: 0.7; }
+            90%  { opacity: 0.6; }
+            100% { top: -10%; transform: translateX(80px) rotate(360deg); opacity: 0; }
+        }
+
+        /* 카운트다운 */
+        .countdown-digit {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 16px;
+            padding: 12px 16px;
+            min-width: 64px;
+            text-align: center;
+        }
+
+        /* 마쓰리 카드 */
+        .matsuri-card { transition: transform 0.3s, box-shadow 0.3s; }
+        .matsuri-card:hover { transform: translateY(-4px); }
+
+        /* 날씨 */
+        #mapCanvas { width: 100%; height: 100%; transition: filter 0.5s ease; }
+        .leaflet-marker-icon { border: none !important; background: none !important; }
+        .leaflet-container { background: #f0fdff !important; font-family: inherit; }
+        .dark .leaflet-tile-container { filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%); }
+        .dark .leaflet-container { background: #111827 !important; }
+
+        .slide-up { animation: slideUp 0.4s ease-out; }
+        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        .rank-badge { width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; border-radius: 6px; font-weight: 800; font-size: 10px; }
+        .rank-1 { background: #FFD700; color: #8B4513; }
+        .rank-2 { background: #C0C0C0; color: #4B4B4B; }
+        .rank-3 { background: #CD7F32; color: #ffffff; }
+        .rank-other { background: #f1f5f9; color: #64748b; }
+        .dark .rank-other { background: rgba(255,255,255,0.1); color: #fff; }
+
+        .nav-active { color: #0ea5e9 !important; }
+        .nav-active i { transform: scale(1.1); }
+
+        #mapTooltip {
+            bottom: 120px !important;
+            left: 24px; right: 24px; z-index: 50;
+            transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s;
+        }
+        @media (min-width: 1024px) {
+            #mapTooltip { bottom: 40px !important; left: 40px !important; right: auto !important; width: 360px !important; transform: translateX(-400px); }
+        }
+        #resetMapBtn { z-index: 150 !important; pointer-events: auto !important; }
+        .fixed.bottom-0 { z-index: 210 !important; pointer-events: none; }
+        .fixed.bottom-0 > div { pointer-events: auto; }
+        #detailOverlay { z-index: 200; padding-bottom: 100px !important; }
+
+        /* 유카타 카드 */
+        .yukata-card { transition: transform 0.3s; }
+        .yukata-card:hover { transform: translateY(-3px); }
+
+        /* 야타이 푸드 그리드 */
+        .food-item { transition: transform 0.2s; }
+        .food-item:hover { transform: scale(1.03); }
+
+        /* 불꽃 스팟 슬라이더 */
+        .fireworks-card { transition: transform 0.3s, box-shadow 0.3s; }
+        .fireworks-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(14,165,233,0.15); }
+
+        @media (max-width: 768px) {
+            #resetMapBtn { top: 20px !important; right: 20px !important; bottom: auto !important; left: auto !important; z-index: 170 !important; }
+            #mapTooltip { bottom: 95px !important; left: 16px !important; right: 16px !important; width: auto !important; transform: translateY(250px); transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1); z-index: 160 !important; }
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-[#0c1a1a] dark:text-white transition-colors duration-300 min-h-screen overflow-x-hidden">
+
+<div id="app" class="relative mx-auto flex h-screen w-full flex-col overflow-hidden bg-white/30 dark:bg-background-dark/30 backdrop-blur-[2px] app-gradient shadow-2xl">
+
+    <!-- 파티클 배경 -->
+    <div id="petalContainer" class="absolute inset-0 pointer-events-none overflow-hidden z-0"></div>
+
+    <div id="mainContent" class="flex-1 overflow-y-auto hide-scrollbar pb-32 relative z-10">
+        <div class="max-w-6xl mx-auto w-full px-6 md:px-12">
+
+            <!-- ① 히어로 -->
+            <div class="pt-12 md:pt-20 pb-10 relative flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+                <div class="text-left">
+                    <div class="flex items-center gap-2 mb-2">
+                        <a href="/" class="text-[10px] font-black text-slate-400 hover:text-primary transition-colors uppercase tracking-widest">← 메인으로</a>
+                        <span class="text-slate-300">·</span>
+                        <a href="/tokyo" class="text-[10px] font-black text-slate-400 hover:text-primary transition-colors uppercase tracking-widest">도쿄 벚꽃</a>
+                    </div>
+                    <p class="text-[10px] md:text-xs font-black text-primary uppercase tracking-[0.2em] mb-1">2026 TOKYO SUMMER</p>
+                    <h1 class="text-3xl md:text-5xl font-black tracking-tighter">도쿄 여름 완벽 가이드</h1>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 font-bold mt-2">마쓰리 · 불꽃놀이 · 야타이 · 유카타</p>
+                </div>
+                <!-- 다크모드 토글 -->
+                <button id="themeToggle" class="size-11 rounded-full border border-slate-200 dark:border-white/10 bg-white/60 dark:bg-white/5 flex items-center justify-center transition-all active:scale-90 shrink-0">
+                    <i id="themeIcon" class="fa-solid fa-moon text-indigo-500 dark:text-yellow-300 text-lg"></i>
+                </button>
+            </div>
+
+            <!-- 스미다강 불꽃놀이 카운트다운 -->
+            <div class="mb-12 slide-up">
+                <div class="relative overflow-hidden rounded-[2.5rem] p-8 md:p-10 text-white" style="background: linear-gradient(135deg, #0ea5e9 0%, #14b8a6 50%, #10b981 100%);">
+                    <div class="absolute inset-0 opacity-10">
+                        <div class="absolute top-4 right-8 text-8xl">🎆</div>
+                        <div class="absolute bottom-4 left-8 text-6xl">✨</div>
+                    </div>
+                    <div class="relative z-10">
+                        <p class="text-[10px] font-black uppercase tracking-[0.25em] opacity-80 mb-2">Countdown</p>
+                        <h2 class="text-2xl md:text-3xl font-black mb-6">스미다강 불꽃놀이까지</h2>
+                        <div class="flex gap-3 mb-6">
+                            <div class="countdown-digit">
+                                <p id="cd-days" class="text-2xl md:text-3xl font-black">--</p>
+                                <p class="text-[9px] font-black opacity-70 mt-1">DAYS</p>
+                            </div>
+                            <div class="countdown-digit">
+                                <p id="cd-hours" class="text-2xl md:text-3xl font-black">--</p>
+                                <p class="text-[9px] font-black opacity-70 mt-1">HRS</p>
+                            </div>
+                            <div class="countdown-digit">
+                                <p id="cd-mins" class="text-2xl md:text-3xl font-black">--</p>
+                                <p class="text-[9px] font-black opacity-70 mt-1">MIN</p>
+                            </div>
+                            <div class="countdown-digit">
+                                <p id="cd-secs" class="text-2xl md:text-3xl font-black">--</p>
+                                <p class="text-[9px] font-black opacity-70 mt-1">SEC</p>
+                            </div>
+                        </div>
+                        <p class="text-sm font-bold opacity-80">📅 2026년 7월 25일 (토) · 스미다강</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ② 날씨 위젯 -->
+            <div class="mb-12 slide-up">
+                <div id="weatherCard" class="bg-white/80 dark:bg-white/5 backdrop-blur-xl rounded-[2.5rem] p-8 border border-white/50 shadow-sm relative z-20">
+                    <div class="flex items-center justify-between mb-8">
+                        <h3 class="text-[12px] font-black uppercase tracking-[0.15em] text-gray-400">도쿄 실시간 날씨</h3>
+                        <div class="px-3 py-1 bg-sky-500/10 text-sky-500 rounded-full text-[9px] font-black uppercase tracking-tighter">Live Update</div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+                        <!-- 현재 날씨 -->
+                        <div class="flex items-center gap-4">
+                            <div id="weatherIconBox" class="size-16 shrink-0 rounded-[1.5rem] bg-sky-50 dark:bg-sky-900/20 flex items-center justify-center text-sky-500 text-3xl">
+                                <i class="fa-solid fa-spinner fa-spin"></i>
+                            </div>
+                            <div>
+                                <p id="currentTemp" class="text-3xl font-black leading-none mb-1.5">--°</p>
+                                <p id="weatherDesc" class="text-[11px] font-bold text-gray-500">로딩 중...</p>
+                            </div>
+                        </div>
+
+                        <!-- 복장 추천 -->
+                        <div class="flex items-center gap-4">
+                            <div class="size-16 shrink-0 rounded-[1.5rem] bg-teal-50 dark:bg-teal-900/20 flex items-center justify-center text-teal-500 text-3xl">
+                                <i class="fa-solid fa-shirt"></i>
+                            </div>
+                            <div>
+                                <p id="clothTitle" class="text-[15px] font-black leading-tight mb-1">분석 중</p>
+                                <p id="clothDesc" class="text-[11px] font-bold text-gray-500">잠시만 기다려주세요</p>
+                            </div>
+                        </div>
+
+                        <!-- 자외선 경고 -->
+                        <div class="flex items-center gap-4">
+                            <div class="size-16 shrink-0 rounded-[1.5rem] bg-amber-50 dark:bg-amber-900/20 flex items-center justify-center text-amber-500 text-3xl">
+                                <i class="fa-solid fa-sun"></i>
+                            </div>
+                            <div>
+                                <p class="text-[15px] font-black leading-tight mb-1 text-amber-600">☀️ 자외선 주의</p>
+                                <p class="text-[11px] font-bold text-gray-500">SPF 50+ 필수!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 pt-6 border-t border-gray-100 dark:border-white/5">
+                        <p id="weatherGuide" class="text-[13px] text-gray-600 dark:text-gray-300 leading-relaxed font-medium">
+                            <span class="text-primary font-black mr-2">🌞</span> 실시간 기상 데이터를 불러오는 중입니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 주간 날씨 -->
+            <div class="mb-12 slide-up">
+                <div class="bg-white/80 dark:bg-white/5 backdrop-blur-xl rounded-[2.5rem] p-8 border border-white/50 shadow-sm">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-[12px] font-black uppercase tracking-[0.15em] text-gray-400">도쿄 주간 날씨 예보</h3>
+                        <div class="px-3 py-1 bg-amber-500/10 text-amber-500 rounded-full text-[9px] font-black uppercase">7 Days</div>
+                    </div>
+                    <div class="w-full overflow-hidden">
+                        <a class="weatherwidget-io"
+                            href="https://forecast7.com/en/35d69139d69/tokyo/"
+                            data-label_1="TOKYO" data-label_2="SUMMER"
+                            data-font="Roboto" data-icons="Climacons Animated"
+                            data-days="7" data-theme="pure"
+                            data-textcolor="#2c3e50" data-highcolor="#e74c3c" data-lowcolor="#3498db"
+                            style="display: block; border: none;">TOKYO WEEKLY WEATHER
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 광고 -->
+            <div class="mb-12 slide-up">
+                <div class="max-w-6xl mx-auto flex flex-col items-center">
+                    <p class="text-[8px] text-gray-300 font-bold uppercase tracking-widest mb-2">Sponsor Ad</p>
+                    <div class="w-full bg-white/40 dark:bg-white/5 rounded-[2.5rem] p-4 border border-white/40 overflow-hidden shadow-sm min-h-[100px] flex items-center justify-center">
+                        <ins class="adsbygoogle" style="display:block; width:100%;"
+                            data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86"
+                            data-ad-client="ca-pub-6682864237624164" data-ad-slot="XXXXXXXXXX"></ins>
+                        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ③ 마쓰리 일정 -->
+            <div class="mb-20 text-left w-full">
+                <div class="flex items-end justify-between mb-8">
+                    <div>
+                        <p class="text-[10px] font-black text-primary uppercase tracking-[0.25em] mb-2">Festival Schedule</p>
+                        <h3 class="text-2xl md:text-3xl font-black">2026 도쿄 마쓰리 일정</h3>
+                    </div>
+                    <span class="text-3xl">🎆</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <!-- 스미다강 불꽃놀이 — 피처드 카드 -->
+                    <div class="matsuri-card md:col-span-2 bg-white/80 dark:bg-white/5 backdrop-blur-xl rounded-[2.5rem] overflow-hidden border border-white/50 shadow-sm">
+                        <div class="relative h-56 md:h-72 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1533929736458-ca588d08c8be?w=1200&q=80" 
+                                 alt="스미다강 불꽃놀이" 
+                                 class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                            <div class="absolute top-4 left-5">
+                                <span class="text-[9px] font-black text-white bg-sky-500 px-3 py-1.5 rounded-full">⭐ 메인 이벤트</span>
+                            </div>
+                            <div class="absolute bottom-5 left-6 right-6 text-white">
+                                <p class="text-[10px] font-black opacity-70 uppercase tracking-widest mb-1">隅田川花火大会</p>
+                                <h4 class="text-2xl md:text-3xl font-black">스미다강 불꽃놀이</h4>
+                                <p class="text-sm font-bold opacity-80 mt-1">📅 2026년 7월 25일 (토) · 19:05~20:30</p>
+                            </div>
+                        </div>
+                        <div class="p-7">
+                            <p class="text-[12px] text-slate-600 dark:text-slate-300 leading-relaxed font-bold mb-5">
+                                도쿄 최대 규모 불꽃놀이. 스미다강 위로 2만 발의 불꽃이 밤하늘을 수놓아요. 아사쿠사와 료고쿠 두 회장에서 동시에 진행되며, 스카이트리와 어우러지는 야경이 압권이에요.
+                            </p>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-5">
+                                <div class="bg-sky-50 dark:bg-sky-500/10 rounded-2xl p-3">
+                                    <p class="text-[9px] font-black text-sky-500 uppercase tracking-widest mb-1">📍 1회장</p>
+                                    <p class="text-[12px] font-black">아사쿠사역 15분</p>
+                                </div>
+                                <div class="bg-sky-50 dark:bg-sky-500/10 rounded-2xl p-3">
+                                    <p class="text-[9px] font-black text-sky-500 uppercase tracking-widest mb-1">📍 2회장</p>
+                                    <p class="text-[12px] font-black">료고쿠역 5분</p>
+                                </div>
+                                <div class="bg-sky-50 dark:bg-sky-500/10 rounded-2xl p-3">
+                                    <p class="text-[9px] font-black text-sky-500 uppercase tracking-widest mb-1">🎆 규모</p>
+                                    <p class="text-[12px] font-black">약 2만 발</p>
+                                </div>
+                                <div class="bg-sky-50 dark:bg-sky-500/10 rounded-2xl p-3">
+                                    <p class="text-[9px] font-black text-sky-500 uppercase tracking-widest mb-1">👘 복장</p>
+                                    <p class="text-[12px] font-black">유카타 추천</p>
+                                </div>
+                            </div>
+                            <div class="bg-amber-50 dark:bg-amber-500/10 rounded-2xl p-4">
+                                <p class="text-[10px] font-black text-amber-600 mb-2">💡 관람 팁</p>
+                                <ul class="text-[11px] text-slate-600 dark:text-slate-300 font-bold space-y-1">
+                                    <li>• 당일 교통 극도로 혼잡 — 1~2시간 일찍 출발하세요</li>
+                                    <li>• 유료 관람석은 3~4월부터 예매 시작해요</li>
+                                    <li>• 우천 시 다음날로 순연되니 날씨 확인 필수</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 아사쿠사 삼바 카니발 -->
+                    <div class="matsuri-card bg-white/80 dark:bg-white/5 backdrop-blur-xl rounded-[2.5rem] overflow-hidden border border-white/50 shadow-sm">
+                        <div class="relative h-44 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1551641506-ee5bf4cb45f1?w=800&q=80"
+                                 alt="아사쿠사 삼바 카니발"
+                                 class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                            <div class="absolute top-3 left-4">
+                                <span class="text-[9px] font-black text-white bg-teal-500 px-2.5 py-1 rounded-full">8월</span>
+                            </div>
+                            <div class="absolute bottom-4 left-5 text-white">
+                                <h4 class="text-lg font-black">아사쿠사 삼바 카니발</h4>
+                                <p class="text-[10px] font-bold opacity-70">浅草サンバカーニバル</p>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-[12px] text-slate-600 dark:text-slate-300 leading-relaxed font-bold mb-4">
+                                아시아 최대 규모의 삼바 퍼레이드. 매년 8월 마지막 토요일, 화려한 의상의 댄서들이 아사쿠사 나카미세 거리를 가득 채워요.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-3">
+                                <div class="bg-teal-50 dark:bg-teal-500/10 rounded-xl px-3 py-2">
+                                    <p class="text-[9px] font-black text-teal-500 mb-0.5">📅 날짜</p>
+                                    <p class="text-[11px] font-black">8월 마지막 토요일</p>
+                                </div>
+                                <div class="bg-teal-50 dark:bg-teal-500/10 rounded-xl px-3 py-2">
+                                    <p class="text-[9px] font-black text-teal-500 mb-0.5">📍 장소</p>
+                                    <p class="text-[11px] font-black">아사쿠사 나카미세</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="text-[9px] font-black px-2 py-1 rounded-full bg-teal-50 dark:bg-teal-500/10 text-teal-600">아시아 최대</span>
+                                <span class="text-[9px] font-black px-2 py-1 rounded-full bg-teal-50 dark:bg-teal-500/10 text-teal-600">무료 관람</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 하라주쿠 오모테산도 마쓰리 -->
+                    <div class="matsuri-card bg-white/80 dark:bg-white/5 backdrop-blur-xl rounded-[2.5rem] overflow-hidden border border-white/50 shadow-sm">
+                        <div class="relative h-44 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=800&q=80"
+                                 alt="하라주쿠 오모테산도"
+                                 class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                            <div class="absolute top-3 left-4">
+                                <span class="text-[9px] font-black text-white bg-purple-500 px-2.5 py-1 rounded-full">8월</span>
+                            </div>
+                            <div class="absolute bottom-4 left-5 text-white">
+                                <h4 class="text-lg font-black">하라주쿠 오모테산도 마쓰리</h4>
+                                <p class="text-[10px] font-bold opacity-70">スーパーよさこい</p>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-[12px] text-slate-600 dark:text-slate-300 leading-relaxed font-bold mb-4">
+                                오모테산도 대로에서 펼쳐지는 요사코이 춤 축제. 전국 댄서들이 화려한 의상과 역동적인 춤으로 거리를 가득 채워요.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-3">
+                                <div class="bg-purple-50 dark:bg-purple-500/10 rounded-xl px-3 py-2">
+                                    <p class="text-[9px] font-black text-purple-500 mb-0.5">📅 날짜</p>
+                                    <p class="text-[11px] font-black">8월 말 주말</p>
+                                </div>
+                                <div class="bg-purple-50 dark:bg-purple-500/10 rounded-xl px-3 py-2">
+                                    <p class="text-[9px] font-black text-purple-500 mb-0.5">📍 장소</p>
+                                    <p class="text-[11px] font-black">오모테산도</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="text-[9px] font-black px-2 py-1 rounded-full bg-purple-50 dark:bg-purple-500/10 text-purple-600">요사코이 댄스</span>
+                                <span class="text-[9px] font-black px-2 py-1 rounded-full bg-purple-50 dark:bg-purple-500/10 text-purple-600">하라주쿠</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 이케부쿠로 마쓰리 -->
+                    <div class="matsuri-card md:col-span-2 bg-white/80 dark:bg-white/5 backdrop-blur-xl rounded-[2.5rem] overflow-hidden border border-white/50 shadow-sm">
+                        <div class="md:flex">
+                            <div class="relative md:w-2/5 h-48 md:h-auto overflow-hidden">
+                                <img src="https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?w=800&q=80"
+                                     alt="이케부쿠로 마쓰리"
+                                     class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-black/60 to-transparent"></div>
+                                <div class="absolute top-3 left-4">
+                                    <span class="text-[9px] font-black text-white bg-orange-500 px-2.5 py-1 rounded-full">8월</span>
+                                </div>
+                            </div>
+                            <div class="p-7 md:w-3/5">
+                                <h4 class="text-xl font-black mb-1">이케부쿠로 마쓰리</h4>
+                                <p class="text-[11px] text-slate-500 font-bold mb-4">池袋祭り</p>
+                                <p class="text-[12px] text-slate-600 dark:text-slate-300 leading-relaxed font-bold mb-4">
+                                    이케부쿠로 역 주변에서 펼쳐지는 지역 축제. 야타이가 줄지어 늘어서고 봉오도리 춤과 함께 현지인들의 여름 분위기를 가장 가까이서 느낄 수 있어요.
+                                </p>
+                                <div class="flex flex-wrap gap-2 mb-3">
+                                    <div class="bg-orange-50 dark:bg-orange-500/10 rounded-xl px-3 py-2">
+                                        <p class="text-[9px] font-black text-orange-500 mb-0.5">📅 날짜</p>
+                                        <p class="text-[11px] font-black">8월 중순</p>
+                                    </div>
+                                    <div class="bg-orange-50 dark:bg-orange-500/10 rounded-xl px-3 py-2">
+                                        <p class="text-[9px] font-black text-orange-500 mb-0.5">📍 장소</p>
+                                        <p class="text-[11px] font-black">이케부쿠로역 주변</p>
+                                    </div>
+                                </div>
+                                <div class="flex flex-wrap gap-1.5">
+                                    <span class="text-[9px] font-black px-2 py-1 rounded-full bg-orange-50 dark:bg-orange-500/10 text-orange-600">봉오도리</span>
+                                    <span class="text-[9px] font-black px-2 py-1 rounded-full bg-orange-50 dark:bg-orange-500/10 text-orange-600">야타이</span>
+                                    <span class="text-[9px] font-black px-2 py-1 rounded-full bg-orange-50 dark:bg-orange-500/10 text-orange-600">로컬 분위기</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ④ 불꽃놀이 관람 명소 -->
+            <div class="mb-20 text-left w-full overflow-hidden">
+                <div class="flex items-end justify-between mb-8">
+                    <div>
+                        <p class="text-[10px] font-black text-primary uppercase tracking-[0.25em] mb-2">Fireworks Spots</p>
+                        <h3 class="text-2xl md:text-3xl font-black">불꽃놀이 관람 명소</h3>
+                    </div>
+                    <p class="text-[10px] font-black text-gray-400 pb-1 flex items-center gap-1 animate-pulse">
+                        옆으로 밀기 <i class="fa-solid fa-arrow-right-long"></i>
+                    </p>
+                </div>
+                <div class="flex flex-row flex-nowrap overflow-x-auto hide-scrollbar gap-5 pb-8">
+                    <!-- 스미다 공원 -->
+                    <div class="fireworks-card flex-none w-72 bg-white/80 dark:bg-white/5 backdrop-blur-xl rounded-[2.5rem] overflow-hidden border border-white/50 shadow-sm">
+                        <div class="h-44 bg-gradient-to-br from-sky-400 to-indigo-600 flex items-center justify-center relative overflow-hidden">
+                            <span class="text-6xl">🎆</span>
+                            <div class="absolute top-3 left-4 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1">
+                                <span class="text-[9px] font-black text-white">1회장</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-[9px] font-black text-sky-500 uppercase tracking-widest mb-1">아사쿠사</p>
+                            <h4 class="text-lg font-black mb-2">스미다 공원</h4>
+                            <p class="text-[11px] text-slate-500 dark:text-slate-400 font-bold leading-relaxed mb-4">
+                                스미다강 불꽃놀이 1회장. 아사쿠사역에서 도보 15분. 스카이트리와 함께하는 야경이 도쿄 최고의 포토 스팟이에요.
+                            </p>
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-500/10 text-sky-600">도보 15분</span>
+                                <span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-500/10 text-sky-600">스카이트리 뷰</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 료고쿠 -->
+                    <div class="fireworks-card flex-none w-72 bg-white/80 dark:bg-white/5 backdrop-blur-xl rounded-[2.5rem] overflow-hidden border border-white/50 shadow-sm">
+                        <div class="h-44 bg-gradient-to-br from-indigo-400 to-purple-600 flex items-center justify-center relative overflow-hidden">
+                            <span class="text-6xl">🌟</span>
+                            <div class="absolute top-3 left-4 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1">
+                                <span class="text-[9px] font-black text-white">2회장</span>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-[9px] font-black text-indigo-500 uppercase tracking-widest mb-1">료고쿠</p>
+                            <h4 class="text-lg font-black mb-2">료고쿠 강변</h4>
+                            <p class="text-[11px] text-slate-500 dark:text-slate-400 font-bold leading-relaxed mb-4">
+                                스미다강 불꽃놀이 2회장. 료고쿠역 도보 5분으로 접근성이 좋아요. 강 위로 터지는 불꽃을 가장 가까이서 볼 수 있는 명당이에요.
+                            </p>
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600">도보 5분</span>
+                                <span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600">가장 가까운 뷰</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 아사히 슈퍼드라이홀 -->
+                    <div class="fireworks-card flex-none w-72 bg-white/80 dark:bg-white/5 backdrop-blur-xl rounded-[2.5rem] overflow-hidden border border-white/50 shadow-sm">
+                        <div class="h-44 bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center relative overflow-hidden">
+                            <span class="text-6xl">🍺</span>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-[9px] font-black text-amber-500 uppercase tracking-widest mb-1">아사쿠사</p>
+                            <h4 class="text-lg font-black mb-2">아사히 슈퍼드라이홀 근처</h4>
+                            <p class="text-[11px] text-slate-500 dark:text-slate-400 font-bold leading-relaxed mb-4">
+                                황금 불꽃 모양의 아사히 맥주 빌딩 앞 강변. 생맥주 한 잔과 함께 불꽃놀이를 즐기는 도쿄 여름 정석 코스예요.
+                            </p>
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-amber-50 dark:bg-amber-500/10 text-amber-600">생맥주 뷰</span>
+                                <span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-amber-50 dark:bg-amber-500/10 text-amber-600">강변 테라스</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 나카메구로 -->
+                    <div class="fireworks-card flex-none w-72 bg-white/80 dark:bg-white/5 backdrop-blur-xl rounded-[2.5rem] overflow-hidden border border-white/50 shadow-sm">
+                        <div class="h-44 bg-gradient-to-br from-teal-400 to-emerald-500 flex items-center justify-center relative overflow-hidden">
+                            <span class="text-6xl">✨</span>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-[9px] font-black text-teal-500 uppercase tracking-widest mb-1">나카메구로</p>
+                            <h4 class="text-lg font-black mb-2">메구로강 뷰포인트</h4>
+                            <p class="text-[11px] text-slate-500 dark:text-slate-400 font-bold leading-relaxed mb-4">
+                                벚꽃으로 유명한 메구로강 주변이 여름엔 불꽃놀이 뷰포인트로 변해요. 강변 카페에서 칵테일 한 잔과 함께 즐기는 감성 코스예요.
+                            </p>
+                            <div class="flex flex-wrap gap-1.5">
+                                <span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-teal-50 dark:bg-teal-500/10 text-teal-600">강변 카페</span>
+                                <span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-teal-50 dark:bg-teal-500/10 text-teal-600">감성 뷰</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 광고 -->
+            <div class="mb-12">
+                <div class="max-w-6xl mx-auto flex flex-col items-center">
+                    <p class="text-[8px] text-gray-300 font-bold uppercase tracking-widest mb-2">Sponsor Ad</p>
+                    <div class="w-full bg-white/40 dark:bg-white/5 rounded-[2.5rem] p-4 border border-white/40 overflow-hidden shadow-sm min-h-[100px] flex items-center justify-center">
+                        <ins class="adsbygoogle" style="display:block; width:100%;"
+                            data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86"
+                            data-ad-client="ca-pub-6682864237624164" data-ad-slot="XXXXXXXXXX"></ins>
+                        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ⑤ 여름 먹거리 -->
+            <div class="mb-20 text-left w-full">
+                <div class="flex items-end justify-between mb-8">
+                    <div>
+                        <p class="text-[10px] font-black text-primary uppercase tracking-[0.25em] mb-2">Summer Food</p>
+                        <h3 class="text-2xl md:text-3xl font-black">야타이에서 꼭 먹어야 할 것들</h3>
+                    </div>
+                    <span class="text-3xl">🍧</span>
+                </div>
+                <p class="text-[12px] text-slate-500 dark:text-slate-400 font-bold mb-8 -mt-4">마쓰리 포장마차에서 반드시 경험해야 할 여름 먹거리</p>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+                    <div class="food-item bg-white/80 dark:bg-white/5 backdrop-blur-xl rounded-[2rem] p-5 border border-white/50 shadow-sm text-center">
+                        <span class="text-4xl block mb-3">🍧</span>
+                        <h4 class="font-black text-sm mb-1">카키고리</h4>
+                        <p class="text-[10px] text-slate-500 font-bold">かき氷</p>
+                        <p class="text-[10px] text-slate-500 mt-2 leading-relaxed">일본식 빙수. 우지 말차, 이치고, 시럽 종류가 다양해요</p>
+                    </div>
+                    <div class="food-item bg-white/80 dark:bg-white/5 backdrop-blur-xl rounded-[2rem] p-5 border border-white/50 shadow-sm text-center">
+                        <span class="text-4xl block mb-3">🍺</span>
+                        <h4 class="font-black text-sm mb-1">나마비루</h4>
+                        <p class="text-[10px] text-slate-500 font-bold">生ビール</p>
+                        <p class="text-[10px] text-slate-500 mt-2 leading-relaxed">갓 뽑은 생맥주. 불꽃놀이와 함께 마시면 최고예요</p>
+                    </div>
+                    <div class="food-item bg-white/80 dark:bg-white/5 backdrop-blur-xl rounded-[2rem] p-5 border border-white/50 shadow-sm text-center">
+                        <span class="text-4xl block mb-3">🐙</span>
+                        <h4 class="font-black text-sm mb-1">타코야키</h4>
+                        <p class="text-[10px] text-slate-500 font-bold">たこ焼き</p>
+                        <p class="text-[10px] text-slate-500 mt-2 leading-relaxed">문어 반죽 볼. 겉은 바삭, 속은 촉촉한 오사카 소울푸드</p>
+                    </div>
+                    <div class="food-item bg-white/80 dark:bg-white/5 backdrop-blur-xl rounded-[2rem] p-5 border border-white/50 shadow-sm text-center">
+                        <span class="text-4xl block mb-3">🍡</span>
+                        <h4 class="font-black text-sm mb-1">야키토리</h4>
+                        <p class="text-[10px] text-slate-500 font-bold">焼き鳥</p>
+                        <p class="text-[10px] text-slate-500 mt-2 leading-relaxed">숯불 닭꼬치. 타레(소스)와 시오(소금) 중 선택</p>
+                    </div>
+                    <div class="food-item bg-white/80 dark:bg-white/5 backdrop-blur-xl rounded-[2rem] p-5 border border-white/50 shadow-sm text-center">
+                        <span class="text-4xl block mb-3">🌽</span>
+                        <h4 class="font-black text-sm mb-1">야키토모로코시</h4>
+                        <p class="text-[10px] text-slate-500 font-bold">焼きとうもろこし</p>
+                        <p class="text-[10px] text-slate-500 mt-2 leading-relaxed">간장 버터 구운 옥수수. 마쓰리 최고 인기 먹거리</p>
+                    </div>
+                    <div class="food-item bg-white/80 dark:bg-white/5 backdrop-blur-xl rounded-[2rem] p-5 border border-white/50 shadow-sm text-center">
+                        <span class="text-4xl block mb-3">🍜</span>
+                        <h4 class="font-black text-sm mb-1">야키소바</h4>
+                        <p class="text-[10px] text-slate-500 font-bold">焼きそば</p>
+                        <p class="text-[10px] text-slate-500 mt-2 leading-relaxed">소스 볶음 국수. 야타이 대표 메뉴. 배고플 때 필수</p>
+                    </div>
+                    <div class="food-item bg-white/80 dark:bg-white/5 backdrop-blur-xl rounded-[2rem] p-5 border border-white/50 shadow-sm text-center">
+                        <span class="text-4xl block mb-3">🫧</span>
+                        <h4 class="font-black text-sm mb-1">라무네</h4>
+                        <p class="text-[10px] text-slate-500 font-bold">ラムネ</p>
+                        <p class="text-[10px] text-slate-500 mt-2 leading-relaxed">구슬 병 레모네이드. 병 안 구슬 굴리는 게 포인트</p>
+                    </div>
+                    <div class="food-item bg-white/80 dark:bg-white/5 backdrop-blur-xl rounded-[2rem] p-5 border border-white/50 shadow-sm text-center">
+                        <span class="text-4xl block mb-3">🍨</span>
+                        <h4 class="font-black text-sm mb-1">소프트크림</h4>
+                        <p class="text-[10px] text-slate-500 font-bold">ソフトクリーム</p>
+                        <p class="text-[10px] text-slate-500 mt-2 leading-relaxed">일본식 소프트 아이스크림. 말차맛이 특히 인기</p>
+                    </div>
+                </div>
+
+                <!-- 카키고리 맛집 추천 -->
+                <div class="bg-white/80 dark:bg-white/5 backdrop-blur-xl rounded-[2.5rem] p-7 border border-white/50 shadow-sm">
+                    <div class="flex items-center gap-3 mb-6">
+                        <span class="text-3xl">🍧</span>
+                        <div>
+                            <p class="text-[10px] font-black text-sky-500 uppercase tracking-widest">Editor's Pick</p>
+                            <h4 class="text-lg font-black">도쿄 카키고리 맛집</h4>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-4 p-4 bg-sky-50 dark:bg-sky-500/10 rounded-2xl">
+                            <div class="rank-badge rank-1">1</div>
+                            <div class="flex-1">
+                                <p class="font-black text-sm">히무로 만넨유키 (氷室万年雪)</p>
+                                <p class="text-[10px] text-slate-500 font-bold">아자부주반 · 천연 얼음 사용 고급 카키고리</p>
+                            </div>
+                            <button onclick="searchMap('氷室万年雪 麻布十番')" class="shrink-0 size-9 rounded-xl bg-sky-500 text-white flex items-center justify-center active:scale-90 transition-all">
+                                <i class="fa-solid fa-map-location-dot text-sm"></i>
+                            </button>
+                        </div>
+                        <div class="flex items-center gap-4 p-4 bg-sky-50 dark:bg-sky-500/10 rounded-2xl">
+                            <div class="rank-badge rank-2">2</div>
+                            <div class="flex-1">
+                                <p class="font-black text-sm">카키고리야마 시부야 (かき氷山)</p>
+                                <p class="text-[10px] text-slate-500 font-bold">시부야 · 과일 시럽 전문, 줄 서서 먹는 인기 맛집</p>
+                            </div>
+                            <button onclick="searchMap('かき氷山 渋谷')" class="shrink-0 size-9 rounded-xl bg-sky-500 text-white flex items-center justify-center active:scale-90 transition-all">
+                                <i class="fa-solid fa-map-location-dot text-sm"></i>
+                            </button>
+                        </div>
+                        <div class="flex items-center gap-4 p-4 bg-sky-50 dark:bg-sky-500/10 rounded-2xl">
+                            <div class="rank-badge rank-3">3</div>
+                            <div class="flex-1">
+                                <p class="font-black text-sm">나나이로히요리 (なないろひより)</p>
+                                <p class="text-[10px] text-slate-500 font-bold">아사쿠사 · 계절 한정 메뉴, 마쓰리 분위기와 찰떡</p>
+                            </div>
+                            <button onclick="searchMap('なないろひより 浅草')" class="shrink-0 size-9 rounded-xl bg-sky-500 text-white flex items-center justify-center active:scale-90 transition-all">
+                                <i class="fa-solid fa-map-location-dot text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ⑥ 유카타 렌탈 -->
+            <div class="mb-20 text-left w-full">
+                <div class="flex items-end justify-between mb-8">
+                    <div>
+                        <p class="text-[10px] font-black text-primary uppercase tracking-[0.25em] mb-2">Yukata Rental</p>
+                        <h3 class="text-2xl md:text-3xl font-black">아사쿠사 유카타 렌탈</h3>
+                    </div>
+                    <span class="text-3xl">👘</span>
+                </div>
+
+                <div class="bg-gradient-to-br from-sky-50 to-teal-50 dark:from-sky-900/20 dark:to-teal-900/20 rounded-[2.5rem] p-7 border border-sky-100 dark:border-sky-500/20 mb-6">
+                    <p class="text-[12px] text-slate-600 dark:text-slate-300 leading-relaxed font-bold mb-4">
+                        🎆 마쓰리와 불꽃놀이엔 역시 유카타! 아사쿠사는 일본에서 유카타 렌탈 숍이 가장 밀집한 지역이에요. 렌탈 후 아사쿠사 거리 산책 → 야타이 먹거리 → 불꽃놀이 관람으로 이어지는 완벽한 여름 코스예요.
+                    </p>
+                    <div class="grid grid-cols-3 gap-3">
+                        <div class="bg-white/70 dark:bg-white/10 rounded-2xl p-3 text-center">
+                            <p class="text-[9px] font-black text-sky-500 uppercase tracking-widest mb-1">💰 가격</p>
+                            <p class="text-[12px] font-black">3,000~8,000엔</p>
+                        </div>
+                        <div class="bg-white/70 dark:bg-white/10 rounded-2xl p-3 text-center">
+                            <p class="text-[9px] font-black text-sky-500 uppercase tracking-widest mb-1">⏰ 소요</p>
+                            <p class="text-[12px] font-black">약 30분</p>
+                        </div>
+                        <div class="bg-white/70 dark:bg-white/10 rounded-2xl p-3 text-center">
+                            <p class="text-[9px] font-black text-sky-500 uppercase tracking-widest mb-1">📍 밀집</p>
+                            <p class="text-[12px] font-black">나카미세 주변</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="yukata-card bg-white/80 dark:bg-white/5 backdrop-blur-xl rounded-[2.5rem] p-6 border border-white/50 shadow-sm flex items-center gap-5">
+                        <div class="size-16 shrink-0 rounded-[1.5rem] bg-gradient-to-br from-pink-400 to-rose-500 flex items-center justify-center text-2xl">👘</div>
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-1">
+                                <div class="rank-badge rank-1">1</div>
+                                <h4 class="font-black text-sm">하나쿠레나이 아사쿠사점 (花くれない)</h4>
+                            </div>
+                            <p class="text-[10px] text-slate-500 font-bold">아사쿠사 · 유카타 200종 이상 · 헤어 셋업 포함 플랜 있음</p>
+                        </div>
+                        <button onclick="searchMap('花くれない 浅草')" class="shrink-0 size-9 rounded-xl bg-primary text-white flex items-center justify-center active:scale-90 transition-all">
+                            <i class="fa-solid fa-map-location-dot text-sm"></i>
+                        </button>
+                    </div>
+                    <div class="yukata-card bg-white/80 dark:bg-white/5 backdrop-blur-xl rounded-[2.5rem] p-6 border border-white/50 shadow-sm flex items-center gap-5">
+                        <div class="size-16 shrink-0 rounded-[1.5rem] bg-gradient-to-br from-teal-400 to-emerald-500 flex items-center justify-center text-2xl">🌸</div>
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-1">
+                                <div class="rank-badge rank-2">2</div>
+                                <h4 class="font-black text-sm">아사쿠사 기모노 렌탈 와타베 (WATABE)</h4>
+                            </div>
+                            <p class="text-[10px] text-slate-500 font-bold">아사쿠사 · 외국인 대응 · 영어 가능 · 모던 유카타 다양</p>
+                        </div>
+                        <button onclick="searchMap('渡部写真館 浅草 着物レンタル')" class="shrink-0 size-9 rounded-xl bg-primary text-white flex items-center justify-center active:scale-90 transition-all">
+                            <i class="fa-solid fa-map-location-dot text-sm"></i>
+                        </button>
+                    </div>
+                    <div class="yukata-card bg-white/80 dark:bg-white/5 backdrop-blur-xl rounded-[2.5rem] p-6 border border-white/50 shadow-sm flex items-center gap-5">
+                        <div class="size-16 shrink-0 rounded-[1.5rem] bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-2xl">✨</div>
+                        <div class="flex-1">
+                            <div class="flex items-center gap-2 mb-1">
+                                <div class="rank-badge rank-3">3</div>
+                                <h4 class="font-black text-sm">유메야 아사쿠사 (夢屋)</h4>
+                            </div>
+                            <p class="text-[10px] text-slate-500 font-bold">아사쿠사 · 가성비 렌탈 · 당일 예약 가능 · 센소지 근처</p>
+                        </div>
+                        <button onclick="searchMap('夢屋 浅草 浴衣レンタル')" class="shrink-0 size-9 rounded-xl bg-primary text-white flex items-center justify-center active:scale-90 transition-all">
+                            <i class="fa-solid fa-map-location-dot text-sm"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="mt-5 bg-amber-50 dark:bg-amber-500/10 rounded-2xl p-4 border border-amber-100 dark:border-amber-500/20">
+                    <p class="text-[10px] font-black text-amber-600 mb-2">💡 예약 팁</p>
+                    <p class="text-[11px] text-slate-600 dark:text-slate-300 font-bold leading-relaxed">마쓰리 당일과 불꽃놀이 날에는 예약 필수예요. 특히 스미다강 불꽃놀이 당일은 1~2주 전에 미리 예약하세요.</p>
+                </div>
+            </div>
+
+            <!-- 광고 -->
+            <div class="mb-12">
+                <div class="max-w-6xl mx-auto flex flex-col items-center">
+                    <p class="text-[8px] text-gray-300 font-bold uppercase tracking-widest mb-2">Sponsor Ad</p>
+                    <div class="w-full bg-white/40 dark:bg-white/5 rounded-[2.5rem] p-4 border border-white/40 overflow-hidden shadow-sm min-h-[100px] flex items-center justify-center">
+                        <ins class="adsbygoogle" style="display:block; width:100%;"
+                            data-ad-format="fluid" data-ad-layout-key="-fb+5w+4e-db+86"
+                            data-ad-client="ca-pub-6682864237624164" data-ad-slot="XXXXXXXXXX"></ins>
+                        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 다른 도시 여름 가이드 링크 -->
+            <div class="mb-12">
+                <div class="bg-gradient-to-br from-sky-500 to-teal-500 rounded-[2.5rem] p-8 text-white text-center">
+                    <p class="text-[10px] font-black uppercase tracking-widest mb-3 opacity-80">More Summer Guides</p>
+                    <h3 class="text-xl font-black mb-4">다른 도시 여름도 계획 중이라면?</h3>
+                    <div class="flex flex-wrap justify-center gap-3">
+                        <a href="/summer-matsuri.html" class="px-4 py-2 rounded-full bg-white/20 backdrop-blur-sm text-white text-[11px] font-black hover:bg-white/30 transition-all no-underline">🎆 전국 마쓰리 가이드</a>
+                        <a href="/" class="px-4 py-2 rounded-full bg-white/20 backdrop-blur-sm text-white text-[11px] font-black hover:bg-white/30 transition-all no-underline">🏠 메인으로</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 푸터 -->
+            <div class="py-10 text-center opacity-30">
+                <p class="text-[10px] font-black tracking-widest uppercase">© 2026 Japan City Guide. All rights reserved.</p>
+            </div>
+            <div class="flex gap-4 justify-center text-sm text-gray-400 mb-10">
+                <a href="/about.html" class="hover:text-gray-600">About</a>
+                <a href="/contact.html" class="hover:text-gray-600">Contact</a>
+                <a href="/privacy.html" class="hover:text-gray-600">Privacy</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 하단 네비게이션 -->
+    <div class="fixed bottom-0 left-0 right-0 z-[100] text-left">
+        <div class="max-w-[600px] mx-auto bg-white/95 dark:bg-background-dark/95 backdrop-blur-xl border-t md:border border-gray-100 dark:border-white/5 md:rounded-t-[2.5rem] px-10 pt-4 pb-8 md:pb-6 flex justify-between items-center shadow-2xl">
+            <button id="nav-home" onclick="goHome()" class="nav-btn flex flex-col items-center gap-1 nav-active active:scale-90 transition-all">
+                <i class="fa-solid fa-house text-xl"></i>
+                <span class="text-[10px] font-bold">홈</span>
+            </button>
+            <button id="nav-explore" onclick="openExplorePage()" class="nav-btn flex flex-col items-center gap-1 text-gray-400 active:scale-90 transition-all">
+                <i class="fa-solid fa-map-location-dot text-xl"></i>
+                <span class="text-[10px] font-bold">지도</span>
+            </button>
+            <a href="/summer-matsuri.html" class="nav-btn flex flex-col items-center gap-1 text-gray-400 active:scale-90 transition-all no-underline">
+                <i class="fa-solid fa-star text-xl"></i>
+                <span class="text-[10px] font-bold">마쓰리</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- 지도 페이지 -->
+    <div id="explorePage" class="hidden absolute inset-0 z-20 bg-background-light dark:bg-background-dark overflow-hidden flex flex-col pt-12 text-left">
+        <div class="px-6 mb-6 flex items-center justify-between">
+            <div>
+                <h2 class="text-3xl font-black tracking-tighter">도쿄 여름 지도</h2>
+                <p class="text-xs font-bold text-gray-400 mt-1 uppercase tracking-widest">Tokyo Summer Interactive Map</p>
+            </div>
+            <button onclick="goHome()" class="size-10 rounded-full bg-gray-100 dark:bg-white/10 flex items-center justify-center text-gray-500 active:scale-90 transition-all">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+        </div>
+        <div class="flex-1 relative bg-white/50 dark:bg-white/5 mb-32 md:mb-0 rounded-[3rem] border border-white/60 overflow-hidden shadow-inner mx-4">
+            <div id="mapCanvas" class="absolute inset-0 w-full h-full z-10"></div>
+            <button id="resetMapBtn" class="absolute bottom-40 right-8 z-[150] size-14 bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-2xl shadow-2xl border border-white/20 flex items-center justify-center text-primary active:scale-90 hover:scale-105 transition-all md:bottom-10 cursor-pointer">
+                <i class="fa-solid fa-arrow-rotate-left text-xl"></i>
+            </button>
+            <div id="mapTooltip" class="absolute bottom-10 left-6 right-6 md:left-1/2 md:-translate-x-1/2 md:max-w-sm bg-white dark:bg-gray-900 p-6 rounded-[2rem] shadow-2xl translate-y-40 transition-transform duration-500 border border-primary/10 z-50">
+                <div class="flex justify-between items-start">
+                    <div class="text-left">
+                        <span id="tooltipRegion" class="text-[10px] font-black text-primary uppercase">지역명</span>
+                        <h3 id="tooltipSpot" class="text-xl font-black">장소 이름</h3>
+                        <p id="tooltipDesc" class="text-[11px] text-gray-500 font-bold mt-1"></p>
+                    </div>
+                    <button id="tooltipBtn" class="size-12 rounded-2xl bg-primary text-white flex items-center justify-center active:scale-90 transition-transform shadow-lg">
+                        <i class="fa-solid fa-map-location-dot"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ── 다크모드 ──
+    const html = document.documentElement;
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const saved = localStorage.getItem('theme') || 'light';
+    html.classList.toggle('dark', saved === 'dark');
+    themeIcon.className = saved === 'dark' ? 'fa-solid fa-sun text-yellow-300 text-lg' : 'fa-solid fa-moon text-indigo-500 text-lg';
+    themeToggle.onclick = () => {
+        const isDark = html.classList.contains('dark');
+        html.classList.toggle('dark', !isDark);
+        localStorage.setItem('theme', isDark ? 'light' : 'dark');
+        themeIcon.className = isDark ? 'fa-solid fa-moon text-indigo-500 text-lg' : 'fa-solid fa-sun text-yellow-300 text-lg';
+    };
+
+    // ── 카운트다운 (스미다강 불꽃놀이: 2026-07-25) ──
+    function startCountdown() {
+        const target = new Date('2026-07-25T19:05:00').getTime();
+        const update = () => {
+            const diff = target - Date.now();
+            if (diff < 0) {
+                document.getElementById('cd-days').textContent = '🎆';
+                document.getElementById('cd-hours').textContent = '終';
+                document.getElementById('cd-mins').textContent = '了';
+                document.getElementById('cd-secs').textContent = '!';
+                return;
+            }
+            const d = Math.floor(diff / 86400000);
+            const h = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, '0');
+            const m = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
+            const s = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
+            document.getElementById('cd-days').textContent = d;
+            document.getElementById('cd-hours').textContent = h;
+            document.getElementById('cd-mins').textContent = m;
+            document.getElementById('cd-secs').textContent = s;
+        };
+        update(); setInterval(update, 1000);
+    }
+    startCountdown();
+
+    // ── 파티클 (여름) ──
+    function createParticles() {
+        const container = document.getElementById('petalContainer');
+        const icons = ['✨', '🎇', '✨', '🎆', '🌟', '✨'];
+        const count = window.innerWidth > 768 ? 35 : 18;
+        for (let i = 0; i < count; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            p.textContent = icons[Math.floor(Math.random() * icons.length)];
+            const size = Math.random() * 10 + 8;
+            p.style.cssText = `
+                left: ${Math.random() * 100}%;
+                font-size: ${size}px;
+                animation-duration: ${Math.random() * 12 + 10}s;
+                animation-delay: ${Math.random() * 10}s;
+            `;
+            container.appendChild(p);
+        }
+    }
+    createParticles();
+
+    // ── 날씨 API ──
+    const _sec = "YTdiMTc0NDlhZTYzYmQ5OGQ4MGUyNTNmNjNiZjEyMmY=";
+    const WEATHER_CONFIG = { API_KEY: atob(_sec), CITY: 'Tokyo' };
+
+    async function fetchWeather() {
+        try {
+            const url = `https://api.openweathermap.org/data/2.5/weather?q=${WEATHER_CONFIG.CITY}&appid=${WEATHER_CONFIG.API_KEY}&units=metric&lang=kr`;
+            const res = await fetch(url);
+            const data = await res.json();
+            if (res.ok) {
+                const temp = Math.round(data.main.temp);
+                document.getElementById('currentTemp').textContent = `${temp}°`;
+                document.getElementById('weatherDesc').textContent = `${data.weather[0].description} (${Math.round(data.main.temp_min)}°/${Math.round(data.main.temp_max)}°)`;
+                document.getElementById('weatherIconBox').innerHTML = `<img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" class="size-12">`;
+                updateClothingGuide(temp, data.main.humidity);
+            }
+        } catch (e) {
+            document.getElementById('weatherDesc').textContent = '데이터 연결 실패';
+        }
+    }
+
+    function updateClothingGuide(temp, humidity) {
+        let title, desc, guide;
+        if (temp >= 33) {
+            title = '민소매 / 반팔'; desc = '통기성 좋은 소재 필수';
+            guide = `체감온도 ${temp + Math.round(humidity/10)}°C 이상의 폭염입니다. 야외 활동 시 수분 보충과 ☀️ <strong class="text-amber-500">SPF 50+ 자외선 차단제</strong>를 꼭 챙기세요!`;
+        } else if (temp >= 28) {
+            title = '반팔 / 얇은 원피스'; desc = '시원한 소재 추천';
+            guide = `전형적인 도쿄 여름입니다. ☀️ <strong class="text-amber-500">SPF 50+ 자외선 차단제</strong>는 필수! 마쓰리 야외 관람 시 부채나 미니 선풍기도 챙기세요.`;
+        } else {
+            title = '얇은 긴팔 / 반팔'; desc = '저녁엔 가디건 추천';
+            guide = `다소 선선한 여름 날씨입니다. 마쓰리 야외 관람 시 자외선이 강하니 ☀️ <strong class="text-amber-500">SPF 50+ 자외선 차단제</strong>를 꼭 챙기세요.`;
+        }
+        document.getElementById('clothTitle').textContent = title;
+        document.getElementById('clothDesc').textContent = desc;
+        document.getElementById('weatherGuide').innerHTML = `<span class="text-primary font-black mr-2">🌞</span> ${guide}`;
+    }
+
+    fetchWeather();
+
+    // ── 지도 (Leaflet) ──
+    const summerSpots = [
+        { name: '스미다 공원', lat: 35.7108, lng: 139.8011, region: '아사쿠사', desc: '불꽃놀이 1회장', color: '#0ea5e9' },
+        { name: '료고쿠 강변', lat: 35.6968, lng: 139.7937, region: '료고쿠', desc: '불꽃놀이 2회장', color: '#6366f1' },
+        { name: '아사쿠사 나카미세', lat: 35.7148, lng: 139.7967, region: '아사쿠사', desc: '삼바 카니발 & 야타이', color: '#14b8a6' },
+        { name: '오모테산도', lat: 35.6654, lng: 139.7108, region: '하라주쿠', desc: '오모테산도 마쓰리', color: '#a855f7' },
+        { name: '이케부쿠로역', lat: 35.7295, lng: 139.7109, region: '이케부쿠로', desc: '이케부쿠로 마쓰리', color: '#f97316' },
+        { name: '메구로강', lat: 35.6441, lng: 139.6988, region: '나카메구로', desc: '불꽃 뷰포인트', color: '#10b981' },
+        { name: '아자부주반', lat: 35.6565, lng: 139.7356, region: '아자부', desc: '카키고리 맛집 밀집', color: '#e879f9' },
+    ];
+
+    let map = null;
+    function initMap() {
+        if (map) return;
+        map = L.map('mapCanvas').setView([35.6892, 139.7714], 12);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors', maxZoom: 18
+        }).addTo(map);
+
+        summerSpots.forEach(spot => {
+            const icon = L.divIcon({
+                className: '',
+                html: `<div style="width:32px;height:32px;border-radius:50%;background:white;border:3px solid ${spot.color};display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,0.15);">
+                    <div style="width:10px;height:10px;border-radius:50%;background:${spot.color};"></div>
+                </div>`,
+                iconSize: [32, 32], iconAnchor: [16, 16]
+            });
+            const marker = L.marker([spot.lat, spot.lng], { icon }).addTo(map);
+            marker.on('click', () => {
+                document.getElementById('tooltipRegion').textContent = spot.region;
+                document.getElementById('tooltipSpot').textContent = spot.name;
+                document.getElementById('tooltipDesc').textContent = spot.desc;
+                const tooltip = document.getElementById('mapTooltip');
+                tooltip.classList.remove('translate-y-40');
+                document.getElementById('tooltipBtn').onclick = () => searchMap(spot.name + ' ' + spot.region + ' 東京');
+            });
+        });
+
+        document.getElementById('resetMapBtn').onclick = () => {
+            map.setView([35.6892, 139.7714], 12);
+            document.getElementById('mapTooltip').classList.add('translate-y-40');
+        };
+    }
+
+    // ── 네비게이션 ──
+    function goHome() {
+        document.getElementById('explorePage').classList.add('hidden');
+        document.getElementById('nav-home').classList.add('nav-active');
+        document.getElementById('nav-explore').classList.remove('nav-active');
+        document.getElementById('mainContent').scrollTop = 0;
+    }
+
+    function openExplorePage() {
+        document.getElementById('explorePage').classList.remove('hidden');
+        document.getElementById('nav-explore').classList.add('nav-active');
+        document.getElementById('nav-home').classList.remove('nav-active');
+        setTimeout(initMap, 100);
+    }
+
+    function searchMap(query) {
+        window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`, '_blank');
+    }
+
+    // ── 주간 날씨 위젯 ──
+    !function(d,s,id){
+        var js,fjs=d.getElementsByTagName(s)[0];
+        if(!d.getElementById(id)){
+            js=d.createElement(s);
+            js.id=id;
+            js.src='https://weatherwidget.io/js/widget.min.js';
+            fjs.parentNode.insertBefore(js,fjs);
+        }
+    }(document,'script','weatherwidget-io-js');
+</script>
+</body>
+</html>

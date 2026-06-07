@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ko" class="light scroll-smooth">
+<head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6682864237624164" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="google-site-verification" content="311s4klorBInl8fo1Dllf1GAdZAtMaM2Aemj4R_Ge-w">
+    <meta name="description" content="2026 일본 마쓰리 완벽 가이드. 기온 마쓰리, 텐진 마쓰리, 하카타 마쓰리 등 전국 여름 축제 총정리.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎆</text></svg>">
+    <title>2026 마쓰리 완벽 가이드 | Japan City Guide 🎆</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="components.js"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-font-smoothing: antialiased; }
+        .app-gradient {
+            background: linear-gradient(180deg, #ecfeff 0%, #ffffff 50%, #f0fdf4 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+        .dark .app-gradient { background: linear-gradient(180deg, #071a1a 0%, #050f0a 100%); }
+        .glass-effect {
+            background: rgba(255,255,255,0.25);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.35);
+        }
+        .city-card {
+            mask-image: -webkit-radial-gradient(white, black);
+            -webkit-mask-image: -webkit-radial-gradient(white, black);
+        }
+        .card-zoom:hover img { transform: scale(1.05); }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .particle { position: fixed; pointer-events: none; z-index: 5; }
+        @keyframes floatUp {
+            0%   { top: 110%; transform: translateX(0) rotate(0deg); opacity: 0; }
+            10%  { opacity: 0.7; }
+            90%  { opacity: 0.6; }
+            100% { top: -10%; transform: translateX(80px) rotate(360deg); opacity: 0; }
+        }
+        #mainHeader.scrolled {
+            background-color: rgba(236,254,255,0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(186,230,253,0.3);
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
+        }
+        .dark #mainHeader.scrolled {
+            background-color: rgba(7,26,26,0.85);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .nav-active { background: rgba(14,165,233,0.12); color: #0ea5e9 !important; }
+    </style>
+</head>
+<body class="app-gradient text-slate-950 dark:text-white transition-colors duration-500">
+
+    <div id="particle-container" class="fixed inset-0 pointer-events-none overflow-hidden z-0"></div>
+
+    <!-- Navigation -->
+    <header id="mainHeader" class="fixed top-0 left-0 right-0 z-50 px-6 transition-all duration-500">
+        <nav class="mx-auto max-w-6xl py-4 flex justify-between items-center transition-all duration-500">
+            <a href="/" class="flex items-center gap-3 group cursor-pointer no-underline shrink-0">
+                <span class="text-2xl font-black tracking-tighter text-rose-400 uppercase">
+                    Japan City <span class="text-rose-500">Guide</span>
+                </span>
+                <div class="w-9 h-9 flex items-center justify-center rounded-full bg-white/20 dark:bg-white/10 group-hover:rotate-12 transition-transform duration-500 shadow-sm border border-white/30">
+                    <span class="text-xl">🎆</span>
+                </div>
+            </a>
+
+            <div class="hidden md:flex items-center gap-1 bg-white/40 dark:bg-white/5 backdrop-blur-md rounded-full px-2 py-1.5 border border-white/50 dark:border-white/10 shadow-sm">
+                <a href="sakura" class="flex items-center gap-1.5 px-4 py-2 rounded-full text-[11px] font-black uppercase tracking-wider text-rose-500 hover:bg-rose-500/10 transition-all no-underline">
+                    🌸 Sakura
+                </a>
+                <a href="matsuri" class="nav-active flex items-center gap-1.5 px-4 py-2 rounded-full text-[11px] font-black uppercase tracking-wider transition-all no-underline">
+                    🎆 Matsuri
+                </a>
+                <a href="hanabi" class="flex items-center gap-1.5 px-4 py-2 rounded-full text-[11px] font-black uppercase tracking-wider text-indigo-500 hover:bg-indigo-500/10 transition-all no-underline">
+                    🎇 Hanabi
+                </a>
+            </div>
+
+            <div class="flex items-center gap-2">
+                <div class="flex md:hidden items-center gap-1.5">
+                    <a href="sakura" class="w-9 h-9 flex items-center justify-center rounded-full bg-white/30 dark:bg-white/5 border border-white/40 dark:border-white/10 text-base no-underline hover:bg-rose-500/10 transition-all" title="Sakura">🌸</a>
+                    <a href="matsuri" class="w-9 h-9 flex items-center justify-center rounded-full bg-sky-500/15 border border-sky-200 text-base no-underline" title="Matsuri">🎆</a>
+                    <a href="hanabi" class="w-9 h-9 flex items-center justify-center rounded-full bg-white/30 dark:bg-white/5 border border-white/40 dark:border-white/10 text-base no-underline hover:bg-indigo-500/10 transition-all" title="Hanabi">🎇</a>
+                </div>
+                <button id="themeToggle" class="size-11 rounded-full border border-slate-200 dark:border-white/10 bg-white/30 dark:bg-white/5 hover:bg-white dark:hover:bg-white/10 flex items-center justify-center transition-all duration-300 shadow-sm active:scale-90">
+                    <i id="themeIcon" class="fa-solid fa-moon text-indigo-600 dark:text-yellow-300 text-lg"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <main class="relative z-10 pt-52 pb-24 px-6 text-center max-w-4xl mx-auto flex flex-col items-center">
+        <div class="inline-block glass-effect px-5 py-2 rounded-full mb-8 shadow-sm border border-sky-200/40">
+            <span class="text-[10px] font-black tracking-[0.3em] uppercase text-sky-500">🎆 2026 Summer Edition</span>
+        </div>
+        <h1 class="text-4xl md:text-6xl lg:text-7xl font-[900] leading-[1.15] mb-8 text-black dark:text-white tracking-tight">
+            2026 마쓰리<br/>
+            <span class="text-transparent bg-clip-text" style="background-image: linear-gradient(to right, #0ea5e9, #14b8a6, #10b981)">완벽 가이드</span>
+        </h1>
+        <p class="text-lg md:text-xl text-black dark:text-slate-300 max-w-2xl mx-auto mb-12 leading-relaxed font-extrabold opacity-90">
+            기온 마쓰리의 웅장함, 텐진 마쓰리의 열기, 하카타의 역동성.<br/>일본 3대 마쓰리부터 지역 축제 캘린더까지 완벽 정리.
+        </p>
+        <a href="#festivals" class="inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-black shadow-lg hover:shadow-xl active:scale-95 transition-all no-underline" style="background-color:#0ea5e9">
+            🎆 마쓰리 보기
+            <span class="material-symbols-outlined text-sm">trending_flat</span>
+        </a>
+    </main>
+
+    <!-- 마쓰리 가이드 (RegionFilter + MatsuriCards) -->
+    <section id="festivals" class="relative z-10 px-6 pb-16 max-w-7xl mx-auto">
+        <div class="flex items-end justify-between mb-8">
+            <div>
+                <p class="text-[10px] font-black text-sky-500 uppercase tracking-[0.25em] mb-2">Festival Guide</p>
+                <h2 class="text-3xl md:text-4xl font-black text-slate-800 dark:text-white">
+                    지역별 <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-500 to-teal-400">마쓰리 가이드</span>
+                </h2>
+            </div>
+        </div>
+        <!-- RegionFilter — rendered by components.js -->
+        <div id="matsuri-region-filter" class="mb-8"></div>
+        <!-- MatsuriCards — rendered by components.js -->
+        <div id="matsuri-cards" class="space-y-5"></div>
+    </section>
+
+    <!-- 마쓰리 캘린더 -->
+    <section class="relative z-10 px-6 pb-16 max-w-7xl mx-auto">
+        <div class="mb-10">
+            <p class="text-[10px] font-black text-sky-500 uppercase tracking-[0.25em] mb-2">Festival Calendar</p>
+            <h2 class="text-3xl md:text-4xl font-black text-slate-800 dark:text-white">
+                월별 <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-500 to-teal-400">마쓰리 캘린더</span>
+            </h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+            <div class="bg-white dark:bg-white/5 rounded-[2rem] p-6 border border-sky-100 dark:border-white/10 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                <p class="text-[9px] font-black text-sky-500 uppercase tracking-widest mb-3">May · 5월</p>
+                <ul class="space-y-3">
+                    <li class="flex items-start gap-3">
+                        <span class="text-sky-400 font-black text-xs mt-0.5 shrink-0">5/3</span>
+                        <div>
+                            <p class="font-black text-sm text-slate-800 dark:text-white">하카타 돈타쿠</p>
+                            <p class="text-[10px] text-slate-400">후쿠오카 최대 시민 축제</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="text-sky-400 font-black text-xs mt-0.5 shrink-0">5/15</span>
+                        <div>
+                            <p class="font-black text-sm text-slate-800 dark:text-white">아오이 마쓰리</p>
+                            <p class="text-[10px] text-slate-400">교토 헤이안 귀족 행렬</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="bg-white dark:bg-white/5 rounded-[2rem] p-6 border border-sky-100 dark:border-white/10 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                <p class="text-[9px] font-black text-sky-500 uppercase tracking-widest mb-3">June · 6월</p>
+                <ul class="space-y-3">
+                    <li class="flex items-start gap-3">
+                        <span class="text-sky-400 font-black text-xs mt-0.5 shrink-0">6/초</span>
+                        <div>
+                            <p class="font-black text-sm text-slate-800 dark:text-white">아쓰타 마쓰리</p>
+                            <p class="text-[10px] text-slate-400">나고야 아쓰타 신궁 여름</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="text-sky-400 font-black text-xs mt-0.5 shrink-0">6/14</span>
+                        <div>
+                            <p class="font-black text-sm text-slate-800 dark:text-white">치카타 마쓰리</p>
+                            <p class="text-[10px] text-slate-400">오사카 나니와의 수상 축제</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="bg-white dark:bg-white/5 rounded-[2rem] p-6 border border-sky-100 dark:border-white/10 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 ring-2 ring-sky-400">
+                <p class="text-[9px] font-black text-sky-500 uppercase tracking-widest mb-3">July · 7월 🔥 최성수</p>
+                <ul class="space-y-3">
+                    <li class="flex items-start gap-3">
+                        <span class="text-sky-400 font-black text-xs mt-0.5 shrink-0">7/1~15</span>
+                        <div>
+                            <p class="font-black text-sm text-slate-800 dark:text-white">하카타 야마가사</p>
+                            <p class="text-[10px] text-slate-400">규슈 최대 여름 마쓰리</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="text-sky-400 font-black text-xs mt-0.5 shrink-0">7/~31</span>
+                        <div>
+                            <p class="font-black text-sm text-slate-800 dark:text-white">기온 마쓰리</p>
+                            <p class="text-[10px] text-slate-400">교토 야마보코 행진</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="bg-white dark:bg-white/5 rounded-[2rem] p-6 border border-sky-100 dark:border-white/10 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                <p class="text-[9px] font-black text-sky-500 uppercase tracking-widest mb-3">August · 8월</p>
+                <ul class="space-y-3">
+                    <li class="flex items-start gap-3">
+                        <span class="text-sky-400 font-black text-xs mt-0.5 shrink-0">8/초</span>
+                        <div>
+                            <p class="font-black text-sm text-slate-800 dark:text-white">삿포로 맥주 가든</p>
+                            <p class="text-[10px] text-slate-400">홋카이도 최대 여름 축제</p>
+                        </div>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="text-sky-400 font-black text-xs mt-0.5 shrink-0">8/오봉</span>
+                        <div>
+                            <p class="font-black text-sm text-slate-800 dark:text-white">봉오도리</p>
+                            <p class="text-[10px] text-slate-400">전국 야외 오본 축제</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 마쓰리 준비물 -->
+    <section class="relative z-10 px-6 pb-24 max-w-7xl mx-auto">
+        <div class="mb-10">
+            <p class="text-[10px] font-black text-sky-500 uppercase tracking-[0.25em] mb-2">Festival Essentials</p>
+            <h2 class="text-3xl md:text-4xl font-black text-slate-800 dark:text-white">
+                마쓰리 <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-500 to-teal-400">필수 가이드</span>
+            </h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+            <div class="bg-white dark:bg-white/5 rounded-[2.5rem] p-7 border border-sky-100 dark:border-white/10 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                <span class="text-4xl block mb-4">👘</span>
+                <p class="text-[9px] font-black text-sky-500 uppercase tracking-widest mb-2">패션</p>
+                <h3 class="font-black text-slate-800 dark:text-white text-lg mb-3">유카타 렌탈</h3>
+                <p class="text-sm text-slate-500 dark:text-slate-400 font-bold leading-relaxed">교토·도쿄 기온 등 관광지 근처에서 1,500~3,000엔으로 렌탈 가능. 축제 전날 예약 필수.</p>
+            </div>
+            <div class="bg-white dark:bg-white/5 rounded-[2.5rem] p-7 border border-sky-100 dark:border-white/10 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                <span class="text-4xl block mb-4">🍺</span>
+                <p class="text-[9px] font-black text-sky-500 uppercase tracking-widest mb-2">먹거리</p>
+                <h3 class="font-black text-slate-800 dark:text-white text-lg mb-3">야타이 공략법</h3>
+                <p class="text-sm text-slate-500 dark:text-slate-400 font-bold leading-relaxed">타코야키, 야키소바, 카키고오리(빙수), 링고아메(사과사탕). 현금만 받는 곳이 많으므로 지폐 준비.</p>
+            </div>
+            <div class="bg-white dark:bg-white/5 rounded-[2.5rem] p-7 border border-sky-100 dark:border-white/10 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                <span class="text-4xl block mb-4">🧊</span>
+                <p class="text-[9px] font-black text-sky-500 uppercase tracking-widest mb-2">더위 대비</p>
+                <h3 class="font-black text-slate-800 dark:text-white text-lg mb-3">혹서기 생존 팁</h3>
+                <p class="text-sm text-slate-500 dark:text-slate-400 font-bold leading-relaxed">7~8월 실외 체감 35~40℃. 부채·얼음물·태양광 차단 선크림 필수. 편의점 냉각 시트도 꼭 챙기세요.</p>
+            </div>
+            <div class="bg-white dark:bg-white/5 rounded-[2.5rem] p-7 border border-sky-100 dark:border-white/10 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                <span class="text-4xl block mb-4">📸</span>
+                <p class="text-[9px] font-black text-sky-500 uppercase tracking-widest mb-2">포토 타이밍</p>
+                <h3 class="font-black text-slate-800 dark:text-white text-lg mb-3">황금 촬영 시간</h3>
+                <p class="text-sm text-slate-500 dark:text-slate-400 font-bold leading-relaxed">행렬 시작 직전 1~2시간이 골든타임. 야간 라이트업은 주요 신사 경내. 망원 렌즈로 야타이 활기 포착.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative z-10 py-16 px-6 text-center border-t border-slate-200 dark:border-white/10 glass-effect">
+        <p class="text-[10px] font-medium tracking-widest text-slate-400/60 dark:text-slate-500/50 mb-6 uppercase">
+            &copy; 2026 Japan City Guide. All rights reserved.
+        </p>
+        <div class="flex gap-4 justify-center text-sm text-gray-400">
+            <a href="/" class="hover:text-sky-500 transition-colors no-underline">Home</a>
+            <a href="/about.html" class="hover:text-gray-600 no-underline">About</a>
+            <a href="/contact.html" class="hover:text-gray-600 no-underline">Contact</a>
+            <a href="/privacy.html" class="hover:text-gray-600 no-underline">Privacy</a>
+        </div>
+    </footer>
+
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const html = document.documentElement;
+        const header = document.getElementById('mainHeader');
+
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('scrolled', window.scrollY > 20);
+        });
+
+        function applyTheme(theme) {
+            if (theme === 'dark') {
+                html.classList.add('dark');
+                themeIcon.className = 'fa-solid fa-sun text-yellow-300 text-lg';
+            } else {
+                html.classList.remove('dark');
+                themeIcon.className = 'fa-solid fa-moon text-indigo-600 text-lg';
+            }
+        }
+
+        themeToggle.onclick = () => {
+            const newTheme = html.classList.contains('dark') ? 'light' : 'dark';
+            applyTheme(newTheme);
+            localStorage.setItem('theme', newTheme);
+        };
+
+        applyTheme(localStorage.getItem('theme') || 'light');
+
+        // ── 지역별 색상 & 대표 이미지 ──
+        const REGION_META = {
+            tokyo:    { color: 'teal',   image: 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800&q=80' },
+            osaka:    { color: 'rose',   image: 'https://images.unsplash.com/photo-1589452271712-64b8a66c7b71?w=800&q=80' },
+            kyoto:    { color: 'sky',    image: 'https://images.unsplash.com/photo-1519984388953-d2406bc725e1?w=800&q=80' },
+            hokkaido: { color: 'violet', image: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=800&q=80' },
+            kyushu:   { color: 'orange', image: 'https://images.unsplash.com/photo-1679230708086-2b10acf31074?q=80&w=800&auto=format&fit=crop' },
+        };
+
+        async function initFestivals() {
+            const grid = document.getElementById('matsuri-cards');
+            if (!grid) return;
+
+            let json;
+            try {
+                const res = await fetch('src/data/matsuriData.json');
+                if (!res.ok) throw new Error(res.status);
+                json = await res.json();
+            } catch (e) {
+                console.error('matsuriData.json 로드 실패:', e);
+                grid.innerHTML = '<p class="text-slate-400 text-sm font-bold py-8 text-center">데이터를 불러올 수 없습니다.</p>';
+                return;
+            }
+
+            let rank = 0;
+            const regionFilters = [];
+
+            for (const region of json.regions) {
+                if (!region.matsuri?.length) continue;
+
+                const meta = REGION_META[region.id] || { color: 'sky', image: '' };
+                regionFilters.push({ id: region.id, label: region.name, emoji: region.emoji, color: meta.color });
+
+                for (const item of region.matsuri) {
+                    rank++;
+                    const wrapper = document.createElement('div');
+                    renderMatsuriCard(wrapper, {
+                        region:      region.id,
+                        regionLabel: region.name,
+                        regionEmoji: region.emoji,
+                        color:       meta.color,
+                        rank:        String(rank).padStart(2, '0'),
+                        subtitle:    item.unescoHeritage ? '유네스코 무형문화유산' : (item.scale || ''),
+                        name:        item.name,
+                        nameJP:      item.nameJa,
+                        date:        item.date.label,
+                        highlight:   item.highlights[0] || '',
+                        desc:        item.highlights.join(' '),
+                        tags:        item.tags,
+                        city:        item.venue.name,
+                        image:       meta.image,
+                        link:        region.id,
+                    });
+                    grid.appendChild(wrapper);
+                }
+            }
+
+            new RegionFilter({
+                containerId: 'matsuri-region-filter',
+                regions: regionFilters,
+                cardSelector: '#matsuri-cards .matsuri-card',
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', initFestivals);
+
+        function createParticles() {
+            const container = document.getElementById('particle-container');
+            if (!container) return;
+            const icons = ['🎆', '✨', '🎇', '✨'];
+            const count = window.innerWidth > 768 ? 30 : 15;
+            for (let i = 0; i < count; i++) {
+                const p = document.createElement('div');
+                p.innerText = icons[Math.floor(Math.random() * icons.length)];
+                p.style.cssText = `
+                    position:fixed; top:${100 + Math.random()*20}%;
+                    left:${Math.random()*100}vw;
+                    z-index:5; pointer-events:none; user-select:none;
+                    font-size:${Math.random()*12+8}px;
+                    opacity:0;
+                    animation:floatUp ${Math.random()*6+9}s linear ${Math.random()*-12}s infinite;
+                    filter:blur(${Math.random()*0.5}px);
+                `;
+                container.appendChild(p);
+            }
+        }
+        window.onload = createParticles;
+    </script>
+</body>
+</html>

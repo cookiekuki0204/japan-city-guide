@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="ko" class="light scroll-smooth">
+<head>
+    <!-- Google Adsense (ONLY ONCE) -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6682864237624164" crossorigin="anonymous"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KZJWPBP1RY"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-KZJWPBP1RY');
+    </script>
+
+    <!-- Verification -->
+    <meta name="impact-site-verification" content="da570fb4-fd59-4dab-8c71-9ec48a894bc2">
+    <meta name="google-site-verification" content="311s4klorBInl8fo1Dllf1GAdZAtMaM2Aemj4R_Ge-w">
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌸</text></svg>">
+    <title>Japan City Guide | 2026 일본 여행 마스터 가이드 🌸</title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Material Symbols (for trending_flat etc.) -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] },
+          colors: {
+            sakura: {
+              light: '#FFD1DC',
+              DEFAULT: '#FFB7C5',
+              dark: '#ea2a33',
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; -webkit-font-smoothing: antialiased; }
+        
+        /* 도쿄 사이트 배경색과 100% 일치 */
+        .app-gradient { 
+            background: linear-gradient(180deg, #e0f2fe 0%, #ffffff 50%, #fff1f2 100%); 
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+        .dark .app-gradient { 
+            background: linear-gradient(180deg, #1a1111 0%, #120a0a 100%); 
+        }
+
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        /* 호버 시 이미지 곡률 유지 버그 수정 */
+        .city-card {
+            mask-image: -webkit-radial-gradient(white, black);
+            -webkit-mask-image: -webkit-radial-gradient(white, black);
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+
+        .card-zoom:hover img { transform: scale(1.05); }
+        
+        /* 📍 꽃잎(Petal) 스타일 및 애니메이션 */
+        .petal { 
+            position: fixed; 
+            top: -10%; 
+            background-color: #ffdae9; 
+            border-radius: 150% 0 150% 0; 
+            opacity: 0.6; 
+            pointer-events: none; 
+            z-index: 5; 
+            animation: fall linear infinite; 
+            filter: blur(0.5px); 
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        @keyframes fall {
+            0% { top: -10%; transform: translateX(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.7; }
+            90% { opacity: 0.7; }
+            100% { top: 110%; transform: translateX(150px) rotate(450deg); opacity: 0; }
+        }
+        .animate-petal-fall { animation: fall 10s linear infinite; }
+
+        /* 스크롤 유도 화살표 애니메이션 */
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+        .scroll-hint { animation: bounce 2s infinite; }
+
+        /* 스크롤 시 헤더 변화를 위한 스타일 */
+        #mainHeader.scrolled {
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(224, 242, 254, 0.5);
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
+        }
+        .dark #mainHeader.scrolled {
+            background-color: rgba(26, 17, 17, 0.8);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body class="app-gradient text-slate-950 dark:text-white transition-colors duration-500">
+
+    <!-- Petal Background (도쿄 페이지 방식 로직 적용) -->
+    <div id="petal-container" class="fixed inset-0 pointer-events-none overflow-hidden z-0"></div>
+
+    <!-- Navigation -->
+    <header id="mainHeader" class="fixed top-0 left-0 right-0 z-50 px-6 transition-all duration-500">
+        <nav class="mx-auto max-w-6xl py-4 flex justify-between items-center transition-all duration-500">
+            <!-- Logo -->
+            <a href="/" class="flex items-center gap-3 group cursor-pointer no-underline shrink-0">
+                <span class="text-2xl font-black tracking-tighter text-rose-400 uppercase">
+                    Japan City <span class="text-rose-500">Guide</span>
+                </span>
+                <div class="w-9 h-9 flex items-center justify-center rounded-full bg-white/20 dark:bg-white/10 group-hover:rotate-12 transition-transform duration-500 shadow-sm border border-white/30">
+                    <span id="logo-icon" class="text-xl">🌸</span>
+                </div>
+            </a>
+
+            <!-- Center Nav Links (desktop) -->
+            <div class="hidden md:flex items-center gap-1 bg-white/40 dark:bg-white/5 backdrop-blur-md rounded-full px-2 py-1.5 border border-white/50 dark:border-white/10 shadow-sm">
+                <a href="sakura" class="flex items-center gap-1.5 px-4 py-2 rounded-full text-[11px] font-black uppercase tracking-wider text-rose-500 hover:bg-rose-500/10 dark:hover:bg-rose-500/10 transition-all no-underline">
+                    🌸 Sakura
+                </a>
+                <a href="matsuri" class="flex items-center gap-1.5 px-4 py-2 rounded-full text-[11px] font-black uppercase tracking-wider text-sky-500 hover:bg-sky-500/10 dark:hover:bg-sky-500/10 transition-all no-underline">
+                    🎆 Matsuri
+                </a>
+                <a href="hanabi" class="flex items-center gap-1.5 px-4 py-2 rounded-full text-[11px] font-black uppercase tracking-wider text-indigo-500 hover:bg-indigo-500/10 dark:hover:bg-indigo-500/10 transition-all no-underline">
+                    🎇 Hanabi
+                </a>
+            </div>
+
+            <!-- Right: mobile icon nav + theme toggle -->
+            <div class="flex items-center gap-2">
+                <!-- Mobile icon-only nav -->
+                <div class="flex md:hidden items-center gap-1.5">
+                    <a href="sakura" class="w-9 h-9 flex items-center justify-center rounded-full bg-white/30 dark:bg-white/5 border border-white/40 dark:border-white/10 text-base no-underline hover:bg-rose-500/10 transition-all" title="Sakura">🌸</a>
+                    <a href="matsuri" class="w-9 h-9 flex items-center justify-center rounded-full bg-white/30 dark:bg-white/5 border border-white/40 dark:border-white/10 text-base no-underline hover:bg-sky-500/10 transition-all" title="Matsuri">🎆</a>
+                    <a href="hanabi" class="w-9 h-9 flex items-center justify-center rounded-full bg-white/30 dark:bg-white/5 border border-white/40 dark:border-white/10 text-base no-underline hover:bg-indigo-500/10 transition-all" title="Hanabi">🎇</a>
+                </div>
+                <button id="themeToggle" class="size-11 rounded-full border border-slate-200 dark:border-white/10 bg-white/30 dark:bg-white/5 hover:bg-white dark:hover:bg-white/10 flex items-center justify-center transition-all duration-300 shadow-sm active:scale-90">
+                    <i id="themeIcon" class="fa-solid fa-moon text-indigo-600 dark:text-yellow-300 text-lg"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section (계절 자동 감지) -->
+    <main class="relative z-10 pt-56 pb-32 px-6 text-center max-w-4xl mx-auto flex flex-col items-center">
+        <div class="inline-block glass-effect px-5 py-2 rounded-full mb-8 shadow-sm border border-sakura/30">
+            <span id="hero-badge" class="text-[10px] font-black tracking-[0.3em] uppercase"></span>
+        </div>
+        
+        <h1 class="text-4xl md:text-6xl lg:text-7xl font-[900] leading-[1.15] mb-8 text-black dark:text-white tracking-tight">
+            어디로 떠나시나요?<br/>
+            <span id="hero-title-accent" class="text-transparent bg-clip-text"></span>
+        </h1>
+        
+        <p id="hero-desc" class="text-lg md:text-xl text-black dark:text-slate-300 max-w-2xl mx-auto mb-16 leading-relaxed font-extrabold opacity-90"></p>
+
+        <section class="px-6 mt-6">
+            <a id="hero-cta" href="#explore"
+                class="inline-flex items-center gap-2 px-6 py-3 rounded-full text-white font-black shadow-lg hover:shadow-xl active:scale-95 transition-all mt-4 mb-6 no-underline">
+                <span id="hero-cta-text"></span>
+                <span class="material-symbols-outlined text-white text-sm">trending_flat</span>
+            </a>
+        </section>
+
+        <a href="#explore" class="mt-8 scroll-hint flex flex-col items-center gap-2 text-slate-400 hover:text-rose-400 transition-colors no-underline">
+            <span class="text-[9px] font-black uppercase tracking-[0.2em]">Explore Cities</span>
+            <i class="fa-solid fa-chevron-down text-xl"></i>
+        </a>
+    </main>
+
+    <script>
+        // ── 계절 감지 ──
+        function getCurrentSeason() {
+            const m = new Date().getMonth() + 1;
+            if (m >= 3 && m <= 4) return 'spring';
+            if (m >= 5 && m <= 8) return 'summer';
+            if (m >= 9 && m <= 11) return 'autumn';
+            return 'winter';
+        }
+
+        // ── 계절별 데이터 ──
+        const seasonData = {
+            spring: {
+                icon: '🌸',
+                badge: '🌸 2026 Sakura Edition',
+                badgeColor: '#e11d48',
+                gradient: 'linear-gradient(to right, #1d4ed8, #dc2626, #b91c1c)',
+                accentText: '2026 벚꽃 마스터 가이드',
+                desc: '가장 아름다운 일본의 봄을 만나보세요.<br>도시별 실시간 개화 정보부터 숨겨진 명소까지<br>에디터가 엄선한 전문 가이드가 안내합니다.',
+                ctaText: '🌸 벚꽃 명소 보기',
+                ctaColor: '#ea2a33',
+                bgLight: 'linear-gradient(180deg, #e0f2fe 0%, #ffffff 50%, #fff1f2 100%)',
+                bgDark:  'linear-gradient(180deg, #1a1111 0%, #120a0a 100%)',
+                particles: ['🌸', '🌸', '🌸', '🍃'],
+                cityBtnText: '🌸 벚꽃 가이드 보기',
+                cities: {
+                    tokyo:   '도시의 빌딩 사이로 흩날리는 낭만적인 꽃비',
+                    osaka:   '활기 넘치는 거리와 오사카성의 웅장한 꽃놀이',
+                    kyoto:   '천년의 세월이 머문 사찰의 고즈넉한 봄날',
+                    fukuoka: '가장 먼저 찾아오는 따스한 남쪽의 봄 기운',
+                    sapporo: '설국에서 즐기는 마지막 벚꽃과 시원한 미식',
+                    nagoya:  '역사와 지브리의 감성이 공존하는 도시의 봄',
+                }
+            },
+            summer: {
+                icon: '🎇',
+                badge: '🎆 2026 Summer Edition',
+                badgeColor: '#0ea5e9',
+                gradient: 'linear-gradient(to right, #0ea5e9, #14b8a6, #10b981)',
+                accentText: '일본 여름 완벽 가이드',
+                desc: '마쓰리의 열기, 불꽃놀이의 낭만, 유카타의 감성.<br>일본 여름을 가장 멋지게 즐기는 방법을<br>에디터가 직접 안내합니다.',
+                ctaText: '🎆 여름 축제 보기',
+                ctaColor: '#0ea5e9',
+                bgLight: 'linear-gradient(180deg, #ecfeff 0%, #ffffff 50%, #f0fdf4 100%)',
+                bgDark:  'linear-gradient(180deg, #071a1a 0%, #050f0a 100%)',
+                particles: ['✨', '🎇', '✨', '🎆'],
+                cityBtnText: '🎆 여름 가이드 보기',
+                cities: {
+                    tokyo:   '스미다강 불꽃축제, 도쿄의 여름밤을 수놓는 장관',
+                    osaka:   '텐진마쓰리의 열기와 도톤보리의 밤거리',
+                    kyoto:   '기온마쓰리의 웅장함, 천년 고도의 여름 축제',
+                    fukuoka: '하카타 기온야마가사, 규슈 최대의 여름 축제',
+                    sapporo: '시원한 홋카이도에서 즐기는 여름 맥주 가든',
+                    nagoya:  '아쓰타 마쓰리와 나고야성의 시원한 여름밤',
+                }
+            },
+            autumn: {
+                icon: '🍁',
+                badge: '🍂 2026 Koyo Edition',
+                badgeColor: '#f97316',
+                gradient: 'linear-gradient(to right, #f97316, #f59e0b, #eab308)',
+                accentText: '일본 단풍 마스터 가이드',
+                desc: '교토 사찰의 붉은 단풍, 닛코의 황금빛 숲.<br>절정 타이밍부터 숨겨진 명소까지<br>에디터가 엄선한 가을 일본을 만나보세요.',
+                ctaText: '🍂 단풍 명소 보기',
+                ctaColor: '#f97316',
+                bgLight: 'linear-gradient(180deg, #fff7ed 0%, #ffffff 50%, #fef3c7 100%)',
+                bgDark:  'linear-gradient(180deg, #1a1005 0%, #120a00 100%)',
+                particles: ['🍁', '🍂', '🍁', '🍃'],
+                cityBtnText: '🍂 단풍 가이드 보기',
+                cities: {
+                    tokyo:   '신주쿠교엔과 이노카시라 공원의 황금빛 단풍',
+                    osaka:   '만박기념공원과 미노산의 붉고 노란 단풍 절경',
+                    kyoto:   '도후쿠지, 기요미즈데라의 압도적인 가을 빛깔',
+                    fukuoka: '오호리 공원과 히라오다이의 고즈넉한 단풍길',
+                    sapporo: '조잔케이와 홋카이도 대학의 황금빛 은행나무',
+                    nagoya:  '고란케이의 단풍 명소, 나고야 최고의 가을 코스',
+                }
+            },
+            winter: {
+                icon: '❄️',
+                badge: '❄️ 2026 Winter Edition',
+                badgeColor: '#6366f1',
+                gradient: 'linear-gradient(to right, #6366f1, #3b82f6, #0ea5e9)',
+                accentText: '일본 겨울 여행 가이드',
+                desc: '삿포로 눈축제의 장관, 시라카와고의 설경,<br>그리고 온천욕의 따스함까지.<br>겨울 일본의 진수를 경험하세요.',
+                ctaText: '❄️ 겨울 명소 보기',
+                ctaColor: '#6366f1',
+                bgLight: 'linear-gradient(180deg, #eff6ff 0%, #ffffff 50%, #eef2ff 100%)',
+                bgDark:  'linear-gradient(180deg, #050a1a 0%, #03060f 100%)',
+                particles: ['❄️', '❄️', '✨', '❄️'],
+                cityBtnText: '❄️ 겨울 가이드 보기',
+                cities: {
+                    tokyo:   '일루미네이션으로 빛나는 도쿄의 로맨틱한 겨울밤',
+                    osaka:   '나카노시마 빛의 르네상스, 오사카 겨울 일루미네이션',
+                    kyoto:   '눈 쌓인 금각사와 기온의 고즈넉한 겨울 풍경',
+                    fukuoka: '유후인 온천과 규슈의 따뜻한 겨울 미식 여행',
+                    sapporo: '삿포로 눈축제, 설국 홋카이도의 겨울 왕국',
+                    nagoya:  '나고야성 겨울 야경과 따뜻한 미소 문화 탐방',
+                }
+            },
+        };
+
+        // ── 히어로 + 배경 + 로고 한번에 적용 ──
+        function applySeasonUI() {
+            const s = seasonData[getCurrentSeason()];
+            const isDark = document.documentElement.classList.contains('dark');
+
+            // 배경
+            const appEl = document.querySelector('.app-gradient');
+            if (appEl) appEl.style.background = isDark ? s.bgDark : s.bgLight;
+
+            // 로고 아이콘
+            const logoIcon = document.getElementById('logo-icon');
+            if (logoIcon) logoIcon.textContent = s.icon;
+
+            // 히어로 배지
+            const badge = document.getElementById('hero-badge');
+            if (badge) { badge.textContent = s.badge; badge.style.color = s.badgeColor; }
+
+            // 히어로 타이틀 그라디언트
+            const accent = document.getElementById('hero-title-accent');
+            if (accent) { accent.textContent = s.accentText; accent.style.backgroundImage = s.gradient; }
+
+            // 히어로 설명
+            const desc = document.getElementById('hero-desc');
+            if (desc) desc.innerHTML = s.desc;
+
+            // CTA 버튼
+            const cta = document.getElementById('hero-cta');
+            if (cta) cta.style.backgroundColor = s.ctaColor;
+            const ctaText = document.getElementById('hero-cta-text');
+            if (ctaText) ctaText.textContent = s.ctaText;
+
+            // 도시 카드 설명 + 버튼
+            Object.entries(s.cities).forEach(([city, text]) => {
+                const el = document.getElementById(`city-desc-${city}`);
+                if (el) el.textContent = text;
+            });
+            document.querySelectorAll('.city-guide-btn').forEach(el => {
+                el.textContent = s.cityBtnText;
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', applySeasonUI);
+    </script>
+      
+    <!-- City Selection Grid -->
+    <section class="relative z-10 px-6 pb-40 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10" id="explore">
+        
+        <!-- Tokyo Card -->
+        <a href="tokyo" class="city-card group relative block h-[500px] overflow-hidden rounded-[2.5rem] shadow-2xl transition-all duration-500 hover:-translate-y-3 card-zoom border border-white/20 no-underline">
+            <img src="https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?q=80&w=1436&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Tokyo" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+            <div class="absolute top-8 left-8">
+                <span class="glass-effect px-4 py-1.5 rounded-full text-[10px] font-black text-rose-600 dark:text-rose-400 uppercase tracking-widest shadow-sm">Kanto Region</span>
+            </div>
+            <div class="absolute bottom-12 left-10 right-10 text-white text-left">
+                <h3 class="text-4xl font-black mb-2 uppercase">TOKYO</h3>
+                <p id="city-desc-tokyo" class="text-sm opacity-80 mb-6 font-bold leading-relaxed"></p>
+                <div class="flex items-center gap-3 text-white font-black text-xs bg-sky-500 px-6 py-3 rounded-full w-fit shadow-lg transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 border border-white/20">
+                    <span class="city-guide-btn">가이드 보기</span>
+                    <i class="fa-solid fa-arrow-right-long"></i>
+                </div>
+            </div>
+        </a>
+
+        <!-- Osaka Card -->
+        <a href="osaka" class="city-card group relative block h-[500px] overflow-hidden rounded-[2.5rem] shadow-2xl transition-all duration-500 hover:-translate-y-3 card-zoom border border-white/20 no-underline">
+            <img src="https://images.unsplash.com/photo-1733693526658-a15f4c5ea7bb?q=80&w=1285&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Osaka" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+            <div class="absolute top-8 left-8">
+                <span class="glass-effect px-4 py-1.5 rounded-full text-[10px] font-black text-rose-600 dark:text-rose-400 uppercase tracking-widest shadow-sm">Kansai Region</span>
+            </div>
+            <div class="absolute bottom-12 left-10 right-10 text-white text-left">
+                <h3 class="text-4xl font-black mb-2 uppercase">OSAKA</h3>
+                <p id="city-desc-osaka" class="text-sm opacity-80 mb-6 font-bold leading-relaxed"></p>
+                <div class="flex items-center gap-3 text-white font-black text-xs bg-rose-500 px-6 py-3 rounded-full w-fit shadow-lg transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 border border-white/20">
+                    <span class="city-guide-btn">가이드 보기</span>
+                    <i class="fa-solid fa-arrow-right-long"></i>
+                </div>
+            </div>
+        </a>
+
+        <!-- Kyoto Card -->
+        <a href="kyoto" class="city-card group relative block h-[500px] overflow-hidden rounded-[2.5rem] shadow-2xl transition-all duration-500 hover:-translate-y-3 card-zoom border border-white/20 no-underline">
+            <img src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=800&q=80" alt="Kyoto" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+            <div class="absolute top-8 left-8">
+                <span class="glass-effect px-4 py-1.5 rounded-full text-[10px] font-black text-rose-600 dark:text-rose-400 uppercase tracking-widest shadow-sm">Kansai Region</span>
+            </div>
+            <div class="absolute bottom-12 left-10 right-10 text-white text-left">
+                <h3 class="text-4xl font-black mb-2 uppercase">KYOTO</h3>
+                <p id="city-desc-kyoto" class="text-sm opacity-80 mb-6 font-bold leading-relaxed"></p>
+                <div class="flex items-center gap-3 text-white font-black text-xs bg-sky-500 px-6 py-3 rounded-full w-fit shadow-lg transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 border border-white/20">
+                    <span class="city-guide-btn">가이드 보기</span>
+                    <i class="fa-solid fa-arrow-right-long"></i>
+                </div>
+            </div>
+        </a>
+
+        <!-- Fukuoka Card -->
+        <a href="fukuoka" class="city-card group relative block h-[500px] overflow-hidden rounded-[2.5rem] shadow-2xl transition-all duration-500 hover:-translate-y-3 card-zoom border border-white/20 no-underline">
+            <img src="https://images.unsplash.com/photo-1679230708086-2b10acf31074?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Fukuoka" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+            <div class="absolute top-8 left-8">
+                <span class="glass-effect px-4 py-1.5 rounded-full text-[10px] font-black text-rose-600 dark:text-rose-400 uppercase tracking-widest shadow-sm">Kyushu Region</span>
+            </div>
+            <div class="absolute bottom-12 left-10 right-10 text-white text-left">
+                <h3 class="text-4xl font-black mb-2 uppercase">FUKUOKA</h3>
+                <p id="city-desc-fukuoka" class="text-sm opacity-80 mb-6 font-bold leading-relaxed"></p>
+                <div class="flex items-center gap-3 text-white font-black text-xs bg-rose-500 px-6 py-3 rounded-full w-fit shadow-lg transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 border border-white/20">
+                    <span class="city-guide-btn">가이드 보기</span>
+                    <i class="fa-solid fa-arrow-right-long"></i>
+                </div>
+            </div>
+        </a>
+
+        <!-- Sapporo Card -->
+        <a href="sapporo" class="city-card group relative block h-[500px] overflow-hidden rounded-[2.5rem] shadow-2xl transition-all duration-500 hover:-translate-y-3 card-zoom border border-white/20 no-underline">
+            <img src="https://images.unsplash.com/photo-1693975264425-e6d639ea27c9?q=80&w=1335&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Sapporo" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+            <div class="absolute top-8 left-8">
+                <span class="glass-effect px-4 py-1.5 rounded-full text-[10px] font-black text-rose-600 dark:text-rose-400 uppercase tracking-widest shadow-sm">Hokkaido Region</span>
+            </div>
+            <div class="absolute bottom-12 left-10 right-10 text-white text-left">
+                <h3 class="text-4xl font-black mb-2 uppercase">SAPPORO</h3>
+                <p id="city-desc-sapporo" class="text-sm opacity-80 mb-6 font-bold leading-relaxed"></p>
+                <div class="flex items-center gap-3 text-white font-black text-xs bg-sky-500 px-6 py-3 rounded-full w-fit shadow-lg transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 border border-white/20">
+                    <span class="city-guide-btn">가이드 보기</span>
+                    <i class="fa-solid fa-arrow-right-long"></i>
+                </div>
+            </div>
+        </a>
+
+        <!-- Nagoya Card -->
+        <a href="nagoya" class="city-card group relative block h-[500px] overflow-hidden rounded-[2.5rem] shadow-2xl transition-all duration-500 hover:-translate-y-3 card-zoom border border-white/20 no-underline">
+            <img src="https://images.unsplash.com/photo-1719805053349-e8974bb0c60d?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Nagoya" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+            <div class="absolute top-8 left-8">
+                <span class="glass-effect px-4 py-1.5 rounded-full text-[10px] font-black text-rose-600 dark:text-rose-400 uppercase tracking-widest shadow-sm">Chubu Region</span>
+            </div>
+            <div class="absolute bottom-12 left-10 right-10 text-white text-left">
+                <h3 class="text-4xl font-black mb-2 uppercase">NAGOYA</h3>
+                <p id="city-desc-nagoya" class="text-sm opacity-80 mb-6 font-bold leading-relaxed"></p>
+                <div class="flex items-center gap-3 text-white font-black text-xs bg-rose-500 px-6 py-3 rounded-full w-fit shadow-lg transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 border border-white/20">
+                    <span class="city-guide-btn">가이드 보기</span>
+                    <i class="fa-solid fa-arrow-right-long"></i>
+                </div>
+            </div>
+        </a> 
+    </section>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!-- 🗓 SEASON GUIDE SECTION (NEW) -->
+    <!-- ══════════════════════════════════════════ -->
+    <section class="relative z-10 px-6 py-20 max-w-7xl mx-auto">
+        <div class="flex items-end justify-between mb-10">
+            <div>
+                <p class="text-[10px] font-black text-rose-500 uppercase tracking-[0.25em] mb-2">Season Guide</p>
+                <h2 class="text-3xl md:text-4xl font-black text-slate-800 dark:text-white leading-tight">
+                    계절로 떠나는 <span class="text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-sky-500">일본</span>
+                </h2>
+            </div>
+            <a href="#" class="text-[11px] font-black text-slate-400 hover:text-rose-500 transition-colors uppercase tracking-widest hidden md:block">전체 보기 →</a>
+        </div>
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- 봄 -->
+            <div class="group relative overflow-hidden rounded-[2rem] bg-white dark:bg-white/5 border border-rose-100 dark:border-white/10 p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                <div class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-rose-400 to-pink-300 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-b-[2rem]"></div>
+                <span class="text-4xl block mb-4">🌸</span>
+                <p class="text-[9px] font-black text-rose-400 uppercase tracking-widest mb-1">Mar — Apr</p>
+                <h3 class="text-lg font-black text-slate-800 dark:text-white mb-1">벚꽃 시즌</h3>
+                <p class="text-[10px] font-bold text-rose-400 tracking-wider mb-3">SAKURA</p>
+                <p class="text-[11px] text-slate-500 dark:text-slate-400 font-bold leading-relaxed">전국 500여 개 명소의 개화 정보와 하나미 완벽 가이드.</p>
+                <div class="flex flex-wrap gap-1.5 mt-4">
+                    <span class="text-[9px] font-black px-2 py-1 rounded-full bg-rose-50 dark:bg-rose-500/10 text-rose-500">개화예보</span>
+                    <span class="text-[9px] font-black px-2 py-1 rounded-full bg-rose-50 dark:bg-rose-500/10 text-rose-500">하나미</span>
+                    <span class="text-[9px] font-black px-2 py-1 rounded-full bg-rose-50 dark:bg-rose-500/10 text-rose-500">포토존</span>
+                </div>
+            </div>
+            <!-- 여름 -->
+            <div class="group relative overflow-hidden rounded-[2rem] bg-white dark:bg-white/5 border border-sky-100 dark:border-white/10 p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                <div class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-sky-400 to-teal-300 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-b-[2rem]"></div>
+                <span class="text-4xl block mb-4">🎆</span>
+                <p class="text-[9px] font-black text-sky-400 uppercase tracking-widest mb-1">May — Aug</p>
+                <h3 class="text-lg font-black text-slate-800 dark:text-white mb-1">여름 축제</h3>
+                <p class="text-[10px] font-bold text-sky-400 tracking-wider mb-3">MATSURI</p>
+                <p class="text-[11px] text-slate-500 dark:text-slate-400 font-bold leading-relaxed">불꽃놀이, 유카타, 봉오도리. 전국 마쓰리 캘린더.</p>
+                <div class="flex flex-wrap gap-1.5 mt-4">
+                    <span class="text-[9px] font-black px-2 py-1 rounded-full bg-sky-50 dark:bg-sky-500/10 text-sky-500">불꽃축제</span>
+                    <span class="text-[9px] font-black px-2 py-1 rounded-full bg-sky-50 dark:bg-sky-500/10 text-sky-500">유카타</span>
+                    <span class="text-[9px] font-black px-2 py-1 rounded-full bg-sky-50 dark:bg-sky-500/10 text-sky-500">오봉</span>
+                </div>
+            </div>
+            <!-- 가을 -->
+            <div class="group relative overflow-hidden rounded-[2rem] bg-white dark:bg-white/5 border border-orange-100 dark:border-white/10 p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                <div class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-orange-400 to-amber-300 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-b-[2rem]"></div>
+                <span class="text-4xl block mb-4">🍂</span>
+                <p class="text-[9px] font-black text-orange-400 uppercase tracking-widest mb-1">Oct — Dec</p>
+                <h3 class="text-lg font-black text-slate-800 dark:text-white mb-1">단풍 시즌</h3>
+                <p class="text-[10px] font-bold text-orange-400 tracking-wider mb-3">KOYO</p>
+                <p class="text-[11px] text-slate-500 dark:text-slate-400 font-bold leading-relaxed">교토 사찰의 붉은 단풍부터 닛코의 황금빛 숲까지.</p>
+                <div class="flex flex-wrap gap-1.5 mt-4">
+                    <span class="text-[9px] font-black px-2 py-1 rounded-full bg-orange-50 dark:bg-orange-500/10 text-orange-500">단풍 명소</span>
+                    <span class="text-[9px] font-black px-2 py-1 rounded-full bg-orange-50 dark:bg-orange-500/10 text-orange-500">교토</span>
+                    <span class="text-[9px] font-black px-2 py-1 rounded-full bg-orange-50 dark:bg-orange-500/10 text-orange-500">닛코</span>
+                </div>
+            </div>
+            <!-- 겨울 -->
+            <div class="group relative overflow-hidden rounded-[2rem] bg-white dark:bg-white/5 border border-indigo-100 dark:border-white/10 p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                <div class="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-indigo-400 to-blue-300 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-b-[2rem]"></div>
+                <span class="text-4xl block mb-4">❄️</span>
+                <p class="text-[9px] font-black text-indigo-400 uppercase tracking-widest mb-1">Dec — Feb</p>
+                <h3 class="text-lg font-black text-slate-800 dark:text-white mb-1">겨울 설경</h3>
+                <p class="text-[10px] font-bold text-indigo-400 tracking-wider mb-3">FUYU</p>
+                <p class="text-[11px] text-slate-500 dark:text-slate-400 font-bold leading-relaxed">삿포로 눈축제, 시라카와고, 온천욕까지.</p>
+                <div class="flex flex-wrap gap-1.5 mt-4">
+                    <span class="text-[9px] font-black px-2 py-1 rounded-full bg-indigo-50 dark:bg-indigo-500/10 text-indigo-500">눈축제</span>
+                    <span class="text-[9px] font-black px-2 py-1 rounded-full bg-indigo-50 dark:bg-indigo-500/10 text-indigo-500">온천</span>
+                    <span class="text-[9px] font-black px-2 py-1 rounded-full bg-indigo-50 dark:bg-indigo-500/10 text-indigo-500">설경</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!-- 🎌 THEME TRAVEL SECTION (NEW) -->
+    <!-- ══════════════════════════════════════════ -->
+    <section class="relative z-10 px-6 pb-20 max-w-7xl mx-auto">
+        <div class="flex items-end justify-between mb-10">
+            <div>
+                <p class="text-[10px] font-black text-rose-500 uppercase tracking-[0.25em] mb-2">Theme Travel</p>
+                <h2 class="text-3xl md:text-4xl font-black text-slate-800 dark:text-white leading-tight">
+                    테마로 즐기는 <span class="text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-sky-500">일본</span>
+                </h2>
+            </div>
+            <a href="#" class="text-[11px] font-black text-slate-400 hover:text-rose-500 transition-colors uppercase tracking-widest hidden md:block">테마 전체 →</a>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+            <a href="#" class="city-card group relative block h-[300px] overflow-hidden rounded-[2.5rem] shadow-xl transition-all duration-500 hover:-translate-y-2 card-zoom border border-white/20 no-underline">
+                <img src="https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=600&q=80" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700" alt="Food">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+                <div class="absolute bottom-8 left-7 right-7 text-white">
+                    <span class="text-2xl block mb-2">🍜</span>
+                    <p class="text-[9px] font-black text-rose-400 uppercase tracking-widest mb-1">Theme Guide</p>
+                    <h3 class="text-xl font-black">미식 여행</h3>
+                    <p class="text-[11px] opacity-0 group-hover:opacity-70 transition-opacity duration-300 mt-1 font-bold leading-relaxed">라멘·스시·이자카야부터 미슐랭까지</p>
+                </div>
+            </a>
+            <a href="#" class="city-card group relative block h-[300px] overflow-hidden rounded-[2.5rem] shadow-xl transition-all duration-500 hover:-translate-y-2 card-zoom border border-white/20 no-underline">
+                <img src="https://images.unsplash.com/photo-1578469645742-46cae010e5d4?w=600&q=80" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700" alt="Onsen">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+                <div class="absolute bottom-8 left-7 right-7 text-white">
+                    <span class="text-2xl block mb-2">♨️</span>
+                    <p class="text-[9px] font-black text-sky-400 uppercase tracking-widest mb-1">Theme Guide</p>
+                    <h3 class="text-xl font-black">온천 여행</h3>
+                    <p class="text-[11px] opacity-0 group-hover:opacity-70 transition-opacity duration-300 mt-1 font-bold leading-relaxed">하코네·벳푸·유후인 완벽 가이드</p>
+                </div>
+            </a>
+            <a href="#" class="city-card group relative block h-[300px] overflow-hidden rounded-[2.5rem] shadow-xl transition-all duration-500 hover:-translate-y-2 card-zoom border border-white/20 no-underline">
+                <img src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=600&q=80" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700" alt="Anime">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+                <div class="absolute bottom-8 left-7 right-7 text-white">
+                    <span class="text-2xl block mb-2">🎌</span>
+                    <p class="text-[9px] font-black text-amber-400 uppercase tracking-widest mb-1">Theme Guide</p>
+                    <h3 class="text-xl font-black">애니 성지순례</h3>
+                    <p class="text-[11px] opacity-0 group-hover:opacity-70 transition-opacity duration-300 mt-1 font-bold leading-relaxed">지브리·귀멸의칼날·슬램덩크 루트</p>
+                </div>
+            </a>
+            <a href="#" class="city-card group relative block h-[300px] overflow-hidden rounded-[2.5rem] shadow-xl transition-all duration-500 hover:-translate-y-2 card-zoom border border-white/20 no-underline">
+                <img src="https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=600&q=80" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700" alt="Shopping">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+                <div class="absolute bottom-8 left-7 right-7 text-white">
+                    <span class="text-2xl block mb-2">🛍️</span>
+                    <p class="text-[9px] font-black text-emerald-400 uppercase tracking-widest mb-1">Theme Guide</p>
+                    <h3 class="text-xl font-black">쇼핑 여행</h3>
+                    <p class="text-[11px] opacity-0 group-hover:opacity-70 transition-opacity duration-300 mt-1 font-bold leading-relaxed">돈키호테·하라주쿠·아키하바라</p>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!-- 🏘 NEIGHBORHOOD SECTION (NEW) -->
+    <!-- ══════════════════════════════════════════ -->
+    <section class="relative z-10 px-6 pb-20 max-w-7xl mx-auto">
+        <div class="flex items-end justify-between mb-10">
+            <div>
+                <p class="text-[10px] font-black text-rose-500 uppercase tracking-[0.25em] mb-2">Neighborhood Deep Dive</p>
+                <h2 class="text-3xl md:text-4xl font-black text-slate-800 dark:text-white leading-tight">
+                    동네별 <span class="text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-sky-500">깊이 보기</span>
+                </h2>
+            </div>
+            <a href="#" class="text-[11px] font-black text-slate-400 hover:text-rose-500 transition-colors uppercase tracking-widest hidden md:block">전체 동네 →</a>
+        </div>
+        <div class="flex gap-5 overflow-x-auto pb-4 hide-scrollbar -mx-2 px-2">
+            <!-- 지유가오카 -->
+            <div class="flex-none w-[220px] group rounded-[2rem] overflow-hidden bg-white dark:bg-white/5 border border-slate-100 dark:border-white/10 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                <div class="h-[160px] overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=400&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Jiyugaoka">
+                </div>
+                <div class="p-4">
+                    <p class="text-[9px] font-black text-rose-500 uppercase tracking-widest mb-1">Tokyo</p>
+                    <h3 class="font-black text-slate-800 dark:text-white text-base leading-tight">Jiyugaoka</h3>
+                    <p class="text-xs text-slate-400 mb-3">自由が丘</p>
+                    <div class="flex flex-wrap gap-1">
+                        <span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-rose-50 dark:bg-rose-500/10 text-rose-500">카페</span>
+                        <span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-rose-50 dark:bg-rose-500/10 text-rose-500">스위츠</span>
+                        <span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-rose-50 dark:bg-rose-500/10 text-rose-500">포토존</span>
+                    </div>
+                </div>
+            </div>
+            <!-- 시모키타자와 -->
+            <div class="flex-none w-[220px] group rounded-[2rem] overflow-hidden bg-white dark:bg-white/5 border border-slate-100 dark:border-white/10 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                <div class="h-[160px] overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=400&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Shimokitazawa">
+                </div>
+                <div class="p-4">
+                    <p class="text-[9px] font-black text-rose-500 uppercase tracking-widest mb-1">Tokyo</p>
+                    <h3 class="font-black text-slate-800 dark:text-white text-base leading-tight">Shimokitazawa</h3>
+                    <p class="text-xs text-slate-400 mb-3">下北沢</p>
+                    <div class="flex flex-wrap gap-1">
+                        <span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-500/10 text-sky-500">빈티지</span>
+                        <span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-500/10 text-sky-500">라이브</span>
+                        <span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-sky-50 dark:bg-sky-500/10 text-sky-500">인디</span>
+                    </div>
+                </div>
+            </div>
+            <!-- 야네센 -->
+            <div class="flex-none w-[220px] group rounded-[2rem] overflow-hidden bg-white dark:bg-white/5 border border-slate-100 dark:border-white/10 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                <div class="h-[160px] overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1578469645742-46cae010e5d4?w=400&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Yanesen">
+                </div>
+                <div class="p-4">
+                    <p class="text-[9px] font-black text-rose-500 uppercase tracking-widest mb-1">Tokyo</p>
+                    <h3 class="font-black text-slate-800 dark:text-white text-base leading-tight">Yanesen</h3>
+                    <p class="text-xs text-slate-400 mb-3">谷根千</p>
+                    <div class="flex flex-wrap gap-1">
+                        <span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-amber-50 dark:bg-amber-500/10 text-amber-600">고양이</span>
+                        <span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-amber-50 dark:bg-amber-500/10 text-amber-600">골목</span>
+                        <span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-amber-50 dark:bg-amber-500/10 text-amber-600">레트로</span>
+                    </div>
+                </div>
+            </div>
+            <!-- 나카메구로 -->
+            <div class="flex-none w-[220px] group rounded-[2rem] overflow-hidden bg-white dark:bg-white/5 border border-slate-100 dark:border-white/10 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                <div class="h-[160px] overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=400&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Nakameguro">
+                </div>
+                <div class="p-4">
+                    <p class="text-[9px] font-black text-rose-500 uppercase tracking-widest mb-1">Tokyo</p>
+                    <h3 class="font-black text-slate-800 dark:text-white text-base leading-tight">Nakameguro</h3>
+                    <p class="text-xs text-slate-400 mb-3">中目黒</p>
+                    <div class="flex flex-wrap gap-1">
+                        <span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-rose-50 dark:bg-rose-500/10 text-rose-500">운하</span>
+                        <span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-rose-50 dark:bg-rose-500/10 text-rose-500">카페</span>
+                        <span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-rose-50 dark:bg-rose-500/10 text-rose-500">벚꽃</span>
+                    </div>
+                </div>
+            </div>
+            <!-- 기온 -->
+            <div class="flex-none w-[220px] group rounded-[2rem] overflow-hidden bg-white dark:bg-white/5 border border-slate-100 dark:border-white/10 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                <div class="h-[160px] overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1519984388953-d2406bc725e1?w=400&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Gion">
+                </div>
+                <div class="p-4">
+                    <p class="text-[9px] font-black text-rose-500 uppercase tracking-widest mb-1">Kyoto</p>
+                    <h3 class="font-black text-slate-800 dark:text-white text-base leading-tight">Gion</h3>
+                    <p class="text-xs text-slate-400 mb-3">祇園</p>
+                    <div class="flex flex-wrap gap-1">
+                        <span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-purple-50 dark:bg-purple-500/10 text-purple-500">게이샤</span>
+                        <span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-purple-50 dark:bg-purple-500/10 text-purple-500">전통</span>
+                        <span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-purple-50 dark:bg-purple-500/10 text-purple-500">야경</span>
+                    </div>
+                </div>
+            </div>
+            <!-- 도톤보리 -->
+            <div class="flex-none w-[220px] group rounded-[2rem] overflow-hidden bg-white dark:bg-white/5 border border-slate-100 dark:border-white/10 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+                <div class="h-[160px] overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1589452271712-64b8a66c7b71?w=400&q=80" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Dotonbori">
+                </div>
+                <div class="p-4">
+                    <p class="text-[9px] font-black text-rose-500 uppercase tracking-widest mb-1">Osaka</p>
+                    <h3 class="font-black text-slate-800 dark:text-white text-base leading-tight">Dotonbori</h3>
+                    <p class="text-xs text-slate-400 mb-3">道頓堀</p>
+                    <div class="flex flex-wrap gap-1">
+                        <span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600">먹거리</span>
+                        <span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600">네온</span>
+                        <span class="text-[9px] font-black px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600">야경</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <div class="mb-10 px-6 slide-up" style="animation-delay: 0.2s;">
+            <div class="max-w-6xl mx-auto flex flex-col items-center">
+                <p class="text-[8px] text-gray-300 font-bold uppercase tracking-widest mb-2">Sponsor Ad</p>
+                
+                <div class="w-full bg-white/40 dark:bg-white/5 rounded-[2.5rem] p-4 border border-white/40 overflow-hidden shadow-sm min-h-[100px] flex items-center justify-center">
+                    <ins class="adsbygoogle"
+                        style="display:block; width:100%;"
+                        data-ad-format="block"
+                        data-ad-layout-key="-fb+5w+4e-db+86"
+                        data-ad-client="ca-pub-6682864237624164" 
+                        data-ad-slot="5823515468"
+                        data-ad-format="auto"
+                        data-full-width-responsive="true">
+                    </ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+            </script>
+                    </div>
+            </div>
+        </div> 
+        <div class="mt-12 mb-8 flex flex-col items-center text-center">
+            <p class="text-[10px] font-black text-rose-500 mb-2 uppercase tracking-widest">Share this Guide</p>
+            <h5 class="font-black text-slate-800 dark:text-white mb-5 leading-tight text-sm">이 가이드를 친구에게 공유하고<br>함께 벚꽃 여행을 계획해보세요!</h5>
+            
+            <button onclick="copyPageUrl()" id="copyBtn" class="flex items-center gap-3 px-10 py-4 bg-white dark:bg-slate-800 text-slate-800 dark:text-white font-black rounded-[1.5rem] shadow-lg hover:shadow-xl transition-all active:scale-95 border border-rose-100 dark:border-white/5">
+                <i class="fa-solid fa-link text-rose-500"></i>
+                <span id="copyBtnText">가이드 링크 복사하기</span>
+            </button>
+        </div>
+
+        <div class="h-16 w-full"></div>
+    <!-- Footer -->
+    <footer class="relative z-10 py-20 px-6 text-center border-t border-slate-200 dark:border-white/10 glass-effect">
+        <p class="text-[10px] font-medium tracking-widest text-slate-400/60 dark:text-slate-500/50 mb-6 uppercase">
+            &copy; 2026 Japan City Guide. All rights reserved.
+        </p>
+
+        <div class="flex gap-4 justify-center text-sm text-gray-400 mt-10">
+        <a href="/about.html" class="hover:text-gray-600">About</a>
+        <a href="/contact.html" class="hover:text-gray-600">Contact</a>
+        <a href="/privacy.html" class="hover:text-gray-600">Privacy</a>
+        </div>        
+
+       <!-- <div class="flex justify-center gap-8 text-left">
+            <button onclick="openPrivacy()" class="text-xs font-black text-rose-500 hover:text-rose-700 underline decoration-rose-300 underline-offset-4 cursor-pointer transition-colors">Privacy Policy</button>
+            <a href="mailto:tokyoshorts99@gmail.com" class="text-xs font-black text-rose-500 hover:text-rose-700 underline decoration-rose-300 underline-offset-4 transition-colors no-underline">Contact</a>
+        </div>-->
+    </footer>
+
+    <!-- Privacy Modal
+    <div id="privacyModal" class="fixed inset-0 z-[300] hidden bg-black/70 backdrop-blur-sm flex items-center justify-center p-6 text-slate-800">
+        <div class="bg-white dark:bg-gray-900 w-full max-w-lg rounded-[3rem] p-12 shadow-2xl max-h-[85vh] overflow-y-auto hide-scrollbar text-left text-balance">
+            <h3 class="text-2xl font-black mb-8 text-rose-500 dark:text-white">개인정보처리방침</h3>
+            <div class="text-[13px] text-slate-700 dark:text-slate-400 leading-relaxed space-y-6 font-semibold">
+                <p><strong class="text-rose-500 block mb-1">1. 수집하는 개인정보</strong>본 사이트는 별도의 회원가입 없이 이용 가능하며, 직접적인 개인정보를 수집하지 않습니다. 다만, 구글 애드센스 및 구글 애널리틱스 이용 과정에서 쿠키(Cookie)가 사용될 수 있습니다.</p>
+                <p><strong class="text-rose-500 block mb-1">2. 쿠키의 사용</strong>구글 등 제3자 제공업체는 사용자의 이전 방문 기록을 바탕으로 맞춤형 광고를 게재합니다.</p>
+                <p><strong class="text-rose-500 block mb-1">3. 정보의 보호</strong>본 사이트는 사용자 데이터를 서버에 저장하지 않으며 모든 저장 기능은 브라우저 로컬 저장소(LocalStorage)에서 작동합니다.</p>
+            </div>
+            <button onclick="closePrivacy()" class="w-full mt-12 py-5 bg-slate-900 text-white rounded-2xl font-black text-sm active:scale-95 transition-all shadow-xl">확인했습니다</button>
+        </div>
+    </div> -->
+
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const html = document.documentElement;
+        const header = document.getElementById('mainHeader');
+
+        function openHanamiModal() {
+            const modal = document.getElementById('hanamiModal');
+            if (!modal) return;
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            }
+
+            function closeHanamiModal() {
+            const modal = document.getElementById('hanamiModal');
+            if (!modal) return;
+            modal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }       
+
+        // 스크롤 이벤트 감지하여 헤더 스타일 변경
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        function applyTheme(theme) {
+            if (theme === 'dark') {
+                html.classList.add('dark');
+                themeIcon.className = 'fa-solid fa-sun text-yellow-300 text-lg';
+            } else {
+                html.classList.remove('dark');
+                themeIcon.className = 'fa-solid fa-moon text-indigo-600 text-lg';
+            }
+        }
+
+        themeToggle.onclick = () => {
+            const isDark = html.classList.contains('dark');
+            const newTheme = isDark ? 'light' : 'dark';
+            applyTheme(newTheme);
+            localStorage.setItem('theme', newTheme);
+            setTimeout(applySeasonUI, 50);
+        };
+
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        applyTheme(savedTheme);
+
+        function createPetals() {
+            const container = document.getElementById('petal-container');
+            if (!container) return;
+
+            const icons = seasonData[getCurrentSeason()].particles;
+            const count = window.innerWidth > 768 ? 50 : 25;
+
+            for (let i = 0; i < count; i++) {
+                const petal = document.createElement('div');
+                
+                // 랜덤 아이콘 선택
+                const icon = icons[Math.floor(Math.random() * icons.length)];
+                petal.innerText = icon;
+
+                // 📍 스타일링: 텍스트가 아닌 '입자'처럼 보이게 설정
+                petal.style.position = 'fixed';
+                petal.style.top = '-10%';
+                petal.style.left = `${Math.random() * 100}vw`;
+                petal.style.zIndex = '5';
+                petal.style.pointerEvents = 'none';
+                petal.style.userSelect = 'none';
+                
+                // 📍 크기 랜덤 (10px ~ 25px)
+                const size = Math.random() * 15 + 10;
+                petal.style.fontSize = `${size}px`;
+
+                // 📍 투명도 랜덤 (포근한 느낌)
+                petal.style.opacity = Math.random() * 0.5 + 0.3;
+
+                // 📍 애니메이션 설정
+                const duration = Math.random() * 5 + 7; // 7초 ~ 12초 사이
+                const delay = Math.random() * -10; // 시작 시점 분산
+                
+                // 기존 CSS 애니메이션 사용 (fall)
+                petal.style.animation = `fall ${duration}s linear ${delay}s infinite`;
+
+                // 📍 필터 효과 (살짝 몽환적으로)
+                petal.style.filter = `blur(${Math.random() * 1}px)`;
+
+                container.appendChild(petal);
+            }
+        }
+
+        window.onload = () => {
+            createPetals();
+        };
+
+        function openPrivacy() { document.getElementById('privacyModal').classList.remove('hidden'); }
+        function closePrivacy() { document.getElementById('privacyModal').classList.add('hidden'); }
+        function copyPageUrl() {
+            const url = window.location.href; // 현재 페이지 주소
+            const btnText = document.getElementById('copyBtnText');
+            const btn = document.getElementById('copyBtn');
+
+            // 최신 브라우저의 클립보드 API 사용
+            navigator.clipboard.writeText(url).then(() => {
+                // 성공 시 피드백 시각화
+                btnText.innerText = "복사 완료! 채팅창에 붙여넣으세요 ✨";
+                btn.classList.add('bg-rose-500', 'text-white');
+                btn.classList.remove('bg-white', 'text-slate-800', 'dark:bg-slate-800', 'dark:text-white');
+                
+                // 2초 후 원래대로 복구
+                setTimeout(() => {
+                    btnText.innerText = "가이드 링크 복사하기";
+                    btn.classList.remove('bg-rose-500', 'text-white');
+                    btn.classList.add('bg-white', 'text-slate-800', 'dark:bg-slate-800', 'dark:text-white');
+                }, 2000);
+            }).catch(err => {
+                // 구형 브라우저 대응 (fallback)
+                const textArea = document.createElement("textarea");
+                textArea.value = url;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand("copy");
+                document.body.removeChild(textArea);
+                alert("링크가 복사되었습니다!");
+            });
+        }
+    </script>
+    <!-- Hanami Modal -->
+    <div id="hanamiModal" 
+        class="fixed inset-0 z-[999] hidden flex items-center justify-center p-4 md:p-8 bg-slate-950/70 backdrop-blur-md" 
+        onclick="if(event.target === this) closeHanamiModal()">
+        
+        <div class="relative bg-white dark:bg-slate-900 w-full max-w-4xl rounded-[3rem] overflow-hidden shadow-2xl transform transition-all border border-white/20 flex flex-col max-h-[95vh]">
+            
+            <div class="sticky top-0 z-20 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-rose-100 dark:border-white/5 px-6 md:px-10 py-6 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 flex items-center justify-center rounded-full bg-rose-500 text-white shadow-lg">
+                        <i class="fa-solid fa-leaf"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-black text-slate-800 dark:text-white tracking-tight text-xl md:text-2xl">2026 하나미 마스터 가이드</h3>
+                        <p class="text-[10px] font-bold text-rose-400 uppercase tracking-[0.2em]">Sakura Limited Edition & Culture</p>
+                    </div>
+                </div>
+                <button onclick="closeHanamiModal()" class="w-12 h-12 flex items-center justify-center rounded-full hover:bg-rose-50 dark:hover:bg-white/10 transition-all text-slate-400">
+                    <i class="fa-solid fa-xmark text-2xl"></i>
+                </button>
+            </div>
+
+            <div class="overflow-y-auto px-6 md:px-10 py-8 hide-scrollbar">
+                
+                <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 mb-12">
+                    <div class="lg:col-span-3 rounded-[2.5rem] overflow-hidden shadow-xl h-64 md:h-80">
+                        <img src="https://images.unsplash.com/photo-1522383225653-ed111181a951?q=80&w=1476&auto=format&fit=crop" 
+                            class="w-full h-full object-cover" alt="Hanami Picnic">
+                    </div>
+                    <div class="lg:col-span-2 flex flex-col justify-center">
+                        <span class="text-rose-500 font-black text-sm mb-2">#Hanami_Culture</span>
+                        <h4 class="text-2xl font-black text-slate-800 dark:text-white mb-4 leading-tight">벚꽃 아래에서의<br/>완벽한 피크닉</h4>
+                        <p class="text-slate-600 dark:text-slate-400 font-bold leading-relaxed text-sm">
+                            만개한 나무 아래 돗자리를 펴고 소중한 사람들과 음식을 나누는 일본의 정점입니다.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-12">
+                    <div class="p-5 rounded-[2rem] bg-rose-50/50 dark:bg-rose-500/5 border border-rose-100 dark:border-rose-500/10 text-center">
+                        <div class="text-2xl mb-2">🍱</div>
+                        <p class="text-[10px] font-black text-rose-500 uppercase">에티켓</p>
+                        <p class="font-bold text-slate-700 dark:text-slate-200 text-[11px]">자리 맡기·쓰레기·소음 준수</p>
+                    </div>
+                    <div class="p-5 rounded-[2rem] bg-sky-50/50 dark:bg-sky-500/5 border border-sky-100 dark:border-sky-500/10 text-center">
+                        <div class="text-2xl mb-2">🧺</div>
+                        <p class="text-[10px] font-black text-sky-500 uppercase">준비물</p>
+                        <p class="font-bold text-slate-700 dark:text-slate-200 text-[11px]">돗자리·벤또·따뜻한 음료</p>
+                    </div>
+                    <div class="p-5 rounded-[2rem] bg-amber-50/50 dark:bg-amber-500/5 border border-amber-100 dark:border-amber-500/10 text-center">
+                        <div class="text-2xl mb-2">📸</div>
+                        <p class="text-[10px] font-black text-amber-600 uppercase">타이밍</p>
+                        <p class="font-bold text-slate-700 dark:text-slate-200 text-[11px]">해질 무렵 → 라이트업 루트</p>
+                    </div>
+                </div>
+
+                <hr class="border-slate-100 dark:border-white/5 mb-12">
+
+                <div class="mb-14">
+                    <h4 class="text-xl font-black text-slate-800 dark:text-white mb-8 flex items-center gap-2">
+                        <span class="text-rose-500">🇯🇵</span> 일본 현지 필수 리스트
+                    </h4>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="group">
+                            <div class="aspect-[4/5] rounded-[2rem] overflow-hidden mb-4 shadow-lg bg-slate-100">
+                                <img src="images/sakura_latte.jpg" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            </div>
+                            <h5 class="font-black text-slate-800 dark:text-white text-base mb-1">스타벅스 사쿠라 라떼</h5>
+                            <p class="text-xs text-slate-500 font-bold leading-relaxed">현지 매장에서만 만날 수 있는 핑크빛 벚꽃 풍미</p>
+                        </div>
+                        <div class="group">
+                            <div class="aspect-[4/5] rounded-[2rem] overflow-hidden mb-4 shadow-lg bg-slate-100">
+                                <img src="images/sakura4.jpg" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            </div>
+                            <h5 class="font-black text-slate-800 dark:text-white text-base mb-1">사쿠라향 섬유유연제</h5>
+                            <p class="text-xs text-slate-500 font-bold leading-relaxed">돈키호테 추천! 옷끝에서 느껴지는 봄의 향기.</p>
+                        </div>
+                        <div class="group">
+                            <div class="aspect-[4/5] rounded-[2rem] overflow-hidden mb-4 shadow-lg bg-slate-100">
+                                <img src="images/senbei.jpeg" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            </div>
+                            <h5 class="font-black text-slate-800 dark:text-white text-base mb-1">가마쿠라 한게츠 센베</h5>
+                            <p class="text-xs text-slate-500 font-bold leading-relaxed">바삭한 전병 사이 은은한 사쿠라 크림.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-10 space-y-12">
+                    
+                    <div>
+                        <h4 class="text-lg font-black text-slate-800 dark:text-white mb-6 flex items-center gap-2">
+                            <span class="text-rose-500 text-base">🍱</span> 사쿠라 푸드 (한국 배송)
+                        </h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <a href="https://naver.me/G4dAi3LQ" target="_blank" class="flex items-center gap-4 p-4 rounded-3xl bg-white dark:bg-white/5 border border-slate-100 dark:border-white/10 hover:shadow-lg transition-all group">
+                                <div class="w-20 h-20 rounded-2xl overflow-hidden bg-slate-100 shrink-0 shadow-inner">
+                                    <img src="images/sakura_muji.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform">
+                                </div>
+                                <div class="flex-grow">
+                                    <p class="text-[10px] font-black text-rose-500 mb-0.5 uppercase">MUJI</p>
+                                    <p class="font-black text-sm dark:text-white leading-tight">무인양품 사쿠라 라떼</p>
+                                    <p class="text-[10px] text-slate-400 mt-1">집에서 즐기는 봄</p>
+                                </div>
+                                <span class="text-slate-300 group-hover:text-rose-500 px-2 font-black">〉</span>
+                            </a>
+                            <a href="https://naver.me/GM36wc32" target="_blank" class="flex items-center gap-4 p-4 rounded-3xl bg-white dark:bg-white/5 border border-slate-100 dark:border-white/10 hover:shadow-lg transition-all group">
+                                <div class="w-20 h-20 rounded-2xl overflow-hidden bg-slate-100 shrink-0 shadow-inner">
+                                    <img src="images/pocky.png" class="w-full h-full object-cover group-hover:scale-110 transition-transform">
+                                </div>
+                                <div class="flex-grow">
+                                    <p class="text-[10px] font-black text-rose-500 mb-0.5 uppercase">GLICO</p>
+                                    <p class="font-black text-sm dark:text-white leading-tight">포키 사쿠라 말차 8봉</p>
+                                    <p class="text-[10px] text-slate-400 mt-1">대용량 라지팩 구성</p>
+                                </div>
+                                <span class="text-slate-300 group-hover:text-rose-500 px-2 font-black">〉</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="text-lg font-black text-slate-800 dark:text-white mb-6 flex items-center gap-2">
+                            <span class="text-sky-500 text-base">🧴</span> 뷰티 & 홈케어 (한정판)
+                        </h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            <div class="p-6 rounded-3xl bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/10">
+                                <div class="w-12 h-12 rounded-full bg-rose-100 flex items-center justify-center text-xl mb-4">💄</div>
+                                <p class="text-[10px] font-black text-sky-500 mb-2 uppercase tracking-tighter">CANMAKE Make-up</p>
+                                <h5 class="font-black text-sm mb-4 dark:text-white leading-tight tracking-tight">스마트 미니 아이브로우<br>(사쿠라 브라운)</h5>
+                                <a href="https://naver.me/5518Ooxp" target="_blank" class="block w-full py-2.5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-[10px] font-black rounded-xl text-center">네이버 쇼핑 〉</a>
+                            </div>
+                            <div class="p-6 rounded-3xl bg-slate-50 dark:bg-white/5 border border-slate-100 dark:border-white/10">
+                                <div class="w-12 h-12 rounded-full bg-sky-100 flex items-center justify-center text-xl mb-4">🧴</div>
+                                <p class="text-[10px] font-black text-sky-500 mb-2 uppercase tracking-tighter">DOVE Body Care</p>
+                                <h5 class="font-black text-sm mb-4 dark:text-white leading-tight">바디 크리미 스크럽<br>사쿠라머스크</h5>
+                                <div class="flex gap-2">
+                                    <a href="https://naver.me/FqID1Jiq" target="_blank" class="flex-1 py-2 bg-rose-100 text-rose-600 text-[10px] font-black rounded-xl text-center">기본</a>
+                                    <a href="https://naver.me/xCj9kzBS" target="_blank" class="flex-1 py-2 bg-rose-500 text-white text-[10px] font-black rounded-xl text-center">50g</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-4">
+                        <a href="https://naver.me/x7eT5aLY" target="_blank" class="flex items-center justify-between p-7 rounded-[2.5rem] bg-gradient-to-br from-rose-500 to-rose-600 text-white shadow-xl hover:scale-[1.01] transition-all group">
+                            <div class="flex items-center gap-5">
+                                <div class="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center text-3xl">🌸</div>
+                                <div>
+                                    <p class="font-black text-xl leading-tight">일본 도쿄 사쿠라 : 벚꽃 체험</p>
+                                    <p class="text-xs opacity-90 font-bold">인기 가이드 투어 / 인생샷 명소 예약</p>
+                                </div>
+                            </div>
+                            <i class="fa-solid fa-arrow-right group-hover:translate-x-2 transition-transform text-2xl px-4"></i>
+                        </a>
+                    </div>
+
+                </div>
+
+                <p class="text-center text-[10px] text-slate-400 font-medium mb-10 uppercase tracking-widest italic">
+                    ※ 일부 링크는 네이버 브랜드 커넥트 활동으로 소정의 수수료를 제공받을 수 있습니다.
+                </p>
+
+                <button onclick="closeHanamiModal()" 
+                class="w-full py-6 bg-rose-500 hover:bg-rose-600 text-white font-black rounded-[2rem] shadow-2xl shadow-rose-500/30 transition-all active:scale-[0.98]">
+                    정보 확인 완료! 도시 선택하기
+                </button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
