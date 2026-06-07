@@ -96,7 +96,7 @@ function generateHub(city) {
                 </span>
             </a>
 
-            <a href="matsuri" class="hub-card no-underline rounded-[2.5rem] p-8 bg-white dark:bg-white/5 border-2 border-sky-100 dark:border-white/10 shadow-lg hover:shadow-2xl hover:border-sky-300 dark:hover:border-sky-500/40 block text-center">
+            <a href="matsuri_${city.id}" class="hub-card no-underline rounded-[2.5rem] p-8 bg-white dark:bg-white/5 border-2 border-sky-100 dark:border-white/10 shadow-lg hover:shadow-2xl hover:border-sky-300 dark:hover:border-sky-500/40 block text-center">
                 <div class="text-5xl mb-5">🎆</div>
                 <p class="text-[9px] font-black text-sky-500 uppercase tracking-widest mb-2">Matsuri Guide</p>
                 <h2 class="text-xl font-black text-slate-800 dark:text-white mb-3">마쓰리 가이드</h2>
@@ -106,7 +106,7 @@ function generateHub(city) {
                 </span>
             </a>
 
-            <a href="hanabi" class="hub-card no-underline rounded-[2.5rem] p-8 bg-white dark:bg-white/5 border-2 border-indigo-100 dark:border-white/10 shadow-lg hover:shadow-2xl hover:border-indigo-300 dark:hover:border-indigo-500/40 block text-center">
+            <a href="hanabi_${city.id}" class="hub-card no-underline rounded-[2.5rem] p-8 bg-white dark:bg-white/5 border-2 border-indigo-100 dark:border-white/10 shadow-lg hover:shadow-2xl hover:border-indigo-300 dark:hover:border-indigo-500/40 block text-center">
                 <div class="text-5xl mb-5">🎇</div>
                 <p class="text-[9px] font-black text-indigo-500 uppercase tracking-widest mb-2">Hanabi Guide</p>
                 <h2 class="text-xl font-black text-slate-800 dark:text-white mb-3">하나비 가이드</h2>
