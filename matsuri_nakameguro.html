@@ -43,22 +43,49 @@
         }
         #guideModal.open #guideModalSheet { transform: translateY(0); }
         .dark #guideModalSheet { background: #0f172a; }
-        #guideModalBody { overflow-y: auto; flex: 1; padding: 0 24px 32px; }
+        #guideModalBody { overflow-y: auto; flex: 1; padding: 0 20px 32px; }
         @media (min-width: 640px) {
             #guideModal { align-items: center; padding: 24px; }
             #guideModalSheet { border-radius: 2rem; max-height: 88dvh; }
+            #guideModalBody { padding: 0 28px 36px; }
         }
+        /* Modal typography */
         .modal-section { margin-bottom: 20px; }
         .modal-label {
-            font-size: 10px; font-weight: 900; letter-spacing: .15em;
+            font-size: 11px; font-weight: 900; letter-spacing: .15em;
             text-transform: uppercase; color: #94a3b8; margin-bottom: 10px;
         }
-        .modal-spot { padding-left: 12px; border-left: 2px solid #e2e8f0; margin-bottom: 10px; }
+        @media (min-width: 640px) { .modal-label { font-size: 12px; } }
+        .modal-summary { font-size: .875rem; font-weight: 700; line-height: 1.8; color: #64748b; margin-bottom: 20px; }
+        @media (min-width: 640px) { .modal-summary { font-size: .9rem; } }
+        .dark .modal-summary { color: #94a3b8; }
+        .modal-spot { padding-left: 12px; border-left: 2px solid #e2e8f0; margin-bottom: 12px; }
         .dark .modal-spot { border-left-color: rgba(255,255,255,0.12); }
+        .modal-spot-title { font-size: .875rem; font-weight: 800; color: #1e293b; margin-bottom: 3px; }
+        .dark .modal-spot-title { color: #f1f5f9; }
+        .modal-spot-desc { font-size: .8rem; font-weight: 600; line-height: 1.75; color: #64748b; }
+        @media (min-width: 640px) { .modal-spot-title { font-size: .9rem; } .modal-spot-desc { font-size: .85rem; } }
+        .dark .modal-spot-desc { color: #94a3b8; }
+        .modal-tip { font-size: .8rem; font-weight: 600; line-height: 1.8; color: #64748b; }
+        @media (min-width: 640px) { .modal-tip { font-size: .85rem; } }
+        .dark .modal-tip { color: #94a3b8; }
         .modal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         @media (max-width: 480px) { .modal-grid { grid-template-columns: 1fr; } }
         .modal-grid-cell { background: #f8fafc; border-radius: 1rem; padding: 14px 16px; }
         .dark .modal-grid-cell { background: rgba(255,255,255,0.06); }
+        .modal-cell-label { font-size: 10px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; color: #94a3b8; margin-bottom: 6px; }
+        @media (min-width: 640px) { .modal-cell-label { font-size: 11px; } }
+        .modal-cell-text { font-size: .8rem; font-weight: 600; line-height: 1.7; color: #64748b; }
+        @media (min-width: 640px) { .modal-cell-text { font-size: .85rem; } }
+        .dark .modal-cell-text { color: #94a3b8; }
+        .modal-food-title { font-size: .875rem; font-weight: 800; color: #1e293b; margin-bottom: 2px; }
+        @media (min-width: 640px) { .modal-food-title { font-size: .9rem; } }
+        .dark .modal-food-title { color: #f1f5f9; }
+        .modal-food-desc { font-size: .8rem; font-weight: 600; line-height: 1.7; color: #64748b; }
+        @media (min-width: 640px) { .modal-food-desc { font-size: .85rem; } }
+        .dark .modal-food-desc { color: #94a3b8; }
+        .modal-budget { font-size: .8rem; font-weight: 700; color: #94a3b8; }
+        @media (min-width: 640px) { .modal-budget { font-size: .85rem; } }
         .modal-divider { border: none; border-top: 1.5px solid #f1f5f9; margin: 20px 0; }
         .dark .modal-divider { border-top-color: rgba(255,255,255,0.08); }
     </style>
@@ -73,13 +100,13 @@
                 <div style="width:40px;height:4px;border-radius:9999px;background:#e2e8f0;"></div>
             </div>
             <!-- Modal header -->
-            <div style="display:flex;align-items:flex-start;justify-content:space-between;padding:16px 24px 16px;flex-shrink:0;">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;padding:16px 20px;flex-shrink:0;">
                 <div>
-                    <p id="guideModalMeta" style="font-size:10px;font-weight:900;letter-spacing:.15em;text-transform:uppercase;color:#94a3b8;margin-bottom:4px;"></p>
-                    <h2 id="guideModalTitle" style="font-size:1.4rem;font-weight:900;color:#0f172a;line-height:1.2;"></h2>
+                    <p id="guideModalMeta" class="modal-label" style="margin-bottom:4px;"></p>
+                    <h2 id="guideModalTitle" style="font-size:1.25rem;font-weight:900;color:#0f172a;line-height:1.2;"></h2>
                 </div>
-                <button id="guideModalClose" onclick="closeGuideModal()" style="width:36px;height:36px;border-radius:50%;border:1.5px solid #f1f5f9;background:#f8fafc;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;margin-left:12px;" aria-label="닫기">
-                    <i class="fa-solid fa-xmark" style="color:#94a3b8;font-size:14px;"></i>
+                <button id="guideModalClose" onclick="closeGuideModal()" style="width:38px;height:38px;border-radius:50%;border:1.5px solid #f1f5f9;background:#f8fafc;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;margin-left:12px;" aria-label="닫기">
+                    <i class="fa-solid fa-xmark" style="color:#94a3b8;font-size:15px;"></i>
                 </button>
             </div>
             <!-- Modal body (scrollable) -->
@@ -115,13 +142,13 @@
         <div class="text-6xl mb-5">🌿</div>
         <div class="inline-flex items-center gap-2 glass-effect px-5 py-2 rounded-full mb-6 shadow-sm">
             <span class="text-2xl">🎆</span>
-            <span class="text-[10px] font-black tracking-[0.3em] uppercase" style="color:#0ea5e9">Matsuri Guide · 中目黒</span>
+            <span class="text-[11px] sm:text-xs font-black tracking-[0.25em] uppercase" style="color:#0ea5e9">Matsuri Guide · 中目黒</span>
         </div>
-        <h1 class="text-4xl md:text-6xl font-[900] tracking-tight mb-4 text-slate-900 dark:text-white">
+        <h1 class="text-[2rem] sm:text-5xl md:text-6xl font-[900] tracking-tight mb-4 text-slate-900 dark:text-white">
             나카메구로 <span style="color:#0ea5e9">마쓰리</span>
-            <span class="block text-xl md:text-2xl font-black mt-2 text-slate-400 dark:text-slate-500">2026 완벽 가이드</span>
+            <span class="block text-lg sm:text-xl md:text-2xl font-black mt-2 text-slate-400 dark:text-slate-500">2026 완벽 가이드</span>
         </h1>
-        <p class="text-base text-slate-500 dark:text-slate-400 font-bold leading-relaxed max-w-xl mx-auto mt-5">도쿄 간토 지역 마쓰리 — 도심 속 여름 축제 가이드</p>
+        <p class="text-sm sm:text-base text-slate-500 dark:text-slate-400 font-bold leading-relaxed max-w-xl mx-auto mt-5">도쿄 간토 지역 마쓰리 — 도심 속 여름 축제 가이드</p>
     </main>
 
     <!-- Cards -->
@@ -180,7 +207,7 @@
             var html = '';
 
             if (guide.summary) {
-                html += '<p style="font-size:.85rem;font-weight:700;line-height:1.8;color:#64748b;margin-bottom:20px;">' + guide.summary + '</p>';
+                html += '<p class="modal-summary">' + guide.summary + '</p>';
                 html += '<hr class="modal-divider">';
             }
 
@@ -189,8 +216,8 @@
                 html += '<p class="modal-label">📍 추천 관람 포인트</p>';
                 guide.bestSpots.forEach(function(spot) {
                     html += '<div class="modal-spot">';
-                    html += '<p style="font-size:.85rem;font-weight:800;color:#1e293b;margin-bottom:3px;">' + spot.name + '</p>';
-                    html += '<p style="font-size:.8rem;font-weight:600;line-height:1.75;color:#64748b;">' + spot.desc + '</p>';
+                    html += '<p class="modal-spot-title">' + spot.name + '</p>';
+                    html += '<p class="modal-spot-desc">' + spot.desc + '</p>';
                     html += '</div>';
                 });
                 html += '</div>';
@@ -200,11 +227,11 @@
                 html += '<hr class="modal-divider">';
                 html += '<div class="modal-section">';
                 html += '<p class="modal-label">💡 알아두면 좋은 팁</p>';
-                html += '<ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:9px;">';
+                html += '<ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;">';
                 guide.tips.forEach(function(tip) {
-                    html += '<li style="display:flex;gap:9px;font-size:.8rem;font-weight:600;line-height:1.75;color:#64748b;">';
-                    html += '<span style="color:' + themeColor + ';flex-shrink:0;margin-top:3px;font-size:.65rem;">▸</span>';
-                    html += '<span>' + tip + '</span>';
+                    html += '<li style="display:flex;gap:9px;">';
+                    html += '<span style="color:' + themeColor + ';flex-shrink:0;margin-top:4px;font-size:.7rem;">▸</span>';
+                    html += '<span class="modal-tip">' + tip + '</span>';
                     html += '</li>';
                 });
                 html += '</ul></div>';
@@ -213,14 +240,14 @@
             var gridItems = '';
             if (guide.crowd) {
                 gridItems += '<div class="modal-grid-cell">';
-                gridItems += '<p class="modal-label" style="margin-bottom:6px;">👥 혼잡도</p>';
-                gridItems += '<p style="font-size:.8rem;font-weight:600;line-height:1.7;color:#64748b;">' + guide.crowd + '</p>';
+                gridItems += '<p class="modal-cell-label">👥 혼잡도</p>';
+                gridItems += '<p class="modal-cell-text">' + guide.crowd + '</p>';
                 gridItems += '</div>';
             }
             if (guide.whatToWear) {
                 gridItems += '<div class="modal-grid-cell">';
-                gridItems += '<p class="modal-label" style="margin-bottom:6px;">👗 복장 추천</p>';
-                gridItems += '<p style="font-size:.8rem;font-weight:600;line-height:1.7;color:#64748b;">' + guide.whatToWear + '</p>';
+                gridItems += '<p class="modal-cell-label">👗 복장 추천</p>';
+                gridItems += '<p class="modal-cell-text">' + guide.whatToWear + '</p>';
                 gridItems += '</div>';
             }
             if (gridItems) {
@@ -233,11 +260,11 @@
                 html += '<div class="modal-section">';
                 html += '<p class="modal-label">🍜 주변 먹거리</p>';
                 guide.food.forEach(function(f) {
-                    html += '<div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:12px;">';
-                    html += '<span style="font-size:1.1rem;flex-shrink:0;margin-top:1px;">🥢</span>';
+                    html += '<div style="display:flex;gap:12px;align-items:flex-start;margin-bottom:14px;">';
+                    html += '<span style="font-size:1.15rem;flex-shrink:0;margin-top:1px;">🥢</span>';
                     html += '<div>';
-                    html += '<p style="font-size:.85rem;font-weight:800;color:#1e293b;margin-bottom:2px;">' + f.name + '</p>';
-                    html += '<p style="font-size:.8rem;font-weight:600;line-height:1.7;color:#64748b;">' + f.desc + '</p>';
+                    html += '<p class="modal-food-title">' + f.name + '</p>';
+                    html += '<p class="modal-food-desc">' + f.desc + '</p>';
                     html += '</div></div>';
                 });
                 html += '</div>';
@@ -245,10 +272,10 @@
 
             var footerItems = [];
             if (guide.budget) {
-                footerItems.push('<span style="font-size:.8rem;font-weight:700;color:#94a3b8;">💰 ' + guide.budget + '</span>');
+                footerItems.push('<span class="modal-budget">💰 ' + guide.budget + '</span>');
             }
             if (guide.officialUrl) {
-                footerItems.push('<a href="' + guide.officialUrl + '" target="_blank" rel="noopener noreferrer" style="font-size:.8rem;font-weight:900;color:' + themeColor + ';text-decoration:none;display:inline-flex;align-items:center;gap:5px;">공식 사이트 <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:.65rem;"></i></a>');
+                footerItems.push('<a href="' + guide.officialUrl + '" target="_blank" rel="noopener noreferrer" style="font-size:.875rem;font-weight:900;color:' + themeColor + ';text-decoration:none;display:inline-flex;align-items:center;gap:5px;">공식 사이트 <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:.7rem;"></i></a>');
             }
             if (footerItems.length) {
                 html += '<hr class="modal-divider">';

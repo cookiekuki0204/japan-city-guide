@@ -13,9 +13,9 @@ function _injectStyles() {
 .rf-wrap { display:flex; flex-wrap:wrap; gap:8px; }
 .rf-btn {
   display:inline-flex; align-items:center; gap:5px;
-  padding:7px 16px; border-radius:9999px;
+  padding:8px 16px; border-radius:9999px;
   border:1.5px solid #e2e8f0; background:#fff; color:#94a3b8;
-  font-size:11px; font-weight:900; letter-spacing:.06em; text-transform:uppercase;
+  font-size:12px; font-weight:900; letter-spacing:.06em; text-transform:uppercase;
   cursor:pointer; white-space:nowrap; transition:all .2s; user-select:none;
   -webkit-tap-highlight-color:transparent;
 }
@@ -82,9 +82,9 @@ function _injectStyles() {
 /* Rank badge on image */
 .mc-rank-badge {
   position:absolute; top:16px; left:16px;
-  width:34px; height:34px; border-radius:50%;
+  width:36px; height:36px; border-radius:50%;
   display:flex; align-items:center; justify-content:center;
-  font-size:10px; font-weight:900; letter-spacing:-.5px; color:#fff;
+  font-size:11px; font-weight:900; letter-spacing:-.5px; color:#fff;
 }
 
 /* Mobile: name overlay on image (hidden on md+) */
@@ -112,9 +112,10 @@ function _injectStyles() {
 /* Badge row */
 .mc-badges { display:flex; flex-wrap:wrap; gap:7px; margin-bottom:14px; }
 .mc-badge {
-  font-size:10px; font-weight:900; padding:4px 11px; border-radius:9999px;
+  font-size:11px; font-weight:900; padding:5px 12px; border-radius:9999px;
   letter-spacing:.04em; text-transform:uppercase;
 }
+@media (min-width:640px) { .mc-badge { font-size:11px; } }
 .mc-badge-date { background:#f1f5f9; color:#64748b; }
 .dark .mc-badge-date { background:rgba(255,255,255,.1); color:#94a3b8; }
 .mc-badge-highlight { background:rgba(251,191,36,.12); color:#92400e; }
@@ -123,19 +124,23 @@ function _injectStyles() {
 /* Desktop-only title block */
 .mc-title-block { margin-bottom:12px; }
 @media (max-width:767px) { .mc-title-block { display:none; } }
-.mc-subtitle { font-size:10px; font-weight:900; letter-spacing:.1em; text-transform:uppercase; color:#94a3b8; margin-bottom:3px; }
-.mc-name { font-size:1.55rem; font-weight:900; color:#0f172a; line-height:1.2; margin-bottom:2px; }
+.mc-subtitle { font-size:11px; font-weight:900; letter-spacing:.1em; text-transform:uppercase; color:#94a3b8; margin-bottom:3px; }
+@media (min-width:640px) { .mc-subtitle { font-size:12px; } }
+.mc-name { font-size:1.35rem; font-weight:900; color:#0f172a; line-height:1.2; margin-bottom:2px; }
+@media (min-width:640px) { .mc-name { font-size:1.5rem; } }
+@media (min-width:768px) { .mc-name { font-size:1.6rem; } }
 .dark .mc-name { color:#f1f5f9; }
-.mc-name-jp { font-size:.82rem; color:#94a3b8; font-weight:700; }
+.mc-name-jp { font-size:.875rem; color:#94a3b8; font-weight:700; }
 
 /* Description */
-.mc-desc { font-size:.82rem; font-weight:700; line-height:1.75; color:#475569; margin-bottom:14px; }
+.mc-desc { font-size:.875rem; font-weight:700; line-height:1.75; color:#475569; margin-bottom:14px; }
+@media (min-width:640px) { .mc-desc { font-size:.9rem; } }
 .dark .mc-desc { color:#94a3b8; }
 
 /* Tags */
 .mc-tags { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:18px; }
 .mc-tag {
-  font-size:10px; font-weight:900; padding:3px 10px; border-radius:9999px;
+  font-size:11px; font-weight:900; padding:4px 11px; border-radius:9999px;
   background:#f1f5f9; color:#64748b;
 }
 .dark .mc-tag { background:rgba(255,255,255,.08); color:#94a3b8; }
@@ -148,11 +153,11 @@ function _injectStyles() {
   position:relative; z-index:1;
 }
 .dark .mc-footer { border-top-color:rgba(255,255,255,.08); }
-.mc-location { font-size:11px; font-weight:700; color:#94a3b8; display:flex; align-items:center; gap:5px; }
+.mc-location { font-size:12px; font-weight:700; color:#94a3b8; display:flex; align-items:center; gap:5px; }
 .mc-cta {
   display:inline-flex; align-items:center; gap:7px;
-  padding:8px 18px; border-radius:9999px;
-  font-size:11px; font-weight:900; color:#fff;
+  padding:9px 20px; border-radius:9999px;
+  font-size:12px; font-weight:900; color:#fff;
   text-decoration:none; transition:opacity .2s, transform .15s;
 }
 .mc-cta:hover { opacity:.88; transform:translateY(-1px); }
@@ -279,9 +284,9 @@ function renderMatsuriCard(container, d) {
       <div class="mc-overlay"></div>
       <div class="mc-rank-badge" style="background:${c.accent};">#${d.rank}</div>
       <div class="mc-mobile-title">
-        <p style="font-size:9px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:2px;">${d.subtitle || ''}</p>
-        <h3 style="font-size:1.15rem;font-weight:900;color:#fff;line-height:1.25;margin-bottom:2px;">${d.name}</h3>
-        <p style="font-size:.75rem;color:rgba(255,255,255,.4);">${d.nameJP}</p>
+        <p style="font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:2px;">${d.subtitle || ''}</p>
+        <h3 style="font-size:1.25rem;font-weight:900;color:#fff;line-height:1.25;margin-bottom:2px;">${d.name}</h3>
+        <p style="font-size:.875rem;color:rgba(255,255,255,.4);">${d.nameJP}</p>
       </div>
     </div>
     <div class="mc-body">
