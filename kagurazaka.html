@@ -20,7 +20,7 @@
 
   .section-wrap { padding: 64px 0 64px; }
   .section-top { padding: 0 28px; margin-bottom: 16px; display: flex; align-items: flex-end; justify-content: space-between; }
-  .eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+  .eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
   .section-title { font-family: 'Shippori Mincho', serif; font-size: clamp(22px, 5vw, 32px); font-weight: 700; line-height: 1.2; }
   .section-title .jp { font-size: 0.58em; color: var(--muted); display: block; font-weight: 400; margin-top: 4px; letter-spacing: 0.15em; }
   .see-all { font-size: 11px; font-weight: 700; color: var(--muted); text-decoration: none; border-bottom: 1px solid var(--muted); padding-bottom: 2px; white-space: nowrap; margin-bottom: 4px; }
@@ -29,7 +29,7 @@
   .info-strip::-webkit-scrollbar { display: none; }
   .info-item { flex: 0 0 auto; padding: 8px 18px 8px 0; border-right: 1px solid var(--border); margin-right: 18px; }
   .info-item:last-child { border-right: none; }
-  .info-label { font-size: 9px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
+  .info-label { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
   .info-value { font-family: 'Shippori Mincho', serif; font-size: 13px; font-weight: 600; }
 
   /* slider */
@@ -64,23 +64,29 @@
   /* fullmap section */
   .fullmap-wrap { margin: 24px 28px 0; border-radius: 20px; overflow: hidden; border: 1px solid var(--border); background: #fff; }
   .fullmap-head { padding: 18px 22px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
-  .map-head-label { font-size: 9px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+  .map-head-label { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
   .fullmap-title { font-family: 'Shippori Mincho', serif; font-size: 18px; font-weight: 700; margin-top: 4px; }
   .fullmap-sub { font-size: 11px; color: var(--muted); margin-top: 3px; }
   .fullmap-btns { display: flex; gap: 8px; }
   .fullmap-body { display: flex; height: 340px; }
   .fullmap-svg-wrap { flex: 1; overflow: hidden; background: #ede9e0; }
   .fullmap-list { width: 220px; flex-shrink: 0; overflow-y: auto; border-left: 1px solid var(--border); padding: 12px; display: flex; flex-direction: column; gap: 6px; scrollbar-width: thin; }
+  @media (max-width: 600px) {
+    .fullmap-wrap { margin: 16px 0 0; border-radius: 16px; }
+    .fullmap-body { flex-direction: column; height: auto; }
+    .fullmap-svg-wrap { height: 240px; width: 100%; }
+    .fullmap-list { width: 100%; border-left: none; border-top: 1px solid var(--border); max-height: 260px; }
+  }
 
   .route-card { padding: 10px 12px; border-radius: 12px; border: 1.5px solid transparent; cursor: pointer; transition: all 0.2s; }
   .route-card:hover { background: rgba(196,80,122,0.05); border-color: rgba(196,80,122,0.2); }
   .route-card.active { background: rgba(196,80,122,0.08); border-color: var(--accent); }
   .route-card-top { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
   .route-card-dot { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 900; color: #fff; flex-shrink: 0; }
-  .route-card-name { font-size: 12px; font-weight: 700; color: var(--ink); line-height: 1.3; }
-  .route-card-badge { margin-left: auto; font-size: 9px; font-weight: 700; color: var(--muted); }
-  .route-card-desc { font-size: 10px; color: var(--muted); line-height: 1.5; padding-left: 30px; }
-  .route-card-time { font-size: 9px; font-weight: 700; color: var(--accent); padding-left: 30px; margin-top: 3px; }
+  .route-card-badge { margin-left: auto; font-size: 11px; font-weight: 700; color: var(--muted); }
+  .route-card-name { font-size: 13px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .route-card-desc { font-size: 11px; color: var(--muted); line-height: 1.5; padding-left: 30px; }
+  .route-card-time { font-size: 11px; font-weight: 700; color: var(--accent); padding-left: 30px; margin-top: 3px; }
 
   .map-btn { padding: 8px 14px; border-radius: 10px; font-size: 11px; font-weight: 700; text-decoration: none; text-align: center; transition: opacity 0.2s; display: inline-block; }
   .map-btn-primary { background: var(--accent); color: #fff; }
