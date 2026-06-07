@@ -143,112 +143,18 @@
         </a>
     </main>
 
-    <!-- Top 하나비 -->
+    <!-- 하나비 가이드 (RegionFilter + HanabiCards) -->
     <section id="events" class="relative z-10 px-6 pb-16 max-w-7xl mx-auto">
         <div class="mb-8">
-            <p class="text-[10px] font-black text-indigo-400 uppercase tracking-[0.25em] mb-2">Top Events</p>
+            <p class="text-[10px] font-black text-indigo-400 uppercase tracking-[0.25em] mb-2">Fireworks Guide</p>
             <h2 class="text-3xl md:text-4xl font-black text-white">
-                전국 하나비 <span class="text-transparent bg-clip-text" style="background-image: linear-gradient(to right, #a78bfa, #f472b6)">BEST 5</span>
+                지역별 하나비 <span class="text-transparent bg-clip-text" style="background-image: linear-gradient(to right, #a78bfa, #f472b6)">완벽 가이드</span>
             </h2>
         </div>
-        <!-- RegionFilter -->
+        <!-- RegionFilter — rendered by components.js -->
         <div id="hanabi-region-filter" class="mb-8"></div>
-        <div class="space-y-5">
-            <!-- 스미다강 -->
-            <div data-region="kanto" class="city-card card-zoom group relative overflow-hidden rounded-[2.5rem] h-[280px] shadow-2xl border border-white/10 cursor-pointer">
-                <img src="https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?w=1200&q=80" alt="Sumida" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700">
-                <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent"></div>
-                <div class="absolute inset-0 flex items-center px-10">
-                    <div class="max-w-lg">
-                        <div class="flex items-center gap-3 mb-3">
-                            <span class="text-3xl font-black text-orange-300 opacity-40">#01</span>
-                            <span class="glass-effect px-3 py-1 rounded-full text-[10px] font-black text-indigo-300 uppercase tracking-widest">Tokyo · Sumida</span>
-                        </div>
-                        <h3 class="text-2xl md:text-3xl font-black text-white mb-2">스미다강 불꽃대회</h3>
-                        <p class="text-sm text-slate-300 font-bold leading-relaxed mb-4">도쿄 최대 규모 2만 발. 스카이트리와 불꽃의 환상적인 콜라보레이션. 100만 명 이상 운집.</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="text-[9px] font-black px-2.5 py-1 rounded-full bg-orange-500/20 text-orange-300">7월 마지막 토요일</span>
-                            <span class="text-[9px] font-black px-2.5 py-1 rounded-full bg-white/10 text-white/70">20,000발</span>
-                            <span class="text-[9px] font-black px-2.5 py-1 rounded-full bg-white/10 text-white/70">스카이트리 뷰</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <!-- 나가오카 -->
-                <div data-region="chubu" class="city-card card-zoom group relative overflow-hidden rounded-[2.5rem] h-[300px] shadow-xl border border-white/10 cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1601506521793-dc748fc80b67?w=800&q=80" alt="Nagaoka" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
-                    <div class="absolute top-6 left-6">
-                        <span class="glass-effect px-3 py-1 rounded-full text-[10px] font-black text-pink-300 uppercase tracking-widest">Niigata · Aug 2-3</span>
-                    </div>
-                    <div class="absolute bottom-8 left-8 right-8">
-                        <div class="flex items-center gap-2 mb-2">
-                            <span class="text-2xl font-black text-orange-300 opacity-40">#02</span>
-                        </div>
-                        <h3 class="text-xl font-black text-white mb-2">나가오카 대불꽃축제</h3>
-                        <p class="text-xs text-slate-300 font-bold leading-relaxed mb-3">피닉스 불꽃·삼척 성성, 신가타 평야를 물들이는 2만 발. 일본 3대 불꽃 축제 중 하나.</p>
-                        <div class="flex gap-2 flex-wrap">
-                            <span class="text-[9px] font-black px-2 py-1 rounded-full bg-pink-500/20 text-pink-300">8월 2~3일</span>
-                            <span class="text-[9px] font-black px-2 py-1 rounded-full bg-white/10 text-white/70">피닉스 불꽃</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- 오마가리 -->
-                <div data-region="tohoku" class="city-card card-zoom group relative overflow-hidden rounded-[2.5rem] h-[300px] shadow-xl border border-white/10 cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1533230408708-8f9f91d1235a?w=800&q=80" alt="Omagari" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
-                    <div class="absolute top-6 left-6">
-                        <span class="glass-effect px-3 py-1 rounded-full text-[10px] font-black text-violet-300 uppercase tracking-widest">Akita · Aug Last Sat</span>
-                    </div>
-                    <div class="absolute bottom-8 left-8 right-8">
-                        <div class="flex items-center gap-2 mb-2">
-                            <span class="text-2xl font-black text-orange-300 opacity-40">#03</span>
-                        </div>
-                        <h3 class="text-xl font-black text-white mb-2">오마가리 전국불꽃경기대회</h3>
-                        <p class="text-xs text-slate-300 font-bold leading-relaxed mb-3">전국 장인이 기술을 겨루는 경쟁 대회. 창의적인 신작 불꽃들이 밤하늘을 장식.</p>
-                        <div class="flex gap-2 flex-wrap">
-                            <span class="text-[9px] font-black px-2 py-1 rounded-full bg-violet-500/20 text-violet-300">8월 마지막 토</span>
-                            <span class="text-[9px] font-black px-2 py-1 rounded-full bg-white/10 text-white/70">경연대회</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <!-- 나니와 요도가와 -->
-                <div data-region="kansai" class="city-card card-zoom group relative overflow-hidden rounded-[2.5rem] h-[260px] shadow-xl border border-white/10 cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1489549132488-d00b7eee80f1?w=800&q=80" alt="Osaka" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
-                    <div class="absolute top-6 left-6">
-                        <span class="glass-effect px-3 py-1 rounded-full text-[10px] font-black text-emerald-300 uppercase tracking-widest">Osaka · Aug 8</span>
-                    </div>
-                    <div class="absolute bottom-8 left-8 right-8">
-                        <div class="flex items-center gap-2 mb-1">
-                            <span class="text-2xl font-black text-orange-300 opacity-40">#04</span>
-                        </div>
-                        <h3 class="text-xl font-black text-white mb-2">나니와 요도가와 하나비</h3>
-                        <p class="text-xs text-slate-300 font-bold leading-relaxed">요도가와 강변에서 펼쳐지는 오사카 최대 불꽃 축제. 2만 발, 도심 접근성 최고.</p>
-                    </div>
-                </div>
-                <!-- 미야지마 -->
-                <div data-region="chugoku" class="city-card card-zoom group relative overflow-hidden rounded-[2.5rem] h-[260px] shadow-xl border border-white/10 cursor-pointer">
-                    <img src="https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800&q=80" alt="Miyajima" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
-                    <div class="absolute top-6 left-6">
-                        <span class="glass-effect px-3 py-1 rounded-full text-[10px] font-black text-amber-300 uppercase tracking-widest">Hiroshima · Aug 14</span>
-                    </div>
-                    <div class="absolute bottom-8 left-8 right-8">
-                        <div class="flex items-center gap-2 mb-1">
-                            <span class="text-2xl font-black text-orange-300 opacity-40">#05</span>
-                        </div>
-                        <h3 class="text-xl font-black text-white mb-2">미야지마 수중 불꽃대회</h3>
-                        <p class="text-xs text-slate-300 font-bold leading-relaxed">바다 위 도리이와 불꽃의 절경. 전국 유일의 수중 불꽃쇼, 일본에서 가장 아름다운 하나비.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!-- HanabiCards — rendered by components.js -->
+        <div id="hanabi-cards" class="space-y-5"></div>
     </section>
 
     <!-- 관람 가이드 -->
@@ -328,19 +234,77 @@
 
         applyTheme(localStorage.getItem('theme') || 'light');
 
-        document.addEventListener('DOMContentLoaded', () => {
+        // ── 지역별 색상 & 대표 이미지 ──
+        const HANABI_REGION_META = {
+            tokyo:    { color: 'indigo', image: 'https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?w=800&q=80' },
+            osaka:    { color: 'rose',   image: 'https://images.unsplash.com/photo-1489549132488-d00b7eee80f1?w=800&q=80' },
+            kyoto:    { color: 'violet', image: 'https://images.unsplash.com/photo-1533230408708-8f9f91d1235a?w=800&q=80' },
+            hokkaido: { color: 'sky',    image: 'https://images.unsplash.com/photo-1601506521793-dc748fc80b67?w=800&q=80' },
+            kyushu:   { color: 'orange', image: 'https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800&q=80' },
+        };
+
+        async function initHanabi() {
+            const grid = document.getElementById('hanabi-cards');
+            if (!grid) return;
+
+            let json;
+            try {
+                const res = await fetch('src/data/matsuriData.json');
+                if (!res.ok) throw new Error(res.status);
+                json = await res.json();
+            } catch (e) {
+                console.error('matsuriData.json 로드 실패:', e);
+                grid.innerHTML = '<p class="text-slate-400 text-sm font-bold py-8 text-center">데이터를 불러올 수 없습니다.</p>';
+                return;
+            }
+
+            let rank = 0;
+            const regionFilters = [];
+
+            for (const region of json.regions) {
+                if (!region.hanabi?.length) continue;
+
+                const meta = HANABI_REGION_META[region.id] || { color: 'indigo', image: '' };
+                regionFilters.push({ id: region.id, label: region.name, emoji: region.emoji, color: meta.color });
+
+                for (const item of region.hanabi) {
+                    rank++;
+                    const scaleText = item.scale
+                        ? (item.scale.frequency
+                            ? `${item.scale.shells}발 · ${item.scale.frequency}`
+                            : `약 ${(item.scale.shells || 0).toLocaleString()}발`)
+                        : '';
+
+                    const wrapper = document.createElement('div');
+                    renderMatsuriCard(wrapper, {
+                        region:      region.id,
+                        regionLabel: region.name,
+                        regionEmoji: region.emoji,
+                        color:       meta.color,
+                        rank:        String(rank).padStart(2, '0'),
+                        subtitle:    scaleText,
+                        name:        item.name,
+                        nameJP:      item.nameJa,
+                        date:        item.date.label,
+                        highlight:   item.highlights[0] || '',
+                        desc:        item.highlights.join(' '),
+                        tags:        item.tags,
+                        city:        item.venue.name,
+                        image:       meta.image,
+                        link:        '',
+                    });
+                    grid.appendChild(wrapper);
+                }
+            }
+
             new RegionFilter({
                 containerId: 'hanabi-region-filter',
-                regions: [
-                    { id: 'kanto',   label: '간토',   emoji: '🗼', color: 'sky'    },
-                    { id: 'kansai',  label: '간사이', emoji: '⛩️', color: 'rose'   },
-                    { id: 'tohoku',  label: '도호쿠', emoji: '🏔️', color: 'violet' },
-                    { id: 'chubu',   label: '중부',   emoji: '⛰️', color: 'teal'   },
-                    { id: 'chugoku', label: '주고쿠', emoji: '🌊', color: 'orange' },
-                ],
-                cardSelector: '#events [data-region]',
+                regions: regionFilters,
+                cardSelector: '#hanabi-cards .matsuri-card',
             });
-        });
+        }
+
+        document.addEventListener('DOMContentLoaded', initHanabi);
 
         function createSparks() {
             const container = document.getElementById('spark-container');

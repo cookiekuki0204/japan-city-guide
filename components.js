@@ -305,9 +305,7 @@ function renderMatsuriCard(container, d) {
           <i class="fa-solid fa-location-dot" style="color:${c.accent};"></i>
           ${d.city}
         </span>
-        <a href="${d.link}" class="mc-cta" style="background:${c.accent};">
-          가이드 보기&nbsp;<i class="fa-solid fa-arrow-right-long"></i>
-        </a>
+        ${d.link ? `<a href="${d.link}" class="mc-cta" style="background:${c.accent};">가이드 보기&nbsp;<i class="fa-solid fa-arrow-right-long"></i></a>` : ''}
       </div>
     </div>
   `;

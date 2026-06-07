@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>나카메구로 — Japan City Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&family=Shippori+Mincho:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf8f5;
+    --ink: #1a1410;
+    --muted: #9a8e84;
+    --accent: #e07b3a;
+    --border: rgba(26,20,16,0.08);
+    --card-w: min(300px, 75vw);
+    --card-h: calc(min(300px, 75vw) * 5 / 4);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); font-family: 'Noto Sans KR', sans-serif; color: var(--ink); overflow-x: hidden; }
+
+  .section-wrap { padding: 64px 0 64px; }
+  .section-top { padding: 0 28px; margin-bottom: 16px; display: flex; align-items: flex-end; justify-content: space-between; }
+  .eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+  .section-title { font-family: 'Shippori Mincho', serif; font-size: clamp(22px, 5vw, 32px); font-weight: 700; line-height: 1.2; }
+  .section-title .jp { font-size: 0.58em; color: var(--muted); display: block; font-weight: 400; margin-top: 4px; letter-spacing: 0.15em; }
+  .see-all { font-size: 11px; font-weight: 700; color: var(--muted); text-decoration: none; border-bottom: 1px solid var(--muted); padding-bottom: 2px; white-space: nowrap; margin-bottom: 4px; }
+
+  .info-strip { display: flex; overflow-x: auto; padding: 0 28px 16px; scrollbar-width: none; }
+  .info-strip::-webkit-scrollbar { display: none; }
+  .info-item { flex: 0 0 auto; padding: 8px 18px 8px 0; border-right: 1px solid var(--border); margin-right: 18px; }
+  .info-item:last-child { border-right: none; }
+  .info-label { font-size: 9px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
+  .info-value { font-family: 'Shippori Mincho', serif; font-size: 13px; font-weight: 600; }
+
+  /* slider */
+  .slider-track { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding: 4px 28px 16px; scrollbar-width: none; cursor: grab; align-items: stretch; }
+  .slider-track:active { cursor: grabbing; }
+  .slider-track::-webkit-scrollbar { display: none; }
+
+  /* image card — strictly 4:5, no extra space */
+  .card {
+    flex: 0 0 var(--card-w);
+    width: var(--card-w);
+    height: var(--card-h);
+    scroll-snap-align: start;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 2px 14px rgba(26,20,16,0.10);
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    background: #eee;
+    flex-shrink: 0;
+  }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(26,20,16,0.16); }
+  .card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .card-num {
+    position: absolute; top: 12px; right: 12px;
+    background: rgba(0,0,0,0.38); backdrop-filter: blur(4px);
+    color: #fff; font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+    padding: 4px 10px; border-radius: 20px;
+  }
+
+  /* map card — same height as image cards */
+  /* fullmap section */
+  .fullmap-wrap { margin: 24px 28px 0; border-radius: 20px; overflow: hidden; border: 1px solid var(--border); background: #fff; }
+  .fullmap-head { padding: 18px 22px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .map-head-label { font-size: 9px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+  .fullmap-title { font-family: 'Shippori Mincho', serif; font-size: 18px; font-weight: 700; margin-top: 4px; }
+  .fullmap-sub { font-size: 11px; color: var(--muted); margin-top: 3px; }
+  .fullmap-btns { display: flex; gap: 8px; }
+  .fullmap-body { display: flex; height: 340px; }
+  .fullmap-svg-wrap { flex: 1; overflow: hidden; background: #ede9e0; }
+  .fullmap-list { width: 220px; flex-shrink: 0; overflow-y: auto; border-left: 1px solid var(--border); padding: 12px; display: flex; flex-direction: column; gap: 6px; scrollbar-width: thin; }
+
+  .route-card { padding: 10px 12px; border-radius: 12px; border: 1.5px solid transparent; cursor: pointer; transition: all 0.2s; }
+  .route-card:hover { background: rgba(224,123,58,0.05); border-color: rgba(224,123,58,0.2); }
+  .route-card.active { background: rgba(224,123,58,0.08); border-color: var(--accent); }
+  .route-card-top { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+  .route-card-dot { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 900; color: #fff; flex-shrink: 0; }
+  .route-card-name { font-size: 12px; font-weight: 700; color: var(--ink); line-height: 1.3; }
+  .route-card-badge { margin-left: auto; font-size: 9px; font-weight: 700; color: var(--muted); }
+  .route-card-desc { font-size: 10px; color: var(--muted); line-height: 1.5; padding-left: 30px; }
+  .route-card-time { font-size: 9px; font-weight: 700; color: var(--accent); padding-left: 30px; margin-top: 3px; }
+
+  .map-btn { padding: 8px 14px; border-radius: 10px; font-size: 11px; font-weight: 700; text-decoration: none; text-align: center; transition: opacity 0.2s; display: inline-block; }
+  .map-btn-primary { background: var(--accent); color: #fff; }
+  .map-btn-primary:hover { opacity: 0.85; }
+  .map-btn-secondary { background: rgba(26,20,16,0.07); color: var(--ink); }
+  .map-btn-secondary:hover { background: rgba(26,20,16,0.12); }
+
+  /* arrow buttons */
+  .slider-arrow {
+    position: absolute;
+    top: 50%; transform: translateY(-50%);
+    z-index: 10;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: #fff;
+    box-shadow: 0 2px 12px rgba(26,20,16,0.18);
+    font-size: 18px;
+    color: var(--ink);
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s, transform 0.2s;
+    padding: 0;
+  }
+  .slider-arrow:hover { background: var(--accent); color: #fff; }
+  .slider-arrow:active { transform: translateY(-50%) scale(0.93); }
+  .slider-arrow-left { left: 6px; }
+  .slider-arrow-right { right: 6px; }
+  .slider-arrow:disabled { opacity: 0.25; pointer-events: none; }
+
+  /* dots */
+  .slider-dots { display: flex; justify-content: center; gap: 5px; padding-top: 4px; }
+  .dot { width: 5px; height: 5px; border-radius: 3px; background: rgba(26,20,16,0.12); transition: width 0.3s, background 0.3s; cursor: pointer; }
+  .dot.active { width: 18px; background: var(--accent); }
+</style>
+</head>
+<body>
+<div class="section-wrap">
+
+  <div class="section-top">
+    <div>
+      <p class="eyebrow">Neighborhood Deep Dive · Tokyo</p>
+      <h2 class="section-title">나카메구로<span class="jp">中目黒 Nakameguro</span></h2>
+    </div>
+    <a href="#" class="see-all">전체 동네 →</a>
+  </div>
+
+  <div class="info-strip">
+    <div class="info-item"><div class="info-label">Access</div><div class="info-value">시부야 5분</div></div>
+    <div class="info-item"><div class="info-label">Station</div><div class="info-value">나카메구로역</div></div>
+    <div class="info-item"><div class="info-label">Vibe</div><div class="info-value">강변 감성</div></div>
+    <div class="info-item"><div class="info-label">Best</div><div class="info-value">봄·가을</div></div>
+    <div class="info-item"><div class="info-label">Spots</div><div class="info-value">7곳</div></div>
+  </div>
+
+  <div style="position:relative;">
+    <button class="slider-arrow slider-arrow-left" id="arrowLeft" onclick="slideMove(-1)">&#8592;</button>
+    <button class="slider-arrow slider-arrow-right" id="arrowRight" onclick="slideMove(1)">&#8594;</button>
+
+  <div class="slider-track" id="sliderTrack">
+
+    <!-- 1~8: 이미지만, 텍스트 없음 -->
+    <div class="card"><img src="images/nakameguro/1.png" alt="나카메구로 커버"><div class="card-num">01 / 09</div></div>
+    <div class="card"><img src="images/nakameguro/2.png" alt="메구로강 산책로"><div class="card-num">02 / 09</div></div>
+    <div class="card"><img src="images/nakameguro/3.png" alt="츠타야 서점"><div class="card-num">03 / 09</div></div>
+    <div class="card"><img src="images/nakameguro/4.png" alt="BIRD LAB."><div class="card-num">04 / 09</div></div>
+    <div class="card"><img src="images/nakameguro/5.png" alt="카우북스"><div class="card-num">05 / 09</div></div>
+    <div class="card"><img src="images/nakameguro/6.png" alt="잔티크스"><div class="card-num">06 / 09</div></div>
+    <div class="card"><img src="images/nakameguro/7.png" alt="사이드워크 스탠드"><div class="card-num">07 / 09</div></div>
+    <div class="card"><img src="images/nakameguro/8.png" alt="아후리"><div class="card-num">08 / 09</div></div>
+    <div class="card"><img src="images/nakameguro/9.png" alt="하루 코스 지도"><div class="card-num">09 / 09</div></div>
+
+  </div><!-- /slider-track -->
+  </div><!-- /slider-wrap -->
+
+  <div class="slider-dots" id="sliderDots"></div>
+
+  <!-- 풀사이즈 지도 섹션 -->
+  <div class="fullmap-wrap">
+    <div class="fullmap-head">
+      <div>
+        <div class="map-head-label">📍 Walking Route</div>
+        <div class="fullmap-title">나카메구로 산책 루트</div>
+        <div class="fullmap-sub">약 2시간 · 전 구간 도보 · 7개 스팟</div>
+      </div>
+      <div class="fullmap-btns">
+        <a class="map-btn map-btn-primary" href="https://www.google.com/maps/dir/中目黒駅/AFURI+中目黒/Sidewalk+Stand/Jantiques/COW+BOOKS+中目黒/Bird+Lab." target="_blank">Google 지도로 보기</a>
+        <a class="map-btn map-btn-secondary" href="https://maps.google.com/?q=中目黒,東京都目黒区" target="_blank">지역 검색</a>
+      </div>
+    </div>
+
+    <div class="fullmap-body">
+      <!-- 왼쪽: Google Maps Embed -->
+      <div class="fullmap-svg-wrap">
+        <iframe
+          width="100%" height="100%"
+          style="border:none; display:block;"
+          loading="lazy" allowfullscreen
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps/embed?pb=!1m52!1m12!1m3!1d1621.5!2d139.6985!3d35.6455!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m37!3e2!4m5!1s0x60188c54d4c8f9d7%3A0xfc793d77ede779fc!2z5Lit55uu6Z2S6aeF!3m2!1d35.6441631!2d139.69884439999998!4m5!1s0x60188c54caab4b3b%3A0x539de97d49e9b869!2sAFURI%20Nakameguro!3m2!1d35.6443648!2d139.6996333!4m5!1s0x60188c547c407c2b%3A0xff3a2798b6c814e9!2sSidewalk%20Stand!3m2!1d35.64691!2d139.696679!4m5!1s0x60188c5489584ba7%3A0x65abb13ceae4da12!2sJantiques!3m2!1d35.6412525!2d139.6965165!4m5!1s0x60188c54e34bbe07%3A0xaed0d03600d0b798!2sCOW%20BOOKS!3m2!1d35.6477149!2d139.6959823!4m5!1s0x60188fe3e36bebc3%3A0x0f4fc534cee4352f!2sBird%20Lab.!3m2!1d35.6474153!2d139.6958342!5e0!3m2!1sko!2skr!4v1">
+        </iframe>
+      </div>
+
+      <!-- 오른쪽: 루트 리스트 -->
+      <div class="fullmap-list" id="routeList">
+        <!-- JS로 렌더링 -->
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const spots = [
+    { num: 'Ⓐ', name: '나카메구로역',     desc: '산책 출발점. 히비야선·도큐 토요코선',    time: '11:00', color: '#6366f1', badge: '출발' },
+    { num: 'Ⓑ', name: '메구로강 산책로',  desc: '강변 따라 천천히. 계절마다 다른 얼굴',  time: '11:05', color: '#4a9b8a', badge: '' },
+    { num: 'Ⓒ', name: '츠타야 서점',      desc: '고가철로 아래 감성 서점. 책·음악·아트',  time: '11:30', color: '#c4956a', badge: '' },
+    { num: 'Ⓓ', name: '사이드워크 스탠드', desc: '테이크아웃 커피. 강변 산책의 쉼표',     time: '12:00', color: '#e07b3a', badge: '' },
+    { num: 'Ⓔ', name: '잔티크스',         desc: '나카메구로 빈티지 숍. 희귀 아이템',     time: '14:30', color: '#8b6a9e', badge: '' },
+    { num: 'Ⓕ', name: '카우북스',         desc: '강변 큐레이션 헌책방. 아트·디자인',     time: '15:30', color: '#5b8a6b', badge: '' },
+    { num: 'Ⓖ', name: 'BIRD LAB.',        desc: '하이브리드 야키토리. 메구로강 뷰 5층',  time: '18:00', color: '#c0392b', badge: '저녁' },
+  ];
+
+  const list = document.getElementById('routeList');
+  spots.forEach((s, i) => {
+    const card = document.createElement('div');
+    card.className = 'route-card' + (i === 0 ? ' active' : '');
+    card.onclick = () => document.querySelectorAll('.route-card').forEach((c, j) => c.classList.toggle('active', i === j));
+    card.innerHTML = `
+      <div class="route-card-top">
+        <div class="route-card-dot" style="background:${s.color}">${s.num}</div>
+        <div class="route-card-name">${s.name}</div>
+        ${s.badge ? `<div class="route-card-badge">${s.badge}</div>` : ''}
+      </div>
+      <div class="route-card-desc">${s.desc}</div>
+      <div class="route-card-time">${s.time}</div>
+    `;
+    list.appendChild(card);
+  });
+
+  const track = document.getElementById('sliderTrack');
+  const dotsEl = document.getElementById('sliderDots');
+  const arrowL = document.getElementById('arrowLeft');
+  const arrowR = document.getElementById('arrowRight');
+  const cards = Array.from(track.children);
+
+  function slideMove(dir) {
+    const cw = cards[0].offsetWidth + 12;
+    track.scrollBy({ left: cw * dir, behavior: 'smooth' });
+  }
+
+  function updateUI() {
+    const idx = Math.min(Math.round(track.scrollLeft / (cards[0].offsetWidth + 12)), cards.length - 1);
+    dotsEl.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+    arrowL.disabled = track.scrollLeft < 10;
+    arrowR.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 10;
+  }
+
+  cards.forEach((_, i) => {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.addEventListener('click', () => cards[i].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' }));
+    dotsEl.appendChild(d);
+  });
+
+  // 카드 클릭 → 모달
+  const imgSrcs = [
+    'images/nakameguro/1.png',
+    'images/nakameguro/2.png',
+    'images/nakameguro/3.png',
+    'images/nakameguro/4.png',
+    'images/nakameguro/5.png',
+    'images/nakameguro/6.png',
+    'images/nakameguro/7.png',
+    'images/nakameguro/8.png',
+    'images/nakameguro/9.png',
+  ];
+  let modalIdx = 0;
+
+  cards.forEach((card, i) => {
+    card.style.cursor = 'zoom-in';
+    card.addEventListener('click', () => openModal(i));
+  });
+
+  function openModal(i) {
+    modalIdx = i;
+    document.getElementById('modalImg').src = imgSrcs[i];
+    document.getElementById('modalCounter').textContent = `${String(i+1).padStart(2,'0')} / ${imgSrcs.length}`;
+    document.getElementById('imgModal').style.display = 'block';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('imgModal').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  function modalMove(dir) {
+    modalIdx = (modalIdx + dir + imgSrcs.length) % imgSrcs.length;
+    document.getElementById('modalImg').src = imgSrcs[modalIdx];
+    document.getElementById('modalCounter').textContent = `${String(modalIdx+1).padStart(2,'0')} / ${imgSrcs.length}`;
+  }
+
+  // 키보드 지원
+  document.addEventListener('keydown', e => {
+    if (document.getElementById('imgModal').style.display === 'none') return;
+    if (e.key === 'ArrowRight') modalMove(1);
+    if (e.key === 'ArrowLeft') modalMove(-1);
+    if (e.key === 'Escape') closeModal();
+  });
+</script>
+
+<!-- 이미지 모달 -->
+<div id="imgModal" style="display:none; position:fixed; inset:0; z-index:1000; background:rgba(0,0,0,0.92); cursor:zoom-out;" onclick="closeModal()">
+  <button onclick="modalMove(-1); event.stopPropagation()" style="position:fixed; left:20px; top:50%; transform:translateY(-50%); width:48px; height:48px; border-radius:50%; border:none; background:rgba(255,255,255,0.15); color:#fff; font-size:22px; cursor:pointer; display:flex; align-items:center; justify-content:center;">&#8592;</button>
+  <button onclick="modalMove(1); event.stopPropagation()" style="position:fixed; right:20px; top:50%; transform:translateY(-50%); width:48px; height:48px; border-radius:50%; border:none; background:rgba(255,255,255,0.15); color:#fff; font-size:22px; cursor:pointer; display:flex; align-items:center; justify-content:center;">&#8594;</button>
+  <button onclick="closeModal(); event.stopPropagation()" style="position:fixed; top:20px; right:20px; width:44px; height:44px; border-radius:50%; border:none; background:rgba(255,255,255,0.15); color:#fff; font-size:20px; cursor:pointer; display:flex; align-items:center; justify-content:center;">✕</button>
+  <div style="display:flex; align-items:center; justify-content:center; width:100%; height:100%; padding:20px;" onclick="event.stopPropagation()">
+    <img id="modalImg" src="" alt="" style="max-width:88vw; max-height:88vh; object-fit:contain; border-radius:12px; display:block;">
+  </div>
+  <div id="modalCounter" style="position:fixed; bottom:28px; left:50%; transform:translateX(-50%); color:rgba(255,255,255,0.55); font-size:12px; font-weight:700; letter-spacing:0.15em;"></div>
+</div>
+
+</body>
+</html>
