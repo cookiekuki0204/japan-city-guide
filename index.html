@@ -212,6 +212,15 @@
             return 'winter';
         }
 
+        // ── 월별 CTA 시즌 페이지 ──
+        function getSeasonCTA() {
+            const m = new Date().getMonth() + 1;
+            if (m >= 3 && m <= 4) return { page: 'sakura',   text: '🌸 벚꽃 가이드 보기' };
+            if (m >= 5 && m <= 6) return { page: 'matsuri',  text: '🎆 마쓰리 가이드 보기' };
+            if (m >= 7 && m <= 8) return { page: 'hanabi',   text: '🎇 하나비 가이드 보기' };
+            return { page: '#explore', text: '🗾 도시 탐험하기' };
+        }
+
         // ── 계절별 데이터 ──
         const seasonData = {
             spring: {
@@ -329,20 +338,12 @@
             const desc = document.getElementById('hero-desc');
             if (desc) desc.innerHTML = s.desc;
 
-            // CTA 버튼
+            // CTA 버튼 — 월별 시즌 페이지로 연결
+            const ctaInfo = getSeasonCTA();
             const cta = document.getElementById('hero-cta');
-            if (cta) cta.style.backgroundColor = s.ctaColor;
+            if (cta) { cta.style.backgroundColor = s.ctaColor; cta.href = ctaInfo.page; }
             const ctaText = document.getElementById('hero-cta-text');
-            if (ctaText) ctaText.textContent = s.ctaText;
-
-            // 도시 카드 설명 + 버튼
-            Object.entries(s.cities).forEach(([city, text]) => {
-                const el = document.getElementById(`city-desc-${city}`);
-                if (el) el.textContent = text;
-            });
-            document.querySelectorAll('.city-guide-btn').forEach(el => {
-                el.textContent = s.cityBtnText;
-            });
+            if (ctaText) ctaText.textContent = ctaInfo.text;
         }
 
         document.addEventListener('DOMContentLoaded', applySeasonUI);
@@ -390,9 +391,9 @@
             </div>
             <div class="absolute bottom-12 left-10 right-10 text-white text-left">
                 <h3 class="text-4xl font-black mb-2 uppercase">TOKYO</h3>
-                <p id="city-desc-tokyo" class="text-sm opacity-80 mb-6 font-bold leading-relaxed"></p>
+                <p class="text-sm opacity-80 mb-6 font-bold leading-relaxed">간토의 심장. 벚꽃·마쓰리·불꽃이 공존하는 일본 최대 도시</p>
                 <div class="flex items-center gap-3 text-white font-black text-xs bg-sky-500 px-6 py-3 rounded-full w-fit shadow-lg transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 border border-white/20">
-                    <span class="city-guide-btn">가이드 보기</span>
+                    <span>도시 가이드 보기</span>
                     <i class="fa-solid fa-arrow-right-long"></i>
                 </div>
             </div>
@@ -407,9 +408,9 @@
             </div>
             <div class="absolute bottom-12 left-10 right-10 text-white text-left">
                 <h3 class="text-4xl font-black mb-2 uppercase">OSAKA</h3>
-                <p id="city-desc-osaka" class="text-sm opacity-80 mb-6 font-bold leading-relaxed"></p>
+                <p class="text-sm opacity-80 mb-6 font-bold leading-relaxed">먹방과 축제의 도시. 도톤보리의 열기와 오사카성의 사계</p>
                 <div class="flex items-center gap-3 text-white font-black text-xs bg-rose-500 px-6 py-3 rounded-full w-fit shadow-lg transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 border border-white/20">
-                    <span class="city-guide-btn">가이드 보기</span>
+                    <span>도시 가이드 보기</span>
                     <i class="fa-solid fa-arrow-right-long"></i>
                 </div>
             </div>
@@ -424,9 +425,9 @@
             </div>
             <div class="absolute bottom-12 left-10 right-10 text-white text-left">
                 <h3 class="text-4xl font-black mb-2 uppercase">KYOTO</h3>
-                <p id="city-desc-kyoto" class="text-sm opacity-80 mb-6 font-bold leading-relaxed"></p>
+                <p class="text-sm opacity-80 mb-6 font-bold leading-relaxed">천년 고도의 정수. 기온마쓰리, 사찰 벚꽃, 단풍이 공존</p>
                 <div class="flex items-center gap-3 text-white font-black text-xs bg-sky-500 px-6 py-3 rounded-full w-fit shadow-lg transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 border border-white/20">
-                    <span class="city-guide-btn">가이드 보기</span>
+                    <span>도시 가이드 보기</span>
                     <i class="fa-solid fa-arrow-right-long"></i>
                 </div>
             </div>
@@ -441,9 +442,9 @@
             </div>
             <div class="absolute bottom-12 left-10 right-10 text-white text-left">
                 <h3 class="text-4xl font-black mb-2 uppercase">FUKUOKA</h3>
-                <p id="city-desc-fukuoka" class="text-sm opacity-80 mb-6 font-bold leading-relaxed"></p>
+                <p class="text-sm opacity-80 mb-6 font-bold leading-relaxed">규슈의 관문. 하카타 야마카사 마쓰리의 본고장</p>
                 <div class="flex items-center gap-3 text-white font-black text-xs bg-rose-500 px-6 py-3 rounded-full w-fit shadow-lg transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 border border-white/20">
-                    <span class="city-guide-btn">가이드 보기</span>
+                    <span>도시 가이드 보기</span>
                     <i class="fa-solid fa-arrow-right-long"></i>
                 </div>
             </div>
@@ -458,9 +459,9 @@
             </div>
             <div class="absolute bottom-12 left-10 right-10 text-white text-left">
                 <h3 class="text-4xl font-black mb-2 uppercase">SAPPORO</h3>
-                <p id="city-desc-sapporo" class="text-sm opacity-80 mb-6 font-bold leading-relaxed"></p>
+                <p class="text-sm opacity-80 mb-6 font-bold leading-relaxed">홋카이도의 심장. 눈축제부터 여름 맥주 가든까지 사계절</p>
                 <div class="flex items-center gap-3 text-white font-black text-xs bg-sky-500 px-6 py-3 rounded-full w-fit shadow-lg transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 border border-white/20">
-                    <span class="city-guide-btn">가이드 보기</span>
+                    <span>도시 가이드 보기</span>
                     <i class="fa-solid fa-arrow-right-long"></i>
                 </div>
             </div>
@@ -475,9 +476,9 @@
             </div>
             <div class="absolute bottom-12 left-10 right-10 text-white text-left">
                 <h3 class="text-4xl font-black mb-2 uppercase">NAGOYA</h3>
-                <p id="city-desc-nagoya" class="text-sm opacity-80 mb-6 font-bold leading-relaxed"></p>
+                <p class="text-sm opacity-80 mb-6 font-bold leading-relaxed">주부 지방의 중심. 아쓰타 마쓰리와 나고야성의 역사</p>
                 <div class="flex items-center gap-3 text-white font-black text-xs bg-rose-500 px-6 py-3 rounded-full w-fit shadow-lg transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 border border-white/20">
-                    <span class="city-guide-btn">가이드 보기</span>
+                    <span>도시 가이드 보기</span>
                     <i class="fa-solid fa-arrow-right-long"></i>
                 </div>
             </div>
