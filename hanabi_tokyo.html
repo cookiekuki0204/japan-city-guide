@@ -24,6 +24,16 @@
         .dark .glass-effect { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1); }
         #mainHeader.scrolled { background-color: rgba(248,250,252,0.9); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.06); padding-top:.75rem; padding-bottom:.75rem; }
         .dark #mainHeader.scrolled { background-color: rgba(15,23,42,0.9); }
+        .guide-detail { border: 1.5px solid #f1f5f9; border-top: none; border-radius: 0 0 2.5rem 2.5rem; background: #f8fafc; padding: 24px 28px 28px; }
+        .dark .guide-detail { background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.06); }
+        .guide-spot { padding-left: 12px; border-left: 2px solid #e2e8f0; margin-bottom: 12px; }
+        .dark .guide-spot { border-left-color: rgba(255,255,255,0.1); }
+        .guide-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
+        @media (max-width: 640px) { .guide-grid { grid-template-columns: 1fr; } }
+        .guide-grid-cell { background: #fff; border-radius: 1rem; padding: 14px 16px; }
+        .dark .guide-grid-cell { background: rgba(255,255,255,0.05); }
+        .guide-footer { display: flex; flex-wrap: wrap; gap: 16px; padding-top: 16px; border-top: 1.5px solid #f1f5f9; align-items: center; }
+        .dark .guide-footer { border-top-color: rgba(255,255,255,0.08); }
     </style>
 </head>
 <body class="app-gradient text-slate-950 dark:text-white transition-colors duration-500">
@@ -67,7 +77,7 @@
 
     <!-- Cards -->
     <section class="relative z-10 px-6 pb-20 max-w-4xl mx-auto">
-        <div id="cards" class="space-y-5"></div>
+        <div id="cards" class="space-y-10"></div>
     </section>
 
     <!-- Counterpart CTA -->
@@ -104,16 +114,104 @@
             hokkaido: { color: 'indigo', image: 'https://images.unsplash.com/photo-1693975264425-e6d639ea27c9?w=800&q=80' },
             kyushu:   { color: 'orange', image: 'https://images.unsplash.com/photo-1679230708086-2b10acf31074?w=800&q=80' },
         };
+        var COLOR_HEX   = { sky: '#0ea5e9', rose: '#e11d48', violet: '#7c3aed', indigo: '#6366f1', orange: '#ea580c' };
+
+        function renderGuideDetail(outerEl, guide, themeColor) {
+            if (!guide) return;
+            var el = document.createElement('div');
+            el.className = 'guide-detail';
+            var html = '';
+
+            if (guide.summary) {
+                html += '<p style="font-size:.82rem;font-weight:700;line-height:1.75;color:#64748b;margin-bottom:20px;">' + guide.summary + '</p>';
+            }
+
+            if (guide.bestSpots && guide.bestSpots.length) {
+                html += '<div style="margin-bottom:20px;">';
+                html += '<p style="font-size:10px;font-weight:900;letter-spacing:.15em;text-transform:uppercase;color:#94a3b8;margin-bottom:12px;">📍 추천 관람 포인트</p>';
+                guide.bestSpots.forEach(function(spot) {
+                    html += '<div class="guide-spot">';
+                    html += '<p style="font-size:.82rem;font-weight:800;color:#1e293b;margin-bottom:3px;">' + spot.name + '</p>';
+                    html += '<p style="font-size:.78rem;font-weight:600;line-height:1.7;color:#64748b;">' + spot.desc + '</p>';
+                    html += '</div>';
+                });
+                html += '</div>';
+            }
+
+            if (guide.tips && guide.tips.length) {
+                html += '<div style="margin-bottom:20px;">';
+                html += '<p style="font-size:10px;font-weight:900;letter-spacing:.15em;text-transform:uppercase;color:#94a3b8;margin-bottom:12px;">💡 알아두면 좋은 팁</p>';
+                html += '<ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;">';
+                guide.tips.forEach(function(tip) {
+                    html += '<li style="display:flex;gap:8px;font-size:.78rem;font-weight:600;line-height:1.7;color:#64748b;">';
+                    html += '<span style="color:' + themeColor + ';flex-shrink:0;margin-top:2px;">▸</span>';
+                    html += '<span>' + tip + '</span>';
+                    html += '</li>';
+                });
+                html += '</ul></div>';
+            }
+
+            var gridItems = '';
+            if (guide.crowd) {
+                gridItems += '<div class="guide-grid-cell">';
+                gridItems += '<p style="font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#94a3b8;margin-bottom:8px;">👥 혼잡도</p>';
+                gridItems += '<p style="font-size:.78rem;font-weight:600;line-height:1.7;color:#64748b;">' + guide.crowd + '</p>';
+                gridItems += '</div>';
+            }
+            if (guide.whatToWear) {
+                gridItems += '<div class="guide-grid-cell">';
+                gridItems += '<p style="font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#94a3b8;margin-bottom:8px;">👗 복장 추천</p>';
+                gridItems += '<p style="font-size:.78rem;font-weight:600;line-height:1.7;color:#64748b;">' + guide.whatToWear + '</p>';
+                gridItems += '</div>';
+            }
+            if (gridItems) {
+                html += '<div class="guide-grid">' + gridItems + '</div>';
+            }
+
+            if (guide.food && guide.food.length) {
+                html += '<div style="margin-bottom:20px;">';
+                html += '<p style="font-size:10px;font-weight:900;letter-spacing:.15em;text-transform:uppercase;color:#94a3b8;margin-bottom:12px;">🍜 주변 먹거리</p>';
+                guide.food.forEach(function(f) {
+                    html += '<div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:10px;">';
+                    html += '<span style="font-size:1.1rem;flex-shrink:0;margin-top:1px;">🥢</span>';
+                    html += '<div>';
+                    html += '<p style="font-size:.82rem;font-weight:800;color:#1e293b;margin-bottom:2px;">' + f.name + '</p>';
+                    html += '<p style="font-size:.78rem;font-weight:600;line-height:1.7;color:#64748b;">' + f.desc + '</p>';
+                    html += '</div></div>';
+                });
+                html += '</div>';
+            }
+
+            var footerItems = [];
+            if (guide.budget) {
+                footerItems.push('<span style="font-size:.78rem;font-weight:700;color:#94a3b8;">💰 ' + guide.budget + '</span>');
+            }
+            if (guide.officialUrl) {
+                footerItems.push('<a href="' + guide.officialUrl + '" target="_blank" rel="noopener noreferrer" style="font-size:.78rem;font-weight:900;color:' + themeColor + ';text-decoration:none;">공식 사이트 →</a>');
+            }
+            if (footerItems.length) {
+                html += '<div class="guide-footer">' + footerItems.join('') + '</div>';
+            }
+
+            el.innerHTML = html;
+            outerEl.appendChild(el);
+        }
 
         async function initCards() {
             var container = document.getElementById('cards');
             try {
-                var res    = await fetch('src/data/matsuriData.json');
-                var json   = await res.json();
-                var region = json.regions.find(function(r) { return r.id === CITY_REGION; });
+                var responses = await Promise.all([
+                    fetch('src/data/matsuriData.json'),
+                    fetch('src/data/matsuri_guide_detail.json')
+                ]);
+                var json       = await responses[0].json();
+                var detailJson = await responses[1].json();
+                var guides     = detailJson.guides || {};
+                var region     = json.regions.find(function(r) { return r.id === CITY_REGION; });
                 if (!region) return;
-                var meta   = REGION_META[CITY_REGION];
-                var items  = region[PAGE_TYPE];
+                var meta       = REGION_META[CITY_REGION];
+                var themeColor = COLOR_HEX[meta.color] || '#0ea5e9';
+                var items      = region[PAGE_TYPE];
                 items.forEach(function(item, idx) {
                     var subtitle;
                     if (PAGE_TYPE === 'matsuri') {
@@ -125,9 +223,12 @@
                             ? (shells.toLocaleString() + '발 · ' + freq)
                             : ('약 ' + shells.toLocaleString() + '발');
                     }
-                    var wrapper = document.createElement('div');
-                    container.appendChild(wrapper);
-                    renderMatsuriCard(wrapper, {
+                    var outerWrapper = document.createElement('div');
+                    container.appendChild(outerWrapper);
+
+                    var cardWrapper = document.createElement('div');
+                    outerWrapper.appendChild(cardWrapper);
+                    renderMatsuriCard(cardWrapper, {
                         region: region.id, regionLabel: region.name, regionEmoji: region.emoji,
                         color: meta.color,
                         rank: String(idx + 1).padStart(2, '0'),
@@ -139,6 +240,8 @@
                         tags: item.tags, city: item.venue.name,
                         image: meta.image, link: '',
                     });
+
+                    renderGuideDetail(outerWrapper, guides[item.id], themeColor);
                 });
             } catch(e) {
                 console.error('데이터 로드 실패:', e);
