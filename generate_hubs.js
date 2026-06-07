@@ -7,6 +7,7 @@ const cities = [
   { id: 'fukuoka',    name: '후쿠오카',   nameJa: '福岡',   emoji: '🌊', desc: '규슈의 관문, 박력 넘치는 하카타 마쓰리의 본고장',         color: '#0d9488', matsuriRegion: '규슈',    hanabiRegion: '규슈'    },
   { id: 'sapporo',    name: '삿포로',     nameJa: '札幌',   emoji: '❄️', desc: '홋카이도의 중심, 4계절 내내 즐기는 축제의 도시',          color: '#4338ca', matsuriRegion: '홋카이도', hanabiRegion: '홋카이도' },
   { id: 'nakameguro', name: '나카메구로', nameJa: '中目黒', emoji: '🌿', desc: '도쿄에서 가장 낭만적인 동네, 메구로강 벚꽃 산책로',       color: '#e11d48', matsuriRegion: '간토',    hanabiRegion: '간토'    },
+  { id: 'nagoya',     name: '나고야',     nameJa: '名古屋', emoji: '🏯', desc: '3영걸의 도시. 아쓰타 마쓰리와 나고야성이 살아있는 역사 도시', color: '#d97706', matsuriRegion: '주부',    hanabiRegion: '주부'    },
 ];
 
 function generateHub(city) {

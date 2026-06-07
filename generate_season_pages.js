@@ -19,6 +19,9 @@ const cities = [
   { id: 'nakameguro', name: '나카메구로', nameJa: '中目黒', emoji: '🌿', region: 'tokyo',
     matsuriDesc: '도쿄 간토 지역 마쓰리 — 도심 속 여름 축제 가이드',
     hanabiDesc:  '간토 지역 불꽃놀이 — 스미다강 등 도쿄 불꽃 완벽 가이드' },
+  { id: 'nagoya',     name: '나고야',     nameJa: '名古屋', emoji: '🏯', region: 'chubu',
+    matsuriDesc: '아쓰타 마쓰리부터 3영걸 퍼레이드까지, 주부 최대 여름 축제',
+    hanabiDesc:  '도요타 2만3천발, 나고야항, 오카자키성 — 주부 불꽃 완벽 가이드' },
 ];
 
 const TYPE_META = {
@@ -40,6 +43,7 @@ const REGION_META_JS = `{
             kyoto:    { color: 'violet', image: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=800&q=80' },
             hokkaido: { color: 'indigo', image: 'https://images.unsplash.com/photo-1693975264425-e6d639ea27c9?w=800&q=80' },
             kyushu:   { color: 'orange', image: 'https://images.unsplash.com/photo-1679230708086-2b10acf31074?w=800&q=80' },
+            chubu:    { color: 'orange', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80' },
         }`;
 
 function gen(city, type) {
