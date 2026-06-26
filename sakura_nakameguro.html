@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>나카메구로 — Japan City Guide</title>
+<meta name="description" content="나카메구로 벚꽃 완벽 가이드. 메구로강 변 벚꽃 산책로와 봄 하나미 스팟, 코스 지도까지.">
+<title>나카메구로 벚꽃 가이드 — Japan City Guide</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&family=Shippori+Mincho:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -15,6 +16,21 @@
     --card-w: min(300px, 75vw);
     --card-h: calc(min(300px, 75vw) * 5 / 4);
   }
+  .dark-mode {
+    --bg: #181210;
+    --ink: #f0ebe6;
+    --muted: #7a6e65;
+    --border: rgba(240,235,230,0.10);
+  }
+  .dark-mode body { background: var(--bg); color: var(--ink); }
+  .dark-toggle {
+    position: fixed; top: 16px; right: 16px; z-index: 999;
+    width: 40px; height: 40px; border-radius: 50%; border: none;
+    background: rgba(26,20,16,0.08); color: var(--ink);
+    font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s;
+  }
+  .dark-mode .dark-toggle { background: rgba(240,235,230,0.12); }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { background: var(--bg); font-family: 'Noto Sans KR', sans-serif; color: var(--ink); overflow-x: hidden; }
 
@@ -118,6 +134,7 @@
 </style>
 </head>
 <body>
+<button class="dark-toggle" id="darkToggle" onclick="toggleDark()" title="다크모드 전환">🌙</button>
 <div class="section-wrap">
 
   <div class="section-top">
@@ -125,7 +142,7 @@
       <p class="eyebrow">Neighborhood Deep Dive · Tokyo</p>
       <h2 class="section-title">나카메구로<span class="jp">中目黒 Nakameguro</span></h2>
     </div>
-    <a href="#" class="see-all">전체 동네 →</a>
+    <a href="nakameguro.html" class="see-all">전체 동네 →</a>
   </div>
 
   <div class="info-strip">
@@ -304,5 +321,18 @@
   <div id="modalCounter" style="position:fixed; bottom:28px; left:50%; transform:translateX(-50%); color:rgba(255,255,255,0.55); font-size:12px; font-weight:700; letter-spacing:0.15em;"></div>
 </div>
 
+<script>
+  function toggleDark() {
+    const isDark = document.documentElement.classList.toggle('dark-mode');
+    document.getElementById('darkToggle').textContent = isDark ? '☀️' : '🌙';
+    localStorage.setItem('jcg-theme', isDark ? 'dark' : 'light');
+  }
+  if (localStorage.getItem('jcg-theme') === 'dark') {
+    document.documentElement.classList.add('dark-mode');
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('darkToggle').textContent = '☀️';
+    });
+  }
+</script>
 </body>
 </html>
