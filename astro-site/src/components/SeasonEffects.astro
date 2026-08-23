@@ -215,26 +215,61 @@ const calendar = SEASON_CALENDAR.map((p) => ({ type: p.type, from: p.from, to: p
     }
 
     /* ── 불꽃놀이 ── */
-    const BURST_COLORS = ['#ffd166', '#ff6b6b', '#4ecdc4', '#c77dff', '#ffe66d', '#7bdff2'];
+    const BURST_COLORS = ['#ffd166', '#ff6b6b', '#4ecdc4', '#c77dff', '#ffe66d', '#7bdff2', '#ff9f1c'];
     let sparks = [];
-    let nextBurst = 0;
+    let rockets = [];
+    let nextLaunch = 0;
 
-    function burst(x, y) {
-      const color = BURST_COLORS[(Math.random() * BURST_COLORS.length) | 0];
-      const count = w < 640 ? 26 : 44;
-      const power = rand(2.2, 3.6);
-      for (let i = 0; i < count; i++) {
-        const a = (Math.PI * 2 * i) / count + rand(-0.06, 0.06);
-        const v = power * rand(0.65, 1);
-        sparks.push({
-          x, y,
-          vx: Math.cos(a) * v,
-          vy: Math.sin(a) * v,
-          life: 1,
-          decay: rand(0.008, 0.016),
-          color,
-          size: rand(1.6, 3),
-        });
+    const isSmall = () => w < 640;
+    const maxSparks = () => (isSmall() ? 260 : 620);
+
+    /** 아래에서 쏘아 올린다 — 올라가는 궤적이 있어야 불꽃놀이로 읽힌다 */
+    function launch() {
+      if (rockets.length >= (isSmall() ? 3 : 6)) return;
+      rockets.push({
+        x: rand(w * 0.12, w * 0.88),
+        y: h + 8,
+        vx: rand(-0.5, 0.5),
+        vy: -rand(7.5, 11),
+        targetY: rand(h * 0.1, h * 0.42),
+        color: BURST_COLORS[(Math.random() * BURST_COLORS.length) | 0],
+      });
+    }
+
+    function burst(x, y, color) {
+      if (sparks.length > maxSparks()) return;
+      const count = isSmall() ? 34 : 58;
+      const power = rand(4.2, 7.4); // 빠르게 퍼져야 시원하다
+      // 가끔 두 겹으로 터뜨려 더 화려하게
+      const rings = Math.random() < 0.35 ? 2 : 1;
+      for (let r = 0; r < rings; r++) {
+        const ringPower = power * (r === 0 ? 1 : 0.55);
+        const ringColor = r === 0 ? color : BURST_COLORS[(Math.random() * BURST_COLORS.length) | 0];
+        for (let i = 0; i < count; i++) {
+          const a = (Math.PI * 2 * i) / count + rand(-0.05, 0.05);
+          const v = ringPower * rand(0.6, 1);
+          sparks.push({
+            x, y,
+            vx: Math.cos(a) * v,
+            vy: Math.sin(a) * v,
+            life: 1,
+            decay: rand(0.018, 0.032), // 짧고 굵게 — 자리를 비워 다음 발이 터진다
+            color: ringColor,
+            size: rand(1.5, 2.8),
+          });
+        }
+      }
+    }
+
+    // 페이지를 열자마자 비어 보이지 않도록 몇 발 띄워 둔다.
+    // 캔버스 크기가 잡힌 뒤에 해야 하므로 첫 프레임에서 실행한다.
+    let seededFireworks = false;
+    function seedFireworks() {
+      if (seededFireworks || theme.kind !== 'fireworks' || !w || !h) return;
+      seededFireworks = true;
+      for (let i = 0; i < 3; i++) {
+        burst(rand(w * 0.2, w * 0.8), rand(h * 0.15, h * 0.45),
+          BURST_COLORS[(Math.random() * BURST_COLORS.length) | 0]);
       }
     }
 
@@ -288,27 +323,64 @@ const calendar = SEASON_CALENDAR.map((p) => ({ type: p.type, from: p.from, to: p
           ctx.restore();
         }
       } else {
-        // 불꽃놀이
-        if (now > nextBurst) {
-          burst(rand(w * 0.15, w * 0.85), rand(h * 0.12, h * 0.5));
-          nextBurst = now + rand(900, 2200);
+        /* 불꽃놀이 — 여러 발이 겹쳐 올라가고 터진다 */
+        seedFireworks();
+
+        if (now > nextLaunch) {
+          // 가끔 여러 발을 한꺼번에 쏘아 올린다
+          const volley = Math.random() < 0.3 ? (isSmall() ? 2 : 3) : 1;
+          for (let i = 0; i < volley; i++) launch();
+          nextLaunch = now + (volley > 1 ? rand(500, 1100) : rand(220, 620));
         }
+
+        ctx.lineCap = 'round';
+
+        // 올라가는 중인 로켓
+        for (let i = rockets.length - 1; i >= 0; i--) {
+          const r = rockets[i];
+          const px = r.x;
+          const py = r.y;
+          r.x += r.vx * dt;
+          r.y += r.vy * dt;
+          r.vy += 0.09 * dt; // 점점 느려지다 정점에서 터진다
+
+          if (r.y <= r.targetY || r.vy >= -0.6) {
+            burst(r.x, r.y, r.color);
+            rockets.splice(i, 1);
+            continue;
+          }
+
+          ctx.globalAlpha = 0.85;
+          ctx.strokeStyle = r.color;
+          ctx.lineWidth = 2.2;
+          ctx.beginPath();
+          ctx.moveTo(px, py);
+          ctx.lineTo(r.x, r.y);
+          ctx.stroke();
+        }
+
+        // 터진 불꽃 — 짧은 선으로 그려 속도감을 살린다
         for (let i = sparks.length - 1; i >= 0; i--) {
           const s = sparks[i];
+          const px = s.x;
+          const py = s.y;
           s.x += s.vx * dt;
           s.y += s.vy * dt;
-          s.vy += 0.028 * dt; // 중력
-          s.vx *= 0.992;
+          s.vy += 0.05 * dt; // 중력
+          s.vx *= 0.983;
+          s.vy *= 0.983;
           s.life -= s.decay * dt;
           if (s.life <= 0) {
             sparks.splice(i, 1);
             continue;
           }
-          ctx.globalAlpha = Math.max(s.life, 0) * 0.9;
-          ctx.fillStyle = s.color;
+          ctx.globalAlpha = Math.max(s.life, 0);
+          ctx.strokeStyle = s.color;
+          ctx.lineWidth = s.size * s.life;
           ctx.beginPath();
-          ctx.arc(s.x, s.y, s.size * s.life, 0, Math.PI * 2);
-          ctx.fill();
+          ctx.moveTo(px, py);
+          ctx.lineTo(s.x, s.y);
+          ctx.stroke();
         }
         ctx.globalAlpha = 1;
       }
