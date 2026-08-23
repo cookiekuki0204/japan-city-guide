@@ -1,0 +1,80 @@
+---
+import { SEASON_CALENDAR, SEASON_META, getSeasonFor } from '../lib/season';
+
+/**
+ * 정적 사이트라 빌드 시점의 시즌이 HTML에 박힌다.
+ * 그대로 두면 배포 후 시즌이 바뀌어도 낡은 배너가 남으므로,
+ * 아래 인라인 스크립트가 방문 시점 날짜로 다시 계산해 덮어쓴다.
+ */
+const initial = getSeasonFor(new Date());
+
+const clientCalendar = SEASON_CALENDAR.map((period) => ({
+  ...SEASON_META[period.type],
+  from: period.from,
+  to: period.to,
+}));
+---
+
+<section
+  id="season-hero"
+  data-season={initial.type}
+  class="mx-auto mb-16 max-w-3xl rounded-3xl border border-slate-200 bg-white px-8 py-10 text-center shadow-sm dark:border-white/10 dark:bg-white/5"
+>
+  <p
+    id="season-hero-eyebrow"
+    class="text-[11px] font-black uppercase tracking-[0.25em]"
+    style={`color:${initial.accent}`}
+  >
+    지금은 {initial.label} 시즌
+  </p>
+  <p id="season-hero-emoji" class="mt-4 text-5xl">{initial.emoji}</p>
+  <p id="season-hero-blurb" class="mt-4 text-slate-600 dark:text-slate-300">
+    {initial.blurb}
+  </p>
+  <a
+    id="season-hero-cta"
+    href={`/${initial.type}`}
+    class="mt-7 inline-block rounded-full px-6 py-3 text-sm font-black text-white no-underline transition-transform hover:-translate-y-0.5 active:scale-95"
+    style={`background:${initial.accent}`}
+  >
+    {initial.emoji} {initial.label} 가이드 보기
+  </a>
+</section>
+
+<script is:inline define:vars={{ clientCalendar }}>
+  (function () {
+    const toKey = (m, d) => m * 100 + d;
+    const now = new Date();
+    const key = toKey(now.getMonth() + 1, now.getDate());
+
+    const current = clientCalendar.find((s) => {
+      const start = toKey(s.from[0], s.from[1]);
+      const end = toKey(s.to[0], s.to[1]);
+      return start <= end ? key >= start && key <= end : key >= start || key <= end;
+    });
+
+    const root = document.getElementById('season-hero');
+    if (!current || !root || root.dataset.season === current.type) return;
+
+    root.dataset.season = current.type;
+
+    const eyebrow = document.getElementById('season-hero-eyebrow');
+    if (eyebrow) {
+      eyebrow.textContent = `지금은 ${current.label} 시즌`;
+      eyebrow.style.color = current.accent;
+    }
+
+    const emoji = document.getElementById('season-hero-emoji');
+    if (emoji) emoji.textContent = current.emoji;
+
+    const blurb = document.getElementById('season-hero-blurb');
+    if (blurb) blurb.textContent = current.blurb;
+
+    const cta = document.getElementById('season-hero-cta');
+    if (cta) {
+      cta.setAttribute('href', `/${current.type}`);
+      cta.textContent = `${current.emoji} ${current.label} 가이드 보기`;
+      cta.style.background = current.accent;
+    }
+  })();
+</script>

@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { SEASON_META, SEASON_TYPES, getSeasonFor } from '../lib/season';
+
+const cities = (await getCollection('cities')).sort((a, b) => a.data.order - b.data.order);
+const current = getSeasonFor(new Date());
+---
+
+<BaseLayout
+  title="페이지를 찾을 수 없습니다"
+  description="찾으시는 페이지가 없습니다. 도시나 시즌 가이드에서 다시 찾아보세요."
+>
+  <main class="mx-auto max-w-3xl px-6 pb-24 pt-20 text-center">
+    <p class="text-6xl">🗺️</p>
+    <h1 class="mt-6 text-3xl font-black tracking-tight sm:text-4xl">
+      찾으시는 페이지가 없습니다
+    </h1>
+    <p class="mx-auto mt-4 max-w-md leading-relaxed text-slate-600 dark:text-slate-300">
+      사이트 구조가 바뀌면서 주소가 달라졌을 수 있습니다. 아래에서 다시 찾아보세요.
+    </p>
+
+    <a
+      href={`/${current.type}`}
+      class="mt-8 inline-block rounded-full px-6 py-3 text-sm font-black text-white no-underline transition-transform hover:-translate-y-0.5"
+      style={`background:${current.accent}`}
+    >
+      {current.emoji} 지금은 {current.label} 시즌 — 가이드 보기
+    </a>
+
+    <div class="mt-14 text-left">
+      <h2 class="mb-3 text-xs font-black uppercase tracking-wider text-slate-400">도시</h2>
+      <div class="grid grid-cols-2 gap-2 sm:grid-cols-3">
+        {cities.map((c) => (
+          <a
+            href={`/${c.id}`}
+            class="rounded-xl border border-slate-200 px-4 py-3 no-underline transition-colors hover:border-rose-300 dark:border-white/10"
+          >
+            <span class="mr-1.5">{c.data.emoji}</span>
+            <span class="text-sm font-bold text-slate-800 dark:text-slate-100">{c.data.name}</span>
+          </a>
+        ))}
+      </div>
+
+      <h2 class="mb-3 mt-8 text-xs font-black uppercase tracking-wider text-slate-400">시즌</h2>
+      <div class="flex flex-wrap gap-2">
+        {SEASON_TYPES.map((t) => (
+          <a
+            href={`/${t}`}
+            class="rounded-full border border-slate-200 px-4 py-2 text-sm font-bold no-underline transition-colors hover:border-rose-300 dark:border-white/10"
+          >
+            {SEASON_META[t].emoji} {SEASON_META[t].label}
+          </a>
+        ))}
+      </div>
+    </div>
+  </main>
+</BaseLayout>

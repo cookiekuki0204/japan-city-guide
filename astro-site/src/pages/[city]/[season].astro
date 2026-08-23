@@ -1,0 +1,19 @@
+---
+import SeasonLayout from '../../layouts/SeasonLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const cities = await getCollection('cities');
+  const seasonGuides = await getCollection('seasonGuides');
+
+  return seasonGuides.flatMap((guide) => {
+    const city = cities.find((c) => c.id === guide.data.cityId);
+    if (!city) return [];
+    return [{ params: { city: city.id, season: guide.data.type }, props: { city, guide } }];
+  });
+}
+
+const { city, guide } = Astro.props;
+---
+
+<SeasonLayout city={city} guide={guide} />

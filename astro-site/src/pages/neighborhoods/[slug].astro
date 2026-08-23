@@ -1,0 +1,21 @@
+---
+import NeighborhoodLayout from '../../layouts/NeighborhoodLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const neighborhoods = await getCollection('neighborhoods');
+  const cities = await getCollection('cities');
+
+  return neighborhoods.map((entry) => ({
+    params: { slug: entry.id },
+    props: {
+      entry,
+      cityName: cities.find((c) => c.id === entry.data.cityId)?.data.name ?? '',
+    },
+  }));
+}
+
+const { entry, cityName } = Astro.props;
+---
+
+<NeighborhoodLayout entry={entry} cityName={cityName} />

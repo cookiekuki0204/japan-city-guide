@@ -1,0 +1,128 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { holidaysOf, weekdayOf, TRAVEL_PERIODS_2026 } from '../lib/holidays';
+
+const YEAR = 2026;
+const holidays = holidaysOf(YEAR);
+
+/** 월별로 묶어 달력처럼 훑을 수 있게 한다 */
+const byMonth = holidays.reduce<Record<number, typeof holidays>>((acc, h) => {
+  const month = Number(h.date.slice(5, 7));
+  (acc[month] ??= []).push(h);
+  return acc;
+}, {});
+
+const months = Object.keys(byMonth)
+  .map(Number)
+  .sort((a, b) => a - b);
+
+const isWeekend = (date: string) => ['토', '일'].includes(weekdayOf(date));
+---
+
+<BaseLayout
+  title={`${YEAR} 일본 공휴일`}
+  description={`${YEAR}년 일본 공휴일 전체 일정과 골든위크·오봉·실버위크 등 연휴 시기. 여행 계획 전에 붐비는 기간을 미리 확인하세요.`}
+>
+  <main class="mx-auto max-w-3xl px-6 pb-24 pt-16">
+    <p class="text-xs font-black uppercase tracking-[0.25em] text-rose-500">Japan Holidays</p>
+    <h1 class="mt-3 text-4xl font-black tracking-tight sm:text-5xl">{YEAR} 일본 공휴일</h1>
+    <p class="mt-4 max-w-xl leading-relaxed text-slate-600 dark:text-slate-300">
+      항공권과 숙소 값이 뛰고 어디를 가도 붐비는 시기가 있습니다. 날짜를 정하기 전에 먼저 확인하세요.
+    </p>
+
+    <section class="mt-14">
+      <h2 class="mb-4 text-sm font-black uppercase tracking-wider text-slate-400">
+        피하거나, 알고 가야 할 연휴
+      </h2>
+      <div class="grid gap-4">
+        {TRAVEL_PERIODS_2026.map((p) => (
+          <article
+            class="rounded-2xl border border-slate-200 bg-white p-6 dark:border-white/10 dark:bg-white/5"
+          >
+            <div class="flex flex-wrap items-center gap-2">
+              <h3 class="text-lg font-black">{p.name}</h3>
+              <span
+                class={`rounded-full px-2.5 py-1 text-[11px] font-black ${
+                  p.impact === 'high'
+                    ? 'bg-rose-500/15 text-rose-600 dark:text-rose-400'
+                    : 'bg-amber-400/15 text-amber-700 dark:text-amber-400'
+                }`}
+              >
+                {p.impact === 'high' ? '매우 혼잡' : '혼잡'}
+              </span>
+            </div>
+            <p class="mt-1 text-sm font-bold tabular-nums text-slate-500 dark:text-slate-400">
+              {p.range}
+            </p>
+            <p class="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300">{p.summary}</p>
+            <p class="mt-3 rounded-xl bg-slate-50 px-4 py-3 text-sm leading-relaxed text-slate-600 dark:bg-white/5 dark:text-slate-300">
+              {p.advice}
+            </p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="mt-16">
+      <h2 class="mb-4 text-sm font-black uppercase tracking-wider text-slate-400">
+        {YEAR}년 공휴일 전체 · {holidays.length}일
+      </h2>
+
+      <div class="overflow-hidden rounded-2xl border border-slate-200 dark:border-white/10">
+        {months.map((month, mi) => (
+          <div class={mi > 0 ? 'border-t border-slate-200 dark:border-white/10' : ''}>
+            <p class="bg-slate-50 px-5 py-2 text-xs font-black text-slate-400 dark:bg-white/5">
+              {month}월
+            </p>
+            <ul>
+              {byMonth[month].map((h, hi) => (
+                <li
+                  class={`flex flex-wrap items-center gap-x-3 gap-y-1 px-5 py-3 ${
+                    hi > 0 ? 'border-t border-slate-100 dark:border-white/5' : ''
+                  }`}
+                >
+                  <span
+                    class={`w-16 shrink-0 text-sm font-black tabular-nums ${
+                      isWeekend(h.date)
+                        ? 'text-rose-500'
+                        : 'text-slate-800 dark:text-slate-100'
+                    }`}
+                  >
+                    {Number(h.date.slice(5, 7))}/{Number(h.date.slice(8, 10))}
+                  </span>
+                  <span
+                    class={`w-6 shrink-0 text-sm font-bold ${
+                      isWeekend(h.date) ? 'text-rose-500' : 'text-slate-400'
+                    }`}
+                  >
+                    {weekdayOf(h.date)}
+                  </span>
+                  <span class="text-sm font-bold text-slate-800 dark:text-slate-100">{h.name}</span>
+                  <span class="text-xs text-slate-400">{h.nameJa}</span>
+                  {h.derived && (
+                    <span class="rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-black text-slate-500 dark:bg-white/10 dark:text-slate-400">
+                      {h.derived === 'substitute' ? '대체공휴일' : '연휴 사이 휴일'}
+                    </span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-5 space-y-2 text-xs leading-relaxed text-slate-400">
+        <p>
+          ℹ️ <b>대체공휴일</b>은 공휴일이 일요일과 겹칠 때 다음 평일이 쉬는 날이 되는 제도입니다.
+          <b>연휴 사이 휴일</b>(국민의 휴일)은 공휴일 사이에 평일 하루가 끼면 그날도 쉬는 규칙입니다.
+        </p>
+        <p>
+          ℹ️ 춘분·추분은 천문 계산으로 정해져 해마다 날짜가 달라지며, 전년도 2월 관보로 확정 공고됩니다.
+        </p>
+        <p>
+          ℹ️ 오봉(8월 중순)은 법정 공휴일이 아니지만 대부분의 기업이 쉬어 실제 이동량은 연중 최고 수준입니다.
+        </p>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

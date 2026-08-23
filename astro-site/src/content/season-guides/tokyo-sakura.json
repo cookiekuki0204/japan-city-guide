@@ -1,0 +1,1245 @@
+{
+  "cityId": "tokyo",
+  "type": "sakura",
+  "title": "도쿄 벚꽃 명소",
+  "updated": "2026-08-12",
+  "timeline": [
+    {
+      "label": "개화 시작",
+      "date": "3월 18일"
+    },
+    {
+      "label": "만개 피크",
+      "date": "3월 25일"
+    },
+    {
+      "label": "벚꽃 엔딩",
+      "date": "4월 1일"
+    }
+  ],
+  "spots": [
+    {
+      "id": "ueno",
+      "tier": "best",
+      "name": "우에노 공원",
+      "area": "우에노",
+      "tagline": "도쿄 최고 전통의 하나미 성지",
+      "image": "images/ueno_1.jpg",
+      "vibe": "전통적",
+      "crowd": "매우 높음",
+      "description": "에도 시대부터 이어진 도쿄 최대의 벚꽃 공원입니다. 박물관과 동물원이 밀집해 있어 문화와 자연을 동시에 즐기기에 완벽합니다",
+      "tips": [
+        "오전 8시 전 방문 권장",
+        "공원 중앙 스타벅스 광장이 휴식 명당"
+      ],
+      "bloom": {
+        "start": "3월 18일",
+        "peak": "3월 25일",
+        "end": "4월 1일"
+      },
+      "station": "우에노역 (Ueno Station)",
+      "attractions": [
+        {
+          "name": "도쿄 국립 박물관",
+          "description": "일본의 역사와 예술을 집대성한 곳",
+          "image": "images/kokuritsu_1.jpg"
+        },
+        {
+          "name": "우에노 토쇼구",
+          "description": "황금빛 장식의 화려한 신사",
+          "image": "images/ueno_to_1.jpg"
+        },
+        {
+          "name": "아메요코 시장",
+          "description": "활기 넘치는 도심 재래시장",
+          "image": "images/ameyoko_1.jpg"
+        }
+      ],
+      "cafes": [
+        {
+          "name": "Starbucks Ueno Park",
+          "description": "자연과 어우러진 랜드마크 매장",
+          "score": "3.9",
+          "link": "https://tabelog.com/kr/tokyo/A1311/A131101/13139919/"
+        },
+        {
+          "name": "Kayaba Coffee",
+          "description": "클래식한 감성의 고택 카페",
+          "score": "3.8",
+          "link": "https://tabelog.com/kr/tokyo/A1311/A131104/13019585/"
+        },
+        {
+          "name": "EVERYONEs CAFE",
+          "description": "숲을 바라보는 통유리 카페",
+          "score": "3.6",
+          "link": "https://tabelog.com/kr/tokyo/A1311/A131101/13273794/"
+        },
+        {
+          "name": "Mihashi Ueno",
+          "description": "일본 전통 디저트 안미츠 노포",
+          "score": "3.8",
+          "link": "https://tabelog.com/kr/tokyo/A1311/A131101/13003581/"
+        },
+        {
+          "name": "Cafe Hibiki",
+          "description": "음악당 내 조용한 쉼터",
+          "score": "3.5",
+          "link": "https://tabelog.com/kr/iwate/A0301/A030101/3008340/"
+        }
+      ],
+      "restaurants": [
+        {
+          "name": "Inshoutei",
+          "description": "140년 전통의 고택 가이세키",
+          "score": "4.2",
+          "link": "https://tabelog.com/kr/tokyo/A1311/A131101/13003560/"
+        },
+        {
+          "name": "Izuei Honten",
+          "description": "에도 시대 전설의 장어 덮밥",
+          "score": "4.1",
+          "link": "https://tabelog.com/kr/tokyo/A1311/A131101/13003586/"
+        },
+        {
+          "name": "Yamabe Okachimachi",
+          "description": "가성비 최강의 두툼한 돈카츠",
+          "score": "3.9",
+          "link": "https://tabelog.com/kr/tokyo/A1311/A131101/13138428/"
+        },
+        {
+          "name": "Seiyoken",
+          "description": "최초의 정통 서양식 레스토랑",
+          "score": "3.7",
+          "link": "https://tabelog.com/kr/tokyo/A1311/A131101/13003552/"
+        },
+        {
+          "name": "Negishi Ueno",
+          "description": "쫄깃한 우설 구이 로컬 맛집",
+          "score": "3.6",
+          "link": "https://tabelog.com/kr/tokyo/A1311/A131101/13019185/"
+        }
+      ]
+    },
+    {
+      "id": "hanzomon",
+      "tier": "best",
+      "name": "치도리가후치",
+      "area": "한조몬",
+      "tagline": "해자 위로 흐르는 벚꽃",
+      "image": "images/hanzomon_2.jpg",
+      "vibe": "우아함",
+      "crowd": "높음",
+      "description": "황궁 해자를 따라 조성된 우아한 벚꽃길입니다. 물 위로 늘어진 벚꽃 사이로 타는 보트가 도쿄 봄의 상징과 같습니다.",
+      "tips": [
+        "보트는 오전 9시 이전 방문 강력 권장",
+        "라이트업 야경이 매우 기품 있습니다"
+      ],
+      "bloom": {
+        "start": "3월 20일",
+        "peak": "3월 27일",
+        "end": "4월 3일"
+      },
+      "station": "구단시타역 (Kudanshita Station)",
+      "attractions": [
+        {
+          "name": "국립근대미술관",
+          "description": "일본 근현대 미술의 정수",
+          "image": "images/kokuritsu_art_1.jpg"
+        },
+        {
+          "name": "황궁 해자길",
+          "description": "에도 성 역사의 산책로",
+          "image": "images/koukyo_2.jpg"
+        },
+        {
+          "name": "보트 하우스",
+          "description": "물 위에서 즐기는 최고의 체험",
+          "image": "images/boat_img01.jpg"
+        }
+      ],
+      "cafes": [
+        {
+          "name": "No.4",
+          "description": "힙한 분위기의 브런치 베이커리",
+          "score": "3.9",
+          "link": "https://tabelog.com/kr/tokyo/A1309/A130904/13189835/"
+        },
+        {
+          "name": "Bundy Beans",
+          "description": "정성스런 로스터리 커피 전문점",
+          "score": "3.7",
+          "link": "https://tabelog.com/kr/tokyo/A1309/A130904/13173550/"
+        },
+        {
+          "name": "Factory",
+          "description": "빵 맛이 훌륭한 쿠단시타 명소",
+          "score": "3.8",
+          "link": "https://tabelog.com/kr/tokyo/A1309/A130904/13093265/"
+        },
+        {
+          "name": "DIXANS Kudanshita",
+          "description": "조용한 스페셜티 커피 공간",
+          "score": "3.6",
+          "link": "https://tabelog.com/kr/tokyo/A1309/A130906/13259006/"
+        },
+        {
+          "name": "Coffee Kan",
+          "description": "클래식한 깃사텐 분위기",
+          "score": "3.5",
+          "link": "https://tabelog.com/kr/tokyo/A1310/A131003/13087126/"
+        }
+      ],
+      "restaurants": [
+        {
+          "name": "Yakiniku Takumi En",
+          "description": "저렴하지만 품질이 끝내주는 야키니쿠",
+          "score": "4.0",
+          "link": "https://tabelog.com/kr/tokyo/A1309/A130906/13271727/"
+        },
+        {
+          "name": "Ippin Fan",
+          "description": "현지인이 찾는 중식집",
+          "score": "3.9",
+          "link": "https://tabelog.com/kr/tokyo/A1308/A130803/13165477/"
+        },
+        {
+          "name": "Kudanshita Nakaji",
+          "description": "3종류의 미소라멘과 마제소바 맛집",
+          "score": "3.8",
+          "link": "https://tabelog.com/kr/tokyo/A1309/A130906/13270872/"
+        },
+        {
+          "name": "Tsunahachi",
+          "description": "정통 에도마에 덴푸라 전문",
+          "score": "3.7",
+          "link": "https://tabelog.com/kr/tokyo/A1304/A130401/13000859/"
+        },
+        {
+          "name": "Sushi Kanesaka",
+          "description": "황궁 근처 최고급 퀄리티의 정통 스시",
+          "score": "4.1",
+          "link": "https://tabelog.com/kr/tokyo/A1301/A130103/13005003/"
+        }
+      ]
+    },
+    {
+      "id": "roppongi",
+      "tier": "best",
+      "name": "미드타운 가든",
+      "area": "롯폰기",
+      "tagline": "도심 속 화려한 라이트업",
+      "image": "images/roppongi_1.jpg",
+      "vibe": "모던함",
+      "crowd": "보통",
+      "description": "현대적인 건축물과 벚꽃이 어우러진 가장 세련된 명소입니다. 밤이 되면 샴페인 기포처럼 반짝이는 화이트 라이트업은 도시적인 낭만의 정점을 보여줍니다",
+      "tips": [
+        "가든 테라스 좌석을 예약하면 명당 확보.",
+        "모리 타워 전망대 뷰와 연계하여 즐겨보세요"
+      ],
+      "bloom": {
+        "start": "3월 22일",
+        "peak": "3월 29일",
+        "end": "4월 5일"
+      },
+      "station": "롯폰기역 (Roppongi Station)",
+      "attractions": [
+        {
+          "name": "산토리 미술관",
+          "description": "디자인과 생활 미술 전시",
+          "image": "images/santori_1.jpg"
+        },
+        {
+          "name": "노기 신사",
+          "description": "도심 속 고요한 역사적 쉼터",
+          "image": "images/nogi_1.jpg"
+        },
+        {
+          "name": "모리정원",
+          "description": "도시 조명과 어우러진 야경",
+          "image": "images/sakura_hills_1.jpg"
+        }
+      ],
+      "cafes": [
+        {
+          "name": "Toshi Yoroizuka",
+          "description": "스타 파티시에의 디저트 바",
+          "score": "3.9",
+          "link": "https://tabelog.com/kr/tokyo/A1307/A130701/13037382/"
+        },
+        {
+          "name": "Toraya Midtown",
+          "description": "전통 화과자의 현대적인 세련미",
+          "score": "3.8",
+          "link": "https://tabelog.com/kr/tokyo/A1307/A130701/13207426/"
+        },
+        {
+          "name": "Blue Bottle",
+          "description": "도심 속 숲같은 고요한 매장",
+          "score": "3.7",
+          "link": "https://tabelog.com/kr/tokyo/A1307/A130701/13200314/"
+        },
+        {
+          "name": "Antico Caffe",
+          "description": "이탈리안 정통 에스프레소",
+          "score": "3.6",
+          "link": "https://tabelog.com/kr/tokyo/A1317/A131708/13124102/"
+        },
+        {
+          "name": "Dean & DeLuca",
+          "description": "벚꽃 한정 피크닉 도시락",
+          "score": "3.5",
+          "link": "https://tabelog.com/kr/tokyo/A1307/A130701/13037364/"
+        }
+      ],
+      "restaurants": [
+        {
+          "name": "Sushi Sora",
+          "description": "고층의 럭셔리 정통 스시",
+          "score": "4.2",
+          "link": "https://tabelog.com/kr/tokyo/A1307/A130701/13261779/"
+        },
+        {
+          "name": "Union Square",
+          "description": "뉴욕 감성의 프리미엄 그릴",
+          "score": "4.0",
+          "link": "https://tabelog.com/kr/tokyo/A1307/A130701/13037339/"
+        },
+        {
+          "name": "Hal Yamashita",
+          "description": "창의적인 퓨전 일식 테라스",
+          "score": "3.9",
+          "link": "https://tabelog.com/kr/tokyo/A1307/A130701/13037337/"
+        },
+        {
+          "name": "Napule",
+          "description": "벚꽃 정원 뷰 화덕 피자",
+          "score": "3.8",
+          "link": "https://tabelog.com/kr/tokyo/A1307/A130701/13037338/"
+        },
+        {
+          "name": "Artisan Truffe",
+          "description": "트러플 요리 전문 미식 성지",
+          "score": "3.7",
+          "link": "https://tabelog.com/kr/tokyo/A1307/A130701/13210588/"
+        }
+      ]
+    },
+    {
+      "id": "shinjuku",
+      "tier": "famous",
+      "name": "신주쿠 교엔",
+      "area": "신주쿠",
+      "tagline": "광활한 피크닉 성지",
+      "image": "images/shinjuku_2.jpg",
+      "vibe": "고요함",
+      "crowd": "높음",
+      "description": "황실 정원을 거쳐 국민 공원이 된 곳입니다. 프랑스식, 영국식, 일본식 정원이 조화를 이룬 도심 속 거대 안식처입니다",
+      "tips": [
+        "주류 반입 금지로 매우 쾌적합니다",
+        "정원 내 스타벅스는 도쿄 최고의 명당"
+      ],
+      "bloom": {
+        "start": "3월 21일",
+        "peak": "3월 28일",
+        "end": "4월 4일"
+      },
+      "station": "신주쿠교엔마에역 (Shinjuku-gyoenmae Station)",
+      "attractions": [
+        {
+          "name": "교엔 대온실",
+          "description": "전 세계 희귀 식물 수집 공간",
+          "image": "images/gyoendaionsitsu.jpg"
+        },
+        {
+          "name": "구 양관 휴게소",
+          "description": "황실 가족의 역사적 서양 건물",
+          "image": "images/kyukesyo_1.jpg"
+        },
+        {
+          "name": "언어의 정원 벤치",
+          "description": "애니메이션 속 실제 장소",
+          "image": "images/c.jpg"
+        }
+      ],
+      "cafes": [
+        {
+          "name": "Starbucks Shinjuku Gyoen",
+          "description": "정원 뷰를 바라보는 명당 매장",
+          "score": "4.0",
+          "link": "https://tabelog.com/kr/tokyo/A1304/A130401/13245454/"
+        },
+        {
+          "name": "Cafe La Boheme",
+          "description": "영화/애니 촬영지로 유명한 곳",
+          "score": "3.7",
+          "link": "https://tabelog.com/kr/tokyo/A1304/A130402/13004291/"
+        },
+        {
+          "name": "All Seasons Coffee",
+          "description": "인생 푸딩과 훌륭한 스페셜티",
+          "score": "3.8",
+          "link": "https://tabelog.com/kr/tokyo/A1304/A130401/13187981/"
+        },
+        {
+          "name": "Eight Coffee",
+          "description": "조용한 로컬 로스터리 카페",
+          "score": "3.6",
+          "link": "https://tabelog.com/kr/tokyo/A1304/A130402/13228851/"
+        },
+        {
+          "name": "Verve Coffee",
+          "description": "세련된 감각의 캘리포니아 스타일",
+          "score": "3.7",
+          "link": "https://tabelog.com/kr/tokyo/A1304/A130403/13193550/"
+        }
+      ],
+      "restaurants": [
+        {
+          "name": "Sobahouse Hototogisu",
+          "description": "미슐랭 1스타 조개 육수 라멘",
+          "score": "4.3",
+          "link": "https://tabelog.com/kr/tokyo/A1304/A130402/13222172/"
+        },
+        {
+          "name": "Kunugi Ya Shinjuku Gyoen Ten",
+          "description": "말이 필요없는 우동 신주쿠 맛집",
+          "score": "4.1",
+          "link": "https://tabelog.com/kr/tokyo/A1304/A130402/13268999/"
+        },
+        {
+          "name": "Hamburg Will",
+          "description": "이베리코 돼지 함바그 성지",
+          "score": "3.8",
+          "link": "https://tabelog.com/kr/tokyo/A1304/A130402/13041176/"
+        },
+        {
+          "name": "Manna",
+          "description": "정통 인도풍 카레 전문점",
+          "score": "3.9",
+          "link": "https://tabelog.com/kr/tokyo/A1304/A130401/13174647/"
+        },
+        {
+          "name": "Udon Shin",
+          "description": "줄 서서 먹는 수제 우동 명소",
+          "score": "4.0",
+          "link": "https://tabelog.com/kr/tokyo/A1304/A130401/13125862/"
+        }
+      ]
+    },
+    {
+      "id": "sumida",
+      "tier": "famous",
+      "name": "스미다 공원",
+      "area": "아사쿠사",
+      "tagline": "스카이트리 명품 뷰",
+      "image": "images/sumida-sakurafes1.jpg",
+      "vibe": "활기참",
+      "crowd": "매우 높음",
+      "description": "스미다 강 양안을 따라 펼쳐진 벚꽃길입니다. 도쿄 스카이트리를 배경으로 사진을 남기기 가장 좋은 곳입니다.",
+      "tips": [
+        "수상 버스에서 보는 벚꽃 추천",
+        "아사쿠사 센소지 관광과 병행하세요"
+      ],
+      "bloom": {
+        "start": "3월 19일",
+        "peak": "3월 26일",
+        "end": "4월 2일"
+      },
+      "station": "아사쿠사역 (Asakusa Station)",
+      "attractions": [
+        {
+          "name": "호쿠사이 미술관",
+          "description": "우키요에 거장 호쿠사이의 작품",
+          "image": "images/hukusai_1.jpg"
+        },
+        {
+          "name": "우시지마 신사",
+          "description": "검은 도리이가 인상적인 신사",
+          "image": "images/ushijima_1.jpg"
+        },
+        {
+          "name": "스미다 리버 테라스",
+          "description": "스카이트리 뷰 산책로",
+          "image": "images/river_1.jpg"
+        }
+      ],
+      "cafes": [
+        {
+          "name": "Jiman Kusamochi",
+          "description": "전통 화과자와 말차 전문점",
+          "score": "4.1",
+          "link": "https://tabelog.com/kr/tokyo/A1312/A131203/13002934/"
+        },
+        {
+          "name": "Fruit Parlour Goto",
+          "description": "레트로한 분위기에서 즐기는 과일 파르페",
+          "score": "3.7",
+          "link": "https://tabelog.com/kr/tokyo/A1311/A131102/13095672/"
+        },
+        {
+          "name": "Suke6 Diner",
+          "description": "든든한 브런치를 즐기기 좋은 곳",
+          "score": "3.8",
+          "link": "https://tabelog.com/kr/tokyo/A1311/A131102/13180333/"
+        },
+        {
+          "name": "Starbucks River Summit",
+          "description": "강변 뷰를 감상하는 스타벅스",
+          "score": "3.6",
+          "link": "https://tabelog.com/kr/tokyo/A1311/A131102/13032596/"
+        },
+        {
+          "name": "COFFEE COUNTER NISHIYA",
+          "description": "정겨운 아사쿠사 커피 카운터",
+          "score": "3.9",
+          "link": "https://tabelog.com/kr/tokyo/A1311/A131102/13267302/"
+        }
+      ],
+      "restaurants": [
+        {
+          "name": "Asakusa Imahan",
+          "description": "100년 전통의 스키야키 명가",
+          "score": "4.2",
+          "link": "https://tabelog.com/kr/tokyo/A1311/A131102/13003649/"
+        },
+        {
+          "name": "Kameya Soba",
+          "description": "가성비 훌륭한 공원 옆 소바",
+          "score": "3.8",
+          "link": "https://tabelog.com/kr/tokyo/A1311/A131101/13003585/"
+        },
+        {
+          "name": "Unatetsu",
+          "description": "장어 덮밥과 히츠마부시 전문",
+          "score": "4.1",
+          "link": "https://tabelog.com/kr/tokyo/A1311/A131102/13159770/"
+        },
+        {
+          "name": "Daikokuya",
+          "description": "아사쿠사식 진한 양념 텐동",
+          "score": "3.7",
+          "link": "https://tabelog.com/kr/tokyo/A1311/A131102/13003696/"
+        },
+        {
+          "name": "Yadoroku",
+          "description": "가장 오래된 주먹밥 미슐랭 맛집",
+          "score": "4.0",
+          "link": "https://tabelog.com/kr/tokyo/A1311/A131102/13024859/"
+        }
+      ]
+    },
+    {
+      "id": "inokashira",
+      "tier": "famous",
+      "name": "이노카시라 공원",
+      "area": "키치죠지",
+      "tagline": "연못과 오리 보트",
+      "image": "images/inokashira_1.jpg",
+      "vibe": "감성적",
+      "crowd": "높음",
+      "description": "연못 위로 드리워진 벚꽃이 환상적인 반영을 만듭니다. 젊은이들이 가장 살고 싶어 하는 동네의 심장입니다.",
+      "tips": [
+        "보트에서 보는 벚꽃 터널 강추",
+        "키치죠지 맛집 투어와 연계"
+      ],
+      "bloom": {
+        "start": "3월 22일",
+        "peak": "3월 29일",
+        "end": "4월 5일"
+      },
+      "station": "키치죠지역 (Kichijoji Station)",
+      "attractions": [
+        {
+          "name": "지브리 미술관",
+          "description": "판타지가 현실이 되는 곳.",
+          "image": "images/ghibli_1.jpg"
+        },
+        {
+          "name": "벤자이텐 사찰",
+          "description": "연못 중앙의 신비로운 붉은 사찰.",
+          "image": "images/benzaiten_1.jpg"
+        },
+        {
+          "name": "이노카시라 동물원",
+          "description": "동물들과 즐기는 꽃구경.",
+          "image": "images/bunkaen_1.jpg"
+        }
+      ],
+      "cafes": [
+        {
+          "name": "Chai Break",
+          "description": "진한 밀크티와 프렌치 토스트",
+          "score": "3.8",
+          "link": "https://tabelog.com/kr/tokyo/A1320/A132001/13098849/"
+        },
+        {
+          "name": "01COFFEE",
+          "description": "미니멀한 공간의 스페셜티",
+          "score": "3.9",
+          "link": "https://tabelog.com/kr/tokyo/A1320/A132001/13302402/"
+        },
+        {
+          "name": "Cafe du Lievre",
+          "description": "숲속 오두막 분위기 크레페",
+          "score": "3.6",
+          "link": "https://tabelog.com/kr/tokyo/A1320/A132001/13028699/"
+        },
+        {
+          "name": "Hattifnatt",
+          "description": "동화 속 세상 일러스트 카페",
+          "score": "3.7",
+          "link": "https://tabelog.com/kr/tokyo/A1320/A132001/13090486/"
+        },
+        {
+          "name": "Light Up Coffee",
+          "description": "맛에 집중하는 로스터리",
+          "score": "3.8",
+          "link": "https://tabelog.com/kr/tokyo/A1320/A132001/13171388/"
+        }
+      ],
+      "restaurants": [
+        {
+          "name": "Iseya Yakitori",
+          "description": "공원 명물 연기 자욱한 맛집",
+          "score": "3.9",
+          "link": "https://tabelog.com/kr/tokyo/A1320/A132001/13005894/"
+        },
+        {
+          "name": "Sato Menchi",
+          "description": "줄 서서 먹는 대표 간식 멘치카츠",
+          "score": "3.8",
+          "link": "https://tabelog.com/kr/tokyo/A1320/A132001/13005807/"
+        },
+        {
+          "name": "Sajilo Cafe",
+          "description": "세련된 맛의 인도 카레",
+          "score": "4.1",
+          "link": "https://tabelog.com/kr/tokyo/A1320/A132001/13049661/"
+        },
+        {
+          "name": "Pizzeria GG",
+          "description": "나폴리 정통 화덕 피자",
+          "score": "4.2",
+          "link": "https://tabelog.com/kr/tokyo/A1320/A132001/13047308/"
+        },
+        {
+          "name": "ISENTEI",
+          "description": "연못 뷰 세계대회 은메달리스트 본격 나폴리 피자 맛집",
+          "score": "3.7",
+          "link": "https://tabelog.com/kr/tokyo/A1320/A132001/13260154/"
+        }
+      ]
+    },
+    {
+      "id": "rikugien",
+      "tier": "famous",
+      "name": "육의원 (리쿠기엔)",
+      "area": "고마고메",
+      "tagline": "쏟아지는 수양벚꽃",
+      "image": "images/rikugien_1.jpg",
+      "vibe": "학구적",
+      "crowd": "보통",
+      "description": "에도 시대의 2대 정원 중 하나입니다. 높이 15m의 거대 수양벚꽃이 폭포처럼 쏟아지는 야경이 압권입니다.",
+      "tips": [
+        "수양벚꽃 야간권 사전 예매 권장",
+        "말차 찻집에서 여유를 느껴보세요"
+      ],
+      "bloom": {
+        "start": "3월 17일",
+        "peak": "3월 24일",
+        "end": "3월 31일"
+      },
+      "station": "고마고메역 (Komagome Station)",
+      "attractions": [
+        {
+          "name": "동양문고 박물관",
+          "description": "거대 서가가 인상적인 박물관",
+          "image": "images/toyobunko_1.jpg"
+        },
+        {
+          "name": "나이테이 몬",
+          "description": "역사적인 위용의 정원 입구",
+          "image": "images/naitei_1.jpg"
+        },
+        {
+          "name": "후키아게 차야",
+          "description": "연못을 바라보는 말차 체험",
+          "image": "images/hukiage_1.jpg"
+        }
+      ],
+      "cafes": [
+        {
+          "name": "Fukiage Chaya",
+          "description": "정원 안 최고의 벚꽃 뷰 찻집",
+          "score": "3.6",
+          "link": "https://tabelog.com/kr/tokyo/A1323/A132301/13026210/"
+        },
+        {
+          "name": "NIKI BAKERY Komagome Ten",
+          "description": "무엇을 골라도 맛있는 베이커리",
+          "score": "3.8",
+          "link": "https://tabelog.com/kr/tokyo/A1323/A132301/13099508/"
+        },
+        {
+          "name": "FRUITS SUGI",
+          "description": "과일 파르페 맛집",
+          "score": "3.5",
+          "link": "https://tabelog.com/kr/tokyo/A1323/A132302/13208305/"
+        },
+        {
+          "name": "Komagome Cafe",
+          "description": "현재와 과거를 잇는 레트로 카페",
+          "score": "3.6",
+          "link": "https://tabelog.com/kr/tokyo/A1311/A131106/13243882/"
+        },
+        {
+          "name": "Saint Marc",
+          "description": "초코 크로와상과 편안한 휴식",
+          "score": "3.4",
+          "link": "https://tabelog.com/kr/tokyo/A1323/A132301/13098419/"
+        }
+      ],
+      "restaurants": [
+        {
+          "name": "Ikewanagi no Mise Tsugumi An",
+          "description": "정갈한 맛의 현지인 추천 장어",
+          "score": "4.1",
+          "link": "https://tabelog.com/kr/tokyo/A1323/A132301/13080463/"
+        },
+        {
+          "name": "Soba Tsuta",
+          "description": "직접 만드는 자가제면 소바",
+          "score": "3.9",
+          "link": "https://tabelog.com/kr/tokyo/A1323/A132302/13133360/"
+        },
+        {
+          "name": "Komagome Ramen",
+          "description": "진한 국물 맛의 골목 맛집",
+          "score": "3.7",
+          "link": "https://tabelog.com/kr/tokyo/A1323/A132301/13178536/"
+        },
+        {
+          "name": "Tonki",
+          "description": "역사 깊은 돈카츠 명가",
+          "score": "4.2",
+          "link": "https://tabelog.com/kr/tokyo/A1323/A132301/13008866/"
+        },
+        {
+          "name": "Ikinari Steak",
+          "description": "가성비 훌륭한 스테이크",
+          "score": "3.5",
+          "link": "https://tabelog.com/kr/tokyo/A1323/A132301/13189172/"
+        }
+      ]
+    },
+    {
+      "id": "kawaguchi",
+      "tier": "suburb",
+      "name": "오이시 공원",
+      "area": "가와구치코",
+      "tagline": "후지산과 벚꽃의 절경",
+      "image": "images/kawaguchiko_1.jpg",
+      "vibe": "경이로움",
+      "crowd": "매우 높음",
+      "description": "후지산의 웅장한 자태를 배경으로 가와구치코 호숫가를 따라 벚꽃이 피어납니다. 일본을 상징하는 두 풍경을 한 프레임에 담을 수 있는 최고의 장소입니다.",
+      "tips": [
+        "날씨가 맑은 날 아침 일찍 방문해야 후지산이 잘 보입니다",
+        "신주쿠에서 특급 열차 후지카이유 이용을 추천합니다"
+      ],
+      "bloom": {
+        "start": "4월 5일",
+        "peak": "4월 12일",
+        "end": "4월 20일"
+      },
+      "station": "가와구치코역 (Kawaguchiko Station)",
+      "attractions": [
+        {
+          "name": "쿠보타 이치쿠 미술관",
+          "description": "기모노 예술의 극치를 보여주는 건축물",
+          "image": "images/kubota_1.jpg"
+        },
+        {
+          "name": "후지산 센겐 신사",
+          "description": "후지산 신앙의 중심지이자 유네스코 유적",
+          "image": "images/hanami_fuji-sengen-jinja-sakura_1.jpg"
+        },
+        {
+          "name": "가와구치코 로프웨이",
+          "description": "하늘 위에서 내려다보는 호수와 벚꽃",
+          "image": "images/kawaguchiko_loop_1.jpg"
+        }
+      ],
+      "cafes": [
+        {
+          "name": "HanaCafe Kikyou",
+          "description": "꽃과 함께 즐기는 정갈한 전통 디저트",
+          "score": "3.8",
+          "link": "https://tabelog.com/yamanashi/A1903/A190303/19010119/"
+        },
+        {
+          "name": "Cafe Mimi",
+          "description": "호수 뷰를 보며 즐기는 유기농 커피",
+          "score": "3.7",
+          "link": "https://tabelog.com/yamanashi/A1903/A190303/19005371/"
+        },
+        {
+          "name": "Trozemane",
+          "description": "빈티지한 감성의 호숫가 베이커리",
+          "score": "3.6",
+          "link": "https://tabelog.com/yamanashi/A1903/A190303/19007497/"
+        },
+        {
+          "name": "Paper Moon",
+          "description": "치즈케이크로 유명한 숲속의 비밀 공간",
+          "score": "3.9",
+          "link": "https://tabelog.com/yamanashi/A1903/A190302/19000035/"
+        },
+        {
+          "name": "Lake Bakestay",
+          "description": "탁 트인 후지산 조망권을 가진 카페",
+          "score": "3.5",
+          "link": "https://tabelog.com/yamanashi/A1903/A190303/19004468/"
+        }
+      ],
+      "restaurants": [
+        {
+          "name": "Houtou Fudou",
+          "description": "야마나시 명물 호토 국수의 끝판왕",
+          "score": "4.1",
+          "link": "https://tabelog.com/yamanashi/A1903/A190303/19000116/"
+        },
+        {
+          "name": "Kosaku",
+          "description": "깊은 육수 맛을 자랑하는 30년 전통 맛집",
+          "score": "4.0",
+          "link": "https://tabelog.com/kr/yamanashi/A1903/A190303/19000046/"
+        },
+        {
+          "name": "Sanrokuen",
+          "description": "화로에서 구워 먹는 정통 이로리 요리",
+          "score": "3.9",
+          "link": "https://tabelog.com/yamanashi/A1903/A190303/19000257/"
+        },
+        {
+          "name": "Fuji Tempura",
+          "description": "현지 식재료를 바삭하게 튀겨낸 덴푸라",
+          "score": "3.8",
+          "link": "https://tabelog.com/yamanashi/A1903/A190303/19008342/"
+        },
+        {
+          "name": "Lake Side Grill",
+          "description": "호수를 바라보며 즐기는 스테이크 하우스",
+          "score": "3.7",
+          "link": "https://tabelog.com/kanagawa/A1410/A141001/14068497/"
+        }
+      ]
+    },
+    {
+      "id": "kamakura",
+      "tier": "suburb",
+      "name": "츠루가오카 하치만구",
+      "area": "가마쿠라",
+      "tagline": "고도의 향기가 배어나는 벚꽃길",
+      "image": "images/kamakura_1.jpg",
+      "vibe": "고전적",
+      "crowd": "높음",
+      "description": "가마쿠라 막부의 중심지였던 유서 깊은 신사입니다. 역에서 신사까지 이어지는 단카즈라 산책로는 수백 그루의 벚꽃 터널로 변신합니다.",
+      "tips": [
+        "신사 앞 단카즈라 산책로는 일방통행이므로 역에서부터 걸어가세요",
+        "에노덴을 타고 바다와 벚꽃을 동시에 즐겨보세요"
+      ],
+      "bloom": {
+        "start": "3월 23일",
+        "peak": "3월 30일",
+        "end": "4월 7일"
+      },
+      "station": "가마쿠라역 (Kamakura Station)",
+      "attractions": [
+        {
+          "name": "가마쿠라 국립 미술관",
+          "description": "가마쿠라 시대의 불교 예술품 전시",
+          "image": "images/kamakura_mus_1.jpg"
+        },
+        {
+          "name": "고토쿠인 대불",
+          "description": "야외에 모셔진 거대한 청동 불상"
+        },
+        {
+          "name": "에노시마 전철(에노덴)",
+          "description": "집 사이를 지나가는 복고풍 전차 체험",
+          "image": "images/enoden_1.jpg"
+        }
+      ],
+      "cafes": [
+        {
+          "name": "Iwata Coffee",
+          "description": "존 레논이 다녀간 두툼한 팬케이크 맛집",
+          "score": "3.9",
+          "link": "https://tabelog.com/kanagawa/A1404/A140402/14002091/"
+        },
+        {
+          "name": "Vivement Dimanche",
+          "description": "장인이 로스팅하는 가마쿠라 커피의 자부심",
+          "score": "3.8",
+          "link": "https://tabelog.com/kanagawa/A1404/A140402/14002141/"
+        },
+        {
+          "name": "The Good Goodies",
+          "description": "아침 일찍 문을 여는 세련된 커피 스탠드",
+          "score": "3.7",
+          "link": "https://tabelog.com/kanagawa/A1404/A140402/14053467/"
+        },
+        {
+          "name": "Kannon Coffee",
+          "description": "하세데라 근처 감각적인 크레페 전문점",
+          "score": "3.7",
+          "link": "https://tabelog.com/kanagawa/A1404/A140402/14069001/"
+        },
+        {
+          "name": "Verve Kamakura",
+          "description": "캘리포니아 감성이 섞인 모던 커피 바",
+          "score": "3.6",
+          "link": "https://tabelog.com/kanagawa/A1404/A140402/14069718/"
+        }
+      ],
+      "restaurants": [
+        {
+          "name": "Matsubara-an",
+          "description": "고택을 개조한 고품격 메밀 소바 전문점",
+          "score": "4.2",
+          "link": "https://tabelog.com/kanagawa/A1404/A140402/14008453/"
+        },
+        {
+          "name": "Akimoto",
+          "description": "가마쿠라의 신선한 채소 요리 텐동",
+          "score": "4.1",
+          "link": "https://tabelog.com/kanagawa/A1404/A140402/14004634/"
+        },
+        {
+          "name": "Shirasuya",
+          "description": "가마쿠라 바다의 명물 잔멸치 덮밥",
+          "score": "4.0",
+          "link": "https://tabelog.com/kanagawa/A1404/A140403/14002304/"
+        },
+        {
+          "name": "Caraway",
+          "description": "줄 서서 먹는 푸짐한 양의 비프 카레",
+          "score": "3.9",
+          "link": "https://tabelog.com/kanagawa/A1404/A140402/14000589/"
+        },
+        {
+          "name": "Latteria Bebe Kamakura",
+          "description": "가마쿠라에 줄서서 먹는 피자 맛집",
+          "score": "3.8",
+          "link": "https://tabelog.com/kanagawa/A1404/A140402/14058636/"
+        }
+      ]
+    },
+    {
+      "id": "kawagoe",
+      "tier": "suburb",
+      "name": "신가시 강",
+      "area": "가와고에",
+      "tagline": "수로를 따라 흐르는 봄의 운치",
+      "image": "images/kawagoe_1.jpg",
+      "vibe": "향수",
+      "crowd": "보통",
+      "description": "에도 시대의 정취가 남아있는 수로변입니다. 히카와 신사 뒤편 수로에 벚꽃이 가득 피면 꽃배(하나이카다) 체험이 진행되어 장관을 이룹니다.",
+      "tips": [
+        "배 위에서 보는 벚꽃은 오전 예약이 필수입니다",
+        "전통 과자 골목(카시야 요코초) 방문을 잊지 마세요"
+      ],
+      "bloom": {
+        "start": "3월 25일",
+        "peak": "4월 1일",
+        "end": "4월 8일"
+      },
+      "station": "가와고에역 (Kawagoe Station)",
+      "attractions": [
+        {
+          "name": "가와고에 시립 박물관",
+          "description": "작은 에도라 불리는 가와고에의 역사",
+          "image": "images/kawagoe_city_art_1.jpg"
+        },
+        {
+          "name": "키타인 사찰",
+          "description": "에도 성의 유일한 잔존 건축물이 있는 곳",
+          "image": "images/kitainn_1.jpg"
+        },
+        {
+          "name": "과자 골목",
+          "description": "옛날 불량식품과 사탕을 파는 골목",
+          "image": "images/kawagoe_okashi_1.jpg"
+        }
+      ],
+      "cafes": [
+        {
+          "name": "Aburi Coffee",
+          "description": "시계탑 바로 뒤에 위치한 오리지널 블랜드 카페",
+          "score": "3.7",
+          "link": "https://tabelog.com/en/saitama/A1103/A110303/11018432/"
+        },
+        {
+          "name": "Kanmidokoro Kawagoe Akariya",
+          "description": "일본 전통 디저트를 맛볼 수 있는 곳",
+          "score": "3.8",
+          "link": "https://tabelog.com/kr/saitama/A1103/A110303/11017607/"
+        },
+        {
+          "name": "Starbucks Coffee Kawagoe Kane Tsuki Tori Ten",
+          "description": "전통 가옥 형태의 랜드마크 매장",
+          "score": "3.6",
+          "link": "https://tabelog.com/kr/saitama/A1103/A110303/11046765/"
+        },
+        {
+          "name": "Cafe Matilda",
+          "description": "미국 빈티지 감성의 팬케이크 전문점",
+          "score": "3.5",
+          "link": "https://tabelog.com/kr/saitama/A1103/A110303/11033941/"
+        },
+        {
+          "name": "KAWAGOE ART CAFE ELEVATO",
+          "description": "역사가 있는 건물에서 즐기는 디저트",
+          "score": "3.7",
+          "link": "https://tabelog.com/kr/saitama/A1103/A110303/11016350/"
+        }
+      ],
+      "restaurants": [
+        {
+          "name": "Ichinoya",
+          "description": "100년 넘는 전통의 장어 덮밥 노포",
+          "score": "4.2",
+          "link": "https://tabelog.com/kr/saitama/A1103/A110303/11000139/"
+        },
+        {
+          "name": "Ogakiku",
+          "description": "가와고에에서 가장 유명한 장어 구이 전문",
+          "score": "4.1",
+          "link": "https://tabelog.com/kr/saitama/A1103/A110303/11000040/"
+        },
+        {
+          "name": "Kotobukian",
+          "description": "제분기로 직접 뽑는 메밀 소바 맛집",
+          "score": "3.9",
+          "link": "https://tabelog.com/kr/saitama/A1103/A110303/11004265/"
+        },
+        {
+          "name": "Kuroneko Kissa",
+          "description": "엄선한 일품과 본격적인 점을 즐길 수 있는 식당",
+          "score": "3.8",
+          "link": "https://tabelog.com/kr/saitama/A1103/A110303/11059906/"
+        },
+        {
+          "name": "Ganja Hon Ten",
+          "description": "방송에도 나와 유명한 츠케멘",
+          "score": "3.7",
+          "link": "https://tabelog.com/kr/saitama/A1103/A110303/11000150/"
+        }
+      ]
+    },
+    {
+      "id": "yokohama",
+      "tier": "suburb",
+      "name": "미나토미라이 21",
+      "area": "요코하마",
+      "tagline": "항구 도시의 세련된 벚꽃길",
+      "image": "images/minatomirai_1.jpg",
+      "vibe": "로맨틱",
+      "crowd": "높음",
+      "description": "요코하마의 현대적인 건축물과 바다가 어우러진 대표 명소입니다. 약 500m의 사쿠라도리는 밤이 되면 대관람차와 함께 로맨틱한 야경을 선사합니다.",
+      "tips": [
+        "코스모월드 관람차에서 내려다보는 벚꽃이 일품",
+        "아카렌가 창고까지 이어지는 코스 추천"
+      ],
+      "bloom": {
+        "start": "3월 22일",
+        "peak": "3월 29일",
+        "end": "4월 6일"
+      },
+      "station": "사쿠라기초역 (Sakuragicho Station)",
+      "attractions": [
+        {
+          "name": "컵누들 박물관",
+          "description": "직접 라면을 만드는 체험형 박물관",
+          "image": "images/Cupnoodles-Museum-Yokohama.jpg"
+        },
+        {
+          "name": "아카렌가 창고",
+          "description": "근대 항구의 역사가 담긴 붉은 벽돌 몰",
+          "image": "images/yokohama-akarenga_1.jpg"
+        },
+        {
+          "name": "에어 캐빈",
+          "description": "하늘을 가로지르는 도심 로프웨이",
+          "image": "images/air_cabin_1.jpg"
+        }
+      ],
+      "cafes": [
+        {
+          "name": "Bills Yokohama",
+          "description": "유명한 호주식 올데이 다이닝",
+          "score": "3.8",
+          "link": "https://tabelog.com/kanagawa/A1401/A140104/14035310/"
+        },
+        {
+          "name": "Blue Bottle",
+          "description": "미니멀한 디자인의 미나토미라이 매장",
+          "score": "3.7",
+          "link": "https://tabelog.com/kanagawa/A1401/A140103/14080559/"
+        },
+        {
+          "name": "Anniversaire Cafe",
+          "description": "운하 뷰가 환상적인 테라스 카페",
+          "score": "3.6",
+          "link": "https://tabelog.com/kanagawa/A1401/A140102/14090328/"
+        },
+        {
+          "name": "The Wharf House",
+          "description": "항구 분위기를 즐기는 공원 카페",
+          "score": "3.5",
+          "link": "https://tabelog.com/kr/kanagawa/A1401/A140104/14089311/"
+        },
+        {
+          "name": "Cafe de la Presse",
+          "description": "고전적인 분위기의 역사적 카페",
+          "score": "3.7",
+          "link": "https://tabelog.com/kr/kanagawa/A1401/A140104/14002143/"
+        }
+      ],
+      "restaurants": [
+        {
+          "name": "Yoshimuraya",
+          "description": "이에케이 라멘의 전설적인 본점",
+          "score": "4.2",
+          "link": "https://tabelog.com/kanagawa/A1401/A140102/14090328/"
+        },
+        {
+          "name": "Mangenchirou",
+          "description": "차이나타운의 유명 딤섬 맛집",
+          "score": "3.9",
+          "link": "https://tabelog.com/kr/kanagawa/A1401/A140104/14000144/"
+        },
+        {
+          "name": "Seryna",
+          "description": "와규 스테이크와 철판 요리 전문",
+          "score": "4.1",
+          "link": "https://tabelog.com/kr/kanagawa/A1401/A140104/14002734/"
+        },
+        {
+          "name": "Katsuretsu-an",
+          "description": "요코하마를 대표하는 돈카츠 노포",
+          "score": "4.0",
+          "link": "https://tabelog.com/kr/kanagawa/A1401/A140101/14003473/"
+        },
+        {
+          "name": "Sky Lounge Sirius",
+          "description": "70층에서 즐기는 럭셔리 다이닝",
+          "score": "3.8",
+          "link": "https://tabelog.com/kr/kanagawa/A1401/A140103/14000037/"
+        }
+      ]
+    },
+    {
+      "id": "futako",
+      "tier": "suburb",
+      "name": "타마가와 강변",
+      "area": "후타코타마가와",
+      "tagline": "강변의 여유와 쇼핑을 동시에 즐기는 핫플레이스",
+      "image": "images/futako_1.jpg",
+      "vibe": "릴렉스",
+      "crowd": "보통",
+      "description": "광활한 강변과 세련된 상업 지구가 조화를 이루는 곳입니다. 강물을 따라 길게 이어진 벚꽃 나무 아래서 즐기는 피크닉은 도쿄인들의 로망입니다.",
+      "tips": [
+        "츠타야 가전에서 책 한 권 사서 산책 추천",
+        "피크닉 매트를 챙겨오면 명당 확보가 쉽습니다"
+      ],
+      "bloom": {
+        "start": "3월 21일",
+        "peak": "3월 28일",
+        "end": "4월 5일"
+      },
+      "station": "후타코타마가와역 (Futako-tamagawa Station)",
+      "attractions": [
+        {
+          "name": "고토 미술관",
+          "description": "고전 예술품을 전시하는 고요한 공간",
+          "image": "images/goto_art_1.jpg"
+        },
+        {
+          "name": "효고지마 공원",
+          "description": "강 사이에 형성된 역사 깊은 공원",
+          "image": "images/hyogojima_1.jpg"
+        },
+        {
+          "name": "츠타야 가전",
+          "description": "가장 세련된 라이프스타일 샵",
+          "image": "images/tsutaya_1.jpg"
+        }
+      ],
+      "cafes": [
+        {
+          "name": "Starbucks Terrace",
+          "description": "강변 뷰를 즐기는 랜드마크 매장",
+          "score": "3.9",
+          "link": "https://tabelog.com/kr/tokyo/A1317/A131708/13210344/"
+        },
+        {
+          "name": "Bills Futako",
+          "description": "여유로운 분위기의 브런치 명소",
+          "score": "3.7",
+          "link": "https://tabelog.com/kr/tokyo/A1317/A131708/13185361/"
+        },
+        {
+          "name": "Cafe Soul Tree",
+          "description": "오래된 창고를 개조한 빈티지 카페",
+          "score": "3.8",
+          "link": "https://tabelog.com/kr/tokyo/A1317/A131708/13141122/"
+        },
+        {
+          "name": "Triangle Cafe",
+          "description": "비주얼이 예쁜 파르페 전문점",
+          "score": "3.6",
+          "link": "https://tabelog.com/kr/tokyo/A1317/A131708/13241031/"
+        },
+        {
+          "name": "Let It Be Coffee",
+          "description": "로컬들이 사랑하는 라떼 맛집",
+          "score": "3.7",
+          "link": "https://tabelog.com/kr/tokyo/A1317/A131708/13217435/"
+        }
+      ],
+      "restaurants": [
+        {
+          "name": "Tokyu Food Show",
+          "description": "피크닉용 고품격 델리 맛집 천국",
+          "score": "3.6",
+          "link": "https://tabelog.com/kr/tokyo/A1317/A131708/13124116/"
+        },
+        {
+          "name": "Azabu Sabo",
+          "description": "정갈한 일식 정식과 디저트",
+          "score": "3.7",
+          "link": "https://tabelog.com/kr/tokyo/A1317/A131708/13010385/"
+        },
+        {
+          "name": "The Veranda",
+          "description": "강변 바람을 느끼는 이탈리안",
+          "score": "3.8",
+          "link": "https://tabelog.com/kr/tokyo/A1317/A131708/13123869/"
+        },
+        {
+          "name": "Kua Aina",
+          "description": "두툼한 하와이안 수제 버거",
+          "score": "3.5",
+          "link": "https://tabelog.com/kr/tokyo/A1317/A131708/13124135/"
+        },
+        {
+          "name": "Sushiro",
+          "description": "가족들과 편하게 즐기는 신선한 초밥",
+          "score": "3.7",
+          "link": "https://tabelog.com/kr/tokyo/A1317/A131715/13257321/"
+        }
+      ]
+    }
+  ]
+}

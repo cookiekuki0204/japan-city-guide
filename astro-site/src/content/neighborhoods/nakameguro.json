@@ -1,0 +1,173 @@
+{
+  "cityId": "tokyo",
+  "title": "나카메구로",
+  "nameJa": "中目黒",
+  "nameEn": "Nakameguro",
+  "description": "메구로강을 따라 800그루의 왕벚나무가 이어지는, 도쿄에서 가장 낭만적인 동네. 강변 카페와 편집숍이 늘어선 산책로가 계절마다 다른 얼굴을 보여줍니다.",
+  "intro": [
+    "메구로강을 따라 흐르는 800그루의 왕벚나무가 만드는 분홍빛 터널은 도쿄 최고의 낭만입니다. 밤이 되면 켜지는 핑크 제등과 강물에 비친 꽃잎은 전 세계 여행자들의 로망입니다.",
+    "다만 나카메구로가 벚꽃만의 동네는 아닙니다. 강 양옆으로 이어지는 좁은 길에는 스페셜티 커피 로스터리와 작은 편집숍, 오래된 이자카야가 촘촘히 붙어 있어, 꽃이 없는 계절에도 걷는 재미가 그대로 남습니다.",
+    "시부야에서 한 정거장이라 접근이 쉬운데도 관광지 특유의 소란함이 덜합니다. 목적지를 정하기보다 강을 따라 천천히 걷다가 마음에 드는 가게에 들어가는 쪽이 이 동네에 어울립니다."
+  ],
+  "heroImage": "images/nakameguro_3.jpg",
+  "facts": [
+    {
+      "label": "Access",
+      "value": "시부야 1정거장"
+    },
+    {
+      "label": "Station",
+      "value": "나카메구로역"
+    },
+    {
+      "label": "Vibe",
+      "value": "강변 산책"
+    },
+    {
+      "label": "Best",
+      "value": "3월 말 · 해질녘"
+    },
+    {
+      "label": "Spots",
+      "value": "7곳"
+    }
+  ],
+  "route": [
+    {
+      "name": "나카메구로역",
+      "description": "산책 출발점. 도큐 도요코선·히비야선이 지난다",
+      "time": "15:00",
+      "badge": "출발"
+    },
+    {
+      "name": "Onibus Coffee",
+      "description": "철길 옆 고택을 개조한 스페셜티 커피. 2층 창가에서 지나가는 전철이 보인다",
+      "time": "15:10"
+    },
+    {
+      "name": "메구로강 산책로",
+      "description": "왕벚나무 800그루가 강을 덮는 구간. 벚꽃철이 아니어도 물가를 따라 걷기 좋다",
+      "time": "15:40"
+    },
+    {
+      "name": "호라이바시 다리",
+      "description": "강과 벚나무가 가장 넓게 담기는 공식 포토 스팟",
+      "time": "16:00"
+    },
+    {
+      "name": "트래블러스 팩토리",
+      "description": "여행의 설렘을 테마로 한 빈티지 문구 본점. 트래블러스 노트의 성지",
+      "time": "16:20"
+    },
+    {
+      "name": "Starbucks Reserve Roastery",
+      "description": "세계 최대 규모의 스타벅스. 4층 테라스가 벚꽃 시즌 최고의 자리",
+      "time": "17:00"
+    },
+    {
+      "name": "Seirinkan",
+      "description": "도쿄 3대 화덕 피자로 꼽히는 곳. 마르게리타와 마리나라 두 가지뿐",
+      "time": "18:30",
+      "badge": "종착"
+    }
+  ],
+  "seasons": [
+    {
+      "season": "봄",
+      "note": "3월 20일경 개화해 3월 27일 전후 만개, 4월 3일경 저뭅니다. 일몰 후 오후 8시까지 라이트업이 켜지고, 이 시기에는 강변 전체가 인파로 가득 찹니다."
+    },
+    {
+      "season": "여름",
+      "note": "벚나무가 짙은 녹음이 되어 강변에 그늘을 만듭니다. 사람이 크게 줄어 카페 자리를 잡기 가장 쉬운 계절입니다."
+    },
+    {
+      "season": "가을",
+      "note": "벚나무 잎이 붉게 물들어 단풍 산책로가 됩니다. 벚꽃철만큼 알려지지 않아 조용히 걷기 좋습니다."
+    },
+    {
+      "season": "겨울",
+      "note": "잎이 진 가지에 조명이 걸리는 해가 있습니다. 강변은 한산하고, 대신 실내 카페와 이자카야가 이 동네의 중심이 됩니다."
+    }
+  ],
+  "cafes": [
+    {
+      "name": "Starbucks Reserve Roastery Tokyo",
+      "description": "세계 최대 규모이자 벚꽃 테라스를 가진 곳",
+      "score": "4.2",
+      "link": "https://tabelog.com/kr/tokyo/A1317/A131701/13231942/"
+    },
+    {
+      "name": "I'm Donut? Nakameguro",
+      "description": "도쿄 대표 생도넛 맛집",
+      "score": "3.9",
+      "link": "https://tabelog.com/kr/tokyo/A1317/A131701/13269567/"
+    },
+    {
+      "name": "Onibus Coffee",
+      "description": "철길 옆 감성 고택 스페셜티 커피",
+      "score": "3.7",
+      "link": "https://tabelog.com/kr/tokyo/A1317/A131701/13191293/"
+    },
+    {
+      "name": "Cafe Facon",
+      "description": "넬 드립 방식의 장인 정신 카페",
+      "score": "3.7",
+      "link": "https://tabelog.com/kr/tokyo/A1317/A131701/13056736/"
+    },
+    {
+      "name": "Sidewalk Stand",
+      "description": "강변 산책용 에스프레소 스탠드",
+      "score": "3.6",
+      "link": "https://tabelog.com/kr/tokyo/A1317/A131701/13180768/"
+    }
+  ],
+  "restaurants": [
+    {
+      "name": "Seirinkan",
+      "description": "도쿄 3대 화덕 피자의 정점",
+      "score": "4.1",
+      "link": "https://tabelog.com/tokyo/A1317/A131701/13003188/"
+    },
+    {
+      "name": "Kushiwakamaru",
+      "description": "가성비 최고의 야키토리 성지",
+      "score": "4.0",
+      "link": "https://tabelog.com/kr/tokyo/A1317/A131701/13003193/"
+    },
+    {
+      "name": "Oniyanma Nakameguro",
+      "description": "모던하고 정갈한 우동집",
+      "score": "3.7",
+      "link": "https://tabelog.com/kr/tokyo/A1317/A131701/13199054/"
+    },
+    {
+      "name": "Beef Kitchen",
+      "description": "합리적인 가격의 와규 야키니쿠",
+      "score": "3.7",
+      "link": "https://tabelog.com/kr/tokyo/A1317/A131701/13054178/"
+    },
+    {
+      "name": "Totorou",
+      "description": "신선한 해산물 전문 이자카야",
+      "score": "3.7",
+      "link": "https://tabelog.com/kr/tokyo/A1317/A131701/13212411/"
+    }
+  ],
+  "gallery": [
+    "images/nakameguro_2.jpg",
+    "images/travelers_1.jpg",
+    "images/sato_sakura_1.jpg",
+    "images/yutenji_1.jpg"
+  ],
+  "cards": [
+    "images/nakameguro/1.png",
+    "images/nakameguro/2.png",
+    "images/nakameguro/3.png",
+    "images/nakameguro/4.png",
+    "images/nakameguro/5.png",
+    "images/nakameguro/6.png",
+    "images/nakameguro/7.png",
+    "images/nakameguro/8.png",
+    "images/nakameguro/9.png"
+  ]
+}

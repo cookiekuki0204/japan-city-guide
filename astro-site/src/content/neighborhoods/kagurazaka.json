@@ -1,0 +1,69 @@
+{
+  "cityId": "tokyo",
+  "title": "가구라자카",
+  "nameJa": "神楽坂",
+  "nameEn": "Kagurazaka",
+  "description": "프렌치 레스토랑과 일본 전통이 공존하는 하이브리드 동네. 에도 시대 돌길 골목과 모던 건축이 한 블록 안에 붙어 있습니다.",
+  "intro": [
+    "가구라자카는 에도 시대 화류가에서 출발해 지금은 프랑스인 커뮤니티가 자리 잡은, 도쿄에서도 성격이 뚜렷한 동네입니다. 큰길에서 한 걸음만 들어가면 돌이 깔린 좁은 골목이 이어지고, 그 안에 요정과 비스트로가 나란히 있습니다.",
+    "언덕길을 중심으로 위아래가 다른 얼굴을 합니다. 아래쪽은 상점가의 활기가, 위쪽 골목은 발소리가 들릴 만큼 조용합니다. 지도를 보고 목적지를 찾기보다 골목으로 일부러 들어가 보는 편이 이 동네를 즐기는 방법입니다.",
+    "신주쿠에서 지하철로 두 정거장인데도 관광객이 몰리지 않아, 도쿄 도심에서 느긋하게 걷기 좋은 몇 안 되는 곳입니다."
+  ],
+  "facts": [
+    { "label": "Access", "value": "신주쿠 2분" },
+    { "label": "Station", "value": "가구라자카역" },
+    { "label": "Vibe", "value": "에도 감성" },
+    { "label": "Best", "value": "주말 오후" },
+    { "label": "Spots", "value": "7곳" }
+  ],
+  "route": [
+    {
+      "name": "가구라자카역",
+      "description": "산책 출발점. 지하철 도자이선 이용",
+      "time": "14:00",
+      "badge": "출발"
+    },
+    {
+      "name": "LA KAGU",
+      "description": "창고를 개조한 복합 셀렉트숍. 패션·책·카페가 한 건물에",
+      "time": "14:05"
+    },
+    {
+      "name": "아카기 신사",
+      "description": "구마 겐고 설계. 모던 건축과 전통이 공존하는 신사",
+      "time": "14:40"
+    },
+    {
+      "name": "효고요코초",
+      "description": "에도 시대 골목이 그대로 남은 옛 게이샤 거리",
+      "time": "15:05"
+    },
+    {
+      "name": "키노젠",
+      "description": "1948년 문을 연 노포. 말차 바바루아가 대표 메뉴",
+      "time": "15:30"
+    },
+    {
+      "name": "400℃ PIZZA TOKYO",
+      "description": "미슐랭에 이름을 올린 피자집. 완전 예약제",
+      "time": "16:05"
+    },
+    {
+      "name": "카날 카페",
+      "description": "에도성 해자를 바라보는 테라스 카페",
+      "time": "17:10",
+      "badge": "종착"
+    }
+  ],
+  "cards": [
+    "images/kagurazaka/1.jpg",
+    "images/kagurazaka/2.jpg",
+    "images/kagurazaka/3.jpg",
+    "images/kagurazaka/4.jpg",
+    "images/kagurazaka/5.jpg",
+    "images/kagurazaka/6.jpg",
+    "images/kagurazaka/7.jpg",
+    "images/kagurazaka/8.jpg",
+    "images/kagurazaka/9.jpg"
+  ]
+}

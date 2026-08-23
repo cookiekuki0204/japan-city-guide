@@ -1,0 +1,509 @@
+{
+  "cityId": "kyoto",
+  "type": "sakura",
+  "title": "교토 벚꽃 명소",
+  "updated": "2026-08-12",
+  "timeline": [
+    {
+      "label": "개화 시작",
+      "date": "3월 23일"
+    },
+    {
+      "label": "만개 피크",
+      "date": "3월 30일"
+    },
+    {
+      "label": "벚꽃 엔딩",
+      "date": "4월 6일"
+    }
+  ],
+  "spots": [
+    {
+      "id": "philosopher",
+      "tier": "best",
+      "name": "철학의 길",
+      "area": "사쿄구",
+      "tagline": "수로 따라 이어지는 벚꽃 터널",
+      "image": "images/tetsugaku_1.jpg",
+      "vibe": "사색적",
+      "crowd": "매우 높음",
+      "description": "은각사에서 난젠지 부근까지 이어지는 약 2km의 수로길입니다. 일본의 철학자 니시다 키타로가 이 길을 산책하며 사색에 잠겼다 하여 이름 붙여졌습니다.",
+      "tips": [
+        "아침 7시 이전에 방문해야 인파 없는 수로 사진을 찍을 수 있습니다",
+        "길 중간중간 나타나는 길고양이들과 인사를 나눠보세요",
+        "은각사(긴카쿠지) 입구에서 시작해 난젠지 방향으로 내려오는 코스가 가장 걷기 좋습니다"
+      ],
+      "bloom": {
+        "start": "3월 23일",
+        "peak": "3월 30일",
+        "end": "4월 6일"
+      },
+      "station": "긴카쿠지미치(버스)",
+      "attractions": [
+        {
+          "name": "노무라 미술관 (Nomura Museum)",
+          "description": "철학의 길 남쪽 난젠지 인근에 위치하며, 일본의 다도 유물과 회화를 전문으로 전시합니다. 사색적인 산책길의 분위기와 가장 잘 어울리는 정적인 예술 공간입니다.",
+          "image": "images/nomura_museum.jpg"
+        },
+        {
+          "name": "은각사 / 긴카쿠지 (Ginkakuji Temple)",
+          "description": "철학의 길 북쪽 기점이자 유네스코 세계문화유산입니다. 15세기 무로마치 시대의 절제된 미학을 간직한 은각과 정교한 모래 정원이 역사의 깊이를 더해줍니다.",
+          "image": "images/ginkakuji.jpg"
+        },
+        {
+          "name": "난젠지 수인각 (Suirokaku Water Bridge)",
+          "description": "전통 사찰 경내를 가로지르는 붉은 벽돌의 로마식 아치형 수로입니다. 동양의 고찰과 서양식 근대 건축이 만난 비현실적이고 유니크한 풍경을 선사합니다.",
+          "image": "images/suirokaku.jpg"
+        }
+      ],
+      "cafes": [
+        {
+          "name": "요지야 카페",
+          "description": "정원을 바라보는 전통 다다미 카페",
+          "score": "4.1",
+          "mapQuery": "よじやカフェ 銀閣寺店"
+        },
+        {
+          "name": "카페 테르미누스",
+          "description": "철길 옆 빈티지한 감성",
+          "score": "4.3",
+          "mapQuery": "Cafe Terminus"
+        },
+        {
+          "name": "고스펠",
+          "description": "앤틱한 유럽풍 건물의 디저트 카페",
+          "score": "4.2",
+          "mapQuery": "Gospel Kyoto"
+        }
+      ],
+      "restaurants": [
+        {
+          "name": "오멘",
+          "description": "정갈한 우동과 텐푸라 전문점",
+          "score": "4.4",
+          "mapQuery": "おめん 銀閣寺本店"
+        },
+        {
+          "name": "히노데 우동",
+          "description": "걸쭉한 카레우동의 성지",
+          "score": "4.5",
+          "mapQuery": "日の出うどん"
+        },
+        {
+          "name": "에이칸도 오차야",
+          "description": "사찰 내에서 즐기는 정갈한 소바",
+          "score": "4.0",
+          "mapQuery": "永観堂 茶店"
+        }
+      ]
+    },
+    {
+      "id": "kiyomizu",
+      "tier": "best",
+      "name": "기요미즈테라",
+      "area": "히가시야마",
+      "tagline": "절벽 위 무대에서 내려다보는 분홍 바다",
+      "image": "images/kiyomizutera_1.jpg",
+      "vibe": "웅장함",
+      "crowd": "최상",
+      "description": "유네스코 세계문화유산으로, 못을 하나도 사용하지 않고 세워진 목조 무대가 유명합니다. 봄이면 1,500그루의 벚꽃이 사찰을 감쌉니다.",
+      "tips": [
+        "야간 특별 관람(라이트업) 기간을 반드시 확인하세요. 밤의 푸른 조명이 벚꽃과 어우러져 환상적입니다",
+        "니넨자카, 산넨자카 산책로와 연결하면 최고의 코스이지만 계단이 많으니 편한 신발을 추천합니다",
+        "매년 봄에만 열리는 특별 공개 구역이 있으니 현장 안내판을 꼭 확인하세요"
+      ],
+      "bloom": {
+        "start": "3월 24일",
+        "peak": "3월 31일",
+        "end": "4월 7일"
+      },
+      "station": "기요미즈미치(버스)",
+      "attractions": [
+        {
+          "name": "교토 시립 박물관 (Kyoto City Museum of Art)",
+          "description": "기요미즈데라 하단 오카자키 지역과 가깝습니다. 화려한 근대 건축물 내에서 전통 공예부터 현대 미술까지 교토의 예술적 가치를 박물관급 전시로 감상할 수 있습니다.",
+          "image": "images/kyoto_museum.jpg"
+        },
+        {
+          "name": "산넨자카 & 니넨자카 (Sannenzaka & Ninenzaka)",
+          "description": "기요미즈데라로 이어지는 유서 깊은 돌담길입니다. 에도 시대의 가옥들이 완벽하게 보존되어 있어 걷는 것만으로도 수백 년 전 교토의 역사 속으로 들어온 듯한 기분을 느끼게 합니다.",
+          "image": "images/sannenzaka.jpg"
+        },
+        {
+          "name": "즈이구도 태내 체험 (Zuigu-do Tainei-meguri)",
+          "description": "기요미즈데라 경내에 위치한 유니크한 체험 장소입니다. 아무것도 보이지 않는 칠흑 같은 어둠 속을 벽을 짚으며 걷는 '태내 체험'을 통해 마음을 정화하고 소원을 비는 특별한 경험을 할 수 있습니다.",
+          "image": "images/zuigudo.jpg"
+        }
+      ],
+      "cafes": [
+        {
+          "name": "카스미",
+          "description": "청수사 근처 말차 디저트 맛집",
+          "score": "4.2",
+          "mapQuery": "Kasumi Kyoto"
+        },
+        {
+          "name": "스타벅스 니넨자카",
+          "description": "다다미가 있는 세계 유일의 매장",
+          "score": "4.4",
+          "mapQuery": "スターバックス コーヒー 京都二寧坂ヤサカ茶屋店"
+        },
+        {
+          "name": "후지나미",
+          "description": "당고와 녹차 세트가 유명한 곳",
+          "score": "4.1",
+          "mapQuery": "藤菜美"
+        }
+      ],
+      "restaurants": [
+        {
+          "name": "오카베야",
+          "description": "교토 전통 유바 요리 전문",
+          "score": "4.3",
+          "mapQuery": "おかべ家"
+        },
+        {
+          "name": "가츠쿠라",
+          "description": "바삭함이 일품인 교토식 돈카츠",
+          "score": "4.5",
+          "mapQuery": "かつくら 名代とんかつ"
+        },
+        {
+          "name": "유도후 분쇼고",
+          "description": "정갈한 교토식 두부 요리",
+          "score": "4.2",
+          "mapQuery": "湯豆腐 噴水"
+        }
+      ]
+    },
+    {
+      "id": "arashiyama",
+      "tier": "best",
+      "name": "도게츠교 & 카메야마 공원",
+      "area": "아라시야마",
+      "tagline": "산 전체가 분홍빛으로 물드는 절경",
+      "image": "images/arashiyama_1.jpg",
+      "vibe": "자연적",
+      "crowd": "매우 높음",
+      "description": "달이 건너는 다리라는 뜻의 도게츠교와 주변 산들이 어우러진 명승지입니다. 헤이안 시대부터 귀족들의 휴양지로 사랑받아온 교토 최고의 풍경 명소입니다.",
+      "tips": [
+        "사가노 토로코 열차(관광열차)를 미리 예약하면 호즈강 계곡 사이 피어난 벚꽃을 가장 가까이서 감상할 수 있습니다",
+        "강변에서 보트를 대여해 도게츠교를 배경으로 여유롭게 벚꽃놀이를 즐겨보세요",
+        "치쿠린(대나무 숲)은 벚꽃은 없지만 도보로 바로 연결되니 함께 둘러보는 코스를 강력 추천합니다"
+      ],
+      "bloom": {
+        "start": "3월 25일",
+        "peak": "4월 1일",
+        "end": "4월 8일"
+      },
+      "station": "아라시야마역(한큐/란덴)",
+      "attractions": [
+        {
+          "name": "후쿠다 미술관 (Fukuda Art Museum)",
+          "description": "도게츠교 근처에 위치한 이 미술관은 세련된 현대식 건축물 내에서 교토 출신 화가들의 걸작을 감상할 수 있는 곳입니다. 특히 카페에서 바라보는 도게츠교와 오이강의 파노라마 뷰는 그 자체로 하나의 예술 작품입니다.",
+          "image": "images/fukuda_art_museum.jpg"
+        },
+        {
+          "name": "텐류지 (Tenryu-ji Temple)",
+          "description": "도게츠교에서 도보 거리에 있는 유네스코 세계문화유산입니다. 14세기에 조성된 \"소겐치 정원\"은 창건 당시의 모습을 그대로 간직하고 있으며, 아라시야마의 풍경을 정원 안으로 끌어들인 \"차경\" 기법의 정수를 보여줍니다.",
+          "image": "images/tenryuji.jpg"
+        },
+        {
+          "name": "아라시야마 공원 카메야마 지구 전망대 (Kameyama Park Observatory)",
+          "description": "카메야마 공원 정상에 위치한 이곳은 굽이쳐 흐르는 호즈강과 란쿄 계곡, 그리고 그 사이를 지나는 사가노 관광 열차를 한눈에 담을 수 있는 유니크한 조망 포인트입니다. 인파를 벗어나 아라시야마의 대자연을 온전히 느끼기에 최적입니다.",
+          "image": "images/kameyama_view.jpg"
+        }
+      ],
+      "cafes": [
+        {
+          "name": "아라비카 커피(%)",
+          "description": "도게츠교 뷰가 보이는 세계적 명소",
+          "score": "4.4",
+          "mapQuery": "Arabica Kyoto Arashiyama"
+        },
+        {
+          "name": "사가노유",
+          "description": "공중목욕탕을 개조한 이색적인 분위기의 카페",
+          "score": "4.2",
+          "mapQuery": "사가노유"
+        },
+        {
+          "name": "리락쿠마 차야",
+          "description": "귀여운 캐릭터 디저트가 가득한 곳",
+          "score": "4.1",
+          "mapQuery": "Rilakkuma Sabo Arashiyama"
+        }
+      ],
+      "restaurants": [
+        {
+          "name": "요시무라",
+          "description": "강을 바라보며 먹는 수제 소바 정식",
+          "score": "4.3",
+          "mapQuery": "아라시야마 요시무라"
+        },
+        {
+          "name": "타이차즈케 하누",
+          "description": "고소한 참깨 소스 도미 오차즈케",
+          "score": "4.6",
+          "mapQuery": "아라시야마 하누"
+        },
+        {
+          "name": "히로카와",
+          "description": "교토에서 손꼽히는 장어덮밥 전문점",
+          "score": "4.5",
+          "mapQuery": "우나기 히로카와"
+        }
+      ]
+    },
+    {
+      "id": "maruyama",
+      "tier": "famous",
+      "name": "마루야마 공원 (원산 공원)",
+      "area": "기온",
+      "tagline": "교토의 여왕, 거대 수양벚꽃",
+      "image": "images/maruyama_1.jpg",
+      "vibe": "",
+      "crowd": "",
+      "description": "교토에서 가장 오래된 공원으로, 중앙의 거대한 \"시다레자쿠라(수양벚꽃)\"는 밤에 조명을 받으면 마치 불꽃이 터지는 듯한 절경을 선사합니다.",
+      "tips": [
+        "공원 내 야타이(길거리 음식점)에서 야키소바나 당고를 사서 노천 자리에 앉아 즐기는 것이 이곳의 묘미입니다.",
+        "수양벚꽃은 일반 벚꽃보다 개화가 약간 빠르니 일정을 잡을 때 참고하세요.",
+        "바로 옆 야사카 신궁과 연결되어 있어 함께 둘러보기 좋습니다."
+      ],
+      "bloom": {
+        "start": "3월 22일",
+        "peak": "3월 29일",
+        "end": "4월 5일"
+      },
+      "station": "기온시조역",
+      "attractions": [
+        {
+          "name": "한자 박물관 (Japan Kanji Museum & Library)",
+          "description": "기온 거리 입구에 위치하며, 한자의 역사와 문화를 체험형 전시로 즐겁게 배울 수 있는 곳입니다. 자신의 이름을 한자로 확인하거나 다양한 게임을 통해 일본 문화를 이해하기 좋습니다.",
+          "image": "images/kanji_museum.jpg"
+        },
+        {
+          "name": "야사카 신사 (Yasaka Shrine)",
+          "description": "마루야마 공원과 바로 연결된 교토의 상징적인 신사입니다. 액운을 물리치고 복을 기원하는 곳으로, 밤마다 수백 개의 제등이 불을 밝히는 무대(부덴)의 모습이 매우 환상적입니다.",
+          "image": "images/yasaka_shrine.jpg"
+        },
+        {
+          "name": "기온 시라카와 (Gion Shirakawa)",
+          "description": "공원에서 조금만 걸어 내려오면 만날 수 있는 보존 지구입니다. 수양버들이 늘어진 수로를 따라 전통 찻집(차야)들이 늘어서 있으며, 운이 좋으면 이동하는 게이코나 마이코를 마주칠 수 있는 유니크한 분위기의 거리입니다.",
+          "image": "images/gion_shirakawa.jpg"
+        }
+      ],
+      "cafes": [
+        {
+          "name": "기온 키타가와 한베",
+          "description": "150년 전통의 고급 말차 디저트 카페",
+          "score": "4.4",
+          "mapQuery": "Gion Kitagawa Hanbee"
+        },
+        {
+          "name": "카기젠 요시후사",
+          "description": "쿠즈키리(칡국수)가 유명한 전통 디저트 맛집",
+          "score": "4.5",
+          "mapQuery": "鍵善良房 四条本店"
+        }
+      ],
+      "restaurants": [
+        {
+          "name": "이즈우",
+          "description": "교토식 고등어 초밥의 명가",
+          "score": "4.4",
+          "mapQuery": "いづう"
+        },
+        {
+          "name": "기온 후지토라",
+          "description": "고택에서 즐기는 정갈한 솥밥 정식",
+          "score": "4.1",
+          "mapQuery": "祇園 藤寅"
+        }
+      ]
+    },
+    {
+      "id": "nijo",
+      "tier": "famous",
+      "name": "니조성",
+      "area": "나카교구",
+      "tagline": "성벽 따라 흐르는 화려한 야간 벚꽃",
+      "image": "images/nijyo_1.jpg",
+      "vibe": "",
+      "crowd": "",
+      "description": "도쿠가와 이에야스가 세운 성으로, 50종류 이상의 다양한 벚꽃 품종이 심어져 있어 개화 기간이 매우 깁니다",
+      "tips": [
+        "야간 라이트업 행사 시 성벽에 투사되는 프로젝션 맵핑은 교토 최고의 볼거리 중 하나입니다",
+        "복도를 걸을 때 나는 \"휘파람새 소리(나이팅게일 플로어)\"를 직접 들어보세요",
+        "성 내부 정원인 세이류엔은 벚꽃과 정원이 어우러진 최고의 사진 명당입니다"
+      ],
+      "bloom": {
+        "start": "3월 25일",
+        "peak": "4월 1일",
+        "end": "4월 8일"
+      },
+      "station": "니조조마에역",
+      "attractions": [
+        {
+          "name": "교토 국제 만화 박물관 (Kyoto International Manga Museum)",
+          "description": "니조성에서 도보 10~15분 거리에 있는 곳으로, 폐교된 초등학교 건물을 개조해 만들었습니다. 약 30만 권의 만화책 소장본과 전시를 통해 일본 만화의 역사를 한눈에 볼 수 있는 독특한 박물관입니다.",
+          "image": "images/kyoto_manga_museum.jpg"
+        },
+        {
+          "name": "교토 어소 / 쿄토교엔 (Kyoto Imperial Palace)",
+          "description": "니조성이 쇼군의 거처였다면, 이곳은 천황이 거주했던 곳입니다. 방대한 부지의 공원과 전통 궁궐 건축을 통해 일본 황실의 역사적 품격을 느낄 수 있습니다.",
+          "image": "images/kyoto_imperial_palace.jpg"
+        },
+        {
+          "name": "미카네 신사 (Mikane Shrine)",
+          "description": "니조성 근처 주택가에 위치한 작은 신사지만, 황금빛 토리이로 매우 유명합니다. 금운(돈복)을 불러온다는 유니크한 테마 덕분에 현지인과 관광객 모두에게 인기 있는 '부자 되는 신사'입니다.",
+          "image": "images/mikane_shrine.jpg"
+        }
+      ],
+      "cafes": [
+        {
+          "name": "클램프 커피 사라사",
+          "description": "식물에 둘러싸인 빈티지한 로스터리",
+          "score": "4.4",
+          "mapQuery": "Clamp Coffee Sarasa"
+        },
+        {
+          "name": "사보 마에다",
+          "description": "고택에서 즐기는 전통 말차와 디저트",
+          "score": "4.3",
+          "mapQuery": "茶房 前田"
+        }
+      ],
+      "restaurants": [
+        {
+          "name": "멘야 유코",
+          "description": "조개 육수가 일품인 세련된 라멘",
+          "score": "4.5",
+          "mapQuery": "Men-ya Yukou"
+        },
+        {
+          "name": "교토 가츠규",
+          "description": "교토에서 시작된 정통 규카츠 전문점",
+          "score": "4.2",
+          "mapQuery": "牛カツ京都勝牛 三条河原町店"
+        }
+      ]
+    },
+    {
+      "id": "daigoji",
+      "tier": "suburb",
+      "name": "다이고지 사찰",
+      "area": "후시미",
+      "tagline": "도요토미 히데요시가 사랑한 벚꽃",
+      "image": "images/daigoji_1.jpg",
+      "vibe": "",
+      "crowd": "",
+      "description": "도요토미 히데요시가 마지막으로 성대한 벚꽃 파티를 열었던 장소로 유명하며, 일본에서 가장 오래된 오층탑을 보유하고 있습니다",
+      "tips": [
+        "삼보인 정원은 벚꽃과 연못의 조화가 교토에서 가장 아름다운 곳 중 하나입니다",
+        "규모가 매우 넓으니 입구에서 통합 관람권을 구매하는 것이 경제적입니다",
+        "산 위쪽의 상다이고까지 가려면 등산이 필요하니 가벼운 마음으로 가실 분은 하다이고(아래쪽) 위주로 보세요"
+      ],
+      "bloom": {
+        "start": "3월 20일",
+        "peak": "3월 27일",
+        "end": "4월 3일"
+      },
+      "station": "다이고역",
+      "attractions": [
+        {
+          "name": "다이고지 레이호칸 (Reihokan Museum)",
+          "description": "다이고지가 소장한 10만 점 이상의 국보와 중요문화재를 전시하는 보물관입니다. 헤이안 시대의 불상, 회화, 고문서 등 일본 불교 예술의 정수를 만날 수 있습니다.",
+          "image": "images/daigoji_reihokan.jpg"
+        },
+        {
+          "name": "삼보원 / 산보인 (Sanbo-in)",
+          "description": "다이고지 역대 주지 스님들의 거처였던 곳으로, 도요토미 히데요시가 직접 설계에 관여한 화려한 정원이 압권입니다. 모모야마 시대의 화려한 건축 양식을 그대로 간직하고 있습니다.",
+          "image": "images/sanboin.jpg"
+        },
+        {
+          "name": "벤텐도 (Benten-do Hall)",
+          "description": "다이고지에서 가장 사진이 예쁘게 찍히는 곳입니다. 연못 중앙에 떠 있는 붉은 당우와 다리가 어우러진 풍경은 가을 단풍철이나 봄 벚꽃철에 비현실적일 만큼 유니크한 미를 보여줍니다.",
+          "image": "images/bentendo.jpg"
+        }
+      ],
+      "cafes": [
+        {
+          "name": "다이고 카페 & 바",
+          "description": "다이고지 근처의 고즈넉한 분위기 맛집",
+          "score": "4.7",
+          "mapQuery": "醍醐cafe＆bar"
+        }
+      ],
+      "restaurants": [
+        {
+          "name": "수 르 세리지에",
+          "description": "교토에서 즐기는 양식집",
+          "score": "4.2",
+          "mapQuery": "Sous Le Cerisier"
+        }
+      ]
+    },
+    {
+      "id": "uji",
+      "tier": "suburb",
+      "name": "뵤도인 & 우지강",
+      "area": "우지",
+      "tagline": "녹차의 고향에서 즐기는 여유",
+      "image": "images/byodoin_1.jpg",
+      "vibe": "",
+      "crowd": "",
+      "description": "10엔 동전 뒷면의 모델인 뵤도인 봉황당이 있는 곳으로, 우지강변을 따라 피는 벚꽃길이 매우 평화롭습니다.",
+      "tips": [
+        "우지는 녹차의 성지입니다. 어디를 가든 녹차 아이스크림이나 녹차 우동을 꼭 드셔보세요",
+        "강 중앙의 섬(나카노시마)은 피크닉 하기에 최적의 장소입니다",
+        "뵤도인 내부 박물관(호쇼칸)은 현대적인 건축미와 국보급 유물을 볼 수 있어 추천합니다"
+      ],
+      "bloom": {
+        "start": "3월 24일",
+        "peak": "3월 31일",
+        "end": "4월 7일"
+      },
+      "station": "우지역(JR)",
+      "attractions": [
+        {
+          "name": "뵤도인 호쇼칸 (Byodoin Hoshokan Museum)",
+          "description": "뵤도인 내부에 위치한 최첨단 박물관입니다. 국보인 봉황상 원본과 구름을 타고 춤추는 보살상(운중공양보살상)들을 가장 가까이서 감상할 수 있는 필수 코스입니다.",
+          "image": "images/byodoin_hoshokan.jpg"
+        },
+        {
+          "name": "우지가미 신사 (Ujigami Shrine)",
+          "description": "우지강 건너편에 위치한 유네스코 세계문화유산입니다. 본전은 일본에서 가장 오래된 신사 건축물로 알려져 있으며, 화려하지는 않지만 수수한 고대의 역사를 간직하고 있습니다.",
+          "image": "images/ujigami_shrine.jpg"
+        },
+        {
+          "name": "다이키치야마 전망대 (Daikichiyama Observatory)",
+          "description": "우지강 뒤편 산길을 따라 15~20분 정도 가볍게 오르면 도착하는 전망대입니다. 우지 시내와 뵤도인, 굽이치는 우지강의 전경을 한눈에 담을 수 있는 유니크한 조망 포인트입니다.",
+          "image": "images/daikichiyama.jpg"
+        }
+      ],
+      "cafes": [
+        {
+          "name": "나카무라 토키치",
+          "description": "교토 최고 명성의 말차 카페 본점",
+          "score": "4.6",
+          "mapQuery": "中村藤吉本店"
+        },
+        {
+          "name": "뵤도인 오모테산도 치쿠린",
+          "description": "화려한 말차 파르페의 성지",
+          "score": "4.5",
+          "mapQuery": "伊藤久右衛門 本店"
+        }
+      ],
+      "restaurants": [
+        {
+          "name": "우지 가와이",
+          "description": "강변 풍경과 함께 즐기는 정갈한 가이세키",
+          "score": "4.3",
+          "mapQuery": "平等院表参道 竹林"
+        }
+      ]
+    }
+  ]
+}

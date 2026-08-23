@@ -1,0 +1,1209 @@
+{
+  "cityId": "osaka",
+  "type": "sakura",
+  "title": "오사카 벚꽃 명소",
+  "updated": "2026-08-12",
+  "timeline": [
+    {
+      "label": "개화 시작",
+      "date": "3월 22일"
+    },
+    {
+      "label": "만개 피크",
+      "date": "3월 29일"
+    },
+    {
+      "label": "벚꽃 엔딩",
+      "date": "4월 5일"
+    }
+  ],
+  "spots": [
+    {
+      "id": "osaka-castle",
+      "tier": "best",
+      "name": "오사카성 공원",
+      "area": "오사카성",
+      "tagline": "천수각과 3천 그루의 벚꽃",
+      "image": "https://images.unsplash.com/photo-1589451907357-2f03122fe218?q=80&w=1760&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fx8fA%3D%3D",
+      "vibe": "웅장함",
+      "crowd": "매우 높음",
+      "description": "오사카의 랜드마크입니다. 니시노마루 정원의 야경이 일품입니다",
+      "tips": [
+        "니시노마루 정원의 야간 라이트업은 유료(약 350엔)지만, 천수각과 밤 벚꽃을 한 프레임에 담을 수 있는 최고의 유료 스팟입니다",
+        "고부자부네(놀잇배)는 당일 아침 일찍 현장 예약이 마감되는 경우가 많으니 오전 방문을 추천합니다",
+        "공원 내 스타벅스(조테라스 점) 창가 자리는 벚꽃 나무를 바로 눈앞에서 보며 커피를 즐길 수 있는 숨은 명당입니다"
+      ],
+      "bloom": {
+        "start": "3월 22일",
+        "peak": "3월 29일",
+        "end": "4월 5일"
+      },
+      "station": "오사카조코엔역",
+      "attractions": [
+        {
+          "name": "오사카 역사 박물관 (Osaka Museum of History)",
+          "description": "오사카성 바로 맞은편에 위치하며, 고대 나니와 궁터부터 근대까지 오사카의 역사를 실물 크기의 복원 모형과 함께 입체적으로 관람할 수 있습니다.",
+          "image": "images/osaka_history_museum.jpg"
+        },
+        {
+          "name": "호코쿠 신사 (Hokoku Shrine)",
+          "description": "오사카성 공원 내부에 위치하며, 오사카성을 지은 도요토미 히데요시를 모시는 신사입니다. 출세와 성공을 기원하는 참배객들이 많이 찾는 곳입니다.",
+          "image": "images/hokoku_shrine.jpg"
+        },
+        {
+          "name": "조-테라스 오사카 (JO-TERRACE OSAKA)",
+          "description": "오사카성 공원역 근처에 조성된 현대적인 복합 상업 시설로, 성의 고즈넉한 분위기와 대비되는 세련된 카페, 맛집들이 모여 있어 휴식과 미식을 즐기기에 최적입니다.",
+          "image": "images/jo_terrace.jpg"
+        }
+      ],
+      "cafes": [
+        {
+          "name": "R Baker 오사카성",
+          "description": "벚꽃 숲속에서 즐기는 베이커리",
+          "score": "4.3",
+          "mapQuery": "R Baker 大阪城公園店"
+        },
+        {
+          "name": "Motto Coffee",
+          "description": "강변 뷰가 아름다운 감성 카페",
+          "score": "4.1",
+          "mapQuery": "MOTO COFFEE 北浜店"
+        },
+        {
+          "name": "& Island",
+          "description": "나카노시마 강변 테라스 카페",
+          "score": "4.0",
+          "mapQuery": "and Island 北浜"
+        },
+        {
+          "name": "Brooklyn Roasting",
+          "description": "인더스트리얼 감성의 로스터리",
+          "score": "4.2",
+          "mapQuery": "Brooklyn Roasting Company Kitahama"
+        },
+        {
+          "name": "MOUNT",
+          "description": "강변 뷰와 함께 즐기는 디저트",
+          "score": "4.1",
+          "mapQuery": "MOUNT 北浜"
+        }
+      ],
+      "restaurants": [
+        {
+          "name": "토쿠마사",
+          "description": "전설의 카레우동 본점",
+          "score": "4.2",
+          "mapQuery": "得正 本店農人橋店"
+        },
+        {
+          "name": "우나기 니시하라",
+          "description": "장어 계란말이 덮밥의 성지",
+          "score": "4.5",
+          "mapQuery": "鰻にしはら"
+        },
+        {
+          "name": "카무쿠라 라멘",
+          "description": "시원하고 담백한 배추 라멘",
+          "score": "4.1",
+          "mapQuery": "どうとんぼり神座 淡路町店"
+        },
+        {
+          "name": "폰테베키오",
+          "description": "강변 조망 고급 이탈리안",
+          "score": "4.4",
+          "mapQuery": "Ponte Vecchio 北浜"
+        },
+        {
+          "name": "사루쇼쿠도",
+          "description": "현지인 픽 일본식 양식 전문점",
+          "score": "4.4",
+          "mapQuery": "サル食堂"
+        }
+      ]
+    },
+    {
+      "id": "mint",
+      "tier": "best",
+      "name": "조폐국 벚꽃 통로",
+      "area": "텐마바시",
+      "tagline": "희귀 겹벚꽃 140종의 향연",
+      "image": "images/sakura_tenmabashi.png",
+      "vibe": "특별함",
+      "crowd": "높음(예약제)",
+      "description": "1년에 단 7일만 개방되는 한정판 벚꽃 명소입니다",
+      "tips": [
+        "겹벚꽃이 위주라 일반 벚꽃 시즌보다 1~2주 늦게 방문해야 최고의 절경을 볼 수 있습니다",
+        "온라인 사전 예약(무료) 시스템은 보통 개방 2주 전에 열리니 공식 홈페이지를 수시로 체크하세요",
+        "일방통행으로만 진행되며 중간에 되돌아갈 수 없으니, 입구(남문) 진입 전 카메라 세팅을 미리 끝내두세요"
+      ],
+      "bloom": {
+        "start": "4월 초",
+        "peak": "4월 중순",
+        "end": "4월 하순"
+      },
+      "station": "덴마바시역",
+      "attractions": [
+        {
+          "name": "오사카 조폐 박물관 (Mint Museum)",
+          "description": "벚꽃 통로 바로 옆에 위치하며, 일본 및 세계 각국의 화폐와 훈장 등의 제조 공정과 역사를 무료로 관람할 수 있는 박물관입니다.",
+          "image": "images/mint_museum.jpg"
+        },
+        {
+          "name": "오사카 천만궁 (Osaka Tenmangu Shrine)",
+          "description": "학문의 신을 모시는 곳으로 유명하며, 매년 일본 3대 축제 중 하나인 텐진 마츠리가 열리는 역사 깊은 신사입니다. 조폐국에서 도보로 이동 가능합니다.",
+          "image": "images/osaka_tenmangu.jpg"
+        },
+        {
+          "name": "텐진바시스지 상점가 (Tenjinbashisuji Shopping Street)",
+          "description": "길이 약 2.6km로 일본에서 가장 긴 상점가입니다. 서민적인 분위기 속에서 오사카의 로컬 맛집과 독특한 잡화점들을 탐방하는 재미가 있습니다.",
+          "image": "images/tenjinbashi_shopping.jpg"
+        }
+      ],
+      "cafes": [
+        {
+          "name": "카페 토키오나",
+          "description": "빈티지한 감성의 브런치 카페",
+          "score": "4.3",
+          "mapQuery": "Cafe Tokiona"
+        },
+        {
+          "name": "코메다 커피",
+          "description": "일본 정통 스타일의 편안한 카페",
+          "score": "4.0",
+          "mapQuery": "コメダ珈琲店 天満橋店"
+        },
+        {
+          "name": "Patisserie C'est Bon",
+          "description": "로컬들이 사랑하는 귀여운 티 카페",
+          "score": "4.3",
+          "mapQuery": "パティスリーセボン"
+        },
+        {
+          "name": "오카와 테라스",
+          "description": "강변을 마주한 탁 트인 야외석",
+          "score": "4.1",
+          "mapQuery": "川の駅 はちけんや"
+        },
+        {
+          "name": "스타벅스 텐마",
+          "description": "강변 산책로 옆 친절한 매장",
+          "score": "4.0",
+          "mapQuery": "Starbucks 京阪天満橋店"
+        }
+      ],
+      "restaurants": [
+        {
+          "name": "스시 치하루",
+          "description": "미슐랭 가이드 선정 가성비 스시",
+          "score": "4.6",
+          "mapQuery": "鮨 千陽"
+        },
+        {
+          "name": "라멘 린",
+          "description": "진한 국물에 땅콩향이 솔솔 나는 탄탄면 맛집",
+          "score": "4.3",
+          "mapQuery": "天満橋ササラ"
+        },
+        {
+          "name": "후지야",
+          "description": "창의적인 가이세키 요리의 정수",
+          "score": "4.5",
+          "mapQuery": "Fujiya 1935"
+        },
+        {
+          "name": "NAGIKATSU",
+          "description": "입에서 녹는 부드러운 돈가스",
+          "score": "4.8",
+          "mapQuery": "とんかつ なぎかつ"
+        },
+        {
+          "name": "아누",
+          "description": "주택가에 고급진 분위기의 세련된 이탈리안",
+          "score": "4.7",
+          "mapQuery": "anu アニュ"
+        }
+      ]
+    },
+    {
+      "id": "kema",
+      "tier": "best",
+      "name": "케마 사쿠라노미야",
+      "area": "사쿠라노미야",
+      "tagline": "4.2km 강변 분홍 산책로",
+      "image": "images/kema_kouen_1.jpg",
+      "vibe": "로맨틱",
+      "crowd": "높음",
+      "description": "오카와 강변을 따라 조성된 도심 속 벚꽃 숲입니다.",
+      "tips": [
+        "오사카 시립 근대미술관 방향으로 갈수록 인파가 적어지며, 조용히 꽃비(벚꽃 눈)를 즐기기 좋습니다",
+        "수상버스(아쿠아 라이너)를 타면 강 양안을 따라 핀 수천 그루의 벚꽃 터널을 물 위에서 입체적으로 감상할 수 있습니다",
+        "강변 산책로가 4km 이상으로 매우 길기 때문에 편한 운동화를 착용하는 것이 필수입니다"
+      ],
+      "bloom": {
+        "start": "3월 21일",
+        "peak": "3월 28일",
+        "end": "4월 4일"
+      },
+      "station": "사쿠라노미야역",
+      "attractions": [
+        {
+          "name": "나카노시마 미술관 (Nakanoshima Museum of Art)",
+          "description": "공원에서 강을 따라 조금 내려가면 만날 수 있는 나카노시마 인근 박물관으로, 일본 전역에서 수집된 귀여운 전통 장난감과 공예품들을 관람할 수 있습니다.",
+          "image": "images/nakanoshima_folk_art.jpg"
+        },
+        {
+          "name": "사쿠라노미야 신사 (Sakuranomiya Shrine)",
+          "description": "공원 이름의 유래가 된 곳으로, 역사적으로 벚꽃 명소로 유명했던 이곳의 전통을 이어받아 매년 많은 참배객이 방문하는 유서 깊은 신사입니다.",
+          "image": "images/sakuranomiya_shrine.jpg"
+        },
+        {
+          "name": "오사카 수상 버스 아쿠아라이너 (Osaka Suijyo Bus Aqua-Liner)",
+          "description": "공원 내 사쿠라노미야 선착장에서 이용 가능하며, 강 위를 미끄러지듯 이동하며 오사카성, 조폐국 등 주변의 랜드마크를 색다른 각도에서 조망할 수 있는 물 위의 유람선입니다.",
+          "image": "images/aqua_liner.jpg"
+        }
+      ],
+      "cafes": [
+        {
+          "name": "제국호텔 라운지",
+          "description": "호텔급 서비스와 화려한 전망",
+          "score": "4.4",
+          "mapQuery": "Imperial Hotel Osaka The Park"
+        },
+        {
+          "name": "카페 레이",
+          "description": "조용한 주택가 속 숨은 로스터리",
+          "score": "4.2",
+          "mapQuery": "Cafe Rei 大阪"
+        },
+        {
+          "name": "오자와 커피",
+          "description": "맛있는 커피와 아침 메뉴를 즐길 수 있는 곳",
+          "score": "4.0",
+          "mapQuery": "小沢コーヒー店"
+        },
+        {
+          "name": "unecafe",
+          "description": "강변 산책 중 들르기 좋은 쉼터",
+          "score": "3.9",
+          "mapQuery": "unecafe"
+        },
+        {
+          "name": "Cafebar.8",
+          "description": "강변에서 즐기는 커피와 디저트",
+          "score": "4.1",
+          "mapQuery": "Cafebar.8"
+        }
+      ],
+      "restaurants": [
+        {
+          "name": "제국호텔 카망",
+          "description": "최고급 철판 요리의 명가",
+          "score": "4.7",
+          "mapQuery": "Kamon Imperial Hotel"
+        },
+        {
+          "name": "미후쿠엔",
+          "description": "강변에서 즐기는 야키니쿠",
+          "score": "4.4",
+          "mapQuery": "焼肉冷麺 三福園"
+        },
+        {
+          "name": "시게 스시",
+          "description": "강변 근처 노포지만 신선한 초밥",
+          "score": "4.2",
+          "mapQuery": "繁鮨"
+        },
+        {
+          "name": "덴마바시 이자카야",
+          "description": "현지인들이 즐겨 찾는 꼬치구이",
+          "score": "4.0",
+          "mapQuery": "天満橋 居酒屋"
+        },
+        {
+          "name": "비스트로 큐",
+          "description": "합리적인 가격의 양식 코스",
+          "score": "4.1",
+          "mapQuery": "Bistro Q Osaka"
+        }
+      ]
+    },
+    {
+      "id": "expo",
+      "tier": "best",
+      "name": "만박 기념공원",
+      "area": "반파쿠",
+      "tagline": "태양의 탑 아래 펼쳐진 성지",
+      "image": "images/manpaku_1.jpg",
+      "vibe": "활기참",
+      "crowd": "높음",
+      "description": "5,500그루의 벚꽃이 피어나는 광활한 공원입니다",
+      "tips": [
+        "오사카 북부 지역이라 시내보다 기온이 약간 낮아 1~2일 정도 벚꽃이 더 오래 유지되는 편입니다",
+        "태양의 탑 바로 아래 광장보다는 동쪽 정원(Japanese Garden) 근처 벚꽃길이 사진이 더 화사하게 나옵니다",
+        "공원 규모가 워낙 방대하므로 피크닉 매트와 간단한 간식을 미리 챙겨가면 여유로운 하나미(꽃구경)가 가능합니다"
+      ],
+      "bloom": {
+        "start": "3월 23일",
+        "peak": "3월 30일",
+        "end": "4월 6일"
+      },
+      "station": "만박기념공원역",
+      "attractions": [
+        {
+          "name": "국립민족학박물관 (National Museum of Ethnology)",
+          "description": "전 세계의 다양한 민족과 문화를 방대한 유물과 자료를 통해 소개하는 세계적인 수준의 박물관입니다. 공원 내부에 위치하여 함께 둘러보기 좋습니다.",
+          "image": "images/ethnology_museum.jpg"
+        },
+        {
+          "name": "태양의 탑 (Tower of the Sun)",
+          "description": "만박 기념공원의 상징이자 예술가 오카모토 타로의 걸작입니다. 1970년 박람회 당시의 상징물로, 현재는 내부 관람(사전 예약제)을 통해 생명의 나무 등 역동적인 예술 세계를 체험할 수 있습니다.",
+          "image": "images/tower_of_the_sun.jpg"
+        },
+        {
+          "name": "니프렐 (NIFREL)",
+          "description": "공원 바로 옆 엑스포시티(EXPOCITY) 내에 위치한 새로운 형태의 수족관입니다. \"감성에 닿다\"라는 컨셉으로 수족관, 동물원, 미술관이 융합된 독특하고 예술적인 전시를 선보입니다.",
+          "image": "images/nifrel.jpeg"
+        }
+      ],
+      "cafes": [
+        {
+          "name": "에라라",
+          "description": "공원 내 숲속의 고요한 티하우스",
+          "score": "4.2",
+          "mapQuery": "Elala Osaka"
+        },
+        {
+          "name": "노스 가든 카페",
+          "description": "정원을 감상하는 통유리 카페",
+          "score": "4.0",
+          "mapQuery": "North Garden Cafe"
+        },
+        {
+          "name": "스타벅스 엑스포",
+          "description": "쇼핑몰 내 넓고 쾌적한 매장",
+          "score": "4.1",
+          "mapQuery": "Starbucks Expo City"
+        },
+        {
+          "name": "Eggs 'n Things",
+          "description": "하와이안 감성의 팬케이크 맛집",
+          "score": "4.3",
+          "mapQuery": "Eggs 'n Things Expo City"
+        },
+        {
+          "name": "카페 반파쿠",
+          "description": "박람회 기념품과 즐기는 커피",
+          "score": "3.9",
+          "mapQuery": "Bampaku Shokudo"
+        }
+      ],
+      "restaurants": [
+        {
+          "name": "만박 식당",
+          "description": "70년대 박람회 향수를 담은 메뉴",
+          "score": "4.1",
+          "mapQuery": "Bampaku Shokudo"
+        },
+        {
+          "name": "오사카 휠 레스토랑",
+          "description": "관람차 뷰를 감상하는 이탈리안",
+          "score": "4.0",
+          "mapQuery": "Osaka Wheel Restaurant"
+        },
+        {
+          "name": "쿠시카츠 다루마",
+          "description": "쇼핑몰에서 즐기는 유명 튀김",
+          "score": "4.2",
+          "mapQuery": "串かつだるま エキスポシティー"
+        },
+        {
+          "name": "츠지 요리학교",
+          "description": "요리 명문의 정갈한 실습 식당",
+          "score": "4.5",
+          "mapQuery": "Tsuji Cooking School Restaurant"
+        },
+        {
+          "name": "엑스포 그릴",
+          "description": "육즙 가득한 수제 스테이크",
+          "score": "4.1",
+          "mapQuery": "Expo Garden Grill"
+        }
+      ]
+    },
+    {
+      "id": "shitennoji",
+      "tier": "famous",
+      "name": "시텐노지",
+      "area": "텐노지",
+      "tagline": "고찰의 고요함과 벚꽃",
+      "image": "images/sitennoji.png",
+      "vibe": "",
+      "crowd": "",
+      "description": "",
+      "tips": [
+        "일본에서 가장 오래된 사찰의 고요함 속에서 즐기는 벚꽃은 인파에 지친 여행자에게 최고의 힐링을 선사합니다",
+        "본존 내부의 극락정원은 유료(약 300엔)지만, 연못과 어우러진 수양벚꽃을 찍을 수 있는 최고의 포토 스팟입니다",
+        "사찰 근처의 유명한 모나카 노포를 들러 간식을 사서 경내 벤치에서 즐겨보세요"
+      ],
+      "attractions": [
+        {
+          "name": "오사카 시립 미술관 (Osaka City Museum of Fine Arts)",
+          "description": "시텐노지 근처 텐노지 공원 내에 위치하며, 일본과 중국의 고전 미술품을 포함한 8,000점 이상의 귀중한 유물을 소장하고 있는 오사카의 대표 미술관입니다.",
+          "image": "images/osaka_city_art_museum.jpg"
+        },
+        {
+          "name": "시텐노지 혼보 정원 (Gokuraku-jodo Garden)",
+          "description": "시텐노지 경내에 있는 극락정원을 본떠 만든 정원입니다. 아미타 여래가 있는 서방 정토를 묘사한 아름다운 연못과 돌길이 고요한 분위기를 자아냅니다.",
+          "image": "images/shitennoji_garden.jpg"
+        },
+        {
+          "name": "아베노 하루카스 (Abeno Harukas)",
+          "description": "시텐노지에서 도보 거리에 있는 일본 최고의 마천루 중 하나입니다. 지상 300m의 '하루카스 300' 전망대에서 오사카 시내를 한눈에 내려다볼 수 있는 현대적인 랜드마크입니다.",
+          "image": "images/abeno_harukas.jpg"
+        }
+      ],
+      "cafes": [
+        {
+          "name": "카페 스완",
+          "description": "정통 쇼와 스타일 깃사텐",
+          "score": "4.0",
+          "mapQuery": "喫茶 スワン 阿倍野"
+        },
+        {
+          "name": "YARD Coffee",
+          "description": "스페셜티 커피와 수제 초콜릿",
+          "score": "4.4",
+          "mapQuery": "YARD Coffee"
+        },
+        {
+          "name": "시텐노지 챠야",
+          "description": "고요한 분위기의 일본 전통 차를 즐길 수 있는 카페",
+          "score": "4.2",
+          "mapQuery": "四天王寺茶屋"
+        },
+        {
+          "name": "스타벅스 아베노",
+          "description": "가장 높은 빌딩 내 통창 매장",
+          "score": "4.1",
+          "mapQuery": "Starbucks Abeno"
+        },
+        {
+          "name": "카페 하루카스",
+          "description": "전망대에서 즐기는 구름 커피",
+          "score": "4.0",
+          "mapQuery": "Abeno Harukas Cafe"
+        }
+      ],
+      "restaurants": [
+        {
+          "name": "동양정",
+          "description": "전통의 함박 스테이크 명가",
+          "score": "4.3",
+          "mapQuery": "グ릴キャピ탈東洋亭"
+        },
+        {
+          "name": "야오젠 우동",
+          "description": "현지인 추천 가성비 우동집",
+          "score": "4.0",
+          "mapQuery": "八百善"
+        },
+        {
+          "name": "아베노 스시",
+          "description": "백화점 내 고품격 스시 다이닝",
+          "score": "4.4",
+          "mapQuery": "Abeno Harukas Sushi"
+        },
+        {
+          "name": "덴노지 소바",
+          "description": "담백한 육수의 자가제면 소바",
+          "score": "4.1",
+          "mapQuery": "Tennoji Soba"
+        },
+        {
+          "name": "시텐노지 함바그",
+          "description": "육즙 가득한 수제 함바그",
+          "score": "4.2",
+          "mapQuery": "Tennoji Hamburg"
+        }
+      ]
+    },
+    {
+      "id": "tsutenkaku",
+      "tier": "famous",
+      "name": "텐노지 공원",
+      "area": "신세카이",
+      "tagline": "쓰텐카쿠 뷰 피크닉",
+      "image": "images/tennojikouen_1.jpg",
+      "vibe": "",
+      "crowd": "",
+      "description": "",
+      "tips": [
+        "잔디 광장인 텐시바에 돗자리를 펴고 앉으면, 현대적인 아베노 하루카스 빌딩과 벚꽃을 한눈에 담을 수 있습니다",
+        "공원 내 동물원 쪽 담벼락을 따라 핀 벚꽃길이 가장 화사하며, 신세카이의 쓰텐카쿠 타워를 배경으로 기념사진을 남기기 좋습니다",
+        "공원 입구의 카페 테라스석을 이용하면 피크닉 장비 없이도 벚꽃 놀이 분위기를 낼 수 있습니다"
+      ],
+      "attractions": [
+        {
+          "name": "오사카 시립 미술관 (Osaka City Museum of Fine Arts)",
+          "description": "텐노지 공원 내에 위치하며, 일본과 중국의 수준 높은 고전 미술품을 감상할 수 있는 역사 깊은 미술관입니다.",
+          "image": "images/osaka_city_art_museum.jpg"
+        },
+        {
+          "name": "쓰텐카쿠 (Tsutenkaku)",
+          "description": "신세카이의 상징이자 오사카의 랜드마크입니다. 에펠탑을 모델로 지어졌으며, 전망대에서는 오사카 시내를 한눈에 볼 수 있습니다.",
+          "image": "images/tsutenkaku.jpg"
+        },
+        {
+          "name": "텐시바 (Tenshiba)",
+          "description": "텐노지 공원 입구에 조성된 드넓은 잔디 광장입니다. 세련된 카페와 식당이 늘어서 있어 현대적인 휴식을 즐기기에 최적인 유니크한 공간입니다.",
+          "image": "images/tenshiba.jpg"
+        }
+      ],
+      "cafes": [
+        {
+          "name": "카나리야",
+          "description": "압도적 크기의 인생 파르페",
+          "score": "4.1",
+          "mapQuery": "カナリヤ 鶴橋"
+        },
+        {
+          "name": "텐시바 가든",
+          "description": "잔디밭 테라스 피크닉 카페",
+          "score": "3.9",
+          "mapQuery": "てんしばガーデン"
+        },
+        {
+          "name": "야드 커피 & 크래프트 초콜릿",
+          "description": "모던한 인테리어의 이곳만의 유니크한 초콜릿이 있는 카페",
+          "score": "4.1",
+          "mapQuery": "YARD CoffeeCraft Chocolate"
+        },
+        {
+          "name": "MAZE CAFE SHINSEKAI",
+          "description": "현지인 픽 브런치 맛집",
+          "score": "5.0",
+          "mapQuery": "MAZE CAFE SHINSEKAI"
+        },
+        {
+          "name": "Kissa Garo",
+          "description": "현지인으로 가득한 로컬 커피숍",
+          "score": "4.9",
+          "mapQuery": "喫茶我路"
+        }
+      ],
+      "restaurants": [
+        {
+          "name": "쿠시카츠 다루마",
+          "description": "오사카 쿠시카츠의 원조",
+          "score": "4.1",
+          "mapQuery": "串かつだるま 新世界"
+        },
+        {
+          "name": "와나카 타코야키",
+          "description": "겉바속촉 정통 타코야키",
+          "score": "4.3",
+          "mapQuery": "たこ焼道楽 わなか"
+        },
+        {
+          "name": "미즈노",
+          "description": "미슐랭 가이드 단골 맛집",
+          "score": "4.2",
+          "mapQuery": "お好み焼 美津の"
+        },
+        {
+          "name": "신세카이 야키소바",
+          "description": "철판에서 구워주는 로컬 국수",
+          "score": "4.0",
+          "mapQuery": "Shinsekai Yakisoba"
+        },
+        {
+          "name": "텐노지 이자카야",
+          "description": "신선한 해산물과 사케",
+          "score": "4.1",
+          "mapQuery": "Shinsekai Izakaya"
+        }
+      ]
+    },
+    {
+      "id": "kishiwada",
+      "tier": "famous",
+      "name": "기시와다성",
+      "area": "기시와다",
+      "tagline": "성곽 해자의 벚꽃 반영",
+      "image": "https://images.unsplash.com/photo-1619639522705-d416aabbc3d8?q=80&w=2148&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "vibe": "",
+      "crowd": "",
+      "description": "",
+      "tips": [
+        "성곽을 둘러싼 해자 주변으로 벚꽃 나무가 낮게 드리워져 있어, 물에 비친 반영 샷을 찍기에 최적의 장소입니다",
+        "간사이 공항과 오사카 시내 사이에 위치해 있어, 여행 첫날이나 마지막 날 일정으로 넣기 매우 편리합니다",
+        "밤이 되면 해자 주변에 제등(초롱불)이 켜지며 에도 시대 성곽의 운치 있는 야경이 펼쳐집니다"
+      ],
+      "attractions": [
+        {
+          "name": "기시와다 단지리 회관 (Kishiwada Danjiri Kaikan)",
+          "description": "300년 역사의 기시와다 단지리 축제를 테마로 한 박물관입니다. 실제 축제에 사용되는 거대한 수레와 대형 스크린 영상을 통해 축제의 열기를 생생하게 느낄 수 있습니다.",
+          "image": "images/danjiri_kaikan.jpg"
+        },
+        {
+          "name": "하치진의 정원 (Hachijin-no-Niwa Garden)",
+          "description": "기시와다성 천수각 바로 앞에 위치한 국가 지정 명승입니다. 제갈공명의 '팔진도'를 모티브로 한 독특한 현대식 바위 정원으로, 성 위에서 내려다보는 풍경이 일품입니다.",
+          "image": "images/hachijin_garden.jpeg"
+        },
+        {
+          "name": "고후소 (Gofuso)",
+          "description": "기시와다성 인근에 위치한 유서 깊은 대저택과 일본식 정원입니다. 현재는 고급 요정으로 운영되고 있어, 아름다운 정원을 감상하며 나고야와는 또 다른 오사카 남부의 미식 체험을 할 수 있는 특별한 장소입니다."
+        }
+      ],
+      "cafes": [
+        {
+          "name": "성 정원 카페",
+          "description": "성곽을 바라보며 마시는 차",
+          "score": "4.2",
+          "mapQuery": "岸和田城 庭園"
+        },
+        {
+          "name": "카페 드 샹송",
+          "description": "우아한 유럽풍 인테리어 카페",
+          "score": "4.0",
+          "mapQuery": "Cafe de Chanson"
+        },
+        {
+          "name": "타마야 디저트",
+          "description": "현지 유명 수제 푸딩 샵",
+          "score": "4.3",
+          "mapQuery": "Tamaya Kishiwada"
+        },
+        {
+          "name": "스타벅스 기시와다",
+          "description": "드라이브 스루가 가능한 대형 매장",
+          "score": "4.1",
+          "mapQuery": "Starbucks Kishiwada"
+        },
+        {
+          "name": "레트로 카페 유",
+          "description": "정겨운 동네 아담한 카페",
+          "score": "3.9",
+          "mapQuery": "Cafe Yu Kishiwada"
+        }
+      ],
+      "restaurants": [
+        {
+          "name": "기시와다 카니",
+          "description": "신선한 대게 요리 전문점",
+          "score": "4.4",
+          "mapQuery": "Kani Doraku Kishiwada"
+        },
+        {
+          "name": "성곽 앞 소바",
+          "description": "메밀 향 가득한 정통 소바",
+          "score": "4.1",
+          "mapQuery": "Kishiwada Soba"
+        },
+        {
+          "name": "항구 횟집",
+          "description": "매일 아침 공수하는 신선한 회",
+          "score": "4.5",
+          "mapQuery": "Kishiwada Fish Market"
+        },
+        {
+          "name": "텟판 오코노미",
+          "description": "기시와다식 두툼한 철판구이",
+          "score": "4.2",
+          "mapQuery": "Kishiwada Okonomiyaki"
+        },
+        {
+          "name": "정식당 이즈미",
+          "description": "가정식 백반의 따뜻한 맛",
+          "score": "4.0",
+          "mapQuery": "Izumi Kishiwada"
+        }
+      ]
+    },
+    {
+      "id": "nagai",
+      "tier": "famous",
+      "name": "나가이 공원",
+      "area": "나가이",
+      "tagline": "지역민이 사랑하는 벚꽃길",
+      "image": "images/nagai_kouen_1.jpg",
+      "vibe": "",
+      "crowd": "",
+      "description": "",
+      "tips": [
+        "관광객보다는 현지인이 주로 찾는 곳이라, 오사카 시내 명소들에 비해 훨씬 여유로운 꽃구경이 가능합니다",
+        "공원 내 보타니컬 가든(식물원) 섹션에 가면 벚꽃 외에도 다양한 봄꽃들을 입체적으로 감상할 수 있습니다",
+        "인근에 대형 마트와 로컬 빵집이 많아 저렴하게 피크닉 음식을 준비하기 매우 좋습니다"
+      ],
+      "attractions": [
+        {
+          "name": "오사카 시립 자연사 박물관 (Osaka Museum of Natural History)",
+          "description": "공원 내 식물원 옆에 위치하며, 공룡 골격 표본부터 오사카의 생태계 변화까지 지구와 생명의 역사를 생생하게 전시하는 교육적인 박물관입니다.",
+          "image": "images/osaka_natural_history_museum.jpg"
+        },
+        {
+          "name": "호라쿠지 (Horakuji Temple)",
+          "description": "나가이 공원에서 멀지 않은 곳에 위치한 유서 깊은 사찰입니다. 조용하고 고즈넉한 경내 분위기 속에서 일본의 전통 건축미와 종교 문화를 느낄 수 있는 숨은 명소입니다.",
+          "image": "images/horakuji_temple.jpg"
+        },
+        {
+          "name": "팀랩 보타니컬 가든 오사카 (teamLab Botanical Garden)",
+          "description": "밤이 되면 나가이 식물원이 빛의 예술 공간으로 변신합니다. 자연과 디지털 기술이 융합되어 관람객의 움직임에 반응하는 환상적인 야간 전시를 체험할 수 있는 유니크한 공간입니다.",
+          "image": "images/teamlab_nagai.jpg"
+        }
+      ],
+      "cafes": [
+        {
+          "name": "보타니컬 카페",
+          "description": "꽃들에 둘러싸인 야외 테이블",
+          "score": "4.1",
+          "mapQuery": "Nagai Botanical Garden"
+        },
+        {
+          "name": "카페 원",
+          "description": "직접 구운 스콘이 맛있는 곳",
+          "score": "4.3",
+          "mapQuery": "Cafe One Nagai"
+        },
+        {
+          "name": "나가이 베이커리",
+          "description": "현지인 줄 서는 빵 맛집",
+          "score": "4.4",
+          "mapQuery": "Nagai Bakery"
+        },
+        {
+          "name": "로스터리 쉼",
+          "description": "깊은 풍미의 스페셜티 커피",
+          "score": "4.2",
+          "mapQuery": "Nagai Coffee"
+        },
+        {
+          "name": "그린 티 하우스",
+          "description": "말차와 전통 다과 세트",
+          "score": "4.0",
+          "mapQuery": "Nagai Tea"
+        }
+      ],
+      "restaurants": [
+        {
+          "name": "나가이 이탈리안",
+          "description": "화덕에서 구운 나폴리 피자",
+          "score": "4.3",
+          "mapQuery": "Nagai Pizza"
+        },
+        {
+          "name": "공원 앞 수제버거",
+          "description": "육즙 가득한 프리미엄 버거",
+          "score": "4.5",
+          "mapQuery": "Nagai Burger"
+        },
+        {
+          "name": "라멘 거리 맛집",
+          "description": "나가이 역 근처의 진한 라멘",
+          "score": "4.2",
+          "mapQuery": "Nagai Ramen"
+        },
+        {
+          "name": "정갈한 일식당",
+          "description": "매일 바뀌는 오마카세 정식",
+          "score": "4.1",
+          "mapQuery": "Nagai Japanese food"
+        },
+        {
+          "name": "로컬 돈카츠",
+          "description": "두툼한 제주 흑돼지 스타일",
+          "score": "4.4",
+          "mapQuery": "Nagai Tonkatsu"
+        }
+      ]
+    },
+    {
+      "id": "nara",
+      "tier": "suburb",
+      "name": "나라 공원",
+      "area": "나라",
+      "tagline": "사슴과 함께 즐기는 벚꽃",
+      "image": "https://images.unsplash.com/photo-1578507080088-e843868f8f13?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "vibe": "",
+      "crowd": "",
+      "description": "",
+      "tips": [
+        "사슴 센베를 구입한 후 카메라를 미리 준비하세요. 벚꽃 나무 아래에서 사슴과 눈이 마주치는 순간이 최고의 인생샷 타이밍입니다",
+        "공원 내 우키미도 정자는 연못 위에 떠 있는 듯한 모습과 주변 벚꽃이 어우러져 나라에서 가장 우아한 풍경을 자랑합니다",
+        "인근 도다이사의 거대 불상을 관람한 후, 가스카 타이샤로 이어지는 숲길을 따라 걷는 코스를 추천합니다"
+      ],
+      "attractions": [
+        {
+          "name": "나라 국립 박물관 (Nara National Museum)",
+          "description": "불교 미술 전문 박물관으로, 일본의 국보급 불상과 회화, 공예품들을 다수 소장하고 있습니다. 특히 가을에 열리는 쇼소인 전시는 전 세계적으로 유명합니다.",
+          "image": "images/nara_national_museum.jpg"
+        },
+        {
+          "name": "동대사 / 토다이지 (Todai-ji Temple)",
+          "description": "세계 최대 규모의 청동 불상인 '나라 대불'이 안치된 곳입니다. 거대한 정문인 남대문과 세계 최대 목조 건축물인 대불전은 압도적인 규모를 자랑합니다.",
+          "image": "images/todaiji_temple.jpeg"
+        },
+        {
+          "name": "카스가 타이샤 (Kasuga Taisha Shrine)",
+          "description": "공원 깊숙한 숲길을 따라 수천 개의 석등과 청동 등이 늘어서 있는 신비로운 분위기의 신사입니다. 이곳의 사슴들은 신의 전령으로 여겨져 공원 전체를 자유롭게 돌아다닙니다.",
+          "image": "images/kasuga_taisha.jpg"
+        }
+      ],
+      "cafes": [
+        {
+          "name": "야마노 카페",
+          "description": "숲속에서 즐기는 말차 한 잔",
+          "score": "4.4",
+          "mapQuery": "Nara Park 山のカフェ"
+        },
+        {
+          "name": "Park Kitchen Shikaya",
+          "description": "귀여운 사슴 모양 디저트",
+          "score": "4.2",
+          "mapQuery": "Park Kitchen Shikaya"
+        },
+        {
+          "name": "오니와 shaveice miracolo",
+          "description": "나라 특산 수제 빙수의 정수",
+          "score": "4.5",
+          "mapQuery": "お庭shaveice miracolo"
+        },
+        {
+          "name": "스타벅스 나라",
+          "description": "호수를 보면서 커피를 즐길 수 있는 나라 공원 랜드마크",
+          "score": "4.1",
+          "mapQuery": "スターバックス コーヒー 奈良猿沢池店"
+        },
+        {
+          "name": "Cafe CONCE",
+          "description": "나라 시내가 내려다보이는 뷰",
+          "score": "4.8",
+          "mapQuery": "カフェコンセ"
+        }
+      ],
+      "restaurants": [
+        {
+          "name": "가마메시 솥밥",
+          "description": "나라 대표 줄 서는 전통 솥밥",
+          "score": "4.2",
+          "mapQuery": "志津香 公園店"
+        },
+        {
+          "name": "Soba-dokoro Kitahara",
+          "description": "슴슴하고 깊은 맛의 온소바",
+          "score": "4.1",
+          "mapQuery": "そば処 喜多原"
+        },
+        {
+          "name": "Naraya Todaiji",
+          "description": "정갈한 일본식 정식 식당",
+          "score": "4.0",
+          "mapQuery": "ならや 東大寺店"
+        },
+        {
+          "name": "NAGOMI",
+          "description": "입에서 녹는 나라 소고기",
+          "score": "4.7",
+          "mapQuery": "東大寺門前 和"
+        },
+        {
+          "name": "오카루",
+          "description": "나라식 깔끔한 철판 요리",
+          "score": "4.4",
+          "mapQuery": "お好み焼き・明石焼 おかる"
+        }
+      ]
+    },
+    {
+      "id": "shukugawa",
+      "tier": "suburb",
+      "name": "슈쿠가와 공원",
+      "area": "고베 사쿠라슈쿠가와",
+      "tagline": "강을 가로지르는 벚꽃 향연",
+      "image": "images/kobe_sakura.jpg",
+      "vibe": "",
+      "crowd": "",
+      "description": "",
+      "tips": [
+        "한큐 슈쿠가와역에서 내리자마자 강변을 따라 펼쳐지는 2.3km의 벚꽃 터널은 간사이 최고의 산책 코스입니다",
+        "강 중간중간 놓인 징검다리 위에서 강물에 비친 벚꽃을 배경으로 찍는 사진이 가장 인기가 많습니다",
+        "인근의 \"고베 미카게\" 지역은 유명한 디저트 카페가 많으니, 산책 후 조각 케이크를 곁들인 티타임을 추천합니다"
+      ],
+      "attractions": [
+        {
+          "name": "오타니 기념 미술관 (Otani Memorial Art Museum)",
+          "description": "슈쿠가와 인근에 위치하며, 아름다운 일본식 정원과 함께 일본 및 프랑스 현대 미술품을 감상할 수 있는 시립 미술관입니다.",
+          "image": "images/otani_art_museum.jpg"
+        },
+        {
+          "name": "니시노미야 신사 (Nishinomiya Shrine)",
+          "description": "일본 전역의 에비스 신사(상업의 신)의 총본산입니다. 매년 1월 열리는 '운수 대통 달리기' 의식으로 유명하며, 고즈넉한 숲으로 둘러싸여 역사적인 정취를 풍깁니다.",
+          "image": "images/nishinomiya_shrine.jpg"
+        },
+        {
+          "name": "고베 시립 가조엔 (Kobe Municipal Kajoen / Rakuen)",
+          "description": "슈쿠가와 상류 방향에 위치한 조용하고 아름다운 정원으로, 잘 가꾸어진 조경 속에서 계절의 변화를 느끼며 차 한 잔의 여유를 즐길 수 있는 숨은 공간입니다.",
+          "image": "images/kajoen_garden.jpg"
+        }
+      ],
+      "cafes": [
+        {
+          "name": "요카시야",
+          "description": "조용한 주택가 수제 디저트",
+          "score": "4.5",
+          "mapQuery": "菓子工房 夙川"
+        },
+        {
+          "name": "카페 라 아부리",
+          "description": "평화로운 분위기의 정원 카페",
+          "score": "4.0",
+          "mapQuery": "La Avril 夙川"
+        },
+        {
+          "name": "슈쿠가와 로컬",
+          "description": "아담하고 정겨운 동네 카페",
+          "score": "4.2",
+          "mapQuery": "Shukugawa Cafe"
+        },
+        {
+          "name": "미카게 커피",
+          "description": "커피 애호가들의 성지",
+          "score": "4.3",
+          "mapQuery": "Mikage Coffee"
+        },
+        {
+          "name": "티룸 앨리스",
+          "description": "영국식 애프터눈 티 세트",
+          "score": "4.1",
+          "mapQuery": "Shukugawa Tea"
+        }
+      ],
+      "restaurants": [
+        {
+          "name": "미츠보시 소바",
+          "description": "정취와 어울리는 수제 소바",
+          "score": "4.2",
+          "mapQuery": "蕎麦 三ツ矢 夙川"
+        },
+        {
+          "name": "타카미 야키니쿠",
+          "description": "입에서 녹는 고베규 전문",
+          "score": "4.3",
+          "mapQuery": "神戶 貴み"
+        },
+        {
+          "name": "슈쿠가와 파스타",
+          "description": "신선한 재료의 이탈리안",
+          "score": "4.1",
+          "mapQuery": "Shukugawa Pasta"
+        },
+        {
+          "name": "추천 스시야",
+          "description": "현지인이 아끼는 작은 스시집",
+          "score": "4.4",
+          "mapQuery": "Shukugawa Sushi"
+        },
+        {
+          "name": "스테이크 하우스",
+          "description": "철판에서 굽는 고베 스테이크",
+          "score": "4.5",
+          "mapQuery": "Kobe Steak House"
+        }
+      ]
+    },
+    {
+      "id": "nunobiki",
+      "tier": "suburb",
+      "name": "누노비키 허브원",
+      "area": "고베 누노비키",
+      "tagline": "고베항 뷰와 즐기는 벚꽃",
+      "image": "images/kobe_hurb.jpg",
+      "vibe": "",
+      "crowd": "",
+      "description": "",
+      "tips": [
+        "로프웨이를 타고 올라가며 내려다보는 고베 시내 전경과 벚꽃의 조화는 이곳에서만 볼 수 있는 장관입니다",
+        "벚꽃 시즌 한정으로 운영되는 야간 영업 시간을 확인하여 고베의 100만 불짜리 야경과 밤 벚꽃을 동시에 즐기세요",
+        "허브원 내 테라스 카페에서 판매하는 \"허브 소프트 아이스크림\"은 산행의 피로를 녹여주는 필수 코스입니다"
+      ],
+      "attractions": [
+        {
+          "name": "기타노 이진칸 거리 (Kitano Ijinkan-gai)",
+          "description": "허브원 로프웨이 승강장 인근에 위치한 지역으로, 과거 외국인 거주지였던 서양식 건물을 개조한 박물관들이 모여 있어 이국적인 분위기를 자아냅니다.",
+          "image": "images/kitano_ijinkan.jpg"
+        },
+        {
+          "name": "누노비키 폭포 (Nunobiki Falls)",
+          "description": "일본 3대 신성한 폭포 중 하나로 꼽히며, 헤이안 시대 문학 작품에도 등장하는 유서 깊은 곳입니다. 허브원에서 산 내리막길을 따라 내려오며 감상할 수 있습니다.",
+          "image": "images/nunobiki_falls.jpg"
+        },
+        {
+          "name": "고베 로프웨이 (Kobe Nunobiki Ropeway)",
+          "description": "허브원으로 향하는 유일한 이동 수단이자 그 자체로 특별한 체험입니다. 발아래로 펼쳐지는 누노비키 폭포와 고베 시내, 멀리 오사카만까지 이어지는 파노라마 뷰가 압권입니다.",
+          "image": "images/kobe_ropeway.jpeg"
+        }
+      ],
+      "cafes": [
+        {
+          "name": "프로인들립",
+          "description": "옛 교회를 개조한 웅장한 공간",
+          "score": "4.3",
+          "mapQuery": "フロインドリーブ"
+        },
+        {
+          "name": "스타벅스 기타노",
+          "description": "유서 깊은 서양식 건물 매장",
+          "score": "4.2",
+          "mapQuery": "Starbucks Kitano"
+        },
+        {
+          "name": "허브원 베란다",
+          "description": "산 정상에서 즐기는 허브티",
+          "score": "4.1",
+          "mapQuery": "ザ・ヴェランダ"
+        },
+        {
+          "name": "기타노 감성 카페",
+          "description": "아기자기한 소품 가득한 곳",
+          "score": "4.4",
+          "mapQuery": "Kitano Cafe"
+        },
+        {
+          "name": "고베 로스터리",
+          "description": "직접 볶은 원두의 진한 맛",
+          "score": "4.2",
+          "mapQuery": "Kobe Roast"
+        }
+      ],
+      "restaurants": [
+        {
+          "name": "스테이크랜드",
+          "description": "가장 유명한 고베규 맛집",
+          "score": "4.1",
+          "mapQuery": "ステーキランド"
+        },
+        {
+          "name": "기타노 규 하우스",
+          "description": "프라이빗한 철판 스테이크",
+          "score": "4.3",
+          "mapQuery": "Kitano Beef House"
+        },
+        {
+          "name": "고베 로컬 야키",
+          "description": "로컬들이 찾는 야키니쿠 명소",
+          "score": "4.2",
+          "mapQuery": "Kobe Roast Meat"
+        },
+        {
+          "name": "기타노 양식당",
+          "description": "일본식 경양식의 정수",
+          "score": "4.0",
+          "mapQuery": "Kitano Western food"
+        },
+        {
+          "name": "항구 뷰 식당",
+          "description": "고베 야경을 담은 다이닝",
+          "score": "4.4",
+          "mapQuery": "Kobe Port View"
+        }
+      ]
+    },
+    {
+      "id": "himeji",
+      "tier": "suburb",
+      "name": "히메지성",
+      "area": "히메지",
+      "tagline": "백로의 성과 분홍빛 대조",
+      "image": "https://images.unsplash.com/photo-1708656376421-8db46939bcfe?q=80&w=1289&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "vibe": "",
+      "crowd": "",
+      "description": "",
+      "tips": [
+        "일본 3대 성 중 하나로, 하얀 성벽과 연분홍 벚꽃의 대비가 강렬하여 백로의 성이라는 별명을 몸소 체험할 수 있습니다",
+        "성 내부 관람도 좋지만, 성을 둘러싼 해자 밖 산노마루 광장에서 성 전체를 배경으로 찍는 사진이 가장 화사하게 나옵니다",
+        "신오사카역에서 산요 신칸센을 이용하면 30분 만에 도착하므로, 이동 시간을 아끼려면 신칸센 이용을 강력 추천합니다"
+      ],
+      "attractions": [
+        {
+          "name": "효고 현립 역사박물관 (Hyogo Prefectural Museum of History)",
+          "description": "히메지성 북동쪽에 위치하며, 히메지성을 포함한 일본 성곽의 역사와 효고현의 민속 문화를 풍부한 자료와 모형을 통해 전시하고 있습니다.",
+          "image": "images/hyogo_history_museum.jpeg"
+        },
+        {
+          "name": "고코엔 (Koko-en Garden)",
+          "description": "히메지성 바로 옆에 위치한 9개의 서로 다른 테마를 가진 일본 정원입니다. 에도 시대의 저택터를 활용해 조성되었으며, 성을 배경으로 한 풍경이 압권입니다.",
+          "image": "images/kokoen_garden.jpg"
+        },
+        {
+          "name": "히메지 시립 동물원 (Himeji City Zoo)",
+          "description": "히메지성 내부 해자 안에 위치한 독특한 입지의 동물원입니다. 성벽과 천수각을 바라보며 동물을 관람할 수 있는 세계적으로도 보기 드문 뷰를 제공합니다.",
+          "image": "images/himeji_zoo.jpeg"
+        }
+      ],
+      "cafes": [
+        {
+          "name": "히메지 조망 카페",
+          "description": "성 전체를 조망하는 테라스",
+          "score": "4.2",
+          "mapQuery": "Himeji Castle View"
+        },
+        {
+          "name": "카페 드 무슈",
+          "description": "히메지 명물 아몬드 토스트",
+          "score": "4.3",
+          "mapQuery": "Cafe de Muche"
+        },
+        {
+          "name": "로컬 전통 찻집",
+          "description": "일본 전통의 맛과 멋",
+          "score": "4.1",
+          "mapQuery": "Himeji Tea House"
+        },
+        {
+          "name": "성곽 인근 빵집",
+          "description": "갓 구운 벚꽃 앙금빵",
+          "score": "4.4",
+          "mapQuery": "Himeji Bakery"
+        },
+        {
+          "name": "스타벅스 히메지",
+          "description": "히메지 역 앞 편리한 매장",
+          "score": "4.0",
+          "mapQuery": "Starbucks Himeji"
+        }
+      ],
+      "restaurants": [
+        {
+          "name": "야마요시",
+          "description": "히메지 성 관람 후 필수 장어",
+          "score": "4.4",
+          "mapQuery": "やま義 姫路"
+        },
+        {
+          "name": "장어 덮밥 전문",
+          "description": "부드럽고 고소한 아나고",
+          "score": "4.2",
+          "mapQuery": "Himeji Anago"
+        },
+        {
+          "name": "히메지 오뎅",
+          "description": "생강 간장에 찍어 먹는 별미",
+          "score": "4.1",
+          "mapQuery": "Himeji Oden"
+        },
+        {
+          "name": "수제 우동집",
+          "description": "쫄깃한 면발의 로컬 우동",
+          "score": "4.0",
+          "mapQuery": "Himeji Udon"
+        },
+        {
+          "name": "히메지 규 스테이크",
+          "description": "로컬 소고기의 진한 풍미",
+          "score": "4.5",
+          "mapQuery": "Himeji Beef"
+        }
+      ]
+    }
+  ]
+}

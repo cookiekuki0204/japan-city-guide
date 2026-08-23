@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+/* Tailwind v4의 dark:는 기본이 prefers-color-scheme — 토글 버튼이 동작하려면 클래스 기준으로 바꿔야 한다 */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --color-sakura: #ffb7c5;
+  --color-sakura-light: #ffd1dc;
+  --color-sakura-dark: #ea2a33;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+}

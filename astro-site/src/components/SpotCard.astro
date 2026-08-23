@@ -1,0 +1,177 @@
+---
+import { Image } from 'astro:assets';
+import { resolveImage, isRemote } from '../lib/images';
+import type { CollectionEntry } from 'astro:content';
+
+type Spot = CollectionEntry<'seasonGuides'>['data']['spots'][number];
+
+interface Props {
+  spot: Spot;
+  /** 구글맵 검색어에 붙일 도시명 — 도시가 뒤섞이지 않도록 항상 명시한다 */
+  cityName: string;
+  accent: string;
+  /** 절정 시기 3단계 이름 — 시즌마다 다르다 */
+  peakLabels: [string, string, string];
+}
+
+const { spot, cityName, accent, peakLabels } = Astro.props;
+
+function eateryHref(e: { link?: string; mapQuery?: string; name: string }) {
+  if (e.link) return e.link;
+  const query = `${e.mapQuery ?? e.name} ${cityName}`;
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+}
+
+const hero = await resolveImage(spot.image);
+const heroRemote = isRemote(spot.image) ? spot.image : null;
+
+// 주변 볼거리 썸네일도 미리 해석해 둔다 (템플릿 안에서는 await 를 쓸 수 없다)
+const attractions = await Promise.all(
+  spot.attractions.map(async (a) => ({ ...a, thumb: await resolveImage(a.image) }))
+);
+---
+
+<article class="overflow-hidden rounded-3xl border border-slate-200 bg-white dark:border-white/10 dark:bg-white/5">
+  {hero && (
+    <Image
+      src={hero}
+      alt={spot.name}
+      widths={[400, 800, 1200]}
+      sizes="(min-width: 896px) 832px, 100vw"
+      quality={68}
+      loading="lazy"
+      decoding="async"
+      class="aspect-[16/9] w-full object-cover"
+    />
+  )}
+  {!hero && heroRemote && (
+    <img
+      src={heroRemote}
+      alt={spot.name}
+      loading="lazy"
+      decoding="async"
+      class="aspect-[16/9] w-full object-cover"
+    />
+  )}
+
+  <div class="p-6 sm:p-7">
+    <div class="flex flex-wrap items-center gap-2">
+      <span class="rounded-full px-3 py-1 text-[11px] font-black" style={`background:${accent}1a;color:${accent}`}>
+        {spot.area}
+      </span>
+      {spot.vibe && (
+        <span class="rounded-full bg-slate-100 px-3 py-1 text-[11px] font-black text-slate-500 dark:bg-white/10 dark:text-slate-400">
+          {spot.vibe}
+        </span>
+      )}
+      {spot.crowd && (
+        <span class="rounded-full bg-slate-100 px-3 py-1 text-[11px] font-black text-slate-500 dark:bg-white/10 dark:text-slate-400">
+          혼잡도 {spot.crowd}
+        </span>
+      )}
+    </div>
+
+    <h3 class="mt-3 text-2xl font-black">{spot.name}</h3>
+    {spot.tagline && <p class="mt-1 text-sm text-slate-400">{spot.tagline}</p>}
+
+    {spot.bloom && (
+      <div class="mt-5 grid grid-cols-3 gap-2">
+        {[
+          { label: peakLabels[0], date: spot.bloom.start },
+          { label: peakLabels[1], date: spot.bloom.peak },
+          { label: peakLabels[2], date: spot.bloom.end },
+        ].map((t) => (
+          <div class="rounded-xl bg-slate-50 px-3 py-2.5 text-center dark:bg-white/5">
+            <p class="text-[10px] font-black uppercase tracking-wider text-slate-400">{t.label}</p>
+            <p class="mt-0.5 text-sm font-black" style={`color:${accent}`}>{t.date}</p>
+          </div>
+        ))}
+      </div>
+    )}
+
+    {spot.description && (
+      <p class="mt-5 text-sm leading-relaxed text-slate-600 dark:text-slate-300">{spot.description}</p>
+    )}
+
+    {spot.station && (
+      <p class="mt-4 text-xs font-bold text-slate-400">🚉 {spot.station}</p>
+    )}
+
+    {spot.tips.length > 0 && (
+      <ul class="mt-5 space-y-1.5">
+        {spot.tips.map((tip) => (
+          <li class="flex gap-2 text-sm text-slate-600 dark:text-slate-300">
+            <span style={`color:${accent}`}>·</span>
+            <span>{tip}</span>
+          </li>
+        ))}
+      </ul>
+    )}
+
+    {spot.attractions.length > 0 && (
+      <div class="mt-6">
+        <p class="text-[11px] font-black uppercase tracking-wider text-slate-400">주변 볼거리</p>
+        <div class="mt-2 grid gap-2 sm:grid-cols-3">
+          {attractions.map((a) => {
+            const thumb = a.thumb;
+            return (
+              <div class="overflow-hidden rounded-xl bg-slate-50 dark:bg-white/5">
+                {thumb && (
+                  <Image
+                    src={thumb}
+                    alt={a.name}
+                    widths={[240, 480]}
+                    sizes="(min-width: 640px) 260px, 100vw"
+                    quality={65}
+                    loading="lazy"
+                    decoding="async"
+                    class="aspect-[4/3] w-full object-cover"
+                  />
+                )}
+                <div class="px-3 py-2.5">
+                  <p class="text-sm font-black">{a.name}</p>
+                  <p class="mt-0.5 text-xs leading-relaxed text-slate-500 dark:text-slate-400">
+                    {a.description}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    )}
+
+    {(spot.cafes.length > 0 || spot.restaurants.length > 0) && (
+      <div class="mt-6 grid gap-5 sm:grid-cols-2">
+        {[
+          { title: '카페', items: spot.cafes },
+          { title: '맛집', items: spot.restaurants },
+        ].filter((g) => g.items.length > 0).map((group) => (
+          <div>
+            <p class="text-[11px] font-black uppercase tracking-wider text-slate-400">{group.title}</p>
+            <ul class="mt-2 space-y-1">
+              {group.items.map((e) => (
+                <li>
+                  <a
+                    href={eateryHref(e)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="flex items-baseline justify-between gap-3 rounded-lg px-2 py-1.5 no-underline transition-colors hover:bg-slate-50 dark:hover:bg-white/5"
+                  >
+                    <span class="min-w-0">
+                      <span class="block truncate text-sm font-bold text-slate-800 dark:text-slate-100">{e.name}</span>
+                      <span class="block truncate text-xs text-slate-500 dark:text-slate-400">{e.description}</span>
+                    </span>
+                    {e.score && (
+                      <span class="shrink-0 text-xs font-black tabular-nums" style={`color:${accent}`}>{e.score}</span>
+                    )}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    )}
+  </div>
+</article>

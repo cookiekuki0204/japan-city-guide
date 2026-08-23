@@ -1,0 +1,77 @@
+---
+import { ADSENSE_CLIENT, slotFor } from '../lib/ads';
+
+interface Props {
+  /** ads.ts 의 AD_SLOTS 키 */
+  name: string;
+  /** 라벨 등 여백을 포함해 미리 확보할 높이 — 레이아웃 흔들림(CLS)을 막는다 */
+  minHeight?: number;
+}
+
+const { name, minHeight = 140 } = Astro.props;
+const slot = slotFor(name);
+---
+
+{
+  /*
+   * 슬롯 ID가 없으면 아무것도 내보내지 않는다.
+   * 기존 사이트처럼 플레이스홀더 광고 단위를 배포하면
+   * 빈 자리만 차지한 채 영원히 노출되지 않는다.
+   */
+}
+{slot && (
+  <aside
+    class="ad-slot mx-auto my-12 w-full max-w-3xl px-6"
+    style={`min-height:${minHeight}px`}
+    aria-label="광고"
+  >
+    <p class="mb-2 text-center text-[10px] font-black uppercase tracking-[0.2em] text-slate-300 dark:text-slate-600">
+      Sponsored
+    </p>
+    <ins
+      class="adsbygoogle block w-full"
+      style="display:block"
+      data-ad-client={ADSENSE_CLIENT}
+      data-ad-slot={slot}
+      data-ad-format="auto"
+      data-full-width-responsive="true"
+    />
+  </aside>
+)}
+
+{slot && (
+  <script is:inline>
+    /*
+     * 기존 사이트는 <ins> 바로 뒤에서 push() 를 인라인 실행했다.
+     * 그 시점엔 아직 레이아웃이 잡히기 전이라 AdSense가 폭을 0으로 읽고
+     * "Fluid responsive ads must be at least 250px wide: availableWidth=0" 로 실패했다.
+     * 요소가 실제로 폭을 가진 뒤에 한 번만 push 하도록 미룬다.
+     */
+    (function () {
+      if (window.__adSlotInitDone) return;
+      window.__adSlotInitDone = true;
+
+      function fillAds() {
+        document.querySelectorAll('ins.adsbygoogle').forEach(function (el) {
+          if (el.dataset.adsbygoogleStatus || el.dataset.jcgPushed) return;
+          if (el.getBoundingClientRect().width < 250) return;
+          el.dataset.jcgPushed = '1';
+          try {
+            (window.adsbygoogle = window.adsbygoogle || []).push({});
+          } catch (e) {
+            /* 광고 실패가 페이지를 망가뜨리지 않게 한다 */
+          }
+        });
+      }
+
+      function start() {
+        fillAds();
+        // 폰트 로딩이나 화면 회전으로 폭이 뒤늦게 잡히는 경우를 위해 한 번 더
+        window.addEventListener('resize', fillAds, { passive: true });
+      }
+
+      if (document.readyState === 'complete') start();
+      else window.addEventListener('load', start);
+    })();
+  </script>
+)}

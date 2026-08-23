@@ -1,0 +1,61 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  # 콘텐츠만 고쳤을 때 수동으로 다시 배포할 수 있게 열어 둔다
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 배포가 겹치면 나중 것이 이기도록 — 진행 중인 배포를 죽이지는 않는다
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # 저장소가 아직 브랜치 배포(legacy)로 설정돼 있어도 Actions 배포로 전환해 준다
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: astro-site/package-lock.json
+
+      - name: 의존성 설치
+        run: npm ci
+        working-directory: astro-site
+
+      - name: 타입 검사
+        run: npx astro check
+        working-directory: astro-site
+
+      - name: 빌드
+        # prebuild 훅이 리디렉트 페이지를 public/ 에 먼저 생성한다
+        run: npm run build
+        working-directory: astro-site
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: astro-site/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -2,3 +2,6 @@ node_modules/
 config.js
 .DS_Store
 *.log
+
+# 개편 전 홈페이지 백업 (git 히스토리에 있으므로 파일로 둘 필요 없음)
+index_old.html

@@ -1,0 +1,23 @@
+---
+import CityLayout from '../../layouts/CityLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const cities = await getCollection('cities');
+  const seasonGuides = await getCollection('seasonGuides');
+  const neighborhoods = await getCollection('neighborhoods');
+
+  return cities.map((city) => ({
+    params: { city: city.id },
+    props: {
+      city,
+      seasonGuides: seasonGuides.filter((g) => g.data.cityId === city.id),
+      neighborhoods: neighborhoods.filter((n) => n.data.cityId === city.id),
+    },
+  }));
+}
+
+const { city, seasonGuides, neighborhoods } = Astro.props;
+---
+
+<CityLayout city={city} seasonGuides={seasonGuides} neighborhoods={neighborhoods} />

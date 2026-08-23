@@ -1,0 +1,58 @@
+---
+/**
+ * 겨울 세일·후쿠부쿠로 정보는 도시마다 다르지 않고 전국이 거의 같은 일정으로 움직인다.
+ * 그래서 도시별 가이드에 반복해 넣지 않고 겨울 허브에 한 번만 둔다.
+ */
+const items = [
+  {
+    title: '후쿠부쿠로 (복주머니)',
+    when: '1월 1일 ~ 1월 2일',
+    body: '내용물을 공개하지 않고 파는 새해 한정 복주머니입니다. 값어치보다 싸게 담는 것이 관례라 인기 브랜드는 개점 전부터 줄이 섭니다. 최근에는 내용을 미리 공개하거나 온라인으로 먼저 파는 곳도 늘었습니다.',
+    tip: '백화점은 1월 1일 또는 2일에 하쓰우리(첫 판매)로 문을 엽니다. 목표한 매장이 있다면 개점 시각을 미리 확인하세요.',
+  },
+  {
+    title: '겨울 세일',
+    when: '1월 초 ~ 2월',
+    body: '백화점과 패션 브랜드의 겨울 정기 세일이 새해 첫 영업일에 맞춰 시작됩니다. 초반에는 할인폭이 크지 않다가 1월 중순을 지나며 폭이 커지고, 2월에는 재고 소진 위주로 바뀝니다.',
+    tip: '사이즈 선택지가 중요하면 세일 초반, 가격이 중요하면 1월 중순 이후가 유리합니다.',
+  },
+  {
+    title: '면세 쇼핑',
+    when: '연중',
+    body: '면세 대응 매장에서 하루 같은 점포 기준 일정 금액 이상을 사면 소비세를 면제받을 수 있습니다. 여권 원본이 필요하며, 결제자와 여권 명의가 같아야 합니다.',
+    tip: '면세 기준 금액과 절차는 제도 개정으로 바뀔 수 있습니다. 매장 안내를 확인하세요.',
+  },
+  {
+    title: '연말연시 휴무',
+    when: '12월 31일 ~ 1월 3일',
+    body: '대형 상업시설은 대체로 문을 열지만, 개인 상점과 노포 식당은 이 기간에 쉬는 곳이 많습니다. 관공서와 은행도 대부분 휴무입니다.',
+    tip: '가려던 식당이 있다면 영업 여부를 미리 확인해두는 편이 안전합니다.',
+  },
+];
+---
+
+<section class="mt-20">
+  <h2 class="mb-2 text-sm font-black uppercase tracking-wider text-slate-400">겨울 쇼핑 · 세일</h2>
+  <p class="mb-5 text-sm text-slate-500 dark:text-slate-400">
+    도시와 상관없이 전국이 거의 같은 일정으로 움직입니다.
+  </p>
+
+  <div class="grid gap-4 sm:grid-cols-2">
+    {items.map((item) => (
+      <article class="rounded-2xl border border-slate-200 bg-white p-6 dark:border-white/10 dark:bg-white/5">
+        <div class="flex flex-wrap items-baseline gap-2">
+          <h3 class="font-black">{item.title}</h3>
+          <span class="text-xs font-bold tabular-nums text-slate-400">{item.when}</span>
+        </div>
+        <p class="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-300">{item.body}</p>
+        <p class="mt-3 rounded-xl bg-slate-50 px-3 py-2.5 text-xs leading-relaxed text-slate-500 dark:bg-white/5 dark:text-slate-400">
+          💡 {item.tip}
+        </p>
+      </article>
+    ))}
+  </div>
+
+  <p class="mt-5 text-xs leading-relaxed text-slate-400">
+    ℹ️ 세일 시작일과 휴무는 점포마다 다릅니다. 위 일정은 일반적인 기준이며, 방문 전 해당 점포 공지를 확인하세요.
+  </p>
+</section>

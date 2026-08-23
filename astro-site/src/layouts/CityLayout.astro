@@ -1,0 +1,71 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import type { CollectionEntry } from 'astro:content';
+import AdSlot from '../components/AdSlot.astro';
+import { SEASON_META, SEASON_TYPES } from '../lib/season';
+
+interface Props {
+  city: CollectionEntry<'cities'>;
+  seasonGuides: CollectionEntry<'seasonGuides'>[];
+  neighborhoods: CollectionEntry<'neighborhoods'>[];
+}
+
+const { city, seasonGuides, neighborhoods } = Astro.props;
+const { name, nameJa, emoji, color, description } = city.data;
+---
+
+<BaseLayout title={`${name} 여행 가이드`} description={description}>
+  <main class="mx-auto max-w-5xl px-6 pb-24 pt-20 text-center">
+    <div class="mb-6 text-6xl">{emoji}</div>
+    <p class="mb-2 text-xs font-black uppercase tracking-[0.25em]" style={{ color }}>
+      {nameJa} · Japan City Guide
+    </p>
+    <h1 class="mb-4 text-4xl font-black tracking-tight sm:text-6xl">{name}</h1>
+    <p class="mx-auto max-w-xl text-slate-600 dark:text-slate-300">{description}</p>
+
+    <div class="mt-14 grid grid-cols-2 gap-4 sm:grid-cols-5">
+      {SEASON_TYPES.map((type) => {
+        const has = seasonGuides.some((g) => g.data.type === type);
+        const meta = SEASON_META[type];
+        return has ? (
+          <a
+            href={`/${city.id}/${type}`}
+            class="flex flex-col items-center gap-2 rounded-2xl border border-slate-200 bg-white px-4 py-6 no-underline shadow-sm transition-transform hover:-translate-y-1 dark:border-white/10 dark:bg-white/5"
+          >
+            <span class="text-2xl">{meta.emoji}</span>
+            <span class="text-xs font-black uppercase tracking-wider text-slate-700 dark:text-slate-200">
+              {meta.label}
+            </span>
+          </a>
+        ) : (
+          <div class="flex flex-col items-center gap-2 rounded-2xl border border-dashed border-slate-200 px-4 py-6 opacity-40 dark:border-white/10">
+            <span class="text-2xl">{meta.emoji}</span>
+            <span class="text-xs font-black uppercase tracking-wider">{meta.label}</span>
+            <span class="text-[10px] text-slate-400">준비중</span>
+          </div>
+        );
+      })}
+    </div>
+
+    {neighborhoods.length > 0 && (
+      <div class="mt-20 text-left">
+        <h2 class="mb-4 text-sm font-black uppercase tracking-wider text-slate-400">
+          {name}의 동네 딥다이브
+        </h2>
+        <div class="grid gap-4 sm:grid-cols-2">
+          {neighborhoods.map((n) => (
+            <a
+              href={`/neighborhoods/${n.id}`}
+              class="rounded-2xl border border-slate-200 bg-white p-5 no-underline shadow-sm transition-transform hover:-translate-y-1 dark:border-white/10 dark:bg-white/5"
+            >
+              <p class="font-black text-slate-900 dark:text-white">{n.data.title}</p>
+              <p class="mt-1 text-sm text-slate-500 dark:text-slate-400">{n.data.description}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <AdSlot name="city" />
+  </main>
+</BaseLayout>

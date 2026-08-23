@@ -1,0 +1,128 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import SpotCard from '../components/SpotCard.astro';
+import EventCard from '../components/EventCard.astro';
+import AdSlot from '../components/AdSlot.astro';
+import type { CollectionEntry } from 'astro:content';
+import { SEASON_META, PEAK_LABELS } from '../lib/season';
+
+interface Props {
+  city: CollectionEntry<'cities'>;
+  guide: CollectionEntry<'seasonGuides'>;
+}
+
+const { city, guide } = Astro.props;
+const { title, type, timeline, timelineNote, spots, events, updated } = guide.data;
+
+const meta = SEASON_META[type];
+const peakLabels = PEAK_LABELS[type] ?? ['시작', '절정', '마무리'];
+
+const countLabel = events.length ? `행사 ${events.length}개` : `명소 ${spots.length}곳`;
+const description = events.length
+  ? `2026 ${city.data.name} ${meta.label} 완벽 가이드. 마쓰리·하나비 ${events.length}개 행사의 일정, 관람 포인트, 혼잡도까지.`
+  : `2026 ${city.data.name} ${meta.label} 완벽 가이드. 명소 ${spots.length}곳의 시기, 팁, 주변 카페·맛집까지.`;
+
+const TIER_LABEL = {
+  best: '대표 명소',
+  famous: '유명 명소',
+  suburb: '근교 명소',
+} as const;
+
+const CATEGORY_LABEL = {
+  matsuri: '🎆 마쓰리',
+  hanabi: '🎇 하나비',
+  snow: '⛄ 눈축제',
+  illumination: '✨ 일루미네이션',
+  tradition: '⛩️ 전통 행사',
+} as const;
+
+/** 행사는 종류별로 나누는 편이 찾기 쉽다 */
+const eventGroups = (['matsuri', 'hanabi', 'snow', 'illumination', 'tradition'] as const)
+  .map((category) => ({
+    label: CATEGORY_LABEL[category],
+    items: events.filter((e) => e.category === category),
+  }))
+  .filter((g) => g.items.length > 0);
+
+/** 명소 시즌은 등급(대표/유명/근교)으로 나눈다 */
+const spotGroups = (['best', 'famous', 'suburb'] as const)
+  .map((tier) => ({
+    label: TIER_LABEL[tier],
+    items: spots.filter((s) => s.tier === tier),
+  }))
+  .filter((g) => g.items.length > 0);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: updated,
+  dateModified: updated,
+  about: { '@type': 'Place', name: city.data.name },
+};
+---
+
+<BaseLayout title={title} description={description}>
+  <main class="mx-auto max-w-4xl px-6 pb-24 pt-16">
+    <a
+      href={`/${city.id}`}
+      class="text-xs font-black uppercase tracking-wider text-slate-400 no-underline hover:text-rose-500"
+    >
+      ← {city.data.name}
+    </a>
+
+    <p class="mt-6 mb-2 text-xs font-black uppercase tracking-[0.25em]" style={`color:${meta.accent}`}>
+      {meta.emoji} {city.data.nameJa} {meta.label}
+    </p>
+    <h1 class="text-4xl font-black tracking-tight sm:text-5xl">{title}</h1>
+    <p class="mt-3 text-slate-500 dark:text-slate-400">{countLabel}</p>
+
+    {timeline && timeline.length > 0 && (
+      <div class="mt-10 grid grid-cols-3 gap-3">
+        {timeline.map((t) => (
+          <div class="rounded-2xl border border-slate-200 bg-white px-4 py-5 text-center dark:border-white/10 dark:bg-white/5">
+            <p class="text-[11px] font-black uppercase tracking-wider text-slate-400">{t.label}</p>
+            <p class="mt-1 text-2xl font-black tabular-nums" style={`color:${meta.accent}`}>{t.date}</p>
+          </div>
+        ))}
+      </div>
+    )}
+
+    {timelineNote && (
+      <p class="mt-3 text-xs leading-relaxed text-slate-400">ℹ️ {timelineNote}</p>
+    )}
+
+    {eventGroups.map((group) => (
+      <section class="mt-16">
+        <h2 class="mb-5 text-sm font-black uppercase tracking-wider text-slate-400">
+          {group.label} · {group.items.length}
+        </h2>
+        <div class="grid gap-5">
+          {group.items.map((event) => (
+            <EventCard event={event} accent={meta.accent} />
+          ))}
+        </div>
+      </section>
+    ))}
+
+    {spotGroups.map((group) => (
+      <section class="mt-16">
+        <h2 class="mb-5 text-sm font-black uppercase tracking-wider text-slate-400">
+          {group.label} · {group.items.length}
+        </h2>
+        <div class="grid gap-5">
+          {group.items.map((spot) => (
+            <SpotCard spot={spot} cityName={city.data.name} accent={meta.accent} peakLabels={peakLabels} />
+          ))}
+        </div>
+      </section>
+    ))}
+
+    <AdSlot name="seasonInline" />
+
+    <slot />
+  </main>
+
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+</BaseLayout>
