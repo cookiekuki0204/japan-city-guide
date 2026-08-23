@@ -1,0 +1,359 @@
+---
+import { SEASON_CALENDAR } from '../lib/season';
+import type { SeasonType } from '../lib/season';
+
+interface Props {
+  /** 시즌 페이지처럼 계절이 정해진 곳에서 넘긴다. 없으면 방문 시점 날짜로 정한다. */
+  season?: SeasonType;
+}
+
+const { season } = Astro.props;
+
+// 정적 사이트라 빌드 시점 계절이 박히면 안 된다. 달력을 클라이언트로 넘겨 방문 시점에 계산한다.
+const calendar = SEASON_CALENDAR.map((p) => ({ type: p.type, from: p.from, to: p.to }));
+---
+
+<canvas id="season-fx" aria-hidden="true"></canvas>
+
+<style>
+  #season-fx {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    /* 본문보다 뒤에 깔린다 */
+  }
+  /* 움직임을 원치 않는 사용자에게는 아예 그리지 않는다 */
+  @media (prefers-reduced-motion: reduce) {
+    #season-fx {
+      display: none;
+    }
+  }
+</style>
+
+<script is:inline define:vars={{ calendar, forcedSeason: season ?? null }}>
+  (function () {
+    const canvas = document.getElementById('season-fx');
+    if (!canvas) return;
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (reduced.matches) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    /* ── 어느 계절인지 ── */
+    function seasonNow() {
+      if (forcedSeason) return forcedSeason;
+      const d = new Date();
+      const key = (d.getMonth() + 1) * 100 + d.getDate();
+      const hit = calendar.find((p) => {
+        const s = p.from[0] * 100 + p.from[1];
+        const e = p.to[0] * 100 + p.to[1];
+        return s <= e ? key >= s && key <= e : key >= s || key <= e;
+      });
+      return hit ? hit.type : 'sakura';
+    }
+
+    const season = seasonNow();
+
+    /* ── 계절별 설정 ── */
+    const THEME = {
+      sakura: {
+        kind: 'fall',
+        colors: ['#ffd1dc', '#ffb7c5', '#ffc9d6', '#fde4ea'],
+        sizeRange: [7, 13],
+        speedRange: [0.35, 0.9],
+        swayRange: [0.4, 1.1],
+        density: 0.055,
+        draw: drawPetal,
+      },
+      matsuri: { kind: 'fireworks' },
+      koyo: {
+        kind: 'fall',
+        colors: ['#e2622a', '#c8451f', '#e08b1f', '#a8341f', '#d4a94f'],
+        sizeRange: [8, 15],
+        speedRange: [0.4, 1.0],
+        swayRange: [0.7, 1.6],
+        density: 0.05,
+        draw: drawLeaf,
+      },
+      winter: {
+        kind: 'fall',
+        colors: ['#ffffff', '#e8f2ff', '#dbe9fb'],
+        sizeRange: [4, 10],
+        speedRange: [0.3, 0.75],
+        swayRange: [0.3, 0.9],
+        density: 0.06,
+        draw: drawFlake,
+        /* 눈송이 사이에 가끔 눈사람이 섞인다 */
+        emoji: { char: '⛄', chance: 0.06, size: [20, 30], speedScale: 0.55 },
+      },
+    };
+
+    const theme = THEME[season];
+    if (!theme) return;
+
+    /* ── 캔버스 크기 ── */
+    let w = 0;
+    let h = 0;
+    let dpr = 1;
+
+    function viewport() {
+      return {
+        vw: window.innerWidth || document.documentElement.clientWidth || 0,
+        vh: window.innerHeight || document.documentElement.clientHeight || 0,
+      };
+    }
+
+    /** 크기가 바뀌었을 때만 캔버스를 다시 잡는다. 바뀌었으면 true */
+    function resize() {
+      const { vw, vh } = viewport();
+      if (vw === w && vh === h) return false;
+      w = vw;
+      h = vh;
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.floor(w * dpr);
+      canvas.height = Math.floor(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      return true;
+    }
+    resize();
+
+    const rand = (a, b) => a + Math.random() * (b - a);
+
+    /* ── 떨어지는 입자 (벚꽃·단풍·눈) ── */
+    function makeParticle(theme, seeded) {
+      const isEmoji = theme.emoji && Math.random() < theme.emoji.chance;
+      const size = isEmoji
+        ? rand(theme.emoji.size[0], theme.emoji.size[1])
+        : rand(theme.sizeRange[0], theme.sizeRange[1]);
+      const speed = rand(theme.speedRange[0], theme.speedRange[1]) * (isEmoji ? theme.emoji.speedScale : 1);
+      return {
+        x: rand(0, w),
+        y: seeded ? rand(-h, h) : rand(-60, -10),
+        size,
+        speed,
+        emoji: isEmoji,
+        color: theme.colors[(Math.random() * theme.colors.length) | 0],
+        angle: rand(0, Math.PI * 2),
+        spin: rand(-0.02, 0.02),
+        sway: rand(theme.swayRange[0], theme.swayRange[1]),
+        phase: rand(0, Math.PI * 2),
+        alpha: rand(0.5, 0.9),
+      };
+    }
+
+    let particles = [];
+
+    function seedParticles() {
+      if (theme.kind !== 'fall' || !w || !h) return;
+      // 화면이 좁으면 적게 — 모바일 성능을 지킨다
+      const target = Math.round(Math.min(w * theme.density, w < 640 ? 26 : 60));
+      particles = Array.from({ length: target }, () => makeParticle(theme, true));
+    }
+    seedParticles();
+
+    /* ── 그리기 ── */
+    function drawPetal(ctx, p) {
+      const s = p.size;
+      ctx.beginPath();
+      ctx.moveTo(0, -s / 2);
+      ctx.bezierCurveTo(s / 2, -s / 3, s / 2.4, s / 3, 0, s / 2);
+      ctx.bezierCurveTo(-s / 2.4, s / 3, -s / 2, -s / 3, 0, -s / 2);
+      ctx.fill();
+    }
+
+    function drawLeaf(ctx, p) {
+      const s = p.size;
+      /* 단풍잎 실루엣 — 다섯 갈래.
+         갈래 끝은 멀리, 갈래 사이 홈은 가깝게 찍어 톱니 모양을 만든다. */
+      const lobes = [0.62, 0.86, 1.0, 0.86, 0.62]; // 가운데가 가장 길다
+      ctx.beginPath();
+      for (let i = 0; i < lobes.length; i++) {
+        const a = -Math.PI / 2 + (i - 2) * 0.66;
+        const tip = s * 0.58 * lobes[i];
+        ctx.lineTo(Math.cos(a) * tip, Math.sin(a) * tip);
+        if (i < lobes.length - 1) {
+          const na = a + 0.33;
+          const notch = s * 0.22;
+          ctx.lineTo(Math.cos(na) * notch, Math.sin(na) * notch);
+        }
+      }
+      ctx.lineTo(s * 0.05, s * 0.42); // 잎자루
+      ctx.lineTo(-s * 0.05, s * 0.42);
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    function drawFlake(ctx, p) {
+      const s = p.size / 2;
+      ctx.strokeStyle = p.color;
+      ctx.lineWidth = Math.max(1, p.size / 9);
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      for (let i = 0; i < 3; i++) {
+        const a = (Math.PI / 3) * i;
+        ctx.moveTo(-Math.cos(a) * s, -Math.sin(a) * s);
+        ctx.lineTo(Math.cos(a) * s, Math.sin(a) * s);
+      }
+      ctx.stroke();
+      // 잔가지
+      ctx.beginPath();
+      for (let i = 0; i < 6; i++) {
+        const a = (Math.PI / 3) * i;
+        const bx = Math.cos(a) * s * 0.62;
+        const by = Math.sin(a) * s * 0.62;
+        ctx.moveTo(bx, by);
+        ctx.lineTo(bx + Math.cos(a + 0.7) * s * 0.28, by + Math.sin(a + 0.7) * s * 0.28);
+        ctx.moveTo(bx, by);
+        ctx.lineTo(bx + Math.cos(a - 0.7) * s * 0.28, by + Math.sin(a - 0.7) * s * 0.28);
+      }
+      ctx.stroke();
+    }
+
+    /* ── 불꽃놀이 ── */
+    const BURST_COLORS = ['#ffd166', '#ff6b6b', '#4ecdc4', '#c77dff', '#ffe66d', '#7bdff2'];
+    let sparks = [];
+    let nextBurst = 0;
+
+    function burst(x, y) {
+      const color = BURST_COLORS[(Math.random() * BURST_COLORS.length) | 0];
+      const count = w < 640 ? 26 : 44;
+      const power = rand(2.2, 3.6);
+      for (let i = 0; i < count; i++) {
+        const a = (Math.PI * 2 * i) / count + rand(-0.06, 0.06);
+        const v = power * rand(0.65, 1);
+        sparks.push({
+          x, y,
+          vx: Math.cos(a) * v,
+          vy: Math.sin(a) * v,
+          life: 1,
+          decay: rand(0.008, 0.016),
+          color,
+          size: rand(1.6, 3),
+        });
+      }
+    }
+
+    /* ── 루프 ── */
+    let raf = 0;
+    let last = performance.now();
+    let running = true;
+
+    function frame(now) {
+      // 탭이 백그라운드였다가 돌아와도 한 번에 튀지 않게 상한을 둔다
+      const dt = Math.min((now - last) / 16.67, 3);
+      last = now;
+
+      /* 스크립트가 일찍 실행돼 뷰포트가 0이었거나 창 크기가 바뀐 경우를 여기서 따라잡는다.
+         (배경 탭에서 열리면 innerWidth 가 0으로 잡히는 브라우저가 있다) */
+      if (resize()) seedParticles();
+      if (!w || !h) {
+        raf = requestAnimationFrame(frame);
+        return;
+      }
+
+      ctx.clearRect(0, 0, w, h);
+
+      if (theme.kind === 'fall') {
+        for (const p of particles) {
+          p.y += p.speed * dt;
+          p.phase += 0.01 * dt;
+          p.x += Math.sin(p.phase) * p.sway * 0.6 * dt;
+          p.angle += p.spin * dt;
+
+          if (p.y > h + 40) {
+            Object.assign(p, makeParticle(theme, false));
+            continue;
+          }
+          if (p.x < -40) p.x = w + 30;
+          if (p.x > w + 40) p.x = -30;
+
+          ctx.save();
+          ctx.globalAlpha = p.alpha;
+          ctx.translate(p.x, p.y);
+          ctx.rotate(p.angle);
+          if (p.emoji) {
+            ctx.font = `${p.size}px serif`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(theme.emoji.char, 0, 0);
+          } else {
+            ctx.fillStyle = p.color;
+            theme.draw(ctx, p);
+          }
+          ctx.restore();
+        }
+      } else {
+        // 불꽃놀이
+        if (now > nextBurst) {
+          burst(rand(w * 0.15, w * 0.85), rand(h * 0.12, h * 0.5));
+          nextBurst = now + rand(900, 2200);
+        }
+        for (let i = sparks.length - 1; i >= 0; i--) {
+          const s = sparks[i];
+          s.x += s.vx * dt;
+          s.y += s.vy * dt;
+          s.vy += 0.028 * dt; // 중력
+          s.vx *= 0.992;
+          s.life -= s.decay * dt;
+          if (s.life <= 0) {
+            sparks.splice(i, 1);
+            continue;
+          }
+          ctx.globalAlpha = Math.max(s.life, 0) * 0.9;
+          ctx.fillStyle = s.color;
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.size * s.life, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.globalAlpha = 1;
+      }
+
+      raf = requestAnimationFrame(frame);
+    }
+
+    function start() {
+      if (running) return;
+      running = true;
+      last = performance.now();
+      raf = requestAnimationFrame(frame);
+    }
+    function stop() {
+      running = false;
+      cancelAnimationFrame(raf);
+    }
+
+    raf = requestAnimationFrame(frame);
+
+    // 보이지 않을 때는 돌리지 않는다
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) stop();
+      else start();
+    });
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        resize();
+        seedParticles();
+      }, 200);
+    });
+
+    // 도중에 설정을 바꾸는 사용자도 있다
+    reduced.addEventListener?.('change', (e) => {
+      if (e.matches) {
+        stop();
+        ctx.clearRect(0, 0, w, h);
+        canvas.style.display = 'none';
+      } else {
+        canvas.style.display = '';
+        start();
+      }
+    });
+  })();
+</script>

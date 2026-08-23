@@ -15,7 +15,7 @@ const cities = (await getCollection('cities')).sort((a, b) => a.data.order - b.d
 const guides = (await getCollection('seasonGuides')).filter((g) => g.data.type === season);
 ---
 
-<BaseLayout title={`일본 ${meta.label} 가이드`} description={meta.blurb}>
+<BaseLayout title={`일본 ${meta.label} 가이드`} description={meta.blurb} season={season as any}>
   <main class="mx-auto max-w-5xl px-6 pb-24 pt-16">
     <div class="text-center">
       <div class="text-5xl">{meta.emoji}</div>

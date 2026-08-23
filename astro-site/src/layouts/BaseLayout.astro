@@ -1,16 +1,20 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import SeasonEffects from '../components/SeasonEffects.astro';
 import { ADSENSE_CLIENT, GA_MEASUREMENT_ID, SITE_VERIFICATION } from '../lib/ads';
+import type { SeasonType } from '../lib/season';
 import '../styles/global.css';
 
 interface Props {
   title: string;
   description: string;
   image?: string;
+  /** 시즌이 정해진 페이지는 그 계절의 배경 효과를 쓴다 */
+  season?: SeasonType;
 }
 
-const { title, description, image } = Astro.props;
+const { title, description, image, season } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
@@ -62,6 +66,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     </script>
   </head>
   <body class="min-h-screen bg-slate-50 font-sans text-slate-950 antialiased dark:bg-slate-950 dark:text-white">
+    <SeasonEffects season={season} />
     <Header />
     <slot />
     <Footer />
